@@ -47,3 +47,6 @@ We would like to thank all the contributors and supporters of the SEAL project. 
 ---
 
 We look forward to your contributions and support in making SEAL a reality!
+
+Best Regards,
+Autism Technology Research Syndicate
