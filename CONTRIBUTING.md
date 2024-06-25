@@ -64,3 +64,22 @@ If you need help or have questions about contributing, feel free to reach out by
 
 Thank you for your contributions! Together, we can make SEAL a valuable tool for personalized special education.
 
+
+
+## Current Priorities
+
+We are focusing on the following tasks:
+
+### Core Features
+- Integrate the SQLite Database to store experimental data during the runtime and analysis phase
+- Take and store sensor data from the mobile device during a given time interval
+- Import the necessary AI models from Vladmandic/Human to analyze the data during educational testing and store the responsiveness
+- Create a model to analyze inputs in curriculum and see statistics on performance
+- Way to cycle different curriculum combinations and optimize the best one for the student
+- Way to export learning style
+  
+### Bug Fixes
+-
+### Documentation
+-
+
