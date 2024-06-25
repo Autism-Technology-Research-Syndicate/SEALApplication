@@ -15,7 +15,7 @@ We welcome contributions from developers, educators, and anyone interested in su
 1. **Fork the Repository**: Create a personal copy of the repository by clicking the 'Fork' button.
 2. **Clone the Repository**: Clone your forked repository to your local machine using the command:
     ```sh
-    git clone https://github.com/your-username/SEAL.git
+    git clone https://github.com/Autism-Technology-Research-Syndicate/SEALApplication.git
     ```
 3. **Create a Branch**: Create a new branch for your feature or bug fix.
     ```sh
