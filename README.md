@@ -1,4 +1,55 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# SEAL
+
+## Introduction
+**SEAL** is an innovative mobile application developed by **AUTRS** that aims to personalize special education curriculum for each student. By leveraging computer vision and machine learning, SEAL analyzes experimental responsiveness data to tailor educational content to individual needs.
+
+## Description
+The goal of SEAL is to provide a customized educational experience for students requiring special education. By using advanced technologies like computer vision and machine learning, SEAL will collect and analyze data to understand each student's responsiveness and adapt the curriculum accordingly. This personalized approach is designed to enhance learning outcomes and provide a more effective educational experience.
+
+## Project Status
+The SEAL project is currently in the conceptual and planning stages. The codebase has not been developed yet, and we are actively seeking contributors to help bring this vision to life.
+
+## Contributing
+We welcome contributions from developers, educators, and anyone interested in supporting special education. Here are some ways you can contribute:
+
+1. **Fork the Repository**: Create a personal copy of the repository by clicking the 'Fork' button.
+2. **Clone the Repository**: Clone your forked repository to your local machine using the command:
+    ```sh
+    git clone https://github.com/Autism-Technology-Research-Syndicate/SEALApplication.git
+    ```
+3. **Create a Branch**: Create a new branch for your feature or bug fix.
+    ```sh
+    git checkout -b feature-name
+    ```
+4. **Make Changes**: Implement your feature or fix.
+5. **Commit Changes**: Commit your changes with a descriptive commit message.
+    ```sh
+    git commit -m "Description of changes"
+    ```
+6. **Push Changes**: Push your changes to your forked repository.
+    ```sh
+    git push origin feature-name
+    ```
+7. **Create a Pull Request**: Submit a pull request to the main repository with a detailed explanation of your changes.
+
+For major changes, please open an issue first to discuss what you would like to change.
+
+## Contact
+For any inquiries or questions regarding the SEAL project, please contact us at:  
+Email: [Inquiries@autrs.com](mailto:Inquiries@autrs.com)
+
+## License
+The SEAL project is licensed under the GNU General Public License v3.0. For more information, please see the [LICENSE](LICENSE) file.
+
+## Acknowledgments
+We would like to thank all the contributors and supporters of the SEAL project. Your efforts are invaluable in making personalized education accessible to all students.
+
+---
+
+We look forward to your contributions and support in making SEAL a reality!
+
+Best Regards,
+Autism Technology Research Syndicate
 
 # Getting Started
 
@@ -18,7 +69,7 @@ npm start
 yarn start
 ```
 
-## Step 2: Start your Application
+## Step 2: Start the Application
 
 Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
 
@@ -55,25 +106,3 @@ Now that you have successfully run the app, let's modify it.
 
    For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
 
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
