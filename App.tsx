@@ -87,7 +87,7 @@ function App(): React.JSX.Element {
             <DebugInstructions />
           </Section>
           <Section title="Learn More">
-            Visit Autrs.com, or email Inquiries@autrs.com:
+            Check out the README.md file, or email Inquiries@autrs.com:
           </Section>
           <LearnMoreLinks />
         </View>
