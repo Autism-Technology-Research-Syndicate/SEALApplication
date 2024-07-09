@@ -1,3 +1,7 @@
+// this file needs to run once on startup, then never again. dbRequests.cjs
+// should be used after for all requests to the database
+
+
 const sqlite3 = require('sqlite3').verbose();
 
 // Open a database connection
