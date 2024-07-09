@@ -12,6 +12,7 @@
   "dependencies": {
     "react": "18.2.0",
     "react-native": "0.74.3",
+    "react-native-camera": "^4.2.1",
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {
