@@ -15,13 +15,16 @@ const App: React.FC = () => {
   // the URI is then being used to access the file
   function onPicture({ uri }: Picture) {
     setImg(uri);
+   
   }
 
   function onBackToCamera() {
     setImg(null);
+  
   }
 
   return (
+    
     <SafeAreaView style={styles.container}>
       {img ? (
         <TouchableHighlight style={styles.flex} onPress={onBackToCamera}>
