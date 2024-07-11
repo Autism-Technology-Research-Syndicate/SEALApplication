@@ -3,12 +3,40 @@ import { RNCamera } from 'react-native-camera';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import { TouchableOpacity, Alert, StyleSheet } from 'react-native';
 
+import RNFS from 'react-native-fs';
+import {
+  insertImageData,
+  getImageData,
+  updateImageData,
+  deleteImageData,
+  initializeDatabase,
+  printFirstRow
+} from '../Database/dbInitialization.js';
+
+function saveImageToDb(toSend, input, output) {
+  insertImageData(toSend, input, output);
+}
+
+function URIToB64Str(uri, input, output) {
+  RNFS.readFile(uri, 'base64')
+    .then(base64String => {
+      saveImageToDb(base64String, input, output);
+    })
+    .catch(error => {
+      console.log('Error converting URI to base64 string:', error);
+    });
+}
+
+
+
 export default class Camera extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       takingPic: false,
     };
+    initializeDatabase();
+   getImageData();
   }
 
   takePicture = async () => {
@@ -26,6 +54,9 @@ export default class Camera extends PureComponent {
         Alert.alert('Success', JSON.stringify(data));
         this.setState({ takingPic: false });
         console.log(data.uri)
+        URIToB64Str(data.uri,-1,-1);
+        
+
         
       } catch (err) {
         Alert.alert('Error', 'Failed to take picture: ' + (err.message || err));
