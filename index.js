@@ -14,13 +14,10 @@ import {
   printFirstRow
 } from './Database/dbInitialization';
 
-// 註冊組件
 AppRegistry.registerComponent(appName, () => App);
 
-// 初始化數據庫
 const setupDatabase = async () => {
   try {
-    // 初始化數據庫
     initializeDatabase();
 
     await insertImageData('test_base64_string', 1, 2);
