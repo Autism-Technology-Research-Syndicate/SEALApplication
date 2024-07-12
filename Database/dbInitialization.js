@@ -26,14 +26,22 @@ const initializeDatabase = () => {
 
 // Insert a new row into the imgdp table
 const insertImageData = (b64str, input, output) => {
-  db.transaction(tx => {
-    tx.executeSql(
-      'INSERT INTO imgdp (b64str, input, output) VALUES (?, ?, ?)',
-      [b64str, input, output],
-      (_, result) => { console.log(`A row has been inserted with rowid ${result.insertId}`); },
-      (tx, error) => { console.error('Error inserting data', error); }
-    );
-  });
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'INSERT INTO imgdp (b64str, input, output) VALUES (?, ?, ?)',
+        [b64str, input, output],
+        (_, result) => { 
+          console.log(`A row has been inserted with rowid ${result.insertId}`);
+          resolve(result.insertId); 
+        },
+        (tx, error) => { 
+          console.error('Error inserting data', error); 
+          reject(error);
+        }
+      );
+    });
+  })
 };
 
 // Retrieve all rows from the imgdp table
