@@ -1,17 +1,12 @@
-import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import React, { Fragment } from 'react';
+import { View } from 'react-native';
 import WebCamFeed from './src/Components/WebCamFeed';
-import { WelcometoSEAL } from './src/Screens/WelcometoSEAL';
+import Home from './src/Screens/Home';
 
 const App: React.FC = () => {
   return (
-<>
-    <WebCamFeed />
-    <View>
-      <WelcometoSEAL />
-    </View>
-    </>
-   ) ;
+        <Home />
+  );
 };
 
 export default App;
