@@ -8,7 +8,9 @@ const index = ({ children }) => {
     return (
         <View style={styles.container}>
             <ImageBackground source={image} resizeMode="repeat" style={styles.image}>
+                <View>
                 {children}
+                </View >
             </ImageBackground>
         </View>
 

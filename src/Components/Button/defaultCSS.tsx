@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 
 const stylesheet = StyleSheet.create({
     activeButton: {
-        width: '80%',
         height: 50,
         flexShrink: 0,
         borderBottomLeftRadius: 12,
@@ -11,10 +10,10 @@ const stylesheet = StyleSheet.create({
         borderTopLeftRadius: 12,
         borderTopRightRadius: 12,
         backgroundColor: 'rgba(48, 80, 112, 1)',
-        alignSelf: 'center',
+        opacity: 0.85
+
     },
     text: {
-        width: 297,
         height: 50,
         flexDirection: 'column',
         justifyContent: 'center',
@@ -25,8 +24,8 @@ const stylesheet = StyleSheet.create({
         fontSize: 18,
         fontStyle: 'normal',
         fontWeight: '700',
-                textAlignVertical: 'center'
+        textAlignVertical: 'center'
     },
-  });
+});
 
 export default stylesheet;
