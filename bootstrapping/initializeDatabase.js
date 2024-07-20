@@ -55,7 +55,8 @@ const setupDatabase = async () => {
     console.log('All users:', allUsers[0]);
 
     const allData = await getImageData();
-    console.log('All data:', allData);
+    // updated not overwhelm the console
+    console.log('All data:', allData[0]);
 
     if (allData.length > 0) {
       await updateImageData('updated_base64_string', allData[0].id);
