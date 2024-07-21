@@ -49,6 +49,18 @@ const insertImageData = (b64str, input, output) => {
   });
 };
 
+//Insert a new row into the curriculum table
+const insertCurriculumData = (content, sequence) => {
+  db.transaction(tx => {
+    tx.executeSql(
+      'INSERT INTO curriculum (content, sequence) VALUES (?, ?)',
+      [content, sequence],
+      (_, result) => { console.log(`A row has been inserted with rowid ${result.insertId}`); },
+      (tx, error) => { console.error('Error inserting data', error); }
+    );
+  });
+};
+
 // Retrieve all rows from the imgdp table
 const getImageData = () => {
   return new Promise((resolve, reject) => {
