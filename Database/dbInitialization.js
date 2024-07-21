@@ -21,8 +21,21 @@ const initializeDatabase = () => {
       () => { console.log('Table created successfully.'); },
       (tx, error) => { console.error('Error creating table', error); }
     );
+    tx.executeSql(
+        `CREATE TABLE IF NOT EXISTS curriculum (
+           id INTEGER PRIMARY KEY AUTOINCREMENT,
+           content TEXT,
+           sequence INTEGER
+        )`,
+        [],
+        () => { console.log('Table created successfully.'); },
+        (tx, error) => { console.error('Error creating table', error); }
+    );
   });
 };
+
+//param: id (Integer), content (TEXT), sequence (Integer)
+//
 
 // Insert a new row into the imgdp table
 const insertImageData = (b64str, input, output) => {
@@ -91,12 +104,31 @@ const printFirstRow = () => {
   });
 };
 
+const printCurriculumFirstRow = () => {
+  db.transaction(tx => {
+    tx.executeSql(
+      'SELECT * FROM curriculum LIMIT 1',
+      [],
+      (_, { rows }) => {
+        if (rows.length > 0) {
+          console.log('First row data:', rows.item(0));
+        } else {
+          console.log('No data found.');
+        }
+      },
+      (tx, error) => { console.error('Error querying data', error); }
+    );
+  });
+};
+
 // Export functions
 export {
   initializeDatabase,
   insertImageData,
+  insertCurriculumData,
   getImageData,
   updateImageData,
   deleteImageData,
-  printFirstRow
+  printFirstRow,
+  printCurriculumFirstRow
 };
