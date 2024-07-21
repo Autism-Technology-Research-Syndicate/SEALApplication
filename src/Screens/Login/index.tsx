@@ -14,7 +14,7 @@ const index = ({navigation}) => {
           <Image style={{ alignSelf: 'center' }} source={require('../../Assets/images/WelcometoSEALimage.png')} />
         </View>
           <Button title='Learner login' />
-          <Button title='Teacher login' />
+          <Button light title='Teacher login' />
         </View>
       </View>
     </BackgroundWrapper>
