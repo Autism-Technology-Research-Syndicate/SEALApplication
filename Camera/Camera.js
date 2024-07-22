@@ -2,15 +2,11 @@ import React, { PureComponent } from 'react';
 import { RNCamera } from 'react-native-camera';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import { TouchableOpacity, Alert, StyleSheet } from 'react-native';
-
 import RNFS from 'react-native-fs';
 import {
   insertImageData,
   getImageData,
-  updateImageData,
-  deleteImageData,
-  initializeDatabase,
-  printFirstRow
+  initializeDatabase
 } from '../Database/dbInitialization.js';
 
 function saveImageToDb(toSend, input, output) {
@@ -19,24 +15,23 @@ function saveImageToDb(toSend, input, output) {
 
 function URIToB64Str(uri, input, output) {
   RNFS.readFile(uri, 'base64')
-    .then(base64String => {
+    .then((base64String) => {
       saveImageToDb(base64String, input, output);
     })
-    .catch(error => {
+    .catch((error) => {
       console.log('Error converting URI to base64 string:', error);
     });
 }
 
-
-
-export default class Camera extends PureComponent {
+class Camera extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       takingPic: false,
     };
+    this.camera = null;
     initializeDatabase();
-   getImageData();
+    getImageData();
   }
 
   takePicture = async () => {
@@ -51,21 +46,12 @@ export default class Camera extends PureComponent {
       console.log("trying pic");
       try {
         const data = await this.camera.takePictureAsync(options);
-        Alert.alert('Success', JSON.stringify(data));
+        //Alert.alert('Success', JSON.stringify(data));
         this.setState({ takingPic: false });
-<<<<<<< HEAD
-        console.log(data.uri)
-=======
-        //console.log(data.uri)
->>>>>>> 90569cea8bba75b6d97b2c0ed4df03919c1580a3
-        URIToB64Str(data.uri,-1,-1);
-        
-
-        
+        URIToB64Str(data.uri, -1, -1);
       } catch (err) {
         Alert.alert('Error', 'Failed to take picture: ' + (err.message || err));
         console.log(data);
-        return data.uri;
       } finally {
         this.setState({ takingPic: false });
       }
@@ -75,7 +61,7 @@ export default class Camera extends PureComponent {
   render() {
     return (
       <RNCamera
-        ref={ref => {
+        ref={(ref) => {
           this.camera = ref;
         }}
         captureAudio={false}
@@ -109,3 +95,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 });
+
+export default Camera;
+export { Camera as CameraComponent };
