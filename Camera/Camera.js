@@ -50,11 +50,7 @@ export default class Camera extends PureComponent {
         const data = await this.camera.takePictureAsync(options);
         Alert.alert('Success', JSON.stringify(data));
         this.setState({ takingPic: false });
-<<<<<<< HEAD
         console.log(data.uri)
-=======
-        //console.log(data.uri)
->>>>>>> 90569cea8bba75b6d97b2c0ed4df03919c1580a3
         URIToB64Str(data.uri,-1,-1);
         
 
