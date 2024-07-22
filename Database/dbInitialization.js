@@ -22,6 +22,33 @@ const initializeDatabase = () => {
       (tx, error) => { console.error('Error creating table', error); }
     );
   });
+<<<<<<< HEAD
+=======
+
+  db.transaction(tx => {
+    tx.executeSql(
+      `CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        picture TEXT,
+        estimatedAttentionSpan INTEGER,
+        levelOfSpectrum INTEGER,
+        settingsChoices TEXT,
+        progressInCurriculum INTEGER,
+        averageAccuracy INTEGER,
+        description TEXT,
+        necessaryBreakTime INTEGER
+      )`,
+      [],
+      () => {
+        console.log('users Table created successfully - in dbInitialization.');
+      },
+      (_, error) => {
+        console.error('Error creating table', error);
+      },
+    );
+  });
+>>>>>>> 90569cea8bba75b6d97b2c0ed4df03919c1580a3
 };
 
 // Insert a new row into the imgdp table
@@ -91,6 +118,69 @@ const printFirstRow = () => {
   });
 };
 
+<<<<<<< HEAD
+=======
+  // Insert a new row into the users table
+const insertUser = (
+  name,
+  picture,
+  estimatedAttentionSpan,
+  levelOfSpectrum,
+  settingsChoices,
+  progressInCurriculum,
+  averageAccuracy,
+  description,
+  necessaryBreakTime,
+) => {
+  db.transaction(
+    tx => {
+      tx.executeSql(
+        'INSERT INTO users (name, picture, estimatedAttentionSpan, levelOfSpectrum, settingsChoices, progressInCurriculum, averageAccuracy, description, necessaryBreakTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [
+          name,
+          picture,
+          estimatedAttentionSpan,
+          levelOfSpectrum,
+          settingsChoices,
+          progressInCurriculum,
+          averageAccuracy,
+          description,
+          necessaryBreakTime,
+        ],
+        (_, result) => {
+          console.log(
+            `A row has been inserted in the user table with rowid ${result.insertId}`,
+          );
+        },
+        (_, error) => {
+          console.error('Error inserting user data', error.message);
+        },
+      );
+    },
+    error => {
+      console.error('Transaction error:', error.message); //
+    },
+    () => {
+      console.log('Transaction completed successfully');
+    },
+  );
+};
+
+// Retrieve all rows from the users table
+const getUsers = () => {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'SELECT * FROM users',
+        [],
+        (_, result) => { resolve(result.rows.raw()); },
+        (_, error) => { reject(error); }
+      );
+    });
+  });
+};
+
+>>>>>>> 90569cea8bba75b6d97b2c0ed4df03919c1580a3
 // Export functions
 export {
   initializeDatabase,
@@ -98,5 +188,11 @@ export {
   getImageData,
   updateImageData,
   deleteImageData,
+<<<<<<< HEAD
   printFirstRow
+=======
+  printFirstRow,
+  insertUser,
+  getUsers,
+>>>>>>> 90569cea8bba75b6d97b2c0ed4df03919c1580a3
 };

@@ -73,5 +73,7 @@ yarn-error.log
 !.yarn/sdks
 !.yarn/versions
 
+android/.bash_profile
+
 # Database
 Database/mydatabase.db
