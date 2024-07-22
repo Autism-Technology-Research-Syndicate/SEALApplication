@@ -22,6 +22,8 @@ const initializeDatabase = () => {
       (tx, error) => { console.error('Error creating table', error); }
     );
   });
+<<<<<<< HEAD
+=======
 
   db.transaction(tx => {
     tx.executeSql(
@@ -46,6 +48,7 @@ const initializeDatabase = () => {
       },
     );
   });
+>>>>>>> 90569cea8bba75b6d97b2c0ed4df03919c1580a3
 };
 
 // Insert a new row into the imgdp table
@@ -115,6 +118,8 @@ const printFirstRow = () => {
   });
 };
 
+<<<<<<< HEAD
+=======
   // Insert a new row into the users table
 const insertUser = (
   name,
@@ -175,6 +180,7 @@ const getUsers = () => {
   });
 };
 
+>>>>>>> 90569cea8bba75b6d97b2c0ed4df03919c1580a3
 // Export functions
 export {
   initializeDatabase,
@@ -182,7 +188,11 @@ export {
   getImageData,
   updateImageData,
   deleteImageData,
+<<<<<<< HEAD
+  printFirstRow
+=======
   printFirstRow,
   insertUser,
   getUsers,
+>>>>>>> 90569cea8bba75b6d97b2c0ed4df03919c1580a3
 };

@@ -76,5 +76,4 @@ yarn-error.log
 android/.bash_profile
 
 # Database
-mydatabase.db
 Database/mydatabase.db
