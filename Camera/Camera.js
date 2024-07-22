@@ -49,8 +49,16 @@ export default class Camera extends PureComponent {
       try {
         const data = await this.camera.takePictureAsync(options);
         Alert.alert('Success', JSON.stringify(data));
-        this.setState({takingPic: false});
-        URIToB64Str(data.uri, -1, -1);
+        this.setState({ takingPic: false });
+<<<<<<< HEAD
+        console.log(data.uri)
+=======
+        //console.log(data.uri)
+>>>>>>> 90569cea8bba75b6d97b2c0ed4df03919c1580a3
+        URIToB64Str(data.uri,-1,-1);
+        
+
+        
       } catch (err) {
         Alert.alert('Error', 'Failed to take picture: ' + (err.message || err));
         return data.uri;
