@@ -21,7 +21,10 @@ const initializeDatabase = () => {
       () => { console.log('Table created successfully.'); },
       (tx, error) => { console.error('Error creating table', error); }
     );
-    tx.executeSql(
+  });
+
+  db.transaction(tx => {
+      tx.executeSql(
         `CREATE TABLE IF NOT EXISTS curriculum (
            id INTEGER PRIMARY KEY AUTOINCREMENT,
            content TEXT,
@@ -30,8 +33,8 @@ const initializeDatabase = () => {
         [],
         () => { console.log('Table created successfully.'); },
         (tx, error) => { console.error('Error creating table', error); }
-    );
-  });
+      );
+    });
 
   db.transaction(tx => {
     tx.executeSql(
