@@ -32,10 +32,31 @@ const initializeDatabase = () => {
         (tx, error) => { console.error('Error creating table', error); }
     );
   });
-};
 
-//param: id (Integer), content (TEXT), sequence (Integer)
-//
+  db.transaction(tx => {
+    tx.executeSql(
+      `CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        picture TEXT,
+        estimatedAttentionSpan INTEGER,
+        levelOfSpectrum INTEGER,
+        settingsChoices TEXT,
+        progressInCurriculum INTEGER,
+        averageAccuracy INTEGER,
+        description TEXT,
+        necessaryBreakTime INTEGER
+      )`,
+      [],
+      () => {
+        console.log('users Table created successfully - in dbInitialization.');
+      },
+      (_, error) => {
+        console.error('Error creating table', error);
+      },
+    );
+  });
+};
 
 // Insert a new row into the imgdp table
 const insertImageData = (b64str, input, output) => {
@@ -43,18 +64,6 @@ const insertImageData = (b64str, input, output) => {
     tx.executeSql(
       'INSERT INTO imgdp (b64str, input, output) VALUES (?, ?, ?)',
       [b64str, input, output],
-      (_, result) => { console.log(`A row has been inserted with rowid ${result.insertId}`); },
-      (tx, error) => { console.error('Error inserting data', error); }
-    );
-  });
-};
-
-//Insert a new row into the curriculum table
-const insertCurriculumData = (content, sequence) => {
-  db.transaction(tx => {
-    tx.executeSql(
-      'INSERT INTO curriculum (content, sequence) VALUES (?, ?)',
-      [content, sequence],
       (_, result) => { console.log(`A row has been inserted with rowid ${result.insertId}`); },
       (tx, error) => { console.error('Error inserting data', error); }
     );
@@ -116,31 +125,161 @@ const printFirstRow = () => {
   });
 };
 
-const printCurriculumFirstRow = () => {
+  // Insert a new row into the users table
+const insertUser = (
+  name,
+  picture,
+  estimatedAttentionSpan,
+  levelOfSpectrum,
+  settingsChoices,
+  progressInCurriculum,
+  averageAccuracy,
+  description,
+  necessaryBreakTime,
+) => {
+  db.transaction(
+    tx => {
+      tx.executeSql(
+        'INSERT INTO users (name, picture, estimatedAttentionSpan, levelOfSpectrum, settingsChoices, progressInCurriculum, averageAccuracy, description, necessaryBreakTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [
+          name,
+          picture,
+          estimatedAttentionSpan,
+          levelOfSpectrum,
+          settingsChoices,
+          progressInCurriculum,
+          averageAccuracy,
+          description,
+          necessaryBreakTime,
+        ],
+        (_, result) => {
+          console.log(
+            `A row has been inserted in the user table with rowid ${result.insertId}`,
+          );
+        },
+        (_, error) => {
+          console.error('Error inserting user data', error.message);
+        },
+      );
+    },
+    error => {
+      console.error('Transaction error:', error.message); //
+    },
+    () => {
+      console.log('Transaction completed successfully');
+    },
+  );
+};
+
+// Retrieve all rows from the users table
+const getUsers = () => {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'SELECT * FROM users',
+        [],
+        (_, result) => { resolve(result.rows.raw()); },
+        (_, error) => { reject(error); }
+      );
+    });
+  });
+};
+
+// Create the table in the db for the input, output, score called Combos
+const createCombosTable = () => {
   db.transaction(tx => {
     tx.executeSql(
-      'SELECT * FROM curriculum LIMIT 1',
+      `CREATE TABLE IF NOT EXISTS Combos (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        score DECIMAL(12, 10),
+        input TEXT,
+        output TEXT, 
+      )`,
       [],
-      (_, { rows }) => {
-        if (rows.length > 0) {
-          console.log('First row data:', rows.item(0));
-        } else {
-          console.log('No data found.');
-        }
+      () => {
+        console.log('Combos Table created successfully - in dbInitialization.');
       },
-      (tx, error) => { console.error('Error querying data', error); }
+      (_, error) => {
+        console.error('Error creating table or exists', error);
+      },
+    );
+  });
+
+  // Create the index on the score column
+  db.transaction(tx => {
+    tx.executeSql(
+      `CREATE INDEX IF NOT EXISTS idx_score ON Combos(score)`,
+      [],
+      () => { console.log('Index created successfully.'); },
+      (tx, error) => { console.error('Error creating index', error); }
     );
   });
 };
 
+// Insert a new row into the Combos table
+const insertComboData = (score, input, output) => {
+  db.transaction(tx => {
+    tx.executeSql(
+      'INSERT INTO Combos (score, input, output) VALUES (?, ?, ?)',
+      [score, input, output],
+      (_, result) => { console.log(`A row has been inserted with rowid ${result.insertId}`); },
+      (tx, error) => { console.error('Error inserting data', error); }
+    );
+  });
+};
+
+// Update combo data in Combos table
+const updateComboData = (score, id) => {
+  db.transaction(tx => {
+    tx.executeSql(
+      'UPDATE Combos SET score = ? WHERE id = ?',
+      [score, id],
+      (_, result) => { console.log(`Row(s) updated: ${result.rowsAffected}`); },
+      (tx, error) => { console.error('Error updating data', error); }
+    );
+  });
+};
+
+// Delete a row from the Combos table
+const deleteComboData = (id) => {
+  db.transaction(tx => {
+    tx.executeSql(
+      'DELETE FROM Combos WHERE id = ?',
+      [id],
+      (_, result) => { console.log(`Row(s) deleted: ${result.rowsAffected}`); },
+      (tx, error) => { console.error('Error deleting data', error); }
+    );
+  });
+};
+// Access the table Combos and return combo that has score closest to 1
+const getBestComboData= () => {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'SELECT input, output, score FROM Combos ORDER BY ABS(score - 1) LIMIT 1',
+        [],
+        (_, result) => { resolve(result.rows.raw()); },
+        (tx, error) => { reject(error); },
+      );
+    });
+  });
+};
+
+
 // Export functions
 export {
+  createCombosTable,
+  insertComboData,
+  updateComboData,
+  deleteComboData,
+  getBestComboData,
+
   initializeDatabase,
   insertImageData,
-  insertCurriculumData,
   getImageData,
   updateImageData,
   deleteImageData,
   printFirstRow,
-  printCurriculumFirstRow
+  insertUser,
+  getUsers,
 };
