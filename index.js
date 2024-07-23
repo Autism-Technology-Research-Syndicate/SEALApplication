@@ -28,6 +28,10 @@ const setupDatabase = async () => {
 
     await printFirstRow();
 
+    await insertCurriculumData('test', 123);
+
+    await printCurriculumFirstRow();
+
     const allData = await getImageData();
     console.log('All data:', allData);
 

@@ -31,7 +31,7 @@ const initializeDatabase = () => {
            sequence INTEGER
         )`,
         [],
-        () => { console.log('Table created successfully.'); },
+        () => { console.log('Curriculum table created successfully.'); },
         (tx, error) => { console.error('Error creating table', error); }
       );
     });
