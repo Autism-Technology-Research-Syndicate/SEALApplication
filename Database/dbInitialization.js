@@ -27,8 +27,10 @@ const initializeDatabase = () => {
       tx.executeSql(
         `CREATE TABLE IF NOT EXISTS curriculum (
            id INTEGER PRIMARY KEY AUTOINCREMENT,
-           content TEXT,
-           sequence INTEGER
+           input_output INTEGER,
+           sequence INTEGER,
+           content TEXT
+
         )`,
         [],
         () => { console.log('Curriculum table created successfully.'); },
@@ -153,11 +155,11 @@ const printFirstRow = () => {
 };
 
 //Insert a new row into the curriculum table
-const insertCurriculumData = (content, sequence) => {
+const insertCurriculumData = (input_output, sequence, content) => {
   db.transaction(tx => {
     tx.executeSql(
-      'INSERT INTO curriculum (content, sequence) VALUES (?, ?)',
-      [content, sequence],
+      'INSERT INTO curriculum (input_output, sequence, content) VALUES (?, ?, ?)',
+      [input_output, sequence, content],
       (_, result) => { console.log(`A row has been inserted with rowid ${result.insertId}`); },
       (tx, error) => { console.error('Error inserting data', error); }
     );
