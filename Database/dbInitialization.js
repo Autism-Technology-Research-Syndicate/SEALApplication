@@ -24,6 +24,43 @@ const initializeDatabase = () => {
   });
 
   db.transaction(tx => {
+      tx.executeSql(
+        `CREATE TABLE IF NOT EXISTS curriculum (
+           id INTEGER PRIMARY KEY AUTOINCREMENT,
+           content TEXT,
+           sequence INTEGER
+        )`,
+        [],
+        () => { console.log('Curriculum table created successfully.'); },
+        (tx, error) => { console.error('Error creating table', error); }
+      );
+    });
+
+  db.transaction(tx => {
+    tx.executeSql(
+      `CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        picture TEXT,
+        estimatedAttentionSpan INTEGER,
+        levelOfSpectrum INTEGER,
+        settingsChoices TEXT,
+        progressInCurriculum INTEGER,
+        averageAccuracy INTEGER,
+        description TEXT,
+        necessaryBreakTime INTEGER
+      )`,
+      [],
+      () => {
+        console.log('users Table created successfully - in dbInitialization.');
+      },
+      (_, error) => {
+        console.error('Error creating table', error);
+      },
+    );
+  });
+
+  db.transaction(tx => {
     tx.executeSql(
       `CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -102,6 +139,35 @@ const printFirstRow = () => {
   db.transaction(tx => {
     tx.executeSql(
       'SELECT * FROM imgdp LIMIT 1',
+      [],
+      (_, { rows }) => {
+        if (rows.length > 0) {
+          console.log('First row data:', rows.item(0));
+        } else {
+          console.log('No data found.');
+        }
+      },
+      (tx, error) => { console.error('Error querying data', error); }
+    );
+  });
+};
+
+//Insert a new row into the curriculum table
+const insertCurriculumData = (content, sequence) => {
+  db.transaction(tx => {
+    tx.executeSql(
+      'INSERT INTO curriculum (content, sequence) VALUES (?, ?)',
+      [content, sequence],
+      (_, result) => { console.log(`A row has been inserted with rowid ${result.insertId}`); },
+      (tx, error) => { console.error('Error inserting data', error); }
+    );
+  });
+};
+
+const printCurriculumFirstRow = () => {
+  db.transaction(tx => {
+    tx.executeSql(
+      'SELECT * FROM curriculum LIMIT 1',
       [],
       (_, { rows }) => {
         if (rows.length > 0) {
@@ -272,4 +338,6 @@ export {
   printFirstRow,
   insertUser,
   getUsers,
+  printCurriculumFirstRow,
+  insertCurriculumData,
 };

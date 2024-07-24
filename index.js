@@ -11,7 +11,9 @@ import {
   getImageData,
   updateImageData,
   deleteImageData,
-  printFirstRow
+  printFirstRow,
+  insertCurriculumData,
+  printCurriculumFirstRow
 } from './Database/dbInitialization';
 
 import { exportDatabase, shareDatabase } from './Database/dbExport';
@@ -25,6 +27,10 @@ const setupDatabase = async () => {
     await insertImageData('test_base64_string', 1, 2);
 
     await printFirstRow();
+
+    await insertCurriculumData('test', 123);
+
+    await printCurriculumFirstRow();
 
     const allData = await getImageData();
     console.log('All data:', allData);
