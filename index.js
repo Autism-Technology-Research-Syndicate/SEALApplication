@@ -28,7 +28,7 @@ const setupDatabase = async () => {
 
     await printFirstRow();
 
-    await insertCurriculumData('test', 123);
+    await insertCurriculumData(0, 5, "Testing curriculum");
 
     await printCurriculumFirstRow();
 
