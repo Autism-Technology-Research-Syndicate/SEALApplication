@@ -1,20 +1,30 @@
 import { Image, View, Text } from 'react-native';
 import BackgroundWrapper from '../../Components/BackgroundWrapper/.';
 import Button from '../../Components/Button/.';
+import TextField from '../../Components/TextField/.';
 import styles from './defaultCSS';
 
-const index = ({navigation}) => {
+const index = ({ navigation }) => {
   return (
     <BackgroundWrapper>
-
       <View style={styles.container}>
+
         <View style={{ flex: 1, justifyContent: 'flex-end', rowGap: 10 }}>
-        <View style={{ paddingBottom: 25, rowGap: 20  }}>
-          <Image style={{ alignSelf: 'center' }} source={require('../../Assets/images/header_subheaderSeal.png')} />
-          <Image style={{ alignSelf: 'center' }} source={require('../../Assets/images/WelcometoSEALimage.png')} />
+          <TextField placeholder="username" />
+          <TextField placeholder="password" />
         </View>
-          <Button title='Learner login' />
-          <Button light title='Teacher login' />
+        <Text>
+          Forget password?
+        </Text>
+        <View style={{ flex: 1, justifyContent: 'flex-end', rowGap: 10 }}>
+          <Button title='Submit' onPress={() => navigation.navigate('Login')} />
+          <Text>
+            Dont' have an account?
+          </Text>
+          <Text>
+            Sign-up
+          </Text>
+          <Button light title='How SEAL works...' />
         </View>
       </View>
     </BackgroundWrapper>

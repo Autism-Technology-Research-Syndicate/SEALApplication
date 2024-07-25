@@ -1,0 +1,21 @@
+import React, { Fragment } from 'react';
+import { TextInput } from 'react-native';
+import styles from './defaultCSS';
+
+type props = {
+  password: boolean;
+};
+
+function index(props) {
+  const [text, onChangeText] = React.useState('');
+  return (
+    <TextInput
+      style={styles.input}
+      onChangeText={onChangeText}
+      placeholder={props.placeholder}
+      value={text}
+    />
+  );
+};
+
+export default index;
