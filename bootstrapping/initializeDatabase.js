@@ -15,7 +15,6 @@ import {
   insertUser,
   getUsers,
 } from '../Database/dbInitialization';
-
 AppRegistry.registerComponent(appName, () => App);
 
 const setupDatabase = async () => {
@@ -52,7 +51,7 @@ const setupDatabase = async () => {
     );
 
     const allUsers = await getUsers();
-    console.log('All users:', allUsers[0]);
+    console.log('All users:', allUsers);
 
     const allData = await getImageData();
     // updated not overwhelm the console

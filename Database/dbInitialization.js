@@ -61,30 +61,6 @@ const initializeDatabase = () => {
       },
     );
   });
-
-  db.transaction(tx => {
-    tx.executeSql(
-      `CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
-        picture TEXT,
-        estimatedAttentionSpan INTEGER,
-        levelOfSpectrum INTEGER,
-        settingsChoices TEXT,
-        progressInCurriculum INTEGER,
-        averageAccuracy INTEGER,
-        description TEXT,
-        necessaryBreakTime INTEGER
-      )`,
-      [],
-      () => {
-        console.log('users Table created successfully - in dbInitialization.');
-      },
-      (_, error) => {
-        console.error('Error creating table', error);
-      },
-    );
-  });
 };
 
 // Insert a new row into the imgdp table
@@ -236,7 +212,11 @@ const getUsers = () => {
       tx.executeSql(
         'SELECT * FROM users',
         [],
-        (_, result) => { resolve(result.rows.raw()); },
+        (_, result) => {
+          const users = result.rows.raw();
+          console.log('Users:', users);
+          resolve(users);
+        },
         (_, error) => { reject(error); }
       );
     });
@@ -251,7 +231,7 @@ const createCombosTable = () => {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         score DECIMAL(12, 10),
         input TEXT,
-        output TEXT, 
+        output TEXT,
       )`,
       [],
       () => {
