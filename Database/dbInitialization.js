@@ -38,6 +38,20 @@ const initializeDatabase = () => {
       );
     });
 
+    db.transaction(tx => {
+      // Drop the existing users table
+      tx.executeSql(
+        `DROP TABLE IF EXISTS users`,
+        [],
+        () => {
+          console.log('Old users table dropped successfully.');
+        },
+        (_, error) => {
+          console.error('Error dropping table', error);
+        },
+      );
+    });
+
   db.transaction(tx => {
     tx.executeSql(
       `CREATE TABLE IF NOT EXISTS users (
@@ -45,7 +59,6 @@ const initializeDatabase = () => {
         name TEXT,
         picture TEXT,
         estimatedAttentionSpan INTEGER,
-        levelOfSpectrum INTEGER,
         settingsChoices TEXT,
         progressInCurriculum INTEGER,
         averageAccuracy INTEGER,
