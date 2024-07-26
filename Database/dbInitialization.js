@@ -38,19 +38,20 @@ const initializeDatabase = () => {
       );
     });
 
-    db.transaction(tx => {
-      // Drop the existing users table
-      tx.executeSql(
-        `DROP TABLE IF EXISTS users`,
-        [],
-        () => {
-          console.log('Old users table dropped successfully.');
-        },
-        (_, error) => {
-          console.error('Error dropping table', error);
-        },
-      );
-    });
+    // Drop the existing users table before updating it. might be better to have a migrations file
+    // db.transaction(tx => {
+    //   // Drop the existing users table
+    //   tx.executeSql(
+    //     `DROP TABLE IF EXISTS users`,
+    //     [],
+    //     () => {
+    //       console.log('Old users table dropped successfully.');
+    //     },
+    //     (_, error) => {
+    //       console.error('Error dropping table', error);
+    //     },
+    //   );
+    // });
 
   db.transaction(tx => {
     tx.executeSql(
@@ -177,7 +178,6 @@ const insertUser = (
   name,
   picture,
   estimatedAttentionSpan,
-  levelOfSpectrum,
   settingsChoices,
   progressInCurriculum,
   averageAccuracy,
@@ -187,12 +187,11 @@ const insertUser = (
   db.transaction(
     tx => {
       tx.executeSql(
-        'INSERT INTO users (name, picture, estimatedAttentionSpan, levelOfSpectrum, settingsChoices, progressInCurriculum, averageAccuracy, description, necessaryBreakTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        'INSERT INTO users (name, picture, estimatedAttentionSpan, settingsChoices, progressInCurriculum, averageAccuracy, description, necessaryBreakTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
         [
           name,
           picture,
           estimatedAttentionSpan,
-          levelOfSpectrum,
           settingsChoices,
           progressInCurriculum,
           averageAccuracy,

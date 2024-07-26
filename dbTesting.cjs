@@ -26,15 +26,15 @@ db.run(`CREATE TABLE IF NOT EXISTS users (
 });
 
 // Insert data into the table
-const insertUser = (name, age) => {
-  db.run(`INSERT INTO users (name, age) VALUES (?, ?)`, [name, age], function (err) {
-    if (err) {
-      console.error('Error inserting data', err.message);
-    } else {
-      console.log(`A row has been inserted with rowid ${this.lastID}`);
-    }
-  });
-};
+// const insertUser = (name, age) => {
+//   db.run(`INSERT INTO users (name, age) VALUES (?, ?)`, [name, age], function (err) {
+//     if (err) {
+//       console.error('Error inserting data', err.message);
+//     } else {
+//       console.log(`A row has been inserted with rowid ${this.lastID}`);
+//     }
+//   });
+// };
 
 // Query data from the table
 const getUsers = () => {
