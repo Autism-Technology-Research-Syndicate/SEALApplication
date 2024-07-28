@@ -1,7 +1,9 @@
-import { Image, View, Text } from 'react-native';
+import { Image, View } from 'react-native';
 import BackgroundWrapper from '../../Components/BackgroundWrapper/.';
 import Button from '../../Components/Button/.';
+import LinkButton from '../../Components/LinkButton/.';
 import TextField from '../../Components/TextField/.';
+import Text from '../../Components/Text/.';
 import styles from './defaultCSS';
 
 const index = ({ navigation }) => {
@@ -9,21 +11,20 @@ const index = ({ navigation }) => {
     <BackgroundWrapper>
       <View style={styles.container}>
 
-        <View style={{ flex: 1, justifyContent: 'flex-end', rowGap: 10 }}>
+        <View style={styles.section}>
           <TextField placeholder="username" />
           <TextField placeholder="password" />
         </View>
-        <Text>
-          Forget password?
-        </Text>
-        <View style={{ flex: 1, justifyContent: 'flex-end', rowGap: 10 }}>
-          <Button title='Submit' onPress={() => navigation.navigate('Login')} />
-          <Text>
+        <LinkButton title='Forget password?' style={{textAlign: 'right'}} onPress={() => navigation.navigate('Welcome')}  />
+
+        <View style={styles.section}>
+          <Button title='Submit' onPress={() => navigation.navigate('Welcome')} />
+
+          <Text  style={{textAlign: 'center'}}>
             Dont' have an account?
           </Text>
-          <Text>
-            Sign-up
-          </Text>
+          <LinkButton title='Sign up' style={{textAlign: 'center'}} onPress={() => navigation.navigate('Welcome')} />
+
           <Button light title='How SEAL works...' />
         </View>
       </View>

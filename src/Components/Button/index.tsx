@@ -12,7 +12,7 @@ type props = {
 function index(props) {
   const { onPress, title = 'Heeelo', isActive = true, light } = props;
   return (
-    <Pressable style={[styles.button, styles.opacityLight, (light ? styles.light : styles.dark)]} onPress={onPress}>
+    <Pressable style={[props.style, styles.button, styles.opacityLight, (light ? styles.light : styles.dark)]} onPress={onPress}>
       <Text style={[styles.text, styles.opacityNormal]}>{title}</Text>
     </Pressable>
   );

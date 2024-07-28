@@ -1,5 +1,6 @@
-import React, { Fragment } from 'react';
-import { TextInput } from 'react-native';
+import React from 'react';
+import { TextInput,View } from 'react-native';
+import { Icon } from 'react-native-elements'
 import styles from './defaultCSS';
 
 type props = {
@@ -15,6 +16,7 @@ function index(props) {
       placeholder={props.placeholder}
       value={text}
     />
+
   );
 };
 

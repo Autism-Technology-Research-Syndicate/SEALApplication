@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
         rowGap: 10,
         padding: 10,
 
-    }, 
+    },
     subheader: {
         fontFamily: 'Helvetica Neue',
         fontSize: 18,
@@ -23,9 +23,17 @@ const styles = StyleSheet.create({
         fontStyle: 'normal',
         fontWeight: 'bold',
         alignSelf: 'center',
-
-           color: '#305070'
-  
+        color: '#305070'
     },
+    middle_section: {
+        paddingBottom: 25,
+        rowGap: 20,
+        alignSelf: 'center'
+    },
+    bottom_up: { 
+        flex: 1, 
+        justifyContent: 'flex-end', 
+        rowGap: 10 
+    }
 });
 export default styles;

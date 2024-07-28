@@ -16,7 +16,7 @@ const stylesheet = StyleSheet.create({
     opacityNormal: { opacity: 1 },
     textNormal: {
         fontFamily: 'Helvetica Neue',
-        fontSize: 18,
+        fontSize: 16,
         fontStyle: 'normal',
         color: '#305070'
     },
