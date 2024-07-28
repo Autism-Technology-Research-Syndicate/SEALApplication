@@ -235,6 +235,23 @@ const getUsers = () => {
   });
 };
 
+const getOneUser = (id) => {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'SELECT * FROM users WHERE id = ?',
+        [id],
+        (_, result) => {
+          const user = result.rows.raw();
+          console.log('User:', user);
+          resolve(user);
+        },
+        (_, error) => { reject(error); }
+      );
+    });
+  });
+};
+
 // Create the table in the db for the input, output, score called Combos
 const createCombosTable = () => {
   db.transaction(tx => {
@@ -332,6 +349,7 @@ export {
   printFirstRow,
   insertUser,
   getUsers,
+  getOneUser,
   printCurriculumFirstRow,
   insertCurriculumData,
 };

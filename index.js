@@ -16,6 +16,7 @@ import {
   printCurriculumFirstRow,
   insertUser,
   getUsers,
+  getOneUser,
 } from './Database/dbInitialization';
 
 import { exportDatabase, shareDatabase } from './Database/dbExport';
@@ -47,6 +48,17 @@ const setupDatabase = async () => {
       necessaryBreakTime: 15,
     };
 
+    const testUser2 = {
+      name: 'Jane Doe',
+      picture: 'path/to/picture.jpg',
+      estimatedAttentionSpan: 30,
+      settingsChoices: '{"sound": "low", "brightness": "medium"}',
+      progressInCurriculum: 0,
+      averageAccuracy: 75.5,
+      description: 'A brief description of Jane Doe.',
+      necessaryBreakTime: 15,
+    };
+
     console.log('Inserting user:', testUser);
     await insertUser(
       testUser.name,
@@ -58,6 +70,22 @@ const setupDatabase = async () => {
       testUser.description,
       testUser.necessaryBreakTime,
     );
+
+    console.log('Inserting user:', testUser2);
+    await insertUser(
+      testUser2.name,
+      testUser2.picture,
+      testUser2.estimatedAttentionSpan,
+      testUser2.settingsChoices,
+      testUser2.progressInCurriculum,
+      testUser2.averageAccuracy,
+      testUser2.description,
+      testUser2.necessaryBreakTime,
+    );
+console.log('Getting one user:');
+    const oneUser = await getOneUser(3);
+    console.log('One user:', oneUser);
+
 
     const allData = await getImageData();
     console.log('All data:', allData);
