@@ -4,7 +4,7 @@ import styles from './defaultCSS';
 
 function index(props) {
 
-  return (<Text style={[props.style, styles.text]}>{props.children}</Text>);
+  return (<Text style={{...styles.text,...props.style}}>{props.children}</Text>);
 };
 
 export default index;

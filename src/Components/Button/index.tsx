@@ -1,8 +1,7 @@
-import React, { Fragment } from 'react';
-import { View, Text, Pressable } from 'react-native';
+import React from 'react';
+import {Text, Pressable } from 'react-native';
 import styles from './defaultCSS';
-import WebCamFeed from '../WebCamFeed';
-//import { WelcometoSEAL } from './WelcometoSEAL';
+
 
 type props = {
   light: boolean;

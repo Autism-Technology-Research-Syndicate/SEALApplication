@@ -18,7 +18,7 @@ const index = ({ navigation }) => {
         <LinkButton title='Forget password?' style={{textAlign: 'right'}} onPress={() => navigation.navigate('Welcome')}  />
 
         <View style={styles.section}>
-          <Button title='Submit' onPress={() => navigation.navigate('Welcome')} />
+          <Button title='Submit' onPress={() => navigation.navigate('Personal')} />
 
           <Text  style={{textAlign: 'center'}}>
             Dont' have an account?

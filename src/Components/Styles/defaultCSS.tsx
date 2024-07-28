@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import styles from '../../Styles/defaultCSS';
 
 
 const stylesheet = StyleSheet.create({
@@ -14,12 +15,8 @@ const stylesheet = StyleSheet.create({
     light: { backgroundColor: 'rgba(132, 182, 207, 1)' },
     opacityLight: { opacity: 0.85 },
     opacityNormal: { opacity: 1 },
-    textNormal: {
-        fontFamily: 'Helvetica Neue',
-        fontSize: 16,
-        fontStyle: 'normal',
-        color: '#305070'
-    },
+    textNormal: {...styles.textNormal },
+
 });
 
 export default stylesheet;
