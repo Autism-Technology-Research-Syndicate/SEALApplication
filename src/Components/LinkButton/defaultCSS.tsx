@@ -3,24 +3,18 @@ import styles from '../Styles/defaultCSS';
 
 
 const stylesheet = StyleSheet.create({
-
-    button: {...styles.border},
     light:{...styles.light},
     dark: {...styles.dark},
     opacityLight:{...styles.opacityLight},
     opacityNormal:{ ...styles.opacityNormal},
      text: {
-        height: 50,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        flexShrink: 0,
-        color: 'rgba(245, 245, 245, 1)',
-        textAlign: 'center',
         fontFamily: styles.textNormal.fontFamily,
-        fontSize: 18,
+        fontSize: styles.textNormal.fontSize,
         fontStyle: styles.textNormal.fontStyle,
-        fontWeight: '700',
-        textAlignVertical: 'center',
+        fontWeight: 'bold',
+        textDecorationLine:'underline',
+        color: styles.textNormal.color
+     
     },
 });
 
