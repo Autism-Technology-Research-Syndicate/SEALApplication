@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import {Button, Text,TextInput, View} from 'react-native'
+import {Button, SafeAreaView, ScrollView, Text, TextInput, View} from 'react-native'
+const { styles } = require('./CSS')
 
 interface FormData {
     email: string
@@ -13,59 +14,80 @@ export function RegistrationForm() {
     const [email, setEmail] = useState('')
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [age, setAge] = useState(0)
-    const [interests, setInterests] = useState()
+    const [age, setAge] = useState('')
+    
+    const [interests, setInterests] = useState([])
+
+    const handleSubmit = async () => {
+        let data: FormData = {
+            email: email,
+            username: username,
+            password: password,
+            age: Number(age),
+            interests: interests
+        }
+        console.log(`${data.username}'s profile has been created`)
+    }
 
     return (
-        <View>
-            <Text>{'Account Sign Up'}</Text>
+        <SafeAreaView>
+            <ScrollView>
+                <View style={styles.container}>
+                    <Text style={styles.title}>Account Sign Up</Text>
 
-            <Text>{'Parent/Guardian Email Address'}</Text>
-            <TextInput
-                style={{}}
-                placeholder={'Enter Email Address'}
-                onChangeText={(newEmail: string) => setEmail(newEmail)}
-                defaultValue={email}
-            />
+                    <Text style={styles.label}>Parent/Guardian Email Address</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder={'Enter Email Address'}
+                        onChangeText={(val: string) => setEmail(val)}
+                        defaultValue={email}
+                        keyboardType='email-address'
+                    />
 
-            <Text>{'Learner Username'}</Text>
-            <TextInput
-                style={{}}
-                placeholder={'Create Username'}
-                onChangeText={(newUsername: string) => setUsername(newUsername)} 
-                defaultValue={username}
-            />
-            
-            <Text>{'Password'}</Text>
-            <TextInput
-                style={{}}
-                placeholder={'Create Password'}
-                onChangeText={(newPassword: string) => setPassword(newPassword)}
-                secureTextEntry={true}
-                defaultValue={password}
-            />
-            <Text>{'Learner Age'}</Text>
-            <TextInput
-                style={{}}
-                placeholder={'Enter Learner\'s Age'}
-                onChangeText={(newAge: number) => setAge(newAge)} 
-                defaultValue={age}
-            />
-            <Text>{'Learner Interests'}</Text>
-            <TextInput
-                style={{}}
-                placeholder={'Select All That Apply'}
-            />
+                    <Text style={styles.label}>Learner Username</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder={'Create Username'}
+                        onChangeText={(val: string) => setUsername(val)} 
+                        defaultValue={username}
+                        textContentType='username'
+                    />
+                    
+                    <Text style={styles.label}>Password</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder={'Create Password'}
+                        onChangeText={(val: string) => setPassword(val)}
+                        secureTextEntry={true}
+                        defaultValue={password}
+                        textContentType='newPassword'
+                    />
 
-            <Button
-                onPress={handleSubmit}
-                title='Sign Up'
-            />
+                    <Text style={styles.label}>Learner Age</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder={'Enter Learner\'s Age'}
+                        onChangeText={(val: string) => setAge(val)} 
+                        defaultValue={age}
+                        keyboardType='number-pad'
+                    />
 
-        </View>
+                    <Text style={styles.label}>Learner Interests</Text>
+                    <TextInput
+                        style={{}}
+                        placeholder={'Select All That Apply'}
+                    />
+
+                    <View style={styles.button}>
+                        <Button
+                            onPress={() => handleSubmit()}
+                            title='Sign Up'
+                        />
+                    </View>
+
+                </View>
+            </ScrollView>
+        </SafeAreaView>
     )
 }
 
-export const handleSubmit = async (data: FormData) => {
-    console.log(`${data.username}'s profile has been created`);
-}
