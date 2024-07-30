@@ -85,7 +85,6 @@ const initializeDatabase = () => {
       },
     );
   });
->>>>>>> 90569cea8bba75b6d97b2c0ed4df03919c1580a3
 };
 
 // Insert a new row into the imgdp table
