@@ -1,4 +1,11 @@
+
 import {
+    createCombosTable,
+    insertComboData,
+    updateComboData,
+    deleteComboData,
+    getBestComboData,
+
     insertImageData,
     getImageData,
     updateImageData,
@@ -39,6 +46,28 @@ import {
       const remainingImageData = await getImageData();
       console.log('Remaining image data:', remainingImageData);
   
+
+      // Create the Combos table
+      createCombosTable();
+
+      // Insert combo data
+      await insertComboData(0.1345678, 3, 2);
+      await insertComboData(0.1345678, 4, 2);
+
+      // Get all bestCombo data
+      console.log('Fetching best combo data...');
+      const bestCombo = await getBestComboData();
+      console.log('Best combo data:', bestCombo);
+  
+      // Update Combo data
+      console.log('Updating combo data...');
+      await updateComboData(0.3456543, 1);
+
+      // Delete Combo data
+      console.log('Deleting combo data...');
+      await deleteComboData(2);
+  
+
       // Close the database connection (optional in most cases)
       // Note: React Native SQLite databases are usually kept open throughout the app lifecycle
       // unless specifically closed.

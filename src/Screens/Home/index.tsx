@@ -1,23 +1,24 @@
-import { Image, View, Text } from 'react-native';
-import BackgroundWrapper from '../../Components/BackgroundWrapper/.';
-import Button from '../../Components/Button/.';
-import styles from './defaultCSS';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Entry from '../Entry';
+import Login from '../Login';
+import Personal from '../Personal';
 
-const index = () => {
+const Stack = createNativeStackNavigator();
+
+const index = ({navigation}) => {
   return (
-    <BackgroundWrapper>
 
-      <View style={styles.container}>
-        <View style={{ flex: 1, justifyContent: 'flex-end', rowGap: 10 }}>
-        <View style={{ paddingBottom: 25, rowGap: 20  }}>
-          <Image style={{ alignSelf: 'center' }} source={require('../../Assets/images/header_subheaderSeal.png')} />
-          <Image style={{ alignSelf: 'center' }} source={require('../../Assets/images/WelcometoSEALimage.png')} />
-        </View>
-          <Button title='Learner login' />
-          <Button title='Teacher login' />
-        </View>
-      </View>
-    </BackgroundWrapper>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Welcome" screenOptions={{
+        headerShown: false
+      }}>
+        <Stack.Screen name="Welcome" component={Entry}  />
+        <Stack.Screen name="Login" component={Login}  />
+        <Stack.Screen name="Personal" component={Personal}  />
+
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
