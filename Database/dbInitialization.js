@@ -11,19 +11,19 @@ const initializeDatabase = async () => {
   console.log("in initializeDatabase");
   console.log("creating tables");
       // Drop the existing users table before updating it. might be better to have a migrations file
-    // db.transaction(tx => {
-    //   // Drop the existing users table
-    //   tx.executeSql(
-    //     `DROP TABLE IF EXISTS users`,
-    //     [],
-    //     () => {
-    //       console.log('Old users table dropped successfully.');
-    //     },
-    //     (_, error) => {
-    //       console.error('Error dropping table', error);
-    //     },
-    //   );
-    // });
+    db.transaction(tx => {
+      // Drop the existing users table
+      tx.executeSql(
+        `DROP TABLE IF EXISTS users`,
+        [],
+        () => {
+          console.log('Old users table dropped successfully.');
+        },
+        (_, error) => {
+          console.error('Error dropping table', error);
+        },
+      );
+    });
 
   const createTable = (query, tableName) => {
     return new Promise((resolve, reject) => {

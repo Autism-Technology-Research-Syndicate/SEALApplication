@@ -20,7 +20,8 @@ const setupDatabase = async () => {
   try {
     await initializeDatabase();
     console.log('Database setup completed');
-    await testDb();
+    // uncomment to test the database
+    // await testDb();
   } catch (error) {
     console.error('Error setting up database:', error);
   }
