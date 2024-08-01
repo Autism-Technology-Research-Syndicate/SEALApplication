@@ -1,10 +1,10 @@
 import { insertCurriculumData } from './dbInitialization.js';
 
-async function parseStrToCurriculumData = (inputStr) => {
+async function parseStrToCurriculumData(inputStr) {
     try {
-        const inputType = parseInt(inputString.slice(0, 1));
-        const sequence = parseInt(inputString.slice(1, 2));
-        const content = inputString.slice(2);
+        const inputType = parseInt(inputStr.slice(0, 2), 10);
+        const sequence = parseInt(inputStr.slice(2, 4), 10);
+        const content = inputStr.slice(4);
 
         insertCurriculumData(inputType, sequence, content);
     } catch (error) {
