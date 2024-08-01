@@ -24,6 +24,13 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         alignSelf: 'center',
         color: '#305070'
+
     },
+    section:
+    {
+        flex: 1,
+        justifyContent: 'flex-end',
+        rowGap: 10
+    }
 });
 export default styles;
