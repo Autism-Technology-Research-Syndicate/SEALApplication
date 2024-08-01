@@ -6,7 +6,7 @@ async function parseStrToCurriculumData(inputStr) {
         const sequence = parseInt(inputStr.slice(2, 4), 10);
         const content = inputStr.slice(4);
 
-        insertCurriculumData(inputType, sequence, content);
+        await insertCurriculumData(inputType, sequence, content);
     } catch (error) {
         console.error('Error when save data to curriculum table:', error);
     }
