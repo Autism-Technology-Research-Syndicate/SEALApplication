@@ -1,7 +1,7 @@
 const db = require('./dbTesting.cjs');
 
 // Insert a new user
-db.insertUser('John Doe', 30);
+// db.insertUser('John Doe', 30);
 
 // Query users
 db.getUsers();
