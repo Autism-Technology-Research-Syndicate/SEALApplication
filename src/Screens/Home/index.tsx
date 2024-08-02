@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import WelcomeToSeal from '../WelcomeToSeal';
 import Login from '../Login';
-import Personal from '../Personal';
+import PersonalPage from '../PersonalPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,7 +15,7 @@ const Index = ({navigation}) => {
       }}>
         <Stack.Screen name="Welcome" component={WelcomeToSeal}  />
         <Stack.Screen name="Login" component={Login}  />
-        <Stack.Screen name="Personal" component={Personal}  />
+        <Stack.Screen name="Personal" component={PersonalPage}  />
 
       </Stack.Navigator>
     </NavigationContainer>
