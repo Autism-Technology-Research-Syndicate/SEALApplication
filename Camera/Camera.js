@@ -3,11 +3,7 @@ import { RNCamera } from 'react-native-camera';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import { TouchableOpacity, Alert, StyleSheet } from 'react-native';
 import RNFS from 'react-native-fs';
-import {
-  insertImageData,
-  getImageData,
-  initializeDatabase
-} from '../Database/dbInitialization.js';
+import { insertImageData, getImageData } from '../Database/dbInitialization.js';
 
 function saveImageToDb(toSend, input, output) {
   insertImageData(toSend, input, output);
@@ -30,7 +26,6 @@ class Camera extends PureComponent {
       takingPic: false,
     };
     this.camera = null;
-    initializeDatabase();
     getImageData();
   }
 
