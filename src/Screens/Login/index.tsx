@@ -6,7 +6,7 @@ import TextField from '../../Components/TextField/.';
 import Text from '../../Components/Text/.';
 import styles from './defaultCSS';
 
-const index = ({ navigation }) => {
+const Index = ({ navigation }) => {
   return (
     <BackgroundWrapper>
       <View style={styles.container}>
@@ -32,6 +32,6 @@ const index = ({ navigation }) => {
   );
 };
 
-export default index;
+export default Index;
 
 

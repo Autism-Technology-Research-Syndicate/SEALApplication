@@ -6,7 +6,7 @@ import Personal from '../Personal';
 
 const Stack = createNativeStackNavigator();
 
-const index = ({navigation}) => {
+const Index = ({navigation}) => {
   return (
 
     <NavigationContainer>
@@ -22,6 +22,6 @@ const index = ({navigation}) => {
   );
 };
 
-export default index;
+export default Index;
 
 

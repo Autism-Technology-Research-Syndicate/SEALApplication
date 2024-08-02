@@ -2,36 +2,19 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
+        flexDirection: 'column',
         height: '100%',
         width: '100%',
         rowGap: 10,
-        padding: 10,
-
-    },
-    subheader: {
-        fontFamily: 'Helvetica Neue',
-        fontSize: 18,
-        fontStyle: 'normal',
-        fontWeight: '400',
-        alignSelf: 'center',
-        color: '#305070'
-
-    },
-    header: {
-        fontFamily: 'Comic Neue',
-        fontSize: 27,
-        fontStyle: 'normal',
-        fontWeight: 'bold',
-        alignSelf: 'center',
-        color: '#305070'
+        padding: 30
     },
     middle_section: {
-        paddingBottom: 25,
-        rowGap: 20,
-        alignSelf: 'center'
+        alignSelf: 'center',
+        justifyContent: 'center',
+        rowGap: 10,
+        flex: 2
     },
-    bottom_up: { 
-        flex: 1, 
+    bottom_section: { 
         justifyContent: 'flex-end', 
         rowGap: 10 
     }

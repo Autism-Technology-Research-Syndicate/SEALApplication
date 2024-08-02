@@ -8,13 +8,14 @@ type props = {
 };
 
 
-function index(props) {
+function Index(props) {
   const { onPress, title = 'Heeelo', isActive = true, light } = props;
+  const combinestyles = [styles.button, styles.opacityLight, (light ? styles.light : styles.dark)];
   return (
-    <Pressable style={[props.style, styles.button, styles.opacityLight, (light ? styles.light : styles.dark)]} onPress={onPress}>
+    <Pressable style={combinestyles} onPress={onPress}>
       <Text style={[styles.text, styles.opacityNormal]}>{title}</Text>
     </Pressable>
   );
 };
 
-export default index;
+export default Index;

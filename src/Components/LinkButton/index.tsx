@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import styles from './defaultCSS';
 
-function index(props) {
+function Index(props) {
   const { onPress, title = 'Heeelo' } = props;
 
   return (<TouchableOpacity onPress={onPress}>
@@ -10,4 +10,4 @@ function index(props) {
   </TouchableOpacity>);
 };
 
-export default index;
+export default Index;
