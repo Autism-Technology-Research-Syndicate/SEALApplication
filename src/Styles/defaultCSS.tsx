@@ -5,7 +5,7 @@ const stylesheet = StyleSheet.create({
         height: '100%',
         width: '100%',
         rowGap: 10,
-        padding: 10,
+        padding: 30,
     },
     defaultColor: '#305070',
     defaultText:{

@@ -5,8 +5,7 @@ const stylesheet = StyleSheet.create({
     container: {...styles.container},
     body: {
         flex: 2,
-        rowGap: 50,
-        justifyContent: 'center'
+        rowGap: 30,
     },
     upper_body:
     {
@@ -22,5 +21,11 @@ const stylesheet = StyleSheet.create({
     {
         rowGap: 10
     },
+    header:{
+        ...styles.defaultText,
+        fontSize: 18,
+        fontWeight: 'bold',
+        paddingBottom: 30
+},
 });
 export default stylesheet;

@@ -11,21 +11,27 @@ const Index = ({ navigation }) => {
     <BackgroundWrapper>
       <View style={styles.container}>
 
-        <View style={styles.section}>
-          <TextField placeholder="username" />
-          <TextField placeholder="password" />
-        </View>
-        <LinkButton title='Forget password?' style={{textAlign: 'right'}} onPress={() => navigation.navigate('Welcome')}  />
-
-        <View style={styles.section}>
+        <View style={styles.body}>
+          <View style={styles.upper_body}>
+            <TextField placeholder="username" />
+            <TextField placeholder="password" />
+            <LinkButton title='Forget password?' style={{ textAlign: 'right' }} onPress={() => navigation.navigate('Welcome')} />
+          </View>
+          <View style={styles.bottom_body}>
           <Button title='Submit' onPress={() => navigation.navigate('Personal')} />
 
-          <Text  style={{textAlign: 'center'}}>
+          <View style={styles.middle_body}>
+          <Text style={{ textAlign: 'center' }}>
             Dont' have an account?
           </Text>
-          <LinkButton title='Sign up' style={{textAlign: 'center'}} onPress={() => navigation.navigate('Welcome')} />
+          <LinkButton title='Sign up' style={{ textAlign: 'center' }} onPress={() => navigation.navigate('AccountSignUp')} />
+          </View>
+          </View>
+        </View>
+        <View>
 
           <Button light title='How SEAL works...' />
+
         </View>
       </View>
     </BackgroundWrapper>
