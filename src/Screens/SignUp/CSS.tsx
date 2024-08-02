@@ -17,16 +17,6 @@ export const styles = StyleSheet.create({
     marginBottom: 5,
     color: '#34495E',
   },
-  input: {
-    width: '100%',
-    height: 40,
-    borderColor: '#BDC3C7',
-    borderWidth: 1,
-    borderRadius: 5,
-    marginBottom: 15,
-    paddingHorizontal: 10,
-    backgroundColor: 'white',
-  },
   button: {
     backgroundColor: '#3498DB',
     padding: 15,
