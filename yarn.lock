@@ -2327,9 +2327,18 @@
   version "6.6.1"
   resolved "https://registry.npmjs.org/@react-navigation/bottom-tabs/-/bottom-tabs-6.6.1.tgz"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   integrity sha512-9oD4cypEBjPuaMiu9tevWGiQ4w/d6l3HNhcJ1IjXZ24xvYDSs0mqjUcdt8SWUolCvRrYc/DmNBLlT83bk0bHTw==
 >>>>>>> 69e4ced (bug fixes)
+=======
+<<<<<<< HEAD
+=======
+  integrity sha512-9oD4cypEBjPuaMiu9tevWGiQ4w/d6l3HNhcJ1IjXZ24xvYDSs0mqjUcdt8SWUolCvRrYc/DmNBLlT83bk0bHTw==
+>>>>>>> 69e4ced (bug fixes)
+=======
+>>>>>>> e87b3d1 (attempt at gradient background)
+>>>>>>> bb-pre-alpha
   dependencies:
     "@react-navigation/elements" "^1.3.31"
     color "^4.2.3"
@@ -2356,6 +2365,7 @@
   version "6.10.1"
   resolved "https://registry.npmjs.org/@react-navigation/native-stack/-/native-stack-6.10.1.tgz"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   integrity sha512-MDTHtelO2EhY1sEbz4YMNw+1YoE0sWXSHLUYireQZFHUXKDfYiWYbxXg2Q08Ool0KEvnZjP0hh0Wm6/ZnvDCtw==
 <<<<<<< HEAD
@@ -2363,6 +2373,14 @@
 =======
 >>>>>>> 69e4ced (bug fixes)
 >>>>>>> c1e1679 (merge conflicts)
+=======
+<<<<<<< HEAD
+=======
+  integrity sha512-MDTHtelO2EhY1sEbz4YMNw+1YoE0sWXSHLUYireQZFHUXKDfYiWYbxXg2Q08Ool0KEvnZjP0hh0Wm6/ZnvDCtw==
+>>>>>>> 69e4ced (bug fixes)
+=======
+>>>>>>> e87b3d1 (attempt at gradient background)
+>>>>>>> bb-pre-alpha
   dependencies:
     "@react-navigation/elements" "^1.3.31"
     warn-once "^0.1.0"
@@ -3677,6 +3695,7 @@ color@^3.1.2:
   version "3.2.1"
   resolved "https://registry.npmjs.org/color/-/color-3.2.1.tgz"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   integrity sha512-aBl7dZI9ENN6fUGC7mWpMTPNHmWUSNan9tuWN6ahh5ZLNk9baLJOnSMlrQkHcrfFgz2/RigjUVAjdx36VcemKA==
 <<<<<<< HEAD
@@ -3684,6 +3703,14 @@ color@^3.1.2:
 =======
 >>>>>>> 69e4ced (bug fixes)
 >>>>>>> c1e1679 (merge conflicts)
+=======
+<<<<<<< HEAD
+=======
+  integrity sha512-aBl7dZI9ENN6fUGC7mWpMTPNHmWUSNan9tuWN6ahh5ZLNk9baLJOnSMlrQkHcrfFgz2/RigjUVAjdx36VcemKA==
+>>>>>>> 69e4ced (bug fixes)
+=======
+>>>>>>> e87b3d1 (attempt at gradient background)
+>>>>>>> bb-pre-alpha
   dependencies:
     color-convert "^1.9.3"
     color-string "^1.6.0"
@@ -4637,6 +4664,10 @@ expect@^29.7.0:
     jest-util "^29.7.0"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> bb-pre-alpha
 expo-blur@^13.0.2:
   version "13.0.2"
   resolved "https://registry.npmjs.org/expo-blur/-/expo-blur-13.0.2.tgz"
@@ -4719,6 +4750,14 @@ expo@*:
     fbemitter "^3.0.0"
     whatwg-url-without-unicode "8.0.0-3"
 >>>>>>> 69e4ced (bug fixes)
+<<<<<<< HEAD
+=======
+=======
+expo-blur@^13.0.2:
+  version "13.0.2"
+  resolved "https://registry.npmjs.org/expo-blur/-/expo-blur-13.0.2.tgz"
+>>>>>>> e87b3d1 (attempt at gradient background)
+>>>>>>> bb-pre-alpha
 
 fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
   version "3.1.3"
@@ -4756,17 +4795,25 @@ fast-xml-parser@^4.0.12, fast-xml-parser@^4.2.4:
   version "4.4.1"
   resolved "https://registry.npmjs.org/fast-xml-parser/-/fast-xml-parser-4.4.1.tgz"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   version "4.4.0"
   resolved "https://registry.npmjs.org/fast-xml-parser/-/fast-xml-parser-4.4.0.tgz"
   integrity sha512-kLY3jFlwIYwBNDojclKsNAC12sfD6NwW74QB2CoNGPvtVxjliYehVunB3HYyNi+n4Tt1dAcgwYvmKF/Z18flqg==
 >>>>>>> origin/main
 =======
+=======
+>>>>>>> bb-pre-alpha
 <<<<<<< HEAD
 =======
   integrity sha512-xkjOecfnKGkSsOwtZ5Pz7Us/T6mrbPQrq0nh+aCO5V9nk5NLWmasAHumTKjiPJPWANe+kAZ84Jc8ooJkzZ88Sw==
 >>>>>>> 69e4ced (bug fixes)
+<<<<<<< HEAD
 >>>>>>> c1e1679 (merge conflicts)
+=======
+=======
+>>>>>>> e87b3d1 (attempt at gradient background)
+>>>>>>> bb-pre-alpha
   dependencies:
     strnum "^1.0.5"
 
@@ -5337,6 +5384,7 @@ hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.2:
   version "3.3.2"
   resolved "https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
 <<<<<<< HEAD
@@ -5344,6 +5392,14 @@ hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.2:
 =======
 >>>>>>> 69e4ced (bug fixes)
 >>>>>>> c1e1679 (merge conflicts)
+=======
+<<<<<<< HEAD
+=======
+  integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
+>>>>>>> 69e4ced (bug fixes)
+=======
+>>>>>>> e87b3d1 (attempt at gradient background)
+>>>>>>> bb-pre-alpha
   dependencies:
     react-is "^16.7.0"
 
@@ -6537,6 +6593,7 @@ lodash.isequal@^4.5.0:
   version "4.5.0"
   resolved "https://registry.npmjs.org/lodash.isequal/-/lodash.isequal-4.5.0.tgz"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   integrity sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==
 <<<<<<< HEAD
@@ -6544,6 +6601,14 @@ lodash.isequal@^4.5.0:
 =======
 >>>>>>> 69e4ced (bug fixes)
 >>>>>>> c1e1679 (merge conflicts)
+=======
+<<<<<<< HEAD
+=======
+  integrity sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==
+>>>>>>> 69e4ced (bug fixes)
+=======
+>>>>>>> e87b3d1 (attempt at gradient background)
+>>>>>>> bb-pre-alpha
 
 lodash.merge@^4.6.2:
   version "4.6.2"
@@ -7471,6 +7536,7 @@ opencollective-postinstall@^2.0.3:
   version "2.0.3"
   resolved "https://registry.npmjs.org/opencollective-postinstall/-/opencollective-postinstall-2.0.3.tgz"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   integrity sha512-8AV/sCtuzUeTo8gQK5qDZzARrulB3egtLzFgteqB2tcT4Mw7B8Kt7JcDHmltjz6FOAHsvTevk70gZEbhM4ZS9Q==
 <<<<<<< HEAD
@@ -7478,6 +7544,14 @@ opencollective-postinstall@^2.0.3:
 =======
 >>>>>>> 69e4ced (bug fixes)
 >>>>>>> c1e1679 (merge conflicts)
+=======
+<<<<<<< HEAD
+=======
+  integrity sha512-8AV/sCtuzUeTo8gQK5qDZzARrulB3egtLzFgteqB2tcT4Mw7B8Kt7JcDHmltjz6FOAHsvTevk70gZEbhM4ZS9Q==
+>>>>>>> 69e4ced (bug fixes)
+=======
+>>>>>>> e87b3d1 (attempt at gradient background)
+>>>>>>> bb-pre-alpha
 
 optionator@^0.9.3:
   version "0.9.4"
@@ -8039,6 +8113,7 @@ react-native-elements@^3.4.3:
   version "3.4.3"
   resolved "https://registry.npmjs.org/react-native-elements/-/react-native-elements-3.4.3.tgz"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   integrity sha512-VtZc25EecPZyUBER85zFK9ZbY6kkUdcm1ZwJ9hdoGSCr1R/GFgxor4jngOcSYeMvQ+qimd5No44OVJW3rSJECA==
 <<<<<<< HEAD
@@ -8046,6 +8121,14 @@ react-native-elements@^3.4.3:
 =======
 >>>>>>> 69e4ced (bug fixes)
 >>>>>>> c1e1679 (merge conflicts)
+=======
+<<<<<<< HEAD
+=======
+  integrity sha512-VtZc25EecPZyUBER85zFK9ZbY6kkUdcm1ZwJ9hdoGSCr1R/GFgxor4jngOcSYeMvQ+qimd5No44OVJW3rSJECA==
+>>>>>>> 69e4ced (bug fixes)
+=======
+>>>>>>> e87b3d1 (attempt at gradient background)
+>>>>>>> bb-pre-alpha
   dependencies:
     "@types/react-native-vector-icons" "^6.4.6"
     color "^3.1.2"
@@ -8065,6 +8148,10 @@ react-native-fs@^2.20.0:
     utf8 "^3.0.0"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> bb-pre-alpha
 react-native-linear-gradient@^2.8.3:
   version "2.8.3"
   resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.8.3.tgz#9a116649f86d74747304ee13db325e20b21e564f"
@@ -8079,14 +8166,24 @@ react-native-linear-gradient@^2.8.3:
     invariant "^2.2.4"
     prop-types "^15.7.2"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/main
 =======
 >>>>>>> 69e4ced (bug fixes)
 >>>>>>> c1e1679 (merge conflicts)
+=======
+>>>>>>> 69e4ced (bug fixes)
+=======
+react-native-linear-gradient@^2.8.3:
+  version "2.8.3"
+  resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.8.3.tgz#9a116649f86d74747304ee13db325e20b21e564f"
+>>>>>>> e87b3d1 (attempt at gradient background)
+>>>>>>> bb-pre-alpha
 
 react-native-ratings@8.0.4:
   version "8.0.4"
   resolved "https://registry.npmjs.org/react-native-ratings/-/react-native-ratings-8.0.4.tgz"
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
   integrity sha512-Xczu5lskIIRD6BEdz9A0jDRpEck/SFxRqiglkXi0u67yAtI1/pcJC76P4MukCbT8K4BPVl+42w83YqXBoBRl7A==
@@ -8095,6 +8192,14 @@ react-native-ratings@8.0.4:
 =======
 >>>>>>> 69e4ced (bug fixes)
 >>>>>>> c1e1679 (merge conflicts)
+=======
+<<<<<<< HEAD
+=======
+  integrity sha512-Xczu5lskIIRD6BEdz9A0jDRpEck/SFxRqiglkXi0u67yAtI1/pcJC76P4MukCbT8K4BPVl+42w83YqXBoBRl7A==
+>>>>>>> 69e4ced (bug fixes)
+=======
+>>>>>>> e87b3d1 (attempt at gradient background)
+>>>>>>> bb-pre-alpha
   dependencies:
     lodash "^4.17.15"
 
@@ -8104,10 +8209,15 @@ react-native-safe-area-context@^4.10.8, "react-native-safe-area-context@>= 3.0.0
   integrity sha512-Jx1lovhvIdYygg0UsMCBUJN0Wvj9GlA5bbcBLzjZf93uJpNHzaiHC4hR280+sNVK1+/pMHEyEkXVHDZE5JWn0w==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> bb-pre-alpha
 react-native-screens@^3.33.0:
   version "3.33.0"
   resolved "https://registry.npmjs.org/react-native-screens/-/react-native-screens-3.33.0.tgz"
 =======
+<<<<<<< HEAD
 <<<<<<< HEAD
 react-native-screens@^3.32.0, "react-native-screens@>= 3.0.0":
   version "3.32.0"
@@ -8115,12 +8225,22 @@ react-native-screens@^3.32.0, "react-native-screens@>= 3.0.0":
   integrity sha512-wybqZAHX7v8ipOXhh90CqGLkBHw5JYqKNRBX7R/b0c2WQisTOgu0M0yGwBMM6LyXRBT+4k3NTGHdDbpJVpq0yQ==
 >>>>>>> origin/main
 =======
+=======
+>>>>>>> bb-pre-alpha
 react-native-screens@^3.33.0, "react-native-screens@>= 3.0.0":
   version "3.33.0"
   resolved "https://registry.npmjs.org/react-native-screens/-/react-native-screens-3.33.0.tgz"
   integrity sha512-3bKeT/kS1g/6XqraBqjDtyyci35LDeDIHMoko74o+Z5p1oLEi697GWFVwsG272FF0iuOullUbuRNzCcEfRBASQ==
 >>>>>>> 69e4ced (bug fixes)
+<<<<<<< HEAD
 >>>>>>> c1e1679 (merge conflicts)
+=======
+=======
+react-native-screens@^3.33.0:
+  version "3.33.0"
+  resolved "https://registry.npmjs.org/react-native-screens/-/react-native-screens-3.33.0.tgz"
+>>>>>>> e87b3d1 (attempt at gradient background)
+>>>>>>> bb-pre-alpha
   dependencies:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
@@ -8134,6 +8254,7 @@ react-native-size-matters@^0.3.1:
   version "0.3.1"
   resolved "https://registry.npmjs.org/react-native-size-matters/-/react-native-size-matters-0.3.1.tgz"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   integrity sha512-mKOfBLIBFBcs9br1rlZDvxD5+mAl8Gfr5CounwJtxI6Z82rGrMO+Kgl9EIg3RMVf3G855a85YVqHJL2f5EDRlw==
 <<<<<<< HEAD
@@ -8141,6 +8262,14 @@ react-native-size-matters@^0.3.1:
 =======
 >>>>>>> 69e4ced (bug fixes)
 >>>>>>> c1e1679 (merge conflicts)
+=======
+<<<<<<< HEAD
+=======
+  integrity sha512-mKOfBLIBFBcs9br1rlZDvxD5+mAl8Gfr5CounwJtxI6Z82rGrMO+Kgl9EIg3RMVf3G855a85YVqHJL2f5EDRlw==
+>>>>>>> 69e4ced (bug fixes)
+=======
+>>>>>>> e87b3d1 (attempt at gradient background)
+>>>>>>> bb-pre-alpha
 
 react-native-sqlite-storage@^6.0.1:
   version "6.0.1"
@@ -8151,6 +8280,7 @@ react-native-vector-icons@^10.1.0, react-native-vector-icons@>7.0.0:
   version "10.1.0"
   resolved "https://registry.npmjs.org/react-native-vector-icons/-/react-native-vector-icons-10.1.0.tgz"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   integrity sha512-fdQjCHIdoXmRoTZ5gvN1FmT4sGLQ2wmQiNZHKJQUYnE2tkIwjGnxNch+6Nd4lHAACvMWO7LOzBNot2u/zlOmkw==
 <<<<<<< HEAD
@@ -8158,6 +8288,14 @@ react-native-vector-icons@^10.1.0, react-native-vector-icons@>7.0.0:
 =======
 >>>>>>> 69e4ced (bug fixes)
 >>>>>>> c1e1679 (merge conflicts)
+=======
+<<<<<<< HEAD
+=======
+  integrity sha512-fdQjCHIdoXmRoTZ5gvN1FmT4sGLQ2wmQiNZHKJQUYnE2tkIwjGnxNch+6Nd4lHAACvMWO7LOzBNot2u/zlOmkw==
+>>>>>>> 69e4ced (bug fixes)
+=======
+>>>>>>> e87b3d1 (attempt at gradient background)
+>>>>>>> bb-pre-alpha
   dependencies:
     prop-types "^15.7.2"
     yargs "^16.1.1"
@@ -8581,6 +8719,10 @@ semver@^6.3.0, semver@^6.3.1:
   integrity sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> bb-pre-alpha
 semver@^7.3.5, semver@^7.5.4, semver@^7.6.0:
   version "7.6.3"
   resolved "https://registry.npmjs.org/semver/-/semver-7.6.3.tgz"
@@ -8588,8 +8730,24 @@ semver@^7.3.5, semver@^7.5.4, semver@^7.6.0:
 semver@^7.3.7, semver@^7.5.2, semver@^7.5.3:
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 semver@^7.3.5:
 >>>>>>> origin/main
+=======
+semver@^7.3.5, semver@^7.6.0:
+=======
+semver@^7.3.5, semver@^7.5.4, semver@^7.6.0:
+>>>>>>> e87b3d1 (attempt at gradient background)
+  version "7.6.3"
+  resolved "https://registry.npmjs.org/semver/-/semver-7.6.3.tgz"
+
+<<<<<<< HEAD
+semver@^7.3.7:
+>>>>>>> 69e4ced (bug fixes)
+=======
+semver@^7.3.7, semver@^7.5.2, semver@^7.5.3:
+>>>>>>> e87b3d1 (attempt at gradient background)
+>>>>>>> bb-pre-alpha
   version "7.6.2"
   resolved "https://registry.npmjs.org/semver/-/semver-7.6.2.tgz"
   integrity sha512-FNAIBWCx9qcRhoHcgcJ0gvU7SN1lYU2ZXuSfl04bSC5OpvDHFyJCjdNHomPXxjQlCBU67YW64PzY7/VIEH7F2w==
@@ -10129,8 +10287,11 @@ yocto-queue@^0.1.0:
   version "0.1.0"
   resolved "https://registry.npmjs.org/yocto-queue/-/yocto-queue-0.1.0.tgz"
 <<<<<<< HEAD
+<<<<<<< HEAD
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 =======
+=======
+>>>>>>> bb-pre-alpha
 <<<<<<< HEAD
 =======
 # This file is generated by running "yarn install" inside your project.
@@ -20523,4 +20684,9 @@ __metadata:
 =======
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 >>>>>>> 69e4ced (bug fixes)
+<<<<<<< HEAD
 >>>>>>> c1e1679 (merge conflicts)
+=======
+=======
+>>>>>>> e87b3d1 (attempt at gradient background)
+>>>>>>> bb-pre-alpha
