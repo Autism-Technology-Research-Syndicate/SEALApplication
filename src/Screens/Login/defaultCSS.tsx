@@ -1,13 +1,8 @@
 import { StyleSheet } from 'react-native';
+import styles from '../../Styles/defaultCSS';
 
-const styles = StyleSheet.create({
-    container: {
-        flexDirection:'column',
-        height: '100%',
-        width: '100%',
-        rowGap: 10,
-        padding: 10
-    },
+const stylesheet = StyleSheet.create({
+    container: {...styles.container},
     body: {
         flex: 2,
         rowGap: 50,
@@ -28,4 +23,4 @@ const styles = StyleSheet.create({
         rowGap: 10
     },
 });
-export default styles;
+export default stylesheet;
