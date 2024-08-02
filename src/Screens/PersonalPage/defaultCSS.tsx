@@ -51,7 +51,7 @@ const stylesheet = StyleSheet.create({
     },
     section:
     {
-        gap:5
+        gap: 10
     }
 });
 export default stylesheet;
