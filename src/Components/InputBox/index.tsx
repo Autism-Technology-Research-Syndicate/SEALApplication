@@ -6,22 +6,23 @@ import styles from './defaultCSS';
 
 export const createTextBox = (
   placeholder: string,
-  setText: Function,
   defVal: string,
-  kboard: string,
+  setText: Function,
+  keyboardType: any = 'default',
+  invalid: boolean = false,
   secure: boolean = false,
+  multiline: boolean = false,
 ) => {
-  const kboardTypes: string[] = ['default', 'number-pad', 'email-address']
-
   return (
     <View>
       <TextInput
-        style={styles.input}
+        style={[styles.input, invalid ? styles.invalid : null]}
         placeholder={placeholder}
         onChangeText={(val: string) => setText(val)}
         defaultValue={defVal}
-        // keyboardType={kboard ?  kboardTypes.includes(kboard) : 'default'}
+        keyboardType={keyboardType}
         secureTextEntry={secure}
+        multiline={multiline}
       />
     </View>
   );

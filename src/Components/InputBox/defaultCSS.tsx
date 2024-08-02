@@ -11,6 +11,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     backgroundColor: 'white',
   },
+  invalid: {
+    borderColor: 'red'
+  }
 });
 
 export default styles;
