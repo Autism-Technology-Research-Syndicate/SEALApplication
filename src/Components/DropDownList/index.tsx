@@ -2,15 +2,14 @@ import React, {Component, useState} from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 import styles from './defaultCSS';
 
-const labels = [
-  {label: 'Apple', value: 'apple'},
-  {label: 'Banana', value: 'banana'},
-];
+export const transformLabels = (labels: string[]) => {
+  return labels.map(e => ({label: e, value: e.toLowerCase()}));
+};
 
-export const createDropDownList = (
+export const createDropDown = (
   labels: object[],
   value: string[],
-  setValue: Function,
+  setValue: any,
 ) => {
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState(labels);
@@ -33,4 +32,3 @@ export const createDropDownList = (
     />
   );
 };
-
