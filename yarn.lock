@@ -1701,6 +1701,14 @@
     invariant "^2.2.4"
     nullthrows "^1.1.1"
 
+"@react-navigation/bottom-tabs@^6.6.1":
+  version "6.6.1"
+  resolved "https://registry.npmjs.org/@react-navigation/bottom-tabs/-/bottom-tabs-6.6.1.tgz"
+  dependencies:
+    "@react-navigation/elements" "^1.3.31"
+    color "^4.2.3"
+    warn-once "^0.1.0"
+
 "@react-navigation/core@^6.4.17":
   version "6.4.17"
   resolved "https://registry.npmjs.org/@react-navigation/core/-/core-6.4.17.tgz"
@@ -1718,7 +1726,7 @@
 
 "@react-navigation/native-stack@^6.10.1":
   version "6.10.1"
-  resolved "https://registry.yarnpkg.com/@react-navigation/native-stack/-/native-stack-6.10.1.tgz#8ceea729b47af4ab18024d129e08ebd8888feeb9"
+  resolved "https://registry.npmjs.org/@react-navigation/native-stack/-/native-stack-6.10.1.tgz"
   dependencies:
     "@react-navigation/elements" "^1.3.31"
     warn-once "^0.1.0"
@@ -2637,7 +2645,7 @@ color-support@^1.1.3:
 
 color@^3.1.2:
   version "3.2.1"
-  resolved "https://registry.yarnpkg.com/color/-/color-3.2.1.tgz#3544dc198caf4490c3ecc9a790b54fe9ff45e164"
+  resolved "https://registry.npmjs.org/color/-/color-3.2.1.tgz"
   dependencies:
     color-convert "^1.9.3"
     color-string "^1.6.0"
@@ -3288,6 +3296,10 @@ expect@^29.7.0:
     jest-message-util "^29.7.0"
     jest-util "^29.7.0"
 
+expo-blur@^13.0.2:
+  version "13.0.2"
+  resolved "https://registry.npmjs.org/expo-blur/-/expo-blur-13.0.2.tgz"
+
 fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
   version "3.1.3"
   resolved "https://registry.npmjs.org/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz"
@@ -3315,8 +3327,8 @@ fast-levenshtein@^2.0.6:
   resolved "https://registry.npmjs.org/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz"
 
 fast-xml-parser@^4.0.12, fast-xml-parser@^4.2.4:
-  version "4.4.0"
-  resolved "https://registry.npmjs.org/fast-xml-parser/-/fast-xml-parser-4.4.0.tgz"
+  version "4.4.1"
+  resolved "https://registry.npmjs.org/fast-xml-parser/-/fast-xml-parser-4.4.1.tgz"
   dependencies:
     strnum "^1.0.5"
 
@@ -3651,7 +3663,7 @@ hermes-profile-transformer@^0.0.6:
 
 hoist-non-react-statics@^3.3.2:
   version "3.3.2"
-  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
+  resolved "https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz"
   dependencies:
     react-is "^16.7.0"
 
@@ -4567,7 +4579,7 @@ lodash.debounce@^4.0.8:
 
 lodash.isequal@^4.5.0:
   version "4.5.0"
-  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+  resolved "https://registry.npmjs.org/lodash.isequal/-/lodash.isequal-4.5.0.tgz"
 
 lodash.merge@^4.6.2:
   version "4.6.2"
@@ -5177,7 +5189,7 @@ open@^7.0.3:
 
 opencollective-postinstall@^2.0.3:
   version "2.0.3"
-  resolved "https://registry.yarnpkg.com/opencollective-postinstall/-/opencollective-postinstall-2.0.3.tgz#7a0fff978f6dbfa4d006238fbac98ed4198c3259"
+  resolved "https://registry.npmjs.org/opencollective-postinstall/-/opencollective-postinstall-2.0.3.tgz"
 
 optionator@^0.9.3:
   version "0.9.4"
@@ -5496,7 +5508,7 @@ react-native-camera@^4.2.1:
 
 react-native-elements@^3.4.3:
   version "3.4.3"
-  resolved "https://registry.yarnpkg.com/react-native-elements/-/react-native-elements-3.4.3.tgz#c33919002aef83a0c0f98d0ed56009714ad9b1b3"
+  resolved "https://registry.npmjs.org/react-native-elements/-/react-native-elements-3.4.3.tgz"
   dependencies:
     "@types/react-native-vector-icons" "^6.4.6"
     color "^3.1.2"
@@ -5514,9 +5526,13 @@ react-native-fs@^2.20.0:
     base-64 "^0.1.0"
     utf8 "^3.0.0"
 
+react-native-linear-gradient@^2.8.3:
+  version "2.8.3"
+  resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.8.3.tgz#9a116649f86d74747304ee13db325e20b21e564f"
+
 react-native-ratings@8.0.4:
   version "8.0.4"
-  resolved "https://registry.yarnpkg.com/react-native-ratings/-/react-native-ratings-8.0.4.tgz#efd5ebad8acc08bf98d34d39b18fb7a6813ef991"
+  resolved "https://registry.npmjs.org/react-native-ratings/-/react-native-ratings-8.0.4.tgz"
   dependencies:
     lodash "^4.17.15"
 
@@ -5524,16 +5540,16 @@ react-native-safe-area-context@^4.10.8:
   version "4.10.8"
   resolved "https://registry.npmjs.org/react-native-safe-area-context/-/react-native-safe-area-context-4.10.8.tgz"
 
-react-native-screens@^3.32.0:
-  version "3.32.0"
-  resolved "https://registry.npmjs.org/react-native-screens/-/react-native-screens-3.32.0.tgz"
+react-native-screens@^3.33.0:
+  version "3.33.0"
+  resolved "https://registry.npmjs.org/react-native-screens/-/react-native-screens-3.33.0.tgz"
   dependencies:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
 
 react-native-size-matters@^0.3.1:
   version "0.3.1"
-  resolved "https://registry.yarnpkg.com/react-native-size-matters/-/react-native-size-matters-0.3.1.tgz#24d0cfc335a2c730f6d58bd7b43ea5a41be4b49f"
+  resolved "https://registry.npmjs.org/react-native-size-matters/-/react-native-size-matters-0.3.1.tgz"
 
 react-native-sqlite-storage@^6.0.1:
   version "6.0.1"
@@ -5541,7 +5557,7 @@ react-native-sqlite-storage@^6.0.1:
 
 react-native-vector-icons@^10.1.0:
   version "10.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-10.1.0.tgz#c98a225213700177d23492e32d1dc920b9bae8aa"
+  resolved "https://registry.npmjs.org/react-native-vector-icons/-/react-native-vector-icons-10.1.0.tgz"
   dependencies:
     prop-types "^15.7.2"
     yargs "^16.1.1"
@@ -5843,7 +5859,11 @@ semver@^6.3.0, semver@^6.3.1:
   version "6.3.1"
   resolved "https://registry.npmjs.org/semver/-/semver-6.3.1.tgz"
 
-semver@^7.3.5, semver@^7.3.7, semver@^7.5.2, semver@^7.5.3, semver@^7.5.4, semver@^7.6.0:
+semver@^7.3.5, semver@^7.5.4, semver@^7.6.0:
+  version "7.6.3"
+  resolved "https://registry.npmjs.org/semver/-/semver-7.6.3.tgz"
+
+semver@^7.3.7, semver@^7.5.2, semver@^7.5.3:
   version "7.6.2"
   resolved "https://registry.npmjs.org/semver/-/semver-7.6.2.tgz"
 

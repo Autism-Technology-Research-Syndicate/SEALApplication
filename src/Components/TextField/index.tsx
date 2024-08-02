@@ -7,7 +7,7 @@ type props = {
   password: boolean;
 };
 
-function index(props) {
+function Index(props) {
   const [text, onChangeText] = React.useState('');
   return (
     <TextInput
@@ -20,4 +20,4 @@ function index(props) {
   );
 };
 
-export default index;
+export default Index;

@@ -2,9 +2,9 @@ import React from 'react';
 import { Text } from 'react-native';
 import styles from './defaultCSS';
 
-function index(props) {
+function Index(props) {
 
   return (<Text style={{...styles.text,...props.style}}>{props.children}</Text>);
 };
 
-export default index;
+export default Index;

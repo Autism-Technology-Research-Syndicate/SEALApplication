@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { View } from 'react-native';
-import Home from './src/Screens/Home';
 import CameraComponent from './Camera/Camera';
+import Home from './src/Screens/Home/Index';
 
 const App: React.FC = () => {
   const cameraRef = useRef<CameraComponent>(null);
