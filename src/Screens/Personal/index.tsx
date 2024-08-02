@@ -52,8 +52,8 @@ const Index = ({ navigation }) => {
         <Tab.Screen name="Home"  options={{tabBarLabel:'Home',  tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={"white"} size={30} />
           ),}} component={WelcomeToSeal} />
-        <Tab.Screen name="JoinClassroom"  options={{tabBarLabel:'Join a classroom'}}  component={Entry} />
-        <Tab.Screen name="Profile" options={{tabBarLabel:'Profile'}}  component={Entry} />
+        <Tab.Screen name="JoinClassroom"  options={{tabBarLabel:'Join a classroom'}}  component={WelcomeToSeal} />
+        <Tab.Screen name="Profile" options={{tabBarLabel:'Profile'}}  component={WelcomeToSeal} />
       </Tab.Navigator>
     </BackgroundWrapper>
   );
