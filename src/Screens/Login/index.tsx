@@ -24,7 +24,7 @@ const Index = ({ navigation }) => {
           <Text style={{ textAlign: 'center' }}>
             Dont' have an account?
           </Text>
-          <LinkButton title='Sign up' style={{ textAlign: 'center' }} onPress={() => navigation.navigate('Welcome')} />
+          <LinkButton title='Sign up' style={{ textAlign: 'center' }} onPress={() => navigation.navigate('AccountSignUp')} />
           </View>
           </View>
         </View>
