@@ -15,13 +15,13 @@ const stylesheet = StyleSheet.create({
     },
     header:{
         fontFamily: 'sans-serif-light',
-        color: '#305070',
+        color: styles.defaultColor,
         fontSize: 40,
         fontWeight: 'bold'
     },
     subheader:{
         fontFamily: 'sans-serif-light',
-        color: '#305070',
+        color: styles.defaultColor,
         fontSize: 30,
         fontWeight: '100',
         paddingBottom: 20,
