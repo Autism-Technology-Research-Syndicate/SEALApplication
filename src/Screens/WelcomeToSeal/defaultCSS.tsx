@@ -10,7 +10,8 @@ const stylesheet = StyleSheet.create({
         flex: 2
     },
     middle_section:{
-        rowGap: 30
+        rowGap: 30,
+        paddingTop: 15
     },
     header:{
         fontFamily: 'sans-serif-light',
@@ -28,7 +29,7 @@ const stylesheet = StyleSheet.create({
     },
     bottom_section: { 
         justifyContent: 'flex-end', 
-        rowGap: 10 
+        rowGap: 20 
     }
 });
 export default stylesheet;
