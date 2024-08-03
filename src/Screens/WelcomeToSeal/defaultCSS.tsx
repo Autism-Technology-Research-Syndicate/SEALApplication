@@ -7,23 +7,24 @@ const stylesheet = StyleSheet.create({
         alignSelf: 'center',
         justifyContent: 'center',
         alignItems: 'center',
-        flex: 2,
-        rowGap: 15
+        flex: 2
     },
     middle_section:{
-        rowGap: 10
+        rowGap: 30
     },
     header:{
-        fontFamily: 'Lucida Grande',
+        fontFamily: 'sans-serif-light',
         color: '#305070',
         fontSize: 40,
         fontWeight: 'bold'
     },
     subheader:{
-        fontFamily: 'Lucida Grande',
+        fontFamily: 'sans-serif-light',
         color: '#305070',
         fontSize: 30,
-        fontWeight: '100'
+        fontWeight: '100',
+        paddingBottom: 20,
+        paddingTop: 5
     },
     bottom_section: { 
         justifyContent: 'flex-end', 
