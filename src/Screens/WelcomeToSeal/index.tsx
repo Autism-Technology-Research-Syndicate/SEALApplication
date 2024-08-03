@@ -13,7 +13,7 @@ const Index = ({ navigation }) => {
 
       <View style={styles.container}>
         <View style={styles.body}>
-          <Seal width={100} height={100} />
+          <Seal width={85} height={85} />
           <View style={styles.middle_section}>
             <Text style={styles.header} >
               Welcome to SEAL
@@ -22,7 +22,7 @@ const Index = ({ navigation }) => {
         <Text style={styles.subheader}>
           (Special Education Assistive Learning)
         </Text>
-        <Hello width={300} height={300} />
+        <Hello width={275} height={275} />
       </View>
       <View style={styles.bottom_section}>
         <Button title='Learner login' onPress={() => navigation.navigate('Login')} />

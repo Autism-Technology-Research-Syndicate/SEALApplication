@@ -11,7 +11,7 @@ const stylesheet = StyleSheet.create({
         rowGap: 15
     },
     middle_section:{
-        rowGap: 15
+        rowGap: 10
     },
     header:{
         fontFamily: 'Lucida Grande',
