@@ -4,11 +4,8 @@ import { CommonActions } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text, BottomNavigation } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
 import PersonalPage from '../../Screens/PersonalPage';
 import AccountSignUp from '../../Screens/AccountSignUp';
-
-
 
 const Tab = createBottomTabNavigator();
 
@@ -74,7 +71,7 @@ export default function Index() {
         name="Profile"
         component={AccountSignUp}
         options={{
-          tabBarLabel: 'Settings',
+          tabBarLabel: 'Profile',
           tabBarIcon: ({ color, size }) => {
             return <Icon name="cog" size={size} color={color} />;
           },

@@ -20,7 +20,9 @@ const stylesheet = StyleSheet.create({
     },
     middle_body:
     {
-        rowGap: 10
+        rowGap: 10,
+        marginTop: 20
+
     },
 });
 export default stylesheet;

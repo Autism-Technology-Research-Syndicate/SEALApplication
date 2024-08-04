@@ -21,10 +21,10 @@ const Index = ({ navigation }) => {
           <Button title='Submit' onPress={() => navigation.navigate('Personal')} />
 
           <View style={styles.middle_body}>
-          <Text style={{ textAlign: 'center' }}>
+          <Text style={{ textAlign: 'center', fontSize: 20 }}>
             Dont' have an account?
           </Text>
-          <LinkButton title='Sign up' style={{ textAlign: 'center' }} onPress={() => navigation.navigate('AccountSignUp')} />
+          <LinkButton title='Sign up' style={{ textAlign: 'center', fontSize: 20 }} onPress={() => navigation.navigate('AccountSignUp')} />
           </View>
           </View>
         </View>

@@ -7,7 +7,7 @@ function Index(props) {
   const { onPress, title = 'Heeelo' } = props;
 
   return (  <Button mode="text" {...props}  onPress={onPress} >
-    <Text style={styles.text}>{title}</Text>
+    <Text style={[styles.text, props.style]}>{title}</Text>
   </Button>);
 
 };

@@ -3,6 +3,8 @@ import BackgroundWrapper from '../../Components/BackgroundWrapper';
 import Button from '../../Components/Button';
 import Text from '../../Components/Text';
 import styles from './defaultCSS';
+import PracticeSession from '../../Assets/svg/practice_session.svg';
+import AssignTasks from '../../Assets/svg/assign_tasks.svg';
 
 const Index = ({ navigation }) => {
   return (
@@ -17,7 +19,7 @@ const Index = ({ navigation }) => {
           </Text>
           <View style={styles.row}>
             <View style={styles.rowItem}>
-              <Image source={require('../../Assets/images/videotutoring.png')} />
+              <PracticeSession />
               <Text style={styles.itemTitle}>
                 Practice sessions
               </Text>
@@ -26,7 +28,7 @@ const Index = ({ navigation }) => {
               </Text>
             </View>
             <View style={styles.rowItem}>
-              <Image source={require('../../Assets/images/checklist.png')} />
+             <AssignTasks />
               <Text style={styles.itemTitle}>
                 Assigned tasks
               </Text>
@@ -37,8 +39,8 @@ const Index = ({ navigation }) => {
           </View>
         </View>
         <View style={styles.section}>
-          <Button title='Eye contact practice' onPress={() => navigation.navigate('Welcome')} />
-          <Button light title='Achievements' onPress={() => navigation.navigate('Welcome')} />
+          <Button title='Eye contact practice' icon="eye" onPress={() => navigation.navigate('Welcome')} />
+          <Button light title='Achievements' icon="trophy" onPress={() => navigation.navigate('Welcome')} />
         </View>
       </View>
     </BackgroundWrapper>
