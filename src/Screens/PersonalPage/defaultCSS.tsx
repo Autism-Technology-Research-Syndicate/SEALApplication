@@ -2,7 +2,8 @@ import { StyleSheet } from 'react-native';
 import styles from '../../Styles/defaultCSS';
 
 const stylesheet = StyleSheet.create({
-    container: { ...styles.container },
+    container: {         height: '100%',
+        width: '100%'},
     textNormal: { ...styles.textNormal },
     header: {
         ...styles.defaultText,
@@ -51,7 +52,8 @@ const stylesheet = StyleSheet.create({
     },
     section:
     {
-        rowGap: 15
+        rowGap: 15,
+        padding: 30,
 
     }
 });

@@ -21,7 +21,10 @@ const Index = ({ navigation }) => {
             )
           })}
         </View>
-        <Button dark title='Sign up' />
+        <View style={styles.bottom_section}>
+        <Button dark title='Sign up' onPress={() => navigation.navigate('Login')}/>
+        <Button light title='Cancel' onPress={() => navigation.navigate('Welcome')}/>
+        </View>
 
       </View>
 

@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import styles from '../../Styles/defaultCSS';
 
 const stylesheet = StyleSheet.create({
-    container: {...styles.container},
+    container: { ...styles.container },
     body: {
         flex: 2,
         rowGap: 30,
@@ -22,11 +22,15 @@ const stylesheet = StyleSheet.create({
     {
         rowGap: 10
     },
-    header:{
+    header: {
         ...styles.defaultText,
         fontSize: 18,
         fontWeight: 'bold',
         paddingBottom: 30
-},
+    },
+    bottom_section: {
+        justifyContent: 'flex-end',
+        rowGap: 20
+    }
 });
 export default stylesheet;
