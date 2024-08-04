@@ -1,10 +1,10 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text } from 'react-native-paper';
 import styles from './defaultCSS';
 
 function Index(props) {
 
-  return (<Text style={{...styles.text,...props.style}}>{props.children}</Text>);
+  return (<Text variant="bodyLarge" style={{...styles.text,...props.style}}>{props.children}</Text>);
 };
 
 export default Index;

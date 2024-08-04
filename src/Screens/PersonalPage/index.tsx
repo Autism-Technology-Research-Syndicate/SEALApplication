@@ -5,10 +5,14 @@ import Text from '../../Components/Text';
 import styles from './defaultCSS';
 import PracticeSession from '../../Assets/svg/practice_session.svg';
 import AssignTasks from '../../Assets/svg/assign_tasks.svg';
+import { Appbar } from 'react-native-paper';
 
 const Index = ({ navigation }) => {
   return (
     <BackgroundWrapper>
+  
+      <Appbar.BackAction onPress={() => navigation.navigate('Login')} />
+
       <View style={styles.container}>
         <View style={styles.section}>
           <Text style={styles.header}>
