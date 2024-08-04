@@ -1,17 +1,18 @@
 import React, {useState} from 'react';
-import {
-  Button,
-  SafeAreaView,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native';
+import {Button, SafeAreaView, ScrollView, Text, View} from 'react-native';
 import {styles} from './CSS';
 import {createTextBox} from '../../Components/InputBox/';
 import {createDropDown} from '../../Components/DropDownList/';
-import {labels, RegData, validateEmail, validatePass} from '.';
+import {
+  labels,
+  RegData,
+  validateEmail,
+  validatePass,
+  validateAge,
+  validateName,
+} from '.';
 
-export function RegistrationForm() {
+export const SignUp = () => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -25,8 +26,10 @@ export function RegistrationForm() {
   const [description, setDescription] = useState('');
   const [necessaryBreakTime, setBreakTime] = useState('');
 
-  const[invalidEmail, setInvalidEmail] = useState(false)
-  const[invalidPass, setInvalidPass] = useState(false)
+  const [invalidEmail, setInvalidEmail] = useState(false);
+  const [invalidPass, setInvalidPass] = useState(false);
+  const [invalidName, setInvalidName] = useState(false);
+  const [invalidAge, setInvalidAge] = useState(false);
 
   const handleSubmit = async () => {
     let data: RegData = {
@@ -44,21 +47,19 @@ export function RegistrationForm() {
       necessaryBreakTime: Number(necessaryBreakTime),
     };
 
-    setInvalidEmail(!validateEmail(email))
-    setInvalidPass(!validatePass(password))
-    if (invalidEmail || invalidPass) {
+    setInvalidEmail(!validateEmail(email));
+    setInvalidPass(!validatePass(password));
+    setInvalidAge(!validateAge(age));
+    setInvalidName(!validateName(username));
+    if (!invalidEmail && !invalidPass && invalidAge && invalidName) {
+      //TODO code that adds it to db
 
-    }
-    else {
-      if (username.length && age.length > 0) {
-        //TODO code that adds it to db
-        console.log(`${data.username}'s profile has been created`);
-      }
+      console.log(`${data.username}'s profile has been created`);
+    } else {
     }
   };
 
   return (
-    <SafeAreaView>
       <ScrollView showsVerticalScrollIndicator={true}>
         <View style={styles.container}>
           <Text style={styles.title}>Account Sign Up</Text>
@@ -72,7 +73,13 @@ export function RegistrationForm() {
             invalidEmail,
           )}
           <Text style={styles.label}>Learner Username</Text>
-          {createTextBox('Create Username', username, setUsername)}
+          {createTextBox(
+            'Create Username',
+            username,
+            setUsername,
+            null,
+            invalidName,
+          )}
 
           <Text style={styles.label}>Password</Text>
           {createTextBox(
@@ -85,7 +92,13 @@ export function RegistrationForm() {
           )}
 
           <Text style={styles.label}>Learner Age</Text>
-          {createTextBox("Enter Learner's Age", age, setAge, 'number-pad')}
+          {createTextBox(
+            "Enter Learner's Age",
+            age,
+            setAge,
+            'number-pad',
+            invalidAge,
+          )}
 
           <Text style={styles.label}>Learner Interests</Text>
           {createDropDown(labels, interests, setInterests)}
@@ -151,6 +164,5 @@ export function RegistrationForm() {
           </View>
         </View>
       </ScrollView>
-    </SafeAreaView>
   );
 }

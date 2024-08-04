@@ -1,4 +1,4 @@
-import { transformLabels } from "../../Components/DropDownList";
+import {transformLabels} from '../../Components/DropDownList';
 
 export interface RegData {
   email: string;
@@ -26,5 +26,13 @@ export const validatePass = (password: string) => {
   return re.test(password);
 };
 
-const interests: string[] = []
-export const labels = transformLabels(interests)
+export const validateAge = (age: string) => {
+  return age.length > 0 && Number(age) >= 1 && Number(age) <= 25;
+};
+
+export const validateName = (username: string) => {
+  return username.length > 0;
+};
+
+const interests: string[] = ['Apple', 'Banana', 'Kiwi', 'Lime', 'Lemon'];
+export const labels = transformLabels(interests);
