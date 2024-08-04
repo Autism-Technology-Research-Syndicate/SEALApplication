@@ -4,8 +4,6 @@ import Button from '../../Components/Button';
 import styles from './defaultCSS';
 import Seal from '../../Assets/svg/seal.svg';
 import Hello from '../../Assets/svg/hello.svg';
-import WelcometoSeal from '../../Assets/svg/WelcometoSEAL.svg';
-import SpecialEducationAssistiveLearning from '../../Assets/svg/SpecialEducationAssistiveLearning.svg';
 
 const Index = ({ navigation }) => {
   return (

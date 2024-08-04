@@ -9,7 +9,7 @@ const stylesheet = StyleSheet.create({
     },
     defaultColor: '#305070',
     defaultText:{
-        fontFamily: 'Helvetica Neue',
+        fontFamily: 'sans-serif-condensed',
         color: '#305070',
     },
     textNormal: {

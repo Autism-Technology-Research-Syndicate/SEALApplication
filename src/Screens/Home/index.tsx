@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import WelcomeToSeal from '../WelcomeToSeal';
 import Login from '../Login';
-import PersonalPage from '../PersonalPage';
+import PersonalPage from '../PersonalPage/Navigation';
 import AccountSignUp from '../AccountSignUp';
 
 const Stack = createNativeStackNavigator();

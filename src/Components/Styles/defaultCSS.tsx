@@ -4,8 +4,6 @@ import styles from '../../Styles/defaultCSS';
 
 const stylesheet = StyleSheet.create({
     border: {
-        height: 50,
-        flexShrink: 0,
         borderBottomLeftRadius: 12,
         borderBottomRightRadius: 12,
         borderTopLeftRadius: 12,
@@ -15,7 +13,8 @@ const stylesheet = StyleSheet.create({
     light: { backgroundColor: 'rgba(132, 182, 207, 1)' },
     opacityLight: { opacity: 0.85 },
     opacityNormal: { opacity: 1 },
-    textNormal: {...styles.textNormal },
+    textNormal: styles.textNormal,
+    defaultColor: styles.defaultColor
 
 });
 

@@ -17,11 +17,14 @@ const Index = ({ navigation }) => {
         <View style={styles.body}>
           {accountSignUp.map((item, idx) => {
             return (
-              <TextField key={idx} name={item.id} placeholder={item.placeHolder} />
+              <TextField key={idx} name={item.id} placeholder={item.placeHolder} label={item.displayName} validationType={item.validationType}/>
             )
           })}
         </View>
-        <Button dark title='Sign up' />
+        <View style={styles.bottom_section}>
+        <Button dark title='Sign up' onPress={() => navigation.navigate('Login')}/>
+        <Button light title='Cancel' onPress={() => navigation.navigate('Welcome')}/>
+        </View>
 
       </View>
 

@@ -1,13 +1,8 @@
 import { Image, View } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import BackgroundWrapper from '../../Components/BackgroundWrapper';
 import Button from '../../Components/Button';
 import Text from '../../Components/Text';
 import styles from './defaultCSS';
-import WelcomeToSeal from '../WelcomeToSeal';
-
-const Tab = createBottomTabNavigator();
 
 const Index = ({ navigation }) => {
   return (
@@ -46,15 +41,6 @@ const Index = ({ navigation }) => {
           <Button light title='Achievements' onPress={() => navigation.navigate('Welcome')} />
         </View>
       </View>
-      <Tab.Navigator screenOptions={{
-        tabBarStyle: { position: 'absolute', backgroundColor: '#305070', color: '#ffffff' }
-      }}>
-        <Tab.Screen name="Home"  options={{tabBarLabel:'Home',  tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={"white"} size={30} />
-          ),}} component={WelcomeToSeal} />
-        <Tab.Screen name="JoinClassroom"  options={{tabBarLabel:'Join a classroom'}}  component={WelcomeToSeal} />
-        <Tab.Screen name="Profile" options={{tabBarLabel:'Profile'}}  component={WelcomeToSeal} />
-      </Tab.Navigator>
     </BackgroundWrapper>
   );
 };
