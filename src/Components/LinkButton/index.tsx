@@ -1,13 +1,13 @@
 import React from 'react';
-import { Text, TouchableOpity } from 'react-native';
+import { Text } from 'react-native';
 import styles from './defaultCSS';
 import { Button } from 'react-native-paper';
 
 function Index(props) {
   const { onPress, title = 'Heeelo' } = props;
 
-  return (  <Button mode="text" {...props}  onPress={onPress} >
-    <Text style={styles.text}>{title}</Text>
+  return (  <Button labelStyle={[styles.text, props.style]} mode="text" {...props}  onPress={onPress} >
+   {title}
   </Button>);
 
 };
