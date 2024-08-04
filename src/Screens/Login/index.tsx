@@ -14,8 +14,8 @@ const Index = ({ navigation }) => {
         <View style={styles.body}>
           <View style={styles.upper_body}>
             <TextField placeholder="Please enter username" label="username" />
-            <TextField placeholder="Please enter password" label="password"  />
-            <LinkButton title='Forget password?' style={{flexDirection: 'row-reverse' }} onPress={() => navigation.navigate('Welcome')} />
+            <TextField placeholder="Please enter password" label="password" validationType="password"  />
+            <LinkButton title='Forget password?' style={{flexDirection: 'row-reverse', fontSize: 20 }} onPress={() => navigation.navigate('Welcome')} />
           </View>
           <View style={styles.bottom_body}>
           <Button title='Submit' onPress={() => navigation.navigate('Personal')} />
