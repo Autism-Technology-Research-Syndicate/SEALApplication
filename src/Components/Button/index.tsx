@@ -1,6 +1,7 @@
 import React from 'react';
-import {Text, Pressable } from 'react-native';
+import { Text } from 'react-native';
 import styles from './defaultCSS';
+import { Button } from 'react-native-paper';
 
 
 type props = {
@@ -9,12 +10,13 @@ type props = {
 
 
 function Index(props) {
-  const { onPress, title = 'Heeelo', isActive = true, light } = props;
-  const combinestyles = [styles.button, styles.opacityLight, (light ? styles.light : styles.dark)];
+  const { onPress, title = 'Heeelo', isActive = true, light, icon = "", loading = false, dark= !light } = props;
+  const combinestyles = [styles.button, (light ? styles.light : styles.dark)];
+
   return (
-    <Pressable style={combinestyles} onPress={onPress}>
+   <Button icon={icon} compact={true} dark mode="contained-tonal"  onPress={onPress} labelStyle={styles.icon} contentStyle={[styles.dimensions, ...combinestyles]}>
       <Text style={[styles.text, styles.opacityNormal]}>{title}</Text>
-    </Pressable>
+   </Button>
   );
 };
 

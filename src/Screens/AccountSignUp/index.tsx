@@ -17,7 +17,7 @@ const Index = ({ navigation }) => {
         <View style={styles.body}>
           {accountSignUp.map((item, idx) => {
             return (
-              <TextField key={idx} name={item.id} placeholder={item.placeHolder} />
+              <TextField key={idx} name={item.id} placeholder={item.placeHolder} label={item.displayName} validationType={item.validationType}/>
             )
           })}
         </View>

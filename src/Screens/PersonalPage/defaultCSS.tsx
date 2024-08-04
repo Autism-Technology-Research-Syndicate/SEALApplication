@@ -2,8 +2,8 @@ import { StyleSheet } from 'react-native';
 import styles from '../../Styles/defaultCSS';
 
 const stylesheet = StyleSheet.create({
-    container: {...styles.container},
-    textNormal: {...styles.textNormal},
+    container: { ...styles.container },
+    textNormal: { ...styles.textNormal },
     header: {
         ...styles.defaultText,
         textAlign: 'center',
@@ -16,14 +16,14 @@ const stylesheet = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold'
     },
-    row:{
+    row: {
         flexDirection: 'row',
         flexWrap: 'nowrap',
         justifyContent: 'space-around',
         gap: 15,
         flexGrow: 1
     },
-    itemTitle:{
+    itemTitle: {
         fontWeight: 'bold',
         fontSize: 16,
         padding: 5,
@@ -31,7 +31,7 @@ const stylesheet = StyleSheet.create({
         textAlign: 'center',
         ...styles.defaultText,
     },
-    itemText:{
+    itemText: {
         fontSize: 16,
         padding: 5,
         textAlign: 'center',
@@ -44,7 +44,7 @@ const stylesheet = StyleSheet.create({
         borderBottomRightRadius: 12,
         borderTopLeftRadius: 12,
         borderTopRightRadius: 12,
-        flex:1,
+        flex: 1,
         padding: 15,
         alignItems: 'center',
         textAlign: 'center',

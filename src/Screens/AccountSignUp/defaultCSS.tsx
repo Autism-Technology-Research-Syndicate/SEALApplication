@@ -6,6 +6,7 @@ const stylesheet = StyleSheet.create({
     body: {
         flex: 2,
         rowGap: 30,
+        overflow: 'scroll'
     },
     upper_body:
     {
