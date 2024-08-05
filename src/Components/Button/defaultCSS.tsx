@@ -17,7 +17,7 @@ const stylesheet = StyleSheet.create({
      text: {
         color: 'rgba(245, 245, 245, 1)',
         fontFamily: styles.textNormal.fontFamily,
-        fontSize: 18,
+        fontSize: styles.textNormal.fontSize,
         fontStyle: styles.textNormal.fontStyle,
         fontWeight: '700',
     },

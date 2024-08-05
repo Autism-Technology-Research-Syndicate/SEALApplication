@@ -13,10 +13,14 @@ const stylesheet = StyleSheet.create({
         color: '#305070',
     },
     textNormal: {
-        fontSize: 16,
+        fontSize: 20,
         fontStyle: 'normal',
         ...this.defaultText
     },
+    content: {
+        fontSize: 18,
+       ...this.textNormal
+    }
 });
 
 export default stylesheet;

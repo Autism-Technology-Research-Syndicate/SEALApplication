@@ -9,12 +9,12 @@ const stylesheet = StyleSheet.create({
         ...styles.defaultText,
         textAlign: 'center',
         padding: 10,
-        fontSize: 27,
+        fontSize: 33,
         fontWeight: 'bold'
     },
     subheader: {
         ...styles.defaultText,
-        fontSize: 18,
+        fontSize: 22,
         fontWeight: 'bold'
     },
     row: {
@@ -26,7 +26,7 @@ const stylesheet = StyleSheet.create({
     },
     itemTitle: {
         fontWeight: 'bold',
-        fontSize: 16,
+        fontSize: 20,
         padding: 5,
         paddingHorizontal: 30,
         textAlign: 'center',
@@ -36,7 +36,7 @@ const stylesheet = StyleSheet.create({
         fontSize: 16,
         padding: 5,
         textAlign: 'center',
-        ...styles.textNormal
+        ...styles.content
     },
     rowItem: {
         borderColor: styles.defaultColor,
