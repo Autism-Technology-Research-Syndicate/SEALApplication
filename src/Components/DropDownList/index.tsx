@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {useState} from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 import styles from './defaultCSS';
 
@@ -24,11 +24,13 @@ export const createDropDown = (
       setValue={setValue}
       setItems={setItems}
       multiple={true}
+      mode='BADGE'
+      listMode='MODAL'
       min={0}
       max={5}
       showTickIcon={true}
-      dropDownContainerStyle={styles.dropDown}
       dropDownDirection="AUTO"
+      style={styles.dropDown}
     />
   );
 };
