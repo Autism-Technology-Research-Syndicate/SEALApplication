@@ -13,13 +13,29 @@ const stylesheet = StyleSheet.create({
         color: '#305070',
     },
     textNormal: {
+        fontFamily: 'sans-serif',
+        color: '#305070',
         fontSize: 20,
         fontStyle: 'normal',
-        ...this.defaultText
+       
     },
+    headerText: {
+        fontSize: 33,
+        fontWeight: 'bold',
+        fontFamily: 'sans-serif',
+        color: '#305070',
+    },
+    subheaderText: {
+        fontSize: 22,
+         fontWeight: 'bold',
+         color: '#305070',
+         fontFamily: 'sans-serif',
+         color: '#305070',
+    }, 
     content: {
         fontSize: 18,
-       ...this.textNormal
+        fontFamily: 'sans-serif',
+        color: '#305070'
     }
 });
 
