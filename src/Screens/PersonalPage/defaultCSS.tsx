@@ -2,8 +2,10 @@ import { StyleSheet } from 'react-native';
 import styles from '../../Styles/defaultCSS';
 
 const stylesheet = StyleSheet.create({
-    container: {         height: '100%',
-        width: '100%'},
+    container: {
+        height: '100%',
+        width: '100%'
+    },
     textNormal: { ...styles.textNormal },
     header: {
         ...styles.defaultText,

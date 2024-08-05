@@ -5,12 +5,11 @@ const {width, height} = Dimensions.get('screen');
 const stylesheet = StyleSheet.create({
     pagination: {flex: 1},
     container: {
-        width: width - 40,
+        width: width,
         height: height,
         alignItems: 'center',
         justifyContent: 'center',
-        paddingHorizontal: 30,
-        paddingBottom: 40
+        paddingHorizontal: 30
       },
       image: {
         flex: 0.6,
