@@ -8,19 +8,20 @@ export const createTextBox = (
   placeholder: string,
   defVal: string,
   setText: Function,
-  keyboardType: any = 'default',
-  invalid: boolean = false,
+  inputMode: any = 'text',
+  valid: boolean = true,
   secure: boolean = false,
   multiline: boolean = false,
 ) => {
   return (
     <View>
       <TextInput
-        style={[styles.input, invalid ? styles.invalid : null]}
+        style={[styles.input, !valid ? styles.invalid : null]}
         placeholder={placeholder}
+        placeholderTextColor={'#2C3E50'}
         onChangeText={(val: string) => setText(val)}
         defaultValue={defVal}
-        keyboardType={keyboardType}
+        inputMode={inputMode}
         secureTextEntry={secure}
         multiline={multiline}
       />
