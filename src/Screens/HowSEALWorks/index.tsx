@@ -1,18 +1,17 @@
 import { View } from 'react-native';
 import BackgroundWrapper from '../../Components/BackgroundWrapper/.';
-import styles from './defaultCSS';
-import { howItWorks } from './data';
+import Carousel from '../../Features/Carousel';
 import { Appbar } from 'react-native-paper';
-
+import styles from './defaultCSS';
+import data from './data';
 
 const Index = ({ navigation }) => {
   return (
     <BackgroundWrapper>
-      <Appbar.BackAction onPress={() => navigation.navigate('Login')} />
       <View style={styles.container}>
-      
+      <Appbar.BackAction onPress={() => navigation.navigate('Login')} />
+      <Carousel data={data} />
       </View>
-
     </BackgroundWrapper>
   );
 };
