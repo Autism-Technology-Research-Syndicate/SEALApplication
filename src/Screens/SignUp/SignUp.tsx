@@ -1,16 +1,18 @@
 import React, {useState} from 'react';
-import {Button, SafeAreaView, ScrollView, Text, View} from 'react-native';
+import {Pressable, SafeAreaView, ScrollView, Text, View} from 'react-native';
 import {styles} from './CSS';
 import {createTextBox} from '../../Components/InputBox/';
 import {createDropDown} from '../../Components/DropDownList/';
 import {
   labels,
+  errorText,
   RegData,
   validateEmail,
   validatePass,
   validateAge,
   validateName,
 } from '.';
+
 
 export const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -20,16 +22,16 @@ export const SignUp = () => {
   const [interests, setInterests] = useState([]);
   const [estimatedAttentionSpan, setAttention] = useState('');
   const [levelOfSpectrum, setLevelOfSpectrum] = useState('');
-  const [settingsChoices, setSettingsChoices] = useState('');
+  const [settingsChoices, setSettings] = useState('');
   const [progessInCurriculum, setProgess] = useState('');
   const [averageAccuracy, setAccuracy] = useState('');
   const [description, setDescription] = useState('');
   const [necessaryBreakTime, setBreakTime] = useState('');
 
-  const [invalidEmail, setInvalidEmail] = useState(false);
-  const [invalidPass, setInvalidPass] = useState(false);
-  const [invalidName, setInvalidName] = useState(false);
-  const [invalidAge, setInvalidAge] = useState(false);
+  const [validEmail, setValidEmail] = useState(true);
+  const [validPass, setValidPass] = useState(true);
+  const [validName, setValidName] = useState(true);
+  const [validAge, setValidAge] = useState(true);
 
   const handleSubmit = async () => {
     let data: RegData = {
@@ -47,20 +49,29 @@ export const SignUp = () => {
       necessaryBreakTime: Number(necessaryBreakTime),
     };
 
-    setInvalidEmail(!validateEmail(email));
-    setInvalidPass(!validatePass(password));
-    setInvalidAge(!validateAge(age));
-    setInvalidName(!validateName(username));
-    if (!invalidEmail && !invalidPass && invalidAge && invalidName) {
+    let vEmail = validateEmail(email)
+    let vPass = validatePass(password)
+    let vAge = validateAge(age)
+    let vName = validateName(username)
+    
+    if (vEmail && vPass && vAge && vName) {
       //TODO code that adds it to db
-
+      console.log(vAge, vEmail, vName, vPass);
       console.log(`${data.username}'s profile has been created`);
     } else {
+      
+      setValidEmail(vEmail);
+      setValidPass(vPass);
+      setValidAge(vAge);
+      setValidName(vName);
+      console.log('Validation error occured');
+      console.log('Valid results:', vAge, vEmail, vName, vPass);
     }
   };
 
   return (
-      <ScrollView showsVerticalScrollIndicator={true}>
+    <SafeAreaView>
+      <ScrollView>
         <View style={styles.container}>
           <Text style={styles.title}>Account Sign Up</Text>
 
@@ -69,17 +80,21 @@ export const SignUp = () => {
             'Enter Email Address',
             email,
             setEmail,
-            'email-address',
-            invalidEmail,
+            'email',
+            validEmail,
           )}
+          {!validEmail && <Text style={styles.errorText}>{errorText.email}</Text>}
+
           <Text style={styles.label}>Learner Username</Text>
           {createTextBox(
             'Create Username',
             username,
             setUsername,
             null,
-            invalidName,
+            validName,
           )}
+          {!validName && <Text style={styles.errorText}>{errorText.name}</Text>}
+
 
           <Text style={styles.label}>Password</Text>
           {createTextBox(
@@ -87,18 +102,22 @@ export const SignUp = () => {
             password,
             setPassword,
             null,
-            invalidPass,
+            validPass,
             true,
           )}
+          {!validPass && <Text style={styles.errorText}>{errorText.pass}</Text>}
+
 
           <Text style={styles.label}>Learner Age</Text>
           {createTextBox(
             "Enter Learner's Age",
             age,
             setAge,
-            'number-pad',
-            invalidAge,
+            'numeric',
+            validAge,
           )}
+          {!validAge && <Text style={styles.errorText}>{errorText.age}</Text>}
+
 
           <Text style={styles.label}>Learner Interests</Text>
           {createDropDown(labels, interests, setInterests)}
@@ -110,7 +129,7 @@ export const SignUp = () => {
             "Enter Child's Attention Span",
             estimatedAttentionSpan,
             setAttention,
-            'number-pad',
+            'numeric',
           )}
 
           <Text style={styles.label}>Level of Spectrum</Text>
@@ -118,18 +137,18 @@ export const SignUp = () => {
             "Enter Child's Level of Spectrum",
             levelOfSpectrum,
             setLevelOfSpectrum,
-            'number-pad',
+            'numeric',
           )}
 
-          <Text style={styles.label}>setting choices</Text>
-          {createTextBox('Enter Settings', settingsChoices, setSettingsChoices)}
+          <Text style={styles.label}>Setting Choices</Text>
+          {createTextBox('Enter Settings', settingsChoices, setSettings)}
 
           <Text style={styles.label}>Progress in Curriculum</Text>
           {createTextBox(
             "Enter Child's Current Progress in the Curriculum",
             progessInCurriculum,
             setProgess,
-            'number-pad',
+            'numeric',
           )}
 
           <Text style={styles.label}>Average Accuracy</Text>
@@ -137,7 +156,7 @@ export const SignUp = () => {
             "Enter Child's Average Accuracy",
             averageAccuracy,
             setAccuracy,
-            'number-pad',
+            'numeric',
           )}
 
           <Text style={styles.label}>Description</Text>
@@ -146,7 +165,7 @@ export const SignUp = () => {
             description,
             setDescription,
             null,
-            false,
+            true,
             false,
             true,
           )}
@@ -156,13 +175,15 @@ export const SignUp = () => {
             "Enter Child's Necessary Break Time",
             necessaryBreakTime,
             setBreakTime,
-            'number-pad',
+            'numeric',
           )}
 
-          <View style={styles.button}>
-            <Button onPress={() => handleSubmit()} title="Sign Up" />
-          </View>
+
+          <Pressable onPress={() => handleSubmit()} style={styles.button}>
+            <Text style={styles.buttonText}>Sign Up</Text>
+          </Pressable>
         </View>
       </ScrollView>
+    </SafeAreaView>
   );
 }
