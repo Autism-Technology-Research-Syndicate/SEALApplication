@@ -16,23 +16,44 @@ export interface RegData {
 }
 
 export const validateEmail = (email: string) => {
-  const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|co\.[a-zA-Z]{2,})$/;
-  return re.test(email);
-};
+  const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|co\.[a-zA-Z]{2,})$/
+  return re.test(email)
+}
 
 export const validatePass = (password: string) => {
-  const re =
-    /^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])(?=.*\d)[A-Za-z\d!@#$%^&*]{6,}$/;
-  return re.test(password);
-};
+  if (password.length < 8) {
+    return false;
+  }
+
+  const upperRe = /[A-Z]/;
+  const lowerRe = /[a-z]/;
+  const numberRe = /\d/;
+  const symbolRe = /[!@#$%^&*(),.?":{}|<>]/;
+
+  let count = 0;
+
+  if (upperRe.test(password)) count++;
+  if (lowerRe.test(password)) count++;
+  if (numberRe.test(password)) count++;
+  if (symbolRe.test(password)) count++;
+
+  return count >= 2;
+}
 
 export const validateAge = (age: string) => {
-  return age.length > 0 && Number(age) >= 1 && Number(age) <= 25;
-};
+  return age.length > 0 && Number(age) >= 1 && Number(age) <= 25
+}
 
 export const validateName = (username: string) => {
-  return username.length > 0;
-};
+  return username.trim().length > 0
+}
 
-const interests: string[] = ['Apple', 'Banana', 'Kiwi', 'Lime', 'Lemon'];
-export const labels = transformLabels(interests);
+export const errorText = {
+  email: 'Please enter a valid email address',
+  pass: 'Passwords must have at least 8 characters and contain at least two of the following: uppercase letters, lowercase letters, numbers, and symbols',
+  age: 'Please enter a valid age',
+  name: 'Please enter a username',
+}
+
+const interests: string[] = ['Apple', 'Banana', 'Kiwi', 'Lime', 'Lemon']
+export const labels = transformLabels(interests)
