@@ -2,8 +2,19 @@ import React from 'react';
 import {View, TextInput} from 'react-native';
 import styles from './defaultCSS';
 
-
-
+/**
+ * Creates a customizable text input box for React Native.
+ *
+ * @param {string} placeholder - The placeholder text for the input box.
+ * @param {string} defVal - The default value of the input box.
+ * @param {Function} setText - Function to update the text state.
+ * @param {string} [inputMode='text'] - The keyboard for the text box (e.g., 'text', 'numeric', 'email').
+ * @param {boolean} [valid=true] - Flag indicating if the input is valid. Used to apply validation styles.
+ * @param {boolean} [secure=false] - Flag indicating if the input is a password (secure text entry).
+ * @param {boolean} [multiline=false] - Flag indicating if the input allows multiple lines.
+ *
+ * @returns {React.JSX.Element} - The rendered text input component.
+ */
 export const createTextBox = (
   placeholder: string,
   defVal: string,
@@ -18,7 +29,7 @@ export const createTextBox = (
       <TextInput
         style={[styles.input, !valid ? styles.invalid : null]}
         placeholder={placeholder}
-        placeholderTextColor={'#2C3E50'}
+        placeholderTextColor={'#305070'}
         onChangeText={(val: string) => setText(val)}
         defaultValue={defVal}
         inputMode={inputMode}
