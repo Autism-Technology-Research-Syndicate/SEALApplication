@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { View } from 'react-native';
-import Home from './src/Screens/Home';
-import CameraComponent from './Camera/Camera';
+import Home from './src/Screens/Home/.';
 
 const App: React.FC = () => {
   const cameraRef = useRef<CameraComponent>(null);
@@ -19,7 +18,6 @@ const App: React.FC = () => {
   return (
     <View style={{ flex: 1 }}>
       <Home />
-      <CameraComponent ref={cameraRef} />
     </View>
   );
 };

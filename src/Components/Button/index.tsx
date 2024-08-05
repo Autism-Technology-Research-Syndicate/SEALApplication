@@ -1,16 +1,22 @@
-import React, { Fragment } from 'react';
-import { View, Text, Pressable } from 'react-native';
+import React from 'react';
 import styles from './defaultCSS';
-import WebCamFeed from '../WebCamFeed';
-//import { WelcometoSEAL } from './WelcometoSEAL';
+import { Button } from 'react-native-paper';
 
-function index(props) {
-  const { onPress, title = 'Heeelo', isActive = true } = props;
+
+type props = {
+  light: boolean;
+};
+
+
+function Index(props) {
+  const { onPress, title = 'Heeelo', isActive = true, light, icon = "", loading = false, dark= !light } = props;
+  const combinestyles = [styles.button, (light ? styles.light : styles.dark)];
+
   return (
-    <Pressable style={styles.activeButton} onPress={onPress}>
-      <Text style={styles.text}>{title}</Text>
-    </Pressable>
+   <Button labelStyle={[styles.icon, styles.text, styles.opacityNormal]} icon={icon} compact={true} dark mode="contained-tonal"  onPress={onPress} contentStyle={[styles.dimensions, ...combinestyles]}>
+      {title}
+   </Button>
   );
 };
 
-export default index;
+export default Index;

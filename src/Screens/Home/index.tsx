@@ -1,26 +1,31 @@
-import { Image, View, Text } from 'react-native';
-import BackgroundWrapper from '../../Components/BackgroundWrapper/.';
-import Button from '../../Components/Button/.';
-import styles from './defaultCSS';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import WelcomeToSeal from '../WelcomeToSeal';
+import Login from '../Login';
+import PersonalPage from '../PersonalPage/Navigation';
+import AccountSignUp from '../AccountSignUp';
+import HowSealWorks from '../HowSEALWorks';
 
-const index = () => {
+const Stack = createNativeStackNavigator();
+
+const Index = ({navigation}) => {
   return (
-    <BackgroundWrapper>
 
-      <View style={styles.container}>
-        <View style={{ flex: 1, justifyContent: 'flex-end', rowGap: 10 }}>
-        <View style={{ paddingBottom: 25, rowGap: 20  }}>
-          <Image style={{ alignSelf: 'center' }} source={require('../../Assets/images/header_subheaderSeal.png')} />
-          <Image style={{ alignSelf: 'center' }} source={require('../../Assets/images/WelcometoSEALimage.png')} />
-        </View>
-          <Button title='Learner login' />
-          <Button title='Teacher login' />
-        </View>
-      </View>
-    </BackgroundWrapper>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="WelcomeToSeal" screenOptions={{
+        headerShown: false
+      }}>
+        <Stack.Screen name="Welcome" component={WelcomeToSeal}  />
+        <Stack.Screen name="Login" component={Login}  />
+        <Stack.Screen name="Personal" component={PersonalPage}  />
+        <Stack.Screen name="AccountSignUp" component={AccountSignUp}  />
+        <Stack.Screen name="HowSealWorks" component={HowSealWorks}  />
+
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
-export default index;
+export default Index;
 
 
