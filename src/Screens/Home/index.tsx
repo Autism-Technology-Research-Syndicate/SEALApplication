@@ -4,6 +4,7 @@ import WelcomeToSeal from '../WelcomeToSeal';
 import Login from '../Login';
 import PersonalPage from '../PersonalPage/Navigation';
 import AccountSignUp from '../AccountSignUp';
+import HowSealWorks from '../HowSEALWorks';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,7 @@ const Index = ({navigation}) => {
         <Stack.Screen name="Login" component={Login}  />
         <Stack.Screen name="Personal" component={PersonalPage}  />
         <Stack.Screen name="AccountSignUp" component={AccountSignUp}  />
+        <Stack.Screen name="HowSealWorks" component={HowSealWorks}  />
 
       </Stack.Navigator>
     </NavigationContainer>

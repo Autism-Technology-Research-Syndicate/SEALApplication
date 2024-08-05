@@ -30,7 +30,7 @@ const Index = ({ navigation }) => {
         </View>
         <View>
 
-          <Button light title='How SEAL works...' />
+          <Button light title='How SEAL works...'  onPress={() => navigation.navigate('HowSealWorks')} />
 
         </View>
       </View>
