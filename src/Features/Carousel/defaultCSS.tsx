@@ -6,7 +6,7 @@ const stylesheet = StyleSheet.create({
     pagination: {flex: 1},
     container: {
         width: width,
-        height: height,
+        minHeight: '100%',
         alignItems: 'center',
         justifyContent: 'center',
         paddingHorizontal: 30
