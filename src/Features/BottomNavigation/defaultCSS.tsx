@@ -8,12 +8,14 @@ const stylesheet = StyleSheet.create({
     alignItems: 'center',
     },
     nav:{
-      backgroundColor: styles.defaultColor,
+      backgroundColor: styles.VeryDarkDesaturatedBlue,
+      highLight: styles.DarkModerateCyan,
+      inActive: styles.White
     },
     icon:{
       fontSize: 15,
       fontStyle: styles.textNormal.fontStyle,
-      color: 'white'
+      color: styles.White
     },
     middle: {marginBottom: 100}
 

@@ -1,23 +1,16 @@
 import React from 'react';
-import { ImageBackground, View, StyleSheet } from 'react-native';
-import { CommonActions } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-import { Icon, IconButton, BottomNavigation } from 'react-native-paper';
-
-//import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Icon} from 'react-native-paper';
 import PersonalPage from '../../Screens/PersonalPage';
 import AccountSignUp from '../../Screens/AccountSignUp';
 import styles from './defaultCSS';
-
-import BottomNavBGImg from '../../Assets/svg/BottomNavbgimg.svg';
 
 const Tab = createBottomTabNavigator();
 
 const screenOptions = {
   headerShown: false,
-  tabBarActiveTintColor: "tomato",
-  tabBarInactiveTintColor: "white",
+  tabBarActiveTintColor: styles.nav.highLight,
+  tabBarInactiveTintColor: styles.nav.inActive,
   tabBarLabelStyle: {
     ...styles.icon
   },
@@ -32,7 +25,6 @@ const screenOptions = {
     paddingBottom: 10
   }
 };
-
 
 export default function Index() {
   return (
