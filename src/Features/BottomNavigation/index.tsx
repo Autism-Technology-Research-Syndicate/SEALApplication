@@ -1,61 +1,43 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { ImageBackground, View, StyleSheet } from 'react-native';
 import { CommonActions } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Text, BottomNavigation } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import { Icon, IconButton, BottomNavigation } from 'react-native-paper';
+
+//import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import PersonalPage from '../../Screens/PersonalPage';
 import AccountSignUp from '../../Screens/AccountSignUp';
+import styles from './defaultCSS';
+
+import BottomNavBGImg from '../../Assets/svg/BottomNavbgimg.svg';
 
 const Tab = createBottomTabNavigator();
+
+const screenOptions = {
+  headerShown: false,
+  tabBarActiveTintColor: "tomato",
+  tabBarInactiveTintColor: "white",
+  tabBarLabelStyle: {
+    ...styles.icon
+  },
+  tabBarStyle: {
+    backgroundColor: styles.nav.backgroundColor,
+    paddingVertical: 5,
+    height: 80
+  },
+  tabBarItemStyle: {
+    backgroundColor: styles.nav.backgroundColor,
+    paddingTop: 10,
+    paddingBottom: 15
+  }
+};
+
 
 export default function Index() {
   return (
     <Tab.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-      tabBar={({ navigation, state, descriptors, insets }) => (
-        <BottomNavigation.Bar
-          navigationState={state}
-         safeAreaInsets={insets}
-          onTabPress={({ route, preventDefault }) => {
-            const event = navigation.emit({
-              type: 'tabPress',
-              target: route.key,
-              canPreventDefault: true,
-            });
-
-            if (event.defaultPrevented) {
-              preventDefault();
-            } else {
-             navigation.dispatch({
-                ...CommonActions.navigate(route.name, route.params),
-                target: state.key,
-              });
-            }
-          }}
-          renderIcon={({ route, focused, color }) => {
-            const { options } = descriptors[route.key];
-            if (options.tabBarIcon) {
-              return options.tabBarIcon({ focused, color, size: 24 });
-            }
-
-            return null;
-          }}
-          getLabelText={({ route }) => {
-            const { options } = descriptors[route.key];
-            const label =
-              options.tabBarLabel !== undefined
-                ? options.tabBarLabel
-                : options.title !== undefined
-                ? options.title
-                : route.title;
-
-            return label;
-          }}
-        />
-      )}
+      {...{ screenOptions }}
     >
       <Tab.Screen
         name="Home"
@@ -63,7 +45,17 @@ export default function Index() {
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => {
-            return <Icon name="home" size={size} color={color} />;
+            return <Icon source="home" size={size} color={color} style={styles.icon} />;
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Join a classroom"
+        component={PersonalPage}
+        options={{
+          tabBarLabel: 'Join a classroom',
+          tabBarIcon: ({ color, size }) => {
+            return <Icon source="cast-education" size={size} color={color} style={styles.middle} />;
           },
         }}
       />
@@ -73,19 +65,11 @@ export default function Index() {
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color, size }) => {
-            return <Icon name="cog" size={size} color={color} />;
+            return <Icon source="account-box" size={size} color={color} style={styles.icon} />;
           },
         }}
       />
+
     </Tab.Navigator>
   );
 }
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
