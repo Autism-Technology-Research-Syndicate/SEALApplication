@@ -29,7 +29,7 @@ const screenOptions = {
   tabBarItemStyle: {
     backgroundColor: styles.nav.backgroundColor,
     paddingTop: 10,
-    paddingBottom: 15
+    paddingBottom: 10
   }
 };
 
