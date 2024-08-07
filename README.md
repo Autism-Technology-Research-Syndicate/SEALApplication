@@ -36,8 +36,8 @@ For major changes, please open an issue first to discuss what you would like to 
 
 ## Contact
 For any inquiries or questions regarding the SEAL project, please contact us at:  
-Email: [Inquiries@autrs.com](mailto:Inquiries@autrs.com)
-[Website: https://www.autrs.com/](autrs.com)
+Email: [Inquiries@autrs.com](mailto:Inquiries@autrs.com) 
+Website: [https://www.autrs.com/](autrs.com)
 
 ## License
 The SEAL project is licensed under the GNU General Public License v3.0. For more information, please see the [LICENSE](LICENSE) file.
