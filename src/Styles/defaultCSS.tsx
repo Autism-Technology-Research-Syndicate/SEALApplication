@@ -11,11 +11,15 @@ const colorRange = {
     LightGrayishCyan: '#D2F9F9',
     VeryLightGray: '#f5f5f5',
     LightGrayishOrange: '#F9E2D2',
-    background:
-    {
-        colorList: ['#D2F9F9','#f5f5f5', '#F9E2D2']
-    }
 };
+
+const background =
+{
+    colorList: [
+        colorRange.LightGrayishCyan,
+         colorRange.VeryLightGray, 
+         colorRange.LightGrayishOrange]
+}
 
 const stylesheet = StyleSheet.create({
     container: {
@@ -25,6 +29,7 @@ const stylesheet = StyleSheet.create({
         padding: 30,
     },
     ...colorRange,
+    ...background,
     defaultColor: colorRange.VeryDarkDesaturatedBlue,
     defaultText: {
         fontFamily: 'sans-serif-condensed',

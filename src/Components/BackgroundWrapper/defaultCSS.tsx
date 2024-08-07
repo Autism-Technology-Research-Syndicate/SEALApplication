@@ -8,7 +8,7 @@ const stylesheet = StyleSheet.create({
     },
     background:{
       opacity: 1,
-      colorList: styles.background.colorList
+      colorList: styles.colorList
     },
     image: {
       flex: 1,
