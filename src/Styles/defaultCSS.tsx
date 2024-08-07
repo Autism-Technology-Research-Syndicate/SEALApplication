@@ -7,7 +7,14 @@ const colorRange = {
     DarkModerateCyan: '#38A3A5',
     LightGrayishBlue: '#D8D7F9',
     VeryDarkDesaturatedBlue: '#305070',
-    White: 'white'
+    White: 'white',
+    LightGrayishCyan: '#D2F9F9',
+    VeryLightGray: '#f5f5f5',
+    LightGrayishOrange: '#F9E2D2',
+    background:
+    {
+        colorList: ['#D2F9F9','#f5f5f5', '#F9E2D2']
+    }
 };
 
 const stylesheet = StyleSheet.create({
