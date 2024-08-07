@@ -13,12 +13,8 @@ const colorRange = {
     LightGrayishOrange: '#F9E2D2',
 };
 
-const background =
-{
-    colorList: [
-        colorRange.LightGrayishCyan,
-         colorRange.VeryLightGray, 
-         colorRange.LightGrayishOrange]
+const background = {
+    colorList: Object.values(colorRange).slice(-4)
 }
 
 const stylesheet = StyleSheet.create({
