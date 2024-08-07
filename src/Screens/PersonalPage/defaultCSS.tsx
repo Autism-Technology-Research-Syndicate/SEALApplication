@@ -15,9 +15,7 @@ const stylesheet = StyleSheet.create({
         fontWeight: 'bold'
     },
     subheader: {
-        ...styles.defaultText,
-        fontSize: 22,
-        fontWeight: 'bold'
+        ...styles.subheaderText
     },
     row: {
         flexDirection: 'row',
