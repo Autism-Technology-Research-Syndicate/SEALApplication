@@ -37,7 +37,7 @@ export default function Index() {
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => {
-            return <Icon source="home" size={size} color={color} style={styles.icon} />;
+            return <Icon source="home" size={size} color={color}  />;
           },
         }}
       />
@@ -47,7 +47,7 @@ export default function Index() {
         options={{
           tabBarLabel: 'Join a classroom',
           tabBarIcon: ({ color, size }) => {
-            return <Icon source="cast-education" size={size} color={color} style={styles.middle} />;
+            return <Icon source="cast-education" size={size} color={color} />;
           },
         }}
       />
@@ -57,7 +57,7 @@ export default function Index() {
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color, size }) => {
-            return <Icon source="account-box" size={size} color={color} style={styles.icon} />;
+            return <Icon source="account-box" size={size} color={color} />;
           },
         }}
       />
