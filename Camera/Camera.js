@@ -8,14 +8,12 @@ import { getPredictions } from '../src/Library/Tensorflow.js';
 
 function saveImageToDb(toSend, input, output) {
   insertImageData(toSend, input, output);
-  //getPredictions(input);
 }
 
 function URIToB64Str(uri, input, output) {
   RNFS.readFile(uri, 'base64')
     .then((base64String) => {
       saveImageToDb(base64String, input, output);
-      getPredictions(uri);
     })
     .catch((error) => {
       console.log('Error converting URI to base64 string:', error);
@@ -47,6 +45,7 @@ class Camera extends PureComponent {
         //Alert.alert('Success', JSON.stringify(data));
         this.setState({ takingPic: false });
         URIToB64Str(data.uri, -1, -1);
+        getPredictions(data.uri);
       } catch (err) {
         Alert.alert('Error', 'Failed to take picture: ' + (err.message || err));
         console.log(data);
