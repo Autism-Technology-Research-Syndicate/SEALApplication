@@ -16,22 +16,23 @@ const Index = ({ navigation }) => {
       <View style={styles.container}>
         <View style={styles.section}>
           <Text style={styles.header}>
-            Welcome, James
+            Well done!
           </Text>
           <Text style={styles.subheader}>
-            Activities
+            Achievements
           </Text>
           <View style={styles.row}>
             <View style={styles.rowItem}>
+              {/* replace below with appropriate icon */}
               <PracticeSession />
-              <Text style={styles.itemTitle}>
+              {/* <Text style={styles.itemTitle}>
                 Practice sessions
               </Text>
               <Text style={styles.itemText}>
                 Focused practices, skill builders, step-by-step sessions and 'repeat & refine'
-              </Text>
+              </Text> */}
             </View>
-            <View style={styles.rowItem}>
+            {/* <View style={styles.rowItem}>
              <AssignTasks />
               <Text style={styles.itemTitle}>
                 Assigned tasks
@@ -39,13 +40,13 @@ const Index = ({ navigation }) => {
               <Text style={styles.itemText}>
                 Complete the tasks assigned to you by your teacher
               </Text>
-            </View>
+            </View> */}
           </View>
         </View>
-        <View style={styles.section}>
+        {/* <View style={styles.section}>
           <Button title='Eye contact practice' icon="eye" onPress={() => navigation.navigate('Welcome')} />
           <Button light title='Achievements' icon="trophy" onPress={() => navigation.navigate('Achievements')} />
-        </View>
+        </View> */}
       </View>
     </BackgroundWrapper>
   );

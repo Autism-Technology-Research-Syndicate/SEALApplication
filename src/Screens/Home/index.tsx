@@ -21,6 +21,7 @@ const Index = ({navigation}) => {
         <Stack.Screen name="Personal" component={PersonalPage}  />
         <Stack.Screen name="AccountSignUp" component={AccountSignUp}  />
         <Stack.Screen name="HowSealWorks" component={HowSealWorks}  />
+        <Stack.Screen name="Achievements" component={Achievements}  />
 
       </Stack.Navigator>
     </NavigationContainer>
