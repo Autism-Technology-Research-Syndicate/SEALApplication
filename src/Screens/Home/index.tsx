@@ -5,6 +5,7 @@ import Login from '../Login';
 import PersonalPage from '../PersonalPage/Navigation';
 import AccountSignUp from '../AccountSignUp';
 import HowSealWorks from '../HowSEALWorks';
+import Achievements from '../Achievements';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,5 +28,3 @@ const Index = ({navigation}) => {
 };
 
 export default Index;
-
-
