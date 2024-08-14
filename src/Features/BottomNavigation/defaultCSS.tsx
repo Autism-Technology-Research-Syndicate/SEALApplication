@@ -17,7 +17,7 @@ const stylesheet = StyleSheet.create({
       fontStyle: styles.textNormal.fontStyle,
       color: styles.White
     },
-    middle: {marginBottom: 100}
+    middle: {position: 'absolute', top: '-50%', height: 70, width: 70, backgroundColor: '#29fd53'}
 
 });
 

@@ -7,20 +7,26 @@ import Login from '../Login';
 import PersonalPage from '../PersonalPage/Navigation';
 import AccountSignUp from '../AccountSignUp';
 import HowSealWorks from '../HowSEALWorks';
-import Break from '../Break'; // Import the Break screen
+import WebCamFeed from '../../Components/WebCamFeed';
 
 const Stack = createNativeStackNavigator();
 
 const Index = () => {
   return (
-    <Stack.Navigator initialRouteName="WelcomeToSeal" screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="WelcomeToSeal" component={WelcomeToSeal} />
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Personal" component={PersonalPage} />
-      <Stack.Screen name="AccountSignUp" component={AccountSignUp} />
-      <Stack.Screen name="HowSealWorks" component={HowSealWorks} />
-      <Stack.Screen name="Break" component={Break} />
-    </Stack.Navigator>
+
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="WebCamFeed" screenOptions={{
+        headerShown: false
+      }}>
+        <Stack.Screen name="Welcome" component={WelcomeToSeal}  />
+        <Stack.Screen name="Login" component={Login}  />
+        <Stack.Screen name="Personal" component={PersonalPage}  />
+        <Stack.Screen name="AccountSignUp" component={AccountSignUp}  />
+        <Stack.Screen name="HowSealWorks" component={HowSealWorks}  />
+        <Stack.Screen name="WebCamFeed" component={WebCamFeed}  />
+
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
