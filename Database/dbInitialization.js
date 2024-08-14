@@ -533,13 +533,13 @@ const testDb = async () => {
   console.log('top user', allUsers[0]);
   console.log('second user', allUsers[1]);
 
-  await insertImageData('test_base64_string', 1, 2);
+  // await insertImageData('test_base64_string', 1, 2);
 
-  await printFirstRow();
+  // await printFirstRow();
 
-  await insertCurriculumData(0, 5, "Testing curriculum");
+  // await insertCurriculumData(0, 5, "Testing curriculum");
 
-  await printCurriculumFirstRow();
+  // await printCurriculumFirstRow();
 
   // User tests
   // Example call to insertUser with test data
@@ -588,36 +588,39 @@ insertUser(
   testUser2.description,
   testUser2.necessaryBreakTime,
 );
-console.log('Getting one user:');
-const oneUser = await getOneUser(3);
-console.log('One user:', oneUser);
+// console.log('Getting one user:');
+// const oneUser = await getOneUser(3);
+// console.log('One user:', oneUser);
 
-const allData = await getImageData();
-console.log('All data:', allData[0]);
+// const allData = await getImageData();
+// console.log('All data:', allData[0]);
 
-if (allData.length > 0) {
-  updateImageData('updated_base64_string', allData[0].id);
-}
- const user1 = await getOneUser(1);
-  console.log('user1:', user1);
-  updateUser(1, { name:'Billy Bob' });
-  console.log('user1 after update:', user1);
-  const user2 = await getOneUser(2);
-  updateUser(2, { progressInCurriculum: 20, averageAccuracy: 20, necessaryBreakTime: 20 });
-  console.log('user2 after update:', user2);
+// if (allData.length > 0) {
+//   updateImageData('updated_base64_string', allData[0].id);
+// }
+//  const user1 = await getOneUser(1);
+//   console.log('user1:', user1);
+//   updateUser(1, { name:'Billy Bob' });
+//   console.log('user1 after update:', user1);
+//   const user2 = await getOneUser(2);
+//   updateUser(2, { progressInCurriculum: 20, averageAccuracy: 20, necessaryBreakTime: 20 });
+//   console.log('user2 after update:', user2);
   // other tests
   // delete a user test
-  const userToDelete = await getOneUser(3);
-  console.log('userToDelete:', userToDelete);
-  deleteUser(3);
-  console.log(getOneUser(3), "should be null");
+  // const userToDelete = await getOneUser(3);
+  // console.log('userToDelete:', userToDelete);
+  // deleteUser(3);
+  // console.log(getOneUser(3), "should be null");
 
-  insertAchievement('Achievement1', 'Description of Achievement1', 'path/to/picture.jpg', 10, 1);
+  await insertAchievement('Achievement1', 'Description of Achievement1', 10, 1);
+  await insertAchievement('Achievement2', 'Description of Achievement2', 20, 1);
+  await insertAchievement('Achievement3', 'Description of Achievement3', 30, 1);
+  console.log('All achievements:', await allUserAchievements(1));
 console.log("finished running testDb");
 };
 
 // uncomment to run tests
-// testDb();
+testDb();
 
 // Export functions
 export {
@@ -639,5 +642,9 @@ export {
   deleteUser,
   printCurriculumFirstRow,
   insertCurriculumData,
+  insertAchievement,
+  updateAchievement,
+  allUserAchievements,
+  deleteAchievement,
   testDb,
 };
