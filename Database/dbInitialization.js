@@ -11,19 +11,19 @@ const initializeDatabase = async () => {
   console.log("in initializeDatabase");
   console.log("creating tables");
       // Drop the existing users table before updating it. might be better to have a migrations file
-    db.transaction(tx => {
-      // Drop the existing users table
-      tx.executeSql(
-        `DROP TABLE IF EXISTS users`,
-        [],
-        () => {
-          console.log('Old users table dropped successfully.');
-        },
-        (_, error) => {
-          console.error('Error dropping table', error);
-        },
-      );
-    });
+    // db.transaction(tx => {
+    //   // Drop the existing users table
+    //   tx.executeSql(
+    //     `DROP TABLE IF EXISTS users`,
+    //     [],
+    //     () => {
+    //       console.log('Old users table dropped successfully.');
+    //     },
+    //     (_, error) => {
+    //       console.error('Error dropping table', error);
+    //     },
+    //   );
+    // });
 
   const createTable = (query, tableName) => {
     return new Promise((resolve, reject) => {
@@ -464,6 +464,67 @@ const getBestComboData= () => {
   });
 };
 
+const insertAchievement = (name, description, points, user_id) => {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'INSERT INTO achievements (name, description, points, user_id) VALUES (?, ?, ?, ?)',
+        [name, description, points, user_id],
+        (_, result) => {
+          console.log(`A row has been inserted with rowid ${result.insertId}`);
+          resolve(result);
+        },
+        (_, error) => {
+          console.error('Error inserting data', error);
+          reject(error);
+        },
+      );
+    });
+  });
+};
+
+const updateAchievement = (name, description, points, user_id) => {
+  db.transaction(tx => {
+    tx.executeSql(
+      'UPDATE achievements SET name = ?, description = ?, points = ? WHERE user_id = ?',
+      [name, description, points, user_id],
+      (_, result) => { console.log(`Row(s) updated: ${result.rowsAffected}`); },
+      (_, error) => { console.error('Error updating data', error); }
+    );
+  });
+};
+
+const allUserAchievements = (id) => {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'SELECT * FROM achievements WHERE user_id = ?',
+        [id],
+        (_, result) => { resolve(result.rows.raw()); },
+        (_, error) => { reject(error); }
+      );
+    });
+  });
+};
+
+const deleteAchievement = (id) => {
+  return new Promise((resolve, reject) => {
+  db.transaction(tx => {
+    tx.executeSql(
+      'DELETE FROM achievements WHERE id = ?',
+      [id],
+      (_, result) => {
+      console.log(`Row(s) deleted: ${result.rowsAffected}`);
+      resolve(result);
+      },
+      (_, error) => {
+        console.error('Error deleting data', error);
+        reject(error);
+       },
+    );
+  });
+});
+};
 // test the functions above
 
 const testDb = async () => {
@@ -550,9 +611,12 @@ if (allData.length > 0) {
   console.log('userToDelete:', userToDelete);
   deleteUser(3);
   console.log(getOneUser(3), "should be null");
+
+  insertAchievement('Achievement1', 'Description of Achievement1', 'path/to/picture.jpg', 10, 1);
 console.log("finished running testDb");
 };
 
+// uncomment to run tests
 // testDb();
 
 // Export functions
