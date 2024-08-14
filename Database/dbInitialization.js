@@ -73,10 +73,22 @@ const initializeDatabase = async () => {
       necessaryBreakTime INTEGER
     )`;
 
+    const achievementsTableQuery = `
+    CREATE TABLE IF NOT EXISTS achievements (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT,
+      description TEXT,
+      picture TEXT,
+      points INTEGER,
+      user_id INTEGER,
+      FOREIGN KEY (user_id) REFERENCES users(id)
+    )`;
+
   return Promise.all([
     createTable(imgdpTableQuery, 'imgdp'),
     createTable(curriculumTableQuery, 'curriculum'),
     createTable(usersTableQuery, 'users'),
+    createTable(achievementsTableQuery, 'achievements'),
   ])
   .then(() => {
     console.log('All tables created successfully.');
