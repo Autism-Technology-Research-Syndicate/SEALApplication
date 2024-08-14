@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import Home from './src/Screens/Home/.';
 
 const App: React.FC = () => {
@@ -16,9 +17,11 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <View style={{ flex: 1 }}>
-      <Home />
-    </View>
+    <NavigationContainer>
+      <View style={{ flex: 1 }}>
+        <Home />
+      </View>
+    </NavigationContainer>
   );
 };
 

@@ -1,4 +1,6 @@
-import { NavigationContainer } from '@react-navigation/native';
+// src/Screens/Home/index.tsx
+
+import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import WelcomeToSeal from '../WelcomeToSeal';
 import Login from '../Login';
@@ -9,7 +11,7 @@ import WebCamFeed from '../../Components/WebCamFeed';
 
 const Stack = createNativeStackNavigator();
 
-const Index = ({navigation}) => {
+const Index = () => {
   return (
 
     <NavigationContainer>
@@ -29,5 +31,3 @@ const Index = ({navigation}) => {
 };
 
 export default Index;
-
-
