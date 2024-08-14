@@ -1,11 +1,15 @@
 sdkmanager "platform-tools" "emulator" "platforms;android-34" "system-images;android-34;google_apis;x86_64"
 
 
-avdmanager create avd -n Pixel_6_Pro_API_34_PlayStore_ARM -k "system-images;android-34;google_apis;x86_64" --device "pixel_6_pro"
+avdmanager create avd -n Pixel_6_Pro_API_34_PlayStore_ARM -k "system-images;android-34;google_apis;x86_64" --device "pixel_7_pro"
+
+~/Library/Android/sdk/emulator/emulator -avd pixel_7_pro
+
+avdmanager list avd
 
 sdkmanager --list
 sdkmanager --list_installed
- avdmanager list device "pixel_6_pro"
+avdmanager list device "pixel_6_pro"
 
  usr/local/var/lib/android-sdk
 
@@ -17,3 +21,18 @@ sdkmanager --list_installed
 
 
  watchman watch-del-all && rm -rf $TMPDIR/react-*  && rm -fr $TMPDIR/metro-cache* && rm -fr $TMPDIR/haste-map-metro*  &&  rm -rf ios/build && xcrun simctl erase all && rm -rf node_modules/ && npm cache verify && npm install && react-native run-ios -- --reset-cache
+
+npx react-native init App01 --version 0.71.7
+
+for i in $( gem list --local --no-version | grep cocoapods );
+do 
+    sudo gem uninstall $i; 
+done
+
+bbs-MacBook-Pro:SEALApplication bb$ lsof -i :8081
+
+
+emulator -webcam-list -avd Pixel_6_Pro_API_34_PlayStore_ARM  -camera-back webcam0
+
+
+emulator @pixel_7_pro -partition-size 2048

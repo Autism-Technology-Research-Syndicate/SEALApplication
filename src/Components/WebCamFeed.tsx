@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Camera from './../../Camera/Camera';
+import { VisionCamera } from './../Library/Camera/VisionCamera';
 import { SafeAreaView, TouchableHighlight, Image, StyleSheet } from 'react-native';
 
 
@@ -35,7 +35,7 @@ const testingIMGUrl = {uri: 'https://www.parents.com/thmb/qKThoOlGAzJwGZ-moTTGQV
           <Image source={{ uri: img }} style={styles.flex} />
         </TouchableHighlight>
       ) : (
-        <Camera onPicture={onPicture} />
+        <VisionCamera />
       )}
     </SafeAreaView>
   );
