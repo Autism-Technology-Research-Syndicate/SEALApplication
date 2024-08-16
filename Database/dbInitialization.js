@@ -11,19 +11,34 @@ const initializeDatabase = async () => {
   console.log("in initializeDatabase");
   console.log("creating tables");
       // Drop the existing users table before updating it. might be better to have a migrations file
-    // db.transaction(tx => {
-    //   // Drop the existing users table
-    //   tx.executeSql(
-    //     `DROP TABLE IF EXISTS users`,
-    //     [],
-    //     () => {
-    //       console.log('Old users table dropped successfully.');
-    //     },
-    //     (_, error) => {
-    //       console.error('Error dropping table', error);
-    //     },
-    //   );
-    // });
+    db.transaction(tx => {
+      // Drop the existing users table
+      tx.executeSql(
+        `DROP TABLE IF EXISTS users`,
+        [],
+        () => {
+          console.log('Old users table dropped successfully.');
+        },
+        (_, error) => {
+          console.error('Error dropping table', error);
+        },
+      );
+    });
+
+    // Drop the existing achievements table before updating it. might be better to have a migrations file
+    db.transaction(tx => {
+      // Drop the existing achievements table
+      tx.executeSql(
+        `DROP TABLE IF EXISTS achievements`,
+        [],
+        () => {
+          console.log('Old achievements table dropped successfully.');
+        },
+        (_, error) => {
+          console.error('Error dropping table', error);
+        }
+      );
+    });
 
   const createTable = (query, tableName) => {
     return new Promise((resolve, reject) => {
@@ -612,9 +627,9 @@ insertUser(
   // deleteUser(3);
   // console.log(getOneUser(3), "should be null");
 
-  await insertAchievement('Achievement1', 'Description of Achievement1', 10, 1);
-  await insertAchievement('Achievement2', 'Description of Achievement2', 20, 1);
-  await insertAchievement('Achievement3', 'Description of Achievement3', 30, 1);
+  await insertAchievement('Streak', 'day streak!', 10, 1);
+  await insertAchievement('Hours', 'hours of learning', 20, 1);
+  await insertAchievement('Tasks', 'tasks completed', 30, 1);
   console.log('All achievements:', await allUserAchievements(1));
 console.log("finished running testDb");
 };
