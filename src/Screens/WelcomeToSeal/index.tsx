@@ -10,7 +10,8 @@ import Hello from '../../Assets/svg/hello.svg';
 import useBreakTimer from '../../Hooks/BreakTimer';
 
 const Index = ({ navigation }) => {
-  useBreakTimer(10 * 1000); // Set the timer interval in milliseconds
+  // Temporarily commented out to avoid breaks in the app
+  // useBreakTimer(10 * 1000); // Set the timer interval in milliseconds
 
   return (
     <BackgroundWrapper>
