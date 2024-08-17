@@ -11,6 +11,7 @@ import {
 } from './Database/dbInitialization';
 
 import { exportDatabase, shareDatabase } from './Database/dbExport';
+import { getSlopeDataFromDB } from './Database/dbUtilities';
 // import { getUsers } from './dbTesting.cjs';
 
 AppRegistry.registerComponent(appName, () => App);
@@ -29,15 +30,13 @@ const setupDatabase = async () => {
 
 setupDatabase();
 
-// if want to export the database
-//  .then(() => {
-//    console.log('### Database setup completed');
-//    return exportDatabase();
-//  })
-//  .then((exportPath) => {
-//    console.log('### Database export completed');
-//    return shareDatabase(exportPath);
-//  })
-//  .catch((error) => {
-//    console.error('### Error:', error);
-//  });
+// uncomment to export the database
+//.then(() => {
+//  console.log('### Database setup completed');
+//  return exportDatabase();
+//}).then((exportPath) => {
+//  console.log('### Database export completed');
+//  return shareDatabase(exportPath); // //"/data/data/com.sealapplication7/databases/mydatabase.db"
+//}).catch((error) => {
+//  console.error('### Error:', error);
+//});
