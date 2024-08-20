@@ -10,8 +10,8 @@ const db = SQLite.openDatabase(
 const initializeDatabase = async () => {
   console.log("in initializeDatabase");
   console.log("creating tables");
-      // Drop the existing users table before updating it. might be better to have a migrations file
-    db.transaction(tx => {
+    // Drop the existing users table before updating it. might be better to have a migrations file
+  db.transaction(tx => {
       // Drop the existing users table
       tx.executeSql(
         `DROP TABLE IF EXISTS users`,
@@ -44,6 +44,49 @@ const initializeDatabase = async () => {
     });
   };
 
+  const addColumnIfTableExists = (tableName, columnName, columnDefinition) => {
+    return new Promise((resolve, reject) => {
+      console.log(`Checking if column '${columnName}' exists in '${tableName}' table...`);
+      db.transaction(tx => {
+        // Query the table schema to check if the column exists
+        tx.executeSql(
+          `PRAGMA table_info(${tableName});`,  // This returns info about the columns in the table
+          [],
+          (_, result) => {
+            // Check if the column exists
+            const columnExists = Array.from({ length: result.rows.length }).some((_, i) => result.rows.item(i).name === columnName);
+
+            if (columnExists) {
+              console.log(`Column '${columnName}' already exists in '${tableName}' table. No changes needed.`);
+              resolve();  // Resolve as no need to add the column
+            } else {
+              console.log(`Column '${columnName}' does not exist in '${tableName}' table. Adding column...`);
+              // Add the column if it doesn't exist
+              tx.executeSql(
+                `ALTER TABLE ${tableName} ADD COLUMN ${columnDefinition};`,
+                [],
+                () => {
+                  console.log(`Column '${columnName}' added to '${tableName}' table successfully.`);
+                  resolve();  // Resolve after successfully adding the column
+                },
+                (tx, error) => {
+                  // Handle any errors that occur while adding the column
+                  console.error(`Error adding column '${columnName}' to '${tableName}' table:`, error?.message || "Unknown error");
+                  reject(error);
+                }
+              );
+            }
+          },
+          (tx, error) => {
+            // Handle any errors that occur while querying the table schema
+            console.error(`Error querying table info for '${tableName}':`, error?.message || "Unknown error");
+            reject(error);
+          }
+        );
+      });
+    });
+  };
+
   const imgdpTableQuery = `
     CREATE TABLE IF NOT EXISTS imgdp (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -57,7 +100,9 @@ const initializeDatabase = async () => {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       input_output INTEGER,
       sequence INTEGER,
-      content TEXT
+      content TEXT,
+      completed INTEGER DEFAULT 0,
+      score INTEGER DEFAULT 0
     )`;
 
   const usersTableQuery = `
@@ -80,6 +125,8 @@ const initializeDatabase = async () => {
   ])
   .then(() => {
     console.log('All tables created successfully.');
+    return addColumnIfTableExists('curriculum', 'completed', 'completed INTEGER DEFAULT 0');
+//    return addColumnIfTableExists('curriculum', 'score', 'score INTEGER DEFAULT 0');
   })
   .catch(error => {
     console.error('Error initializing database', error);
