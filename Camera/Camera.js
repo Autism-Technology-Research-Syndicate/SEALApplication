@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import { TouchableOpacity, Alert, StyleSheet } from 'react-native';
 import RNFS from 'react-native-fs';
 import { insertImageData, getImageData } from '../Database/dbInitialization.js';
+import { getPredictions } from '../src/Library/Tensorflow.js';
 
 function saveImageToDb(toSend, input, output) {
   insertImageData(toSend, input, output);
@@ -13,6 +14,7 @@ function URIToB64Str(uri, input, output) {
   RNFS.readFile(uri, 'base64')
     .then((base64String) => {
       saveImageToDb(base64String, input, output);
+      getPredictions(base64String);
     })
     .catch((error) => {
       console.log('Error converting URI to base64 string:', error);
