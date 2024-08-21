@@ -25,7 +25,11 @@ const DeveloperMode = () => {
     // Hook to access navigation object
   const navigation = useNavigation();
 
+  // State to store export status
+
   const [exportStatus, setExportStatus] = useState<string | null>(null);
+
+  // Function to handle database export
 
   const handleExportDB = async () => {
     try {
@@ -37,6 +41,8 @@ const DeveloperMode = () => {
       setExportStatus('Export failed');
     }
   };
+
+  // Function to clear export status
 
   const clearExportStatus = () => {
     setExportStatus(null);
@@ -64,6 +70,8 @@ const DeveloperMode = () => {
           </TouchableOpacity>
         ))}
       </ScrollView>
+
+      {/*  Export status after pressing export button */}
       {exportStatus && (
          <View style={styles.statusContainer}>
          <Text style={styles.statusText}>{exportStatus}</Text>
