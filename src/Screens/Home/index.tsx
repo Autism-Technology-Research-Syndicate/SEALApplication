@@ -14,7 +14,6 @@ const Stack = createNativeStackNavigator();
 const Index = () => {
   return (
 
-    <NavigationContainer>
       <Stack.Navigator initialRouteName="WebCamFeed" screenOptions={{
         headerShown: false
       }}>
@@ -23,10 +22,10 @@ const Index = () => {
         <Stack.Screen name="Personal" component={PersonalPage}  />
         <Stack.Screen name="AccountSignUp" component={AccountSignUp}  />
         <Stack.Screen name="HowSealWorks" component={HowSealWorks}  />
-        <Stack.Screen name="WebCamFeed" component={WebCamFeed}  />
+        {/* Commented for testing, to enable camera feed uncomment this */}
+        {/* <Stack.Screen name="WebCamFeed" component={WebCamFeed}  /> */}
 
       </Stack.Navigator>
-    </NavigationContainer>
   );
 };
 

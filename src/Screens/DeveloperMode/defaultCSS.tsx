@@ -54,6 +54,28 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontWeight: '500',
   },
+  statusContainer: {
+    marginTop: 20,
+    padding: 10,
+    backgroundColor: '#4A4A4C',
+    borderRadius: 8,
+    width: '100%',
+  },
+  statusText: {
+    color: '#FFFFFF',
+    textAlign: 'center',
+    fontSize: 14,
+  },
+  closeButton: {
+    backgroundColor: 'lightcoral',
+    padding: 5,
+    borderRadius: 5,
+    alignSelf: 'center',
+  },
+  closeButtonText: {
+    color: '#FFFFFF',
+    fontSize: 12,
+  },
 });
 
 export default styles;
