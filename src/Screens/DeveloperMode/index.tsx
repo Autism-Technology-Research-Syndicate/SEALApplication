@@ -6,10 +6,11 @@
  * functionalities of the application.
  */
 
-import React from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import React, {useState} from 'react';
+import { View, Text, TouchableOpacity, ScrollView, Clipboard  } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './defaultCSS';
+import { exportDatabase } from '../../../Database/dbExport';
 
 /**
  * DeveloperMode Component
@@ -24,6 +25,23 @@ const DeveloperMode = () => {
     // Hook to access navigation object
   const navigation = useNavigation();
 
+  const [exportStatus, setExportStatus] = useState<string | null>(null);
+
+  const handleExportDB = async () => {
+    try {
+      setExportStatus('Exporting...');
+      const exportPath = await exportDatabase();
+      setExportStatus(`Exported to: ${exportPath}`);
+    } catch (error) {
+      console.error('Export failed:', error);
+      setExportStatus('Export failed');
+    }
+  };
+
+  const clearExportStatus = () => {
+    setExportStatus(null);
+  };
+
   //Temporary options for developer mode
   const options = [
     { title: 'Camera', icon: '📷', onPress: () => console.log('Camera component opens') },
@@ -31,6 +49,7 @@ const DeveloperMode = () => {
     { title: 'Network', icon: '🌐', onPress: () => console.log('Network info viewed') },
     { title: 'Storage', icon: '💾', onPress: () => console.log('Storage info viewed') },
     { title: 'Debug', icon: '🐞', onPress: () => console.log('Debug mode toggled') },
+    { title: 'Export DB', icon: '📤', onPress: handleExportDB },
   ];
 
   return (
@@ -45,6 +64,14 @@ const DeveloperMode = () => {
           </TouchableOpacity>
         ))}
       </ScrollView>
+      {exportStatus && (
+         <View style={styles.statusContainer}>
+         <Text style={styles.statusText}>{exportStatus}</Text>
+         <TouchableOpacity style={styles.closeButton} onPress={clearExportStatus}>
+           <Text style={styles.closeButtonText}>Close</Text>
+         </TouchableOpacity>
+       </View>
+        )}
     </View>
   </View>
   );
