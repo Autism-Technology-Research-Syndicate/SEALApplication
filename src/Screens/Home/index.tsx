@@ -22,6 +22,7 @@ const Index = () => {
         <Stack.Screen name="Personal" component={PersonalPage}  />
         <Stack.Screen name="AccountSignUp" component={AccountSignUp}  />
         <Stack.Screen name="HowSealWorks" component={HowSealWorks}  />
+        {/* Commented for testing, to enable camera feed uncomment this */}
         {/* <Stack.Screen name="WebCamFeed" component={WebCamFeed}  /> */}
 
       </Stack.Navigator>
