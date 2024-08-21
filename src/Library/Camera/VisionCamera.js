@@ -1,9 +1,11 @@
 import { Camera, useCameraDevice, useCameraPermission, useFrameProcessor } from 'react-native-vision-camera';
+//import { loadTensorflowModel } from 'react-native-fast-tflite';
 import { StyleSheet, useState } from 'react-native';
 
 
 
 export function VisionCamera() {
+  //const model = loadTensorflowModel(require('./model.tflite'))
 
   const device = useCameraDevice('back', {
     physicalDevices: ['wide-angle-camera']
@@ -14,7 +16,7 @@ export function VisionCamera() {
     'worklet'
     console.log(`Frame: ${frame.width}x${frame.height} (${frame.pixelFormat})`)
     //const outputData =  model.run(frame)
-   // console.log(outputData)
+    //console.log(outputData)
   }, [])
 
   return (
