@@ -18,7 +18,8 @@ const Index = ({ navigation }) => {
             <LinkButton title='Forget password?' style={{flexDirection: 'row-reverse' }} onPress={() => navigation.navigate('Welcome')} />
           </View>
           <View style={styles.bottom_body}>
-          <Button title='Submit' onPress={() => navigation.navigate('Personal')} />
+            {/* renders the Bottomnav which in turn renders pages once logged in. defaults to the personal page */}
+          <Button title='Submit' onPress={() => navigation.navigate('Main')} />
 
           <View style={styles.middle_body}>
           <Text style={{ textAlign: 'center' }}>
@@ -39,5 +40,3 @@ const Index = ({ navigation }) => {
 };
 
 export default Index;
-
-

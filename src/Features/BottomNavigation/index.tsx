@@ -4,8 +4,8 @@ import { CommonActions } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text, BottomNavigation } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import PersonalPage from '../../Screens/PersonalPage';
-import AccountSignUp from '../../Screens/AccountSignUp';
+import { HomeStackNavigator, ProfileStackNavigator } from '../StackNavigators';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -59,7 +59,7 @@ export default function Index() {
     >
       <Tab.Screen
         name="Home"
-        component={PersonalPage}
+        component={HomeStackNavigator}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => {
@@ -69,7 +69,7 @@ export default function Index() {
       />
       <Tab.Screen
         name="Profile"
-        component={AccountSignUp}
+        component={ProfileStackNavigator}
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color, size }) => {
