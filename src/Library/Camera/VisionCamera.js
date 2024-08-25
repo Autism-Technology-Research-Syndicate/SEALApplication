@@ -17,9 +17,9 @@ function VisionCamera() {
    if (model == null) return;
    //console.log(`Frame: ${frame.width}x${frame.height} (${frame.pixelFormat})`);
 
-    const buffer = frame.toArrayBuffer()
-   // const data = new Uint8Array(buffer)
-    outputData =  model.run(buffer);
+    const buffer = frame.toArrayBuffer();
+    const data = new BigInt64Array(buffer);
+    outputData =  model.run(data);
     console.log(outputData);
   }, [])
 
