@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { VisionCamera } from './../Library/Camera/VisionCamera';
+import  VisionCamera  from './../Library/Camera/VisionCamera';
 import { SafeAreaView, TouchableHighlight, Image, StyleSheet } from 'react-native';
 
 
