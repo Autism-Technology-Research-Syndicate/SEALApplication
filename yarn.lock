@@ -4269,7 +4269,7 @@ fs.realpath@^1.0.0:
 
 fsevents@^2.3.2:
   version "2.3.3"
-  resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-2.3.3.tgz#cac6407785d03675a2a5e1a5305c697b347d90d6"
+  resolved "https://registry.npmjs.org/fsevents/-/fsevents-2.3.3.tgz"
 
 function-bind@^1.1.2:
   version "1.1.2"
@@ -5927,8 +5927,8 @@ metro@0.80.9, metro@^0.80.3:
     yargs "^17.6.2"
 
 micromatch@^4.0.4:
-  version "4.0.7"
-  resolved "https://registry.npmjs.org/micromatch/-/micromatch-4.0.7.tgz"
+  version "4.0.8"
+  resolved "https://registry.npmjs.org/micromatch/-/micromatch-4.0.8.tgz"
   dependencies:
     braces "^3.0.3"
     picomatch "^2.3.1"
@@ -6998,7 +6998,7 @@ react-native-vector-icons@^10.1.0:
 
 react-native-vision-camera-image-labeler@^2.2.0:
   version "2.2.0"
-  resolved "https://registry.yarnpkg.com/react-native-vision-camera-image-labeler/-/react-native-vision-camera-image-labeler-2.2.0.tgz#04ebf47ff413a92bfd980de86b42edacf8850cc0"
+  resolved "https://registry.npmjs.org/react-native-vision-camera-image-labeler/-/react-native-vision-camera-image-labeler-2.2.0.tgz"
 
 react-native-vision-camera@^4.5.1:
   version "4.5.1"

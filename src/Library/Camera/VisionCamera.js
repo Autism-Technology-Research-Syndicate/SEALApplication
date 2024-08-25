@@ -12,13 +12,14 @@ function VisionCamera() {
   });
   const { hasPermission, requestPermission } = useCameraPermission();
 
+  let buffer = []; 
   let outputData = '';
   const frameProcessor = useFrameProcessor((frame) => {
     'worklet'
    if (model == null) return;
-    const buffer = frame.toArrayBuffer();
-    const data = new Uint8Array(buffer);
-    outputData =  model.run(data);
+     buffer = frame.toArrayBuffer();
+   // const data = new Uint8Array(buffer);
+   outputData =  model.run(buffer);
     console.log(outputData);
   }, [])
 

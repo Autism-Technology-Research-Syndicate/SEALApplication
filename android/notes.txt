@@ -3,6 +3,7 @@ sdkmanager "platform-tools" "emulator" "platforms;android-34" "system-images;and
 
 avdmanager create avd -n Pixel_6_Pro_API_34_PlayStore_ARM -k "system-images;android-34;google_apis;x86_64" --device "pixel_7_pro"
 
+
 ~/Library/Android/sdk/emulator/emulator -avd pixel_7_pro
 
 avdmanager list avd
@@ -40,3 +41,14 @@ npx react-native-clean-project
 ~/.android/avd
 
 ./gradlew assembleDebug
+
+react-native run-android  --mode=release
+
+./gradlew clean
+rm -rf .gradle
+
+unzip -lv test.apk | grep "\.so"
+
+ unzip -lv android/app/build/outputs/apk/debug/app-debug.apk | grep lib*.so
+
+adb logcat
