@@ -37,5 +37,6 @@ emulator @pixel_7_pro -partition-size 2048
 
 npx react-native-clean-project
 
-
 ~/.android/avd
+
+./gradlew assembleDebug

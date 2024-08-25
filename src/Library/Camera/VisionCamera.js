@@ -15,8 +15,6 @@ function VisionCamera() {
   const frameProcessor = useFrameProcessor((frame) => {
     'worklet'
    if (model == null) return;
-   //console.log(`Frame: ${frame.width}x${frame.height} (${frame.pixelFormat})`);
-
     const buffer = frame.toArrayBuffer();
     const data = new BigInt64Array(buffer);
     outputData =  model.run(data);
@@ -24,6 +22,7 @@ function VisionCamera() {
   }, [])
 
   return (
+    !!device && 
     <Camera
       style={StyleSheet.absoluteFill}
       video={true}
