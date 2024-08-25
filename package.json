@@ -38,6 +38,7 @@
     "react-native-svg": "^15.4.0",
     "react-native-vector-icons": "^10.1.0",
     "react-native-vision-camera": "^4.5.1",
+    "react-native-vision-camera-image-labeler": "^2.2.0",
     "react-native-worklets-core": "^1.3.3",
     "sqlite3": "^5.1.7"
   },
