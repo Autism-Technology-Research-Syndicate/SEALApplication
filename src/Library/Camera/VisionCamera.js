@@ -6,6 +6,7 @@ function VisionCamera() {
   const objectDetection = useTensorflowModel(require('../model.tflite'));
   const model = objectDetection.state === "loaded" ? objectDetection.model : undefined;
 
+  console.log(model, 'hiiEE');
   const device = useCameraDevice('back', {
     physicalDevices: ['wide-angle-camera']
   });
@@ -16,7 +17,7 @@ function VisionCamera() {
     'worklet'
    if (model == null) return;
     const buffer = frame.toArrayBuffer();
-    const data = new BigInt64Array(buffer);
+    const data = new Uint8Array(buffer);
     outputData =  model.run(data);
     console.log(outputData);
   }, [])
