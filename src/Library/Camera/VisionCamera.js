@@ -3,14 +3,14 @@ import { useTensorflowModel } from 'react-native-fast-tflite';
 import { StyleSheet } from 'react-native';
 
 function VisionCamera() {
+  const { hasPermission, requestPermission } = useCameraPermission();
+  if (!hasPermission) requestPermission();
+
   const objectDetection = useTensorflowModel(require('../model.tflite'));
   const model = objectDetection.state === "loaded" ? objectDetection.model : undefined;
 
   console.log(model, 'hiiEE');
-  const device = useCameraDevice('back', {
-    physicalDevices: ['wide-angle-camera']
-  });
-  const { hasPermission, requestPermission } = useCameraPermission();
+  const device = useCameraDevice('back');
 
   let buffer = []; 
   let outputData = '';
