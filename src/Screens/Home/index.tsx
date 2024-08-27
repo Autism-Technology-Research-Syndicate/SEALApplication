@@ -24,7 +24,7 @@ const Index = ({navigate}) => {
         <Stack.Screen name="Welcome" component={WelcomeToSeal}  />
         <Stack.Screen name="Login" component={Login}  />
         <Stack.Screen name="Personal" component={PersonalPage}  />
-        {/* <Stack.Screen name="AccountSignUp" component={AccountSignUp}  /> */}
+        <Stack.Screen name="AccountSignUp" component={AccountSignUp}  />
         {/* the "Main "screen below renders the bottom Nav which wraps the relevant pages it is included on */}
         <Stack.Screen name="Main" component={BottomNav}  />
         <Stack.Screen name="HowSealWorks" component={HowSealWorks}  />
