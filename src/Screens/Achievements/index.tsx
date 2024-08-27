@@ -1,11 +1,10 @@
 import { Image, View, ScrollView } from 'react-native';
 import { useEffect, useState } from 'react';
 import BackgroundWrapper from '../../Components/BackgroundWrapper';
-import Button from '../../Components/Button';
 import Text from '../../Components/Text';
 import styles from './defaultCSS';
-import PracticeSession from '../../Assets/svg/practice_session.svg';
-import AssignTasks from '../../Assets/svg/assign_tasks.svg';
+import Trophy from '../../Assets/svg/Trophy.svg';
+import Award from '../../Assets/svg/Award.svg';
 import { Appbar } from 'react-native-paper';
 import { allUserAchievements } from '../../../Database/dbInitialization';
 
@@ -20,8 +19,8 @@ interface Achievement {
 const AchievementsList = ({ achievements }) => (
   <View>
     {achievements.map((item) => (
-      <View key={item.id} style={styles.listItem}>
-        <Text>• {item.points} {item.description}</Text>
+      <View key={item.id} >
+        <Text style={styles.itemText}>• {item.points} {item.description}</Text>
       </View>
     ))}
   </View>
@@ -46,14 +45,19 @@ const Index = ({ navigation }) => {
 
   return (
     <BackgroundWrapper>
-      <Appbar.BackAction onPress={() => navigation.navigate('Login')} />
+      <Appbar.BackAction onPress={() => navigation.navigate('PersonalPage')} />
       <View style={styles.container}>
-        <View style={styles.section}>
           <Text style={styles.header}>Well done!</Text>
-          <Text style={styles.subheader}>Achievements</Text>
+        <View style={styles.section}>
+          <View style={{ flex: 1 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Trophy />
+          <Text style={styles.subheader}> Achievements</Text>
+          </View>
+          </View>
           <View style={styles.row}>
             <View style={styles.rowItem}>
-              <PracticeSession />
+              <Award/>
               <View style={{ flex: 1 }}>
                 <AchievementsList achievements={achievements} />
               </View>
