@@ -31,6 +31,7 @@ do
 done
 
 lsof -i :8081
+lsof | grep x86
 ~/.android/avd
 
 unzip -lv test.apk | grep "\.so"
@@ -38,5 +39,6 @@ unzip -lv test.apk | grep "\.so"
 unzip -lv android/app/build/outputs/apk/debug/app-debug.apk | grep lib*.so
 
 grep camera   ~/.android/avd/*/*.ini
+
 
 
