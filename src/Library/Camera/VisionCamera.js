@@ -45,7 +45,7 @@ function VisionCamera() {
       device={device}
       isActive={true}
       frameProcessor={frameProcessor}
-      frameProcessorFps={30}
+      frameProcessorFps={10}
     />
   );
 }
