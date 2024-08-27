@@ -22,14 +22,16 @@ function VisionCamera() {
     'worklet'
     if (model == null) return;
 
+    
     const data = resize(frame, {
       scale: {
-        width: 320,
-        height: 320,
+        width: 5,
+        height: 5,
       },
       pixelFormat: 'rgb',
       dataType: 'uint8'
-    })
+    });
+
     const output = model.runSync([data])
 
     console.log('model output ----> ', output);
