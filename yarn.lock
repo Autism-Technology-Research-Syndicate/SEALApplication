@@ -8178,6 +8178,10 @@ vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.npmjs.org/vary/-/vary-1.1.2.tgz"
 
+vision-camera-resize-plugin@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.npmjs.org/vision-camera-resize-plugin/-/vision-camera-resize-plugin-3.1.0.tgz"
+
 vlq@^1.0.0:
   version "1.0.1"
   resolved "https://registry.npmjs.org/vlq/-/vlq-1.0.1.tgz"

@@ -1,8 +1,11 @@
 import { Camera, useCameraDevice, useCameraPermission, useFrameProcessor } from 'react-native-vision-camera';
 import { useTensorflowModel } from 'react-native-fast-tflite';
+import { createResizePlugin } from 'vision-camera-resize-plugin'
 import { StyleSheet } from 'react-native';
 
 function VisionCamera() {
+  const { resize } = createResizePlugin();
+
   const { hasPermission, requestPermission } = useCameraPermission();
   if (!hasPermission) requestPermission();
 
@@ -10,29 +13,37 @@ function VisionCamera() {
   const model = objectDetection.state === "loaded" ? objectDetection.model : undefined;
 
   console.log(model, 'hiiEE');
-  const device = useCameraDevice('back');
+  const device = useCameraDevice('front');
 
-  let buffer = []; 
+  let buffer = [];
   let outputData = '';
+  let data = [];
   const frameProcessor = useFrameProcessor((frame) => {
     'worklet'
-   if (model == null) return;
-     buffer = frame.toArrayBuffer();
-   // const data = new Uint8Array(buffer);
-   outputData =  model.run(buffer);
-    console.log(outputData);
+    if (model == null) return;
+
+    const data = resize(frame, {
+      scale: {
+        width: 320,
+        height: 320,
+      },
+      pixelFormat: 'rgb',
+      dataType: 'uint8'
+    })
+    const output = model.runSync([data])
+
+    console.log('model output ----> ', output);
+
   }, [])
 
   return (
-    !!device && 
+    !!device &&
     <Camera
       style={StyleSheet.absoluteFill}
-      video={true}
       device={device}
       isActive={true}
       frameProcessor={frameProcessor}
       frameProcessorFps={30}
-      photoQualityBalance="speed"
     />
   );
 }
