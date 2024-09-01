@@ -595,13 +595,13 @@ const testDb = async () => {
   console.log('top user', allUsers[0]);
   console.log('second user', allUsers[1]);
 
-  // await insertImageData('test_base64_string', 1, 2);
+  await insertImageData('test_base64_string', 1, 2);
 
-  // await printFirstRow();
+  await printFirstRow();
 
-  // await insertCurriculumData(0, 5, "Testing curriculum");
+  await insertCurriculumData(0, 5, "Testing curriculum");
 
-  // await printCurriculumFirstRow();
+  await printCurriculumFirstRow();
 
   // User tests
   // Example call to insertUser with test data
@@ -650,6 +650,7 @@ insertUser(
   testUser2.description,
   testUser2.necessaryBreakTime,
 );
+// USER TESTS
 // console.log('Getting one user:');
 // const oneUser = await getOneUser(3);
 // console.log('One user:', oneUser);
@@ -674,9 +675,12 @@ insertUser(
   // deleteUser(3);
   // console.log(getOneUser(3), "should be null");
 
-  await insertAchievement('Streak', 'day streak!', 10, 1);
+  // INERTING AN ACHIEVEMENT TO THE ACHIEVEMENTS TABLE TO DISPLAY
+  // See logic in Achievements directory for displaying achievements.
+
+  await insertAchievement('Streak', 'day streak', 4, 1);
   await insertAchievement('Hours', 'hours of learning', 20, 1);
-  await insertAchievement('Tasks', 'tasks completed', 30, 1);
+  await insertAchievement('Tasks', 'tasks completed', 12, 1);
   console.log('All achievements:', await allUserAchievements(1));
 console.log("finished running testDb");
 };
