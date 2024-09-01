@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import BackgroundWrapper from '../../Components/BackgroundWrapper';
 import Text from '../../Components/Text';
 import styles from './defaultCSS';
@@ -16,7 +16,7 @@ interface Achievement {
   user_id: number;
 }
 
-const AchievementsList = ({ achievements }) => (
+const AchievementsList = ({ achievements }: { achievements: Achievement[] }) => (
   <View>
     {achievements.map((item) => (
       <View key={item.id} >
@@ -26,7 +26,7 @@ const AchievementsList = ({ achievements }) => (
   </View>
 );
 
-const Index = ({ navigation }) => {
+const Index: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [achievements, setAchievements] = useState<Achievement[]>([]);
 
   useEffect(() => {
