@@ -1,6 +1,6 @@
 /**
  * App.tsx
- * 
+ *
  * This is the main entry point for the SEAL application.
  * It sets up the overall structure of the app, including navigation, developer mode,
  * and context providers.
@@ -23,10 +23,10 @@ const RootStack = createNativeStackNavigator();
 
 /**
  * CloseButton Component
- * 
+ *
  * Renders a button to close the developer mode.
  * This is extracted as a separate component for reusability and cleaner code.
- * 
+ *
  * @param {Function} onPress - Function to call when the button is pressed
  */
 const CloseButton: React.FC<{ onPress: () => void }> = ({ onPress }) => (
@@ -72,7 +72,7 @@ const AppContent: React.FC = () => {
 
 /**
  * App Component
- * 
+ *
  * The root component of the application.
  * It sets up providers and containers:
  * - DeveloperModeProvider for managing developer mode state
