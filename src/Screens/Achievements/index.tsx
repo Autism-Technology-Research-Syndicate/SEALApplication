@@ -1,4 +1,4 @@
-import { Image, View, ScrollView } from 'react-native';
+import { View } from 'react-native';
 import { useEffect, useState } from 'react';
 import BackgroundWrapper from '../../Components/BackgroundWrapper';
 import Text from '../../Components/Text';
@@ -50,19 +50,17 @@ const Index = ({ navigation }) => {
           <Text style={styles.header}>Well done!</Text>
         <View style={styles.section}>
           <View style={{ flex: 1 }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={styles.row}>
           <Trophy />
           <Text style={styles.subheader}> Achievements</Text>
           </View>
           </View>
-          <View style={styles.row}>
             <View style={styles.rowItem}>
               <Award/>
               <View style={{ flex: 1 }}>
                 <AchievementsList achievements={achievements} />
               </View>
             </View>
-          </View>
         </View>
       </View>
     </BackgroundWrapper>

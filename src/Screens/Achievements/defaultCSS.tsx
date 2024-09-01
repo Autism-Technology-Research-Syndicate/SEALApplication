@@ -4,10 +4,10 @@ import styles from '../../Styles/defaultCSS';
 // console.log('scaleWidth:', scaleWidth);
 // console.log('scaleHeight:', scaleHeight);
 
-const fontSize = 18; // Example font size
-const headerFontSize = 27; // Example font size
-const letterSpacing = fontSize * 0.02; // 2% of font size
-const letterSpacingHeader = fontSize * -0.02; // 3% of font size
+// const fontSize = 20; // Example font size
+// const headerFontSize = 27; // Example font size
+// const letterSpacing = fontSize * 0.02; // 2% of font size
+// const letterSpacingHeader = fontSize * -0.02; // 3% of font size
 
 const stylesheet = StyleSheet.create({
     container: {
@@ -16,43 +16,39 @@ const stylesheet = StyleSheet.create({
     },
     textNormal: { ...styles.textNormal },
     header: {
-        // ...styles.defaultText,
+        ...styles.headerText,
         textAlign: 'center',
-        // padding: 10,
-        fontFamily: 'comic Neue',
         fontSize: 27,
-        fontWeight: 'normal',
+        fontWeight: '700',
         lineHeight: 31.05,
-        letterSpacing: letterSpacingHeader,
+        letterSpacing: 0.54,
     },
     subheader: {
-        // ...styles.defaultText,
-        fontFamily: 'Helvetica Neue',
+        ...styles.subheaderText,
         fontSize: 18,
         fontWeight: '700',
         lineHeight: 21.98,
-        letterSpacing: letterSpacing,
+        letterSpacing: 0.36,
     },
     row: {
         flexDirection: 'row',
-        flexWrap: 'nowrap',
-        justifyContent: 'space-around',
+        alignItems: 'center',
         flexGrow: 1,
     },
 
     itemText: {
         textAlign: 'center',
-        fontFamily: 'Helvetica Neue',
         fontWeight: '700',
         fontSize: 16,
         padding: 5,
-        lineHeight: 18.6,
+        // lineHeight: 18.72,
+        letterSpacing: 0.36,
+        // ...styles.content
     },
 
     rowItem: {
         paddingTop: 49,
         gap: 15,
-        borderColor: styles.defaultColor,
         borderWidth: 0.5,
         borderBottomLeftRadius: 12,
         borderBottomRightRadius: 12,
