@@ -4,6 +4,7 @@ import { Icon} from 'react-native-paper';
 import PersonalPage from '../../Screens/PersonalPage';
 import AccountSignUp from '../../Screens/AccountSignUp';
 import styles from './defaultCSS';
+import { HomeStackNavigator, ProfileStackNavigator } from '../StackNavigators';
 
 const Tab = createBottomTabNavigator();
 
