@@ -6,7 +6,7 @@ import styles from './defaultCSS';
 import Trophy from '../../Assets/svg/Trophy.svg';
 import Award from '../../Assets/svg/Award.svg';
 import { Appbar } from 'react-native-paper';
-import { allUserAchievements } from '../../../Database/dbInitialization';
+import { fetchAchievements } from './data';
 
 interface Achievement {
   id: number;
@@ -30,17 +30,17 @@ const Index = ({ navigation }) => {
   const [achievements, setAchievements] = useState<Achievement[]>([]);
 
   useEffect(() => {
-    const fetchAchievements = async () => {
+    const loadAchievements = async () => {
       try {
         const userId = 1; // Replace with the actual user ID of logged in user
-        const userAchievements = await allUserAchievements(userId);
+        const userAchievements = await fetchAchievements(userId);
         setAchievements(userAchievements);
       } catch (error) {
         console.error('Failed to fetch achievements:', error);
       }
     };
 
-    fetchAchievements();
+    loadAchievements();
   }, []);
 
   return (
