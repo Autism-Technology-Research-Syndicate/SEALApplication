@@ -23,9 +23,7 @@ const stylesheet = StyleSheet.create({
         rowGap: 10
     },
     header: {
-        ...styles.defaultText,
-        fontSize: 18,
-        fontWeight: 'bold',
+        ...styles.subheaderText,
         paddingBottom: 30
     },
     bottom_section: {

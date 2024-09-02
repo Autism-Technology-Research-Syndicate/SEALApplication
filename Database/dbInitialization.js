@@ -25,6 +25,21 @@ const initializeDatabase = async () => {
       );
     });
 
+    // Drop the existing achievements table before updating it. might be better to have a migrations file
+    db.transaction(tx => {
+      // Drop the existing achievements table
+      tx.executeSql(
+        `DROP TABLE IF EXISTS achievements`,
+        [],
+        () => {
+          console.log('Old achievements table dropped successfully.');
+        },
+        (_, error) => {
+          console.error('Error dropping table', error);
+        }
+      );
+    });
+
   const createTable = (query, tableName) => {
     return new Promise((resolve, reject) => {
       db.transaction(tx => {
@@ -118,10 +133,22 @@ const initializeDatabase = async () => {
       necessaryBreakTime INTEGER
     )`;
 
+    const achievementsTableQuery = `
+    CREATE TABLE IF NOT EXISTS achievements (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT,
+      description TEXT,
+      picture TEXT,
+      points INTEGER,
+      user_id INTEGER,
+      FOREIGN KEY (user_id) REFERENCES users(id)
+    )`;
+
   return Promise.all([
     createTable(imgdpTableQuery, 'imgdp'),
     createTable(curriculumTableQuery, 'curriculum'),
     createTable(usersTableQuery, 'users'),
+    createTable(achievementsTableQuery, 'achievements'),
   ])
   .then(() => {
     console.log('All tables created successfully.');
@@ -499,6 +526,67 @@ const getBestComboData= () => {
   });
 };
 
+const insertAchievement = (name, description, points, user_id) => {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'INSERT INTO achievements (name, description, points, user_id) VALUES (?, ?, ?, ?)',
+        [name, description, points, user_id],
+        (_, result) => {
+          console.log(`A row has been inserted with rowid ${result.insertId}`);
+          resolve(result);
+        },
+        (_, error) => {
+          console.error('Error inserting data', error);
+          reject(error);
+        },
+      );
+    });
+  });
+};
+
+const updateAchievement = (name, description, points, user_id) => {
+  db.transaction(tx => {
+    tx.executeSql(
+      'UPDATE achievements SET name = ?, description = ?, points = ? WHERE user_id = ?',
+      [name, description, points, user_id],
+      (_, result) => { console.log(`Row(s) updated: ${result.rowsAffected}`); },
+      (_, error) => { console.error('Error updating data', error); }
+    );
+  });
+};
+
+const allUserAchievements = (id) => {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'SELECT * FROM achievements WHERE user_id = ?',
+        [id],
+        (_, result) => { resolve(result.rows.raw()); },
+        (_, error) => { reject(error); }
+      );
+    });
+  });
+};
+
+const deleteAchievement = (id) => {
+  return new Promise((resolve, reject) => {
+  db.transaction(tx => {
+    tx.executeSql(
+      'DELETE FROM achievements WHERE id = ?',
+      [id],
+      (_, result) => {
+      console.log(`Row(s) deleted: ${result.rowsAffected}`);
+      resolve(result);
+      },
+      (_, error) => {
+        console.error('Error deleting data', error);
+        reject(error);
+       },
+    );
+  });
+});
+};
 // test the functions above
 
 const testDb = async () => {
@@ -562,33 +650,43 @@ insertUser(
   testUser2.description,
   testUser2.necessaryBreakTime,
 );
-console.log('Getting one user:');
-const oneUser = await getOneUser(3);
-console.log('One user:', oneUser);
+// USER TESTS
+// console.log('Getting one user:');
+// const oneUser = await getOneUser(3);
+// console.log('One user:', oneUser);
 
-const allData = await getImageData();
-console.log('All data:', allData[0]);
+// const allData = await getImageData();
+// console.log('All data:', allData[0]);
 
-if (allData.length > 0) {
-  updateImageData('updated_base64_string', allData[0].id);
-}
- const user1 = await getOneUser(1);
-  console.log('user1:', user1);
-  updateUser(1, { name:'Billy Bob' });
-  console.log('user1 after update:', user1);
-  const user2 = await getOneUser(2);
-  updateUser(2, { progressInCurriculum: 20, averageAccuracy: 20, necessaryBreakTime: 20 });
-  console.log('user2 after update:', user2);
+// if (allData.length > 0) {
+//   updateImageData('updated_base64_string', allData[0].id);
+// }
+//  const user1 = await getOneUser(1);
+//   console.log('user1:', user1);
+//   updateUser(1, { name:'Billy Bob' });
+//   console.log('user1 after update:', user1);
+//   const user2 = await getOneUser(2);
+//   updateUser(2, { progressInCurriculum: 20, averageAccuracy: 20, necessaryBreakTime: 20 });
+//   console.log('user2 after update:', user2);
   // other tests
   // delete a user test
-  const userToDelete = await getOneUser(3);
-  console.log('userToDelete:', userToDelete);
-  deleteUser(3);
-  console.log(getOneUser(3), "should be null");
+  // const userToDelete = await getOneUser(3);
+  // console.log('userToDelete:', userToDelete);
+  // deleteUser(3);
+  // console.log(getOneUser(3), "should be null");
+
+  // INERTING AN ACHIEVEMENT TO THE ACHIEVEMENTS TABLE TO DISPLAY
+  // See logic in Achievements directory for displaying achievements.
+
+  await insertAchievement('Streak', 'day streak', 4, 1);
+  await insertAchievement('Hours', 'hours of learning', 20, 1);
+  await insertAchievement('Tasks', 'tasks completed', 12, 1);
+  console.log('All achievements:', await allUserAchievements(1));
 console.log("finished running testDb");
 };
 
-// testDb();
+// uncomment to run tests
+testDb();
 
 // Export functions
 export {
@@ -610,5 +708,9 @@ export {
   deleteUser,
   printCurriculumFirstRow,
   insertCurriculumData,
+  insertAchievement,
+  updateAchievement,
+  allUserAchievements,
+  deleteAchievement,
   testDb,
 };

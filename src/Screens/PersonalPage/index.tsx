@@ -10,7 +10,7 @@ import { Appbar } from 'react-native-paper';
 const Index = ({ navigation }) => {
   return (
     <BackgroundWrapper>
-  
+
       <Appbar.BackAction onPress={() => navigation.navigate('Login')} />
 
       <View style={styles.container}>
@@ -44,7 +44,7 @@ const Index = ({ navigation }) => {
         </View>
         <View style={styles.section}>
           <Button title='Eye contact practice' icon="eye" onPress={() => navigation.navigate('Welcome')} />
-          <Button light title='Achievements' icon="trophy" onPress={() => navigation.navigate('Welcome')} />
+          <Button light title='Achievements' icon="trophy" onPress={() => navigation.navigate('Achievements')} />
         </View>
       </View>
     </BackgroundWrapper>
@@ -52,5 +52,3 @@ const Index = ({ navigation }) => {
 };
 
 export default Index;
-
-
