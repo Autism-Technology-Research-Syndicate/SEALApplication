@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import BackgroundWrapper from '../../Components/BackgroundWrapper';
 import Text from '../../Components/Text';
 import styles from './defaultCSS';
