@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text } from 'react-native';
+import { View, TextInput, Button, Text, Alert } from 'react-native';
 import styles from './defaultCSS';
 import { parseStrToCurriculumData } from '../../../Database/dbUtilities';
 
-const CurriculumInput = ({ navigation }) => {
+import { NavigationProp } from '@react-navigation/native';
+
+const CurriculumInput = ({ navigation }: { navigation: NavigationProp<any> }) => {
     const [description, setDescription] = useState('');
 
     const handleSave = () => {
-        parseStrToCurriculumData(description);
-        navigation.goBack();
+        try {
+            parseStrToCurriculumData(description);
+            navigation.goBack();
+        } catch (error) {
+            Alert.alert('Error', 'Failed to save the curriculum data.');
+        }
     };
 
     return (
