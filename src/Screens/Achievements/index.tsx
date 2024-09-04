@@ -40,7 +40,7 @@ const Index: React.FC<{ navigation: any }> = ({ navigation }) => {
 
   return (
     <BackgroundWrapper>
-      <Appbar.BackAction onPress={() => navigation.navigate('PersonalPage')} />
+      <Appbar.BackAction onPress={() => navigation.goBack()} />
       <View style={styles.container}>
           <Text style={styles.header}>Well done!</Text>
         <View style={styles.section}>
