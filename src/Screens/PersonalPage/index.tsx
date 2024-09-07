@@ -8,11 +8,10 @@ import AssignTasks from '../../Assets/svg/assign_tasks.svg';
 import { Appbar } from 'react-native-paper';
 
 const Index = ({ navigation }) => {
+  console.log('Navigation prop:', navigation);
   return (
     <BackgroundWrapper>
-
-      <Appbar.BackAction onPress={() => navigation.navigate('Login')} />
-
+      <Appbar.BackAction onPress={() => navigation.goBack() }/>
       <View style={styles.container}>
         <View style={styles.section}>
           <Text style={styles.header}>
