@@ -7,6 +7,7 @@ import Button from '../../Components/Button';
 import styles from './defaultCSS';
 import Seal from '../../Assets/svg/seal.svg';
 import Hello from '../../Assets/svg/hello.svg';
+import SessionOptimizerComponent from '../../prediction/sessionPrediction'
 import useBreakTimer from '../../Hooks/BreakTimer';
 
 const Index = ({ navigation }) => {
@@ -28,6 +29,9 @@ const Index = ({ navigation }) => {
           <Button title='Learner login' onPress={() => navigation.navigate('Login')} />
           <Button light title='Teacher login' />
         </View>
+        {/* For temporary testing purpose, Session combos output */}
+        <SessionOptimizerComponent />
+        {/*  */}
       </View>
     </BackgroundWrapper>
   );
