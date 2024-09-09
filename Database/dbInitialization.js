@@ -446,85 +446,122 @@ const updateUser = (id, updates) => {
     });
   };
 
-// Create the table in the db for the input, output, score called Combos
-const createCombosTable = () => {
-  db.transaction(tx => {
-    tx.executeSql(
-      `CREATE TABLE IF NOT EXISTS Combos (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        score DECIMAL(12, 10),
-        input TEXT,
-        output TEXT,
-      )`,
-      [],
-      () => {
-        console.log('Combos Table created successfully - in dbInitialization.');
-      },
-      (_, error) => {
-        console.error('Error creating table or exists', error);
-      },
-    );
-  });
-
-  // Create the index on the score column
-  db.transaction(tx => {
-    tx.executeSql(
-      `CREATE INDEX IF NOT EXISTS idx_score ON Combos(score)`,
-      [],
-      () => { console.log('Index created successfully.'); },
-      (tx, error) => { console.error('Error creating index', error); }
-    );
-  });
-};
-
-// Insert a new row into the Combos table
-const insertComboData = (score, input, output) => {
-  db.transaction(tx => {
-    tx.executeSql(
-      'INSERT INTO Combos (score, input, output) VALUES (?, ?, ?)',
-      [score, input, output],
-      (_, result) => { console.log(`A row has been inserted with rowid ${result.insertId}`); },
-      (tx, error) => { console.error('Error inserting data', error); }
-    );
-  });
-};
-
-// Update combo data in Combos table
-const updateComboData = (score, id) => {
-  db.transaction(tx => {
-    tx.executeSql(
-      'UPDATE Combos SET score = ? WHERE id = ?',
-      [score, id],
-      (_, result) => { console.log(`Row(s) updated: ${result.rowsAffected}`); },
-      (tx, error) => { console.error('Error updating data', error); }
-    );
-  });
-};
-
-// Delete a row from the Combos table
-const deleteComboData = (id) => {
-  db.transaction(tx => {
-    tx.executeSql(
-      'DELETE FROM Combos WHERE id = ?',
-      [id],
-      (_, result) => { console.log(`Row(s) deleted: ${result.rowsAffected}`); },
-      (tx, error) => { console.error('Error deleting data', error); }
-    );
-  });
-};
-// Access the table Combos and return combo that has score closest to 1
-const getBestComboData= () => {
-  return new Promise((resolve, reject) => {
-    db.transaction(tx => {
-      tx.executeSql(
-        'SELECT input, output, score FROM Combos ORDER BY ABS(score - 1) LIMIT 1',
-        [],
-        (_, result) => { resolve(result.rows.raw()); },
-        (tx, error) => { reject(error); },
-      );
+  //  Combos table operations
+  const createCombosTable = () => {
+    return new Promise((resolve, reject) => {
+      db.transaction(tx => {
+        tx.executeSql(
+          `CREATE TABLE IF NOT EXISTS Combos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            score DECIMAL(12, 10),
+            input TEXT,
+            output TEXT
+          )`,
+          [],
+          () => {
+            console.log('Combos Table created successfully - in dbInitialization.');
+            resolve();
+          },
+          (_, error) => {
+            console.error('Error creating table:', error);
+            reject(error);
+          }
+        );
+      });
     });
-  });
-};
+  };
+  
+  const createScoreIndex = () => {
+    return new Promise((resolve, reject) => {
+      db.transaction(tx => {
+        tx.executeSql(
+          `CREATE INDEX IF NOT EXISTS idx_score ON Combos(score)`,
+          [],
+          () => {
+            console.log('Index created successfully.');
+            resolve();
+          },
+          (_, error) => {
+            console.error('Error creating index:', error);
+            reject(error);
+          }
+        );
+      });
+    });
+  };
+  
+  const insertComboData = (score, input, output) => {
+    return new Promise((resolve, reject) => {
+      db.transaction(tx => {
+        tx.executeSql(
+          'INSERT INTO Combos (score, input, output) VALUES (?, ?, ?)',
+          [score, input, output],
+          (_, result) => {
+            console.log(`A row has been inserted with rowid ${result.insertId}`);
+            resolve(result.insertId);
+          },
+          (_, error) => {
+            console.error('Error inserting data:', error);
+            reject(error);
+          }
+        );
+      });
+    });
+  };
+  
+  const updateComboData = (score, id) => {
+    return new Promise((resolve, reject) => {
+      db.transaction(tx => {
+        tx.executeSql(
+          'UPDATE Combos SET score = ? WHERE id = ?',
+          [score, id],
+          (_, result) => {
+            console.log(`Row(s) updated: ${result.rowsAffected}`);
+            resolve(result.rowsAffected);
+          },
+          (_, error) => {
+            console.error('Error updating data:', error);
+            reject(error);
+          }
+        );
+      });
+    });
+  };
+  
+  const deleteComboData = (id) => {
+    return new Promise((resolve, reject) => {
+      db.transaction(tx => {
+        tx.executeSql(
+          'DELETE FROM Combos WHERE id = ?',
+          [id],
+          (_, result) => {
+            console.log(`Row(s) deleted: ${result.rowsAffected}`);
+            resolve(result.rowsAffected);
+          },
+          (_, error) => {
+            console.error('Error deleting data:', error);
+            reject(error);
+          }
+        );
+      });
+    });
+  };
+  
+// A prediciton algorithm has been written in the prediction/sessionPrediction.js file 
+// that uses the data from the Combos table to predict the next best action.
+// Access the table Combos and return combo that has score closest to 1
+// const getBestComboData= () => {
+//   return new Promise((resolve, reject) => {
+//     db.transaction(tx => {
+//       tx.executeSql(
+//         'SELECT input, output, score FROM Combos ORDER BY ABS(score - 1) LIMIT 1',
+//         [],
+//         (_, result) => { resolve(result.rows.raw()); },
+//         (tx, error) => { reject(error); },
+//       );
+//     });
+//   });
+// };
 
 const insertAchievement = (name, description, points, user_id) => {
   return new Promise((resolve, reject) => {
@@ -691,10 +728,11 @@ testDb();
 // Export functions
 export {
   createCombosTable,
+  createScoreIndex,
   insertComboData,
   updateComboData,
   deleteComboData,
-  getBestComboData,
+  // getBestComboData,
   initializeDatabase,
   insertImageData,
   getImageData,
