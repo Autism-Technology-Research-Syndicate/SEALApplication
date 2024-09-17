@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import styles from '../../Styles/defaultCSS';
 
 const stylesheet = StyleSheet.create({
     container: {
@@ -8,8 +7,9 @@ const stylesheet = StyleSheet.create({
         padding: 16,
     },
     header: {
-        fontSize: 24,
-        fontWeight: 'bold',
+        fontSize: 20,
+        fontWeight: '700',
+        fontFamily: 'Helvetica Neue',
         marginBottom: 12,
     },
     input: {
@@ -20,8 +20,13 @@ const stylesheet = StyleSheet.create({
         paddingHorizontal: 8,
     },
     buttonContainer: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         justifyContent: 'space-between',
+        marginTop: 20,
+    },
+    buttonSpacing: {
+        marginHorizontal: 8,
+        marginVertical: 8,
     },
 });
 
