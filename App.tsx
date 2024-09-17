@@ -1,6 +1,6 @@
 /**
  * App.tsx
- * 
+ *
  * This is the main entry point for the SEAL application.
  * It sets up the overall structure of the app, including navigation, developer mode,
  * and context providers.
@@ -12,6 +12,7 @@ import { View, TouchableWithoutFeedback, StyleSheet, TouchableOpacity, Text } fr
 import { NavigationContainer } from '@react-navigation/native';
 import Home from './src/Screens/Home/.';
 import DeveloperMode from './src/Screens/DeveloperMode';
+import CurriculumInput from './src/Screens/CurriculumInput';
 import { DeveloperModeProvider, useDeveloperMode } from './src/Contexts/DeveloperModeContext';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import styles from './appCSS.tsx';
@@ -23,10 +24,10 @@ const RootStack = createNativeStackNavigator();
 
 /**
  * CloseButton Component
- * 
+ *
  * Renders a button to close the developer mode.
  * This is extracted as a separate component for reusability and cleaner code.
- * 
+ *
  * @param {Function} onPress - Function to call when the button is pressed
  */
 const CloseButton: React.FC<{ onPress: () => void }> = ({ onPress }) => (
@@ -52,9 +53,15 @@ const AppContent: React.FC = () => {
     <View style={styles.container}>
 
      {/* Main navigation stack */}
-      <RootStack.Navigator screenOptions={{ headerShown: false }}>
+      {/* <RootStack.Navigator screenOptions={{ headerShown: false }}>
           <RootStack.Screen name="Stack" component={Home} />
-        </RootStack.Navigator>
+        </RootStack.Navigator> */}
+
+      <RootStack.Navigator screenOptions={{ headerShown: false }}>
+      {/* Temporarily set CurriculumInput as the initial screen */}
+          <RootStack.Screen name="CurriculumInput" component={CurriculumInput} />
+          <RootStack.Screen name="Home" component={Home} />
+      </RootStack.Navigator>
 
       {/* Developer mode activation area (top-right corner) */}
         <TouchableWithoutFeedback onPress={openDeveloperMode}>
@@ -72,7 +79,7 @@ const AppContent: React.FC = () => {
 
 /**
  * App Component
- * 
+ *
  * The root component of the application.
  * It sets up providers and containers:
  * - DeveloperModeProvider for managing developer mode state

@@ -1,5 +1,5 @@
 {
-  "name": "SEALApplication7",
+  "name": "sealapplication7",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -20,11 +20,13 @@
     "expo-blur": "^13.0.2",
     "expo-file-system": "^17.0.1",
     "expo-modules-core": "^1.12.20",
+    "express": "^4.21.0",
     "npm": "^10.8.2",
     "pod-install": "^0.2.2",
     "react": "18.2.0",
     "react-native": "^0.75.2",
     "react-native-camera": "^4.2.1",
+    "react-native-dropdown-picker": "^5.4.6",
     "react-native-elements": "^3.4.3",
     "react-native-fs": "^2.20.0",
     "react-native-paper": "^5.12.5",
@@ -35,6 +37,7 @@
     "react-native-sqlite-storage": "^6.0.1",
     "react-native-svg": "^15.4.0",
     "react-native-vector-icons": "^10.1.0",
+    "sequelize": "^6.37.3",
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {
@@ -63,5 +66,10 @@
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "yarn@3.6.4"
+  "packageManager": "yarn@3.6.4",
+  "description": "## Introduction **SEAL** is an innovative mobile application developed by **AUTRS** that aims to personalize special education curriculum for each student. By leveraging computer vision and machine learning, SEAL analyzes experimental responsiveness data to tailor educational content to individual needs.",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
