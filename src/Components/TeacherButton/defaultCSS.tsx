@@ -8,6 +8,7 @@ const stylesheet = StyleSheet.create({
         borderRadius: 12,
         alignItems: 'center',
         justifyContent: 'center',
+        width: '100%',
     },
     dimensions: { height: 50},
     text: {
