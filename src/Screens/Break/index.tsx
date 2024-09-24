@@ -10,7 +10,7 @@ const Index = ({ navigation }) => {
         <Text style={styles.title}>Time for a Break!</Text>
         <Button
           title="Continue Working"
-          onPress={() => navigation.navigate('Welcome')} // Navigate to 'Welcome' screen
+          onPress={() => navigation.goBack()} // Close the break screen
           color="#4CAF50"
         />
       </View>
