@@ -1,17 +1,39 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import styles from '../../Styles/defaultCSS'; // Import common styles
 
-const styles = StyleSheet.create({
+const stylesheet = StyleSheet.create({
   container: {
-    flex: 1,
+    ...styles.container,
+    backgroundColor: '#f0f0f0',
+  },
+  body: {
+    alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f0f0f0',
-  } as ViewStyle,
+    flex: 2,
+  },
   title: {
-    fontSize: 24,
+    ...styles.header,
+    fontSize: 28,
     marginBottom: 20,
     color: '#305070',
-  } as TextStyle,
+    textAlign: 'center',
+  },
+  buttonContainer: {
+    justifyContent: 'flex-end',
+    rowGap: 20,
+  },
+  button: {
+    backgroundColor: '#4CAF50',
+    padding: 10,
+    borderRadius: 5,
+    alignSelf: 'center',
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    textAlign: 'center',
+  },
 });
 
-export default styles;
+export default stylesheet;
