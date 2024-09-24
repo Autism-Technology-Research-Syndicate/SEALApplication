@@ -53,15 +53,16 @@ const AppContent: React.FC = () => {
     <View style={styles.container}>
 
      {/* Main navigation stack */}
-      {/* <RootStack.Navigator screenOptions={{ headerShown: false }}>
+     <RootStack.Navigator screenOptions={{ headerShown: false }}>
           <RootStack.Screen name="Stack" component={Home} />
-        </RootStack.Navigator> */}
+        </RootStack.Navigator>
 
-      <RootStack.Navigator screenOptions={{ headerShown: false }}>
+      {/* Testing Curriculum Input Page */}
+      {/* <RootStack.Navigator screenOptions={{ headerShown: false }}>
       {/* Temporarily set CurriculumInput as the initial screen */}
-          <RootStack.Screen name="CurriculumInput" component={CurriculumInput} />
+          {/* <RootStack.Screen name="CurriculumInput" component={CurriculumInput} />
           <RootStack.Screen name="Home" component={Home} />
-      </RootStack.Navigator>
+      </RootStack.Navigator> */}
 
       {/* Developer mode activation area (top-right corner) */}
         <TouchableWithoutFeedback onPress={openDeveloperMode}>
