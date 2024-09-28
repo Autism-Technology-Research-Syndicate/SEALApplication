@@ -13,7 +13,7 @@ const Index = ({navigation}) => {
   return (
 
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="WebCamFeed" screenOptions={{
+      <Stack.Navigator initialRouteName="Welcome" screenOptions={{
         headerShown: false
       }}>
         <Stack.Screen name="Welcome" component={WelcomeToSeal}  />
