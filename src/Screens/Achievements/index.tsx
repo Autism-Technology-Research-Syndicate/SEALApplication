@@ -1,12 +1,12 @@
 import { View } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import BackgroundWrapper from '../../Components/BackgroundWrapper';
 import Text from '../../Components/Text';
 import styles from './defaultCSS';
 import Trophy from '../../Assets/svg/Trophy.svg';
 import Award from '../../Assets/svg/Award.svg';
 import { Appbar } from 'react-native-paper';
-import { fetchAchievements } from './data';
+import useAchievements from './data';
 
 interface Achievement {
   id: number;
@@ -27,25 +27,20 @@ const AchievementsList = ({ achievements }: { achievements: Achievement[] }) => 
 );
 
 const Index: React.FC<{ navigation: any }> = ({ navigation }) => {
-  const [achievements, setAchievements] = useState<Achievement[]>([]);
+  const user_id = 1; //replace with the actual user id of the logged in user
+  const { achievements, loading, error } = useAchievements(user_id);
 
-  useEffect(() => {
-    const loadAchievements = async () => {
-      try {
-        const userId = 1; // Replace with the actual user ID of logged in user
-        const userAchievements = await fetchAchievements(userId);
-        setAchievements(userAchievements);
-      } catch (error) {
-        console.error('Failed to fetch achievements:', error);
-      }
-    };
+  if (loading) {
+    return <Text>Loading...</Text>;
+  }
 
-    loadAchievements();
-  }, []);
+  if (error) {
+    return <Text>Error loading achievements</Text>;
+  }
 
   return (
     <BackgroundWrapper>
-      <Appbar.BackAction onPress={() => navigation.navigate('PersonalPage')} />
+      <Appbar.BackAction onPress={() => navigation.goBack()} />
       <View style={styles.container}>
           <Text style={styles.header}>Well done!</Text>
         <View style={styles.section}>

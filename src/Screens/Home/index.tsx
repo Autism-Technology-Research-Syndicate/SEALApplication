@@ -8,6 +8,7 @@ import PersonalPage from '../PersonalPage';
 import AccountSignUp from '../AccountSignUp';
 import HowSealWorks from '../HowSEALWorks';
 import WebCamFeed from '../../Components/WebCamFeed';
+import Break from '../Break';
 import BottomNav from '../../Features/BottomNavigation';
 
 const Stack = createNativeStackNavigator();
@@ -25,6 +26,7 @@ const Index = () => {
         {/* the "Main "screen below renders the bottom Nav which wraps the relevant pages it is included on */}
         <Stack.Screen name="Main" component={BottomNav}  />
         <Stack.Screen name="HowSealWorks" component={HowSealWorks}  />
+        <Stack.Screen name="Break" component={Break} />
         {/* Commented for testing, to enable camera feed uncomment this */}
         {/* <Stack.Screen name="WebCamFeed" component={WebCamFeed}  /> */}
 
