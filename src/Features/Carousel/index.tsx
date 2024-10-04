@@ -2,9 +2,13 @@ import {Animated, FlatList, View} from 'react-native';
 import React, {useRef, useState} from 'react';
 import SlideItem from './SlideItem';
 import Pagination from './Pagination';
-import styles from './defaultCSS';
+import {getStyles} from './defaultCSS';
+import {useFontContext} from '../../Contexts/FontContext';
 
-const Index = (props) => {
+const Index = props => {
+  const {selectedFontFamily, setSelectedFontFamily} = useFontContext();
+  const styles = getStyles(selectedFontFamily);
+
   const [index, setIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const {data} = props;

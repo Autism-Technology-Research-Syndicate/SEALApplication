@@ -1,24 +1,32 @@
-import { StyleSheet } from 'react-native';
-import styles from '../../Styles/defaultCSS';
+import {StyleSheet} from 'react-native';
+import {getStyles as getDefaultStyles} from '../../Styles/defaultCSS';
 
-const stylesheet = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+export const getStyles = (fontFamily: string) => {
+  const styles = getDefaultStyles(fontFamily);
+
+  const stylesheet = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
-    nav:{
+    nav: {
       backgroundColor: styles.VeryDarkDesaturatedBlue,
       highLight: styles.DarkModerateCyan,
-      inActive: styles.White
+      inActive: styles.White,
     },
-    icon:{
+    icon: {
       fontSize: 15,
       fontStyle: styles.textNormal.fontStyle,
-      color: styles.White
+      color: styles.White,
     },
-    middle: {position: 'absolute', top: '-50%', height: 70, width: 70, backgroundColor: '#29fd53'}
-
-});
-
-export default stylesheet;
+    middle: {
+      position: 'absolute',
+      top: '-50%',
+      height: 70,
+      width: 70,
+      backgroundColor: '#29fd53',
+    },
+  });
+  return stylesheet;
+};

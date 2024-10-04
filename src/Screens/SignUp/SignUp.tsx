@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Pressable, SafeAreaView, ScrollView, Text, View} from 'react-native';
-import {styles} from './defaultCSS';
+import {getStyles} from './defaultCSS';
 import {createTextBox} from '../../Components/InputBox/';
 import {createDropDown} from '../../Components/DropDownList/';
 import {labels, RegData} from '.';
@@ -11,10 +11,11 @@ import {
   validateAge,
   validateName,
 } from './validation';
+import {useFontContext} from '../../Contexts/FontContext';
 
 /**
  * SignUp component renders the registration form and handles user input and validation.
- * 
+ *
  * @returns {React.JSX.Element} The rendered Sign Up Screen
  */
 export const SignUp = () => {
@@ -36,6 +37,9 @@ export const SignUp = () => {
   const [validPass, setValidPass] = useState(true);
   const [validName, setValidName] = useState(true);
   const [validAge, setValidAge] = useState(true);
+
+  const {selectedFontFamily, setSelectedFontFamily} = useFontContext();
+  const styles = getStyles(selectedFontFamily);
 
   /**
    * Handles the form submission and validates inputs.

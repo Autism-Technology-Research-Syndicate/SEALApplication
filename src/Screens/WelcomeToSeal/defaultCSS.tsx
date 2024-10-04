@@ -1,35 +1,38 @@
-import { StyleSheet } from 'react-native';
-import styles from '../../Styles/defaultCSS';
+import {StyleSheet} from 'react-native';
+import {getStyles as getDefaultStyles} from '../../Styles/defaultCSS';
+import {FontFamilyType} from '../../Contexts/FontContext';
 
-const stylesheet = StyleSheet.create({
+export const getStyles = (fontFamily: FontFamilyType) => {
+  const styles = getDefaultStyles(fontFamily);
+  const stylesheet = StyleSheet.create({
     container: {...styles.container},
     body: {
-        alignSelf: 'center',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex: 2
+      alignSelf: 'center',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flex: 2,
     },
-    middle_section:{
-        rowGap: 30,
-        paddingTop: 15
+    middle_section: {
+      rowGap: 30,
+      paddingTop: 15,
     },
-    header:{
-        fontFamily: 'sans-serif-light',
-        color: styles.defaultColor,
-        fontSize: 40,
-        fontWeight: 'bold'
+    header: {
+      fontFamily: fontFamily.bold,
+      color: styles.defaultColor,
+      fontSize: 40,
     },
-    subheader:{
-        fontFamily: 'sans-serif-light',
-        color: styles.defaultColor,
-        fontSize: 30,
-        fontWeight: '100',
-        paddingBottom: 20,
-        paddingTop: 5
+    subheader: {
+      fontFamily: fontFamily.regular,
+      color: styles.defaultColor,
+      fontSize: 30,
+      paddingBottom: 20,
+      paddingTop: 5,
     },
-    bottom_section: { 
-        justifyContent: 'flex-end', 
-        rowGap: 20 
-    }
-});
-export default stylesheet;
+    bottom_section: {
+      justifyContent: 'flex-end',
+      rowGap: 20,
+    },
+  });
+
+  return stylesheet;
+};

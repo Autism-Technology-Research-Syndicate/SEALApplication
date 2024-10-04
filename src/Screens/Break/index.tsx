@@ -1,9 +1,12 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import BackgroundWrapper from '../../Components/BackgroundWrapper';
-import styles from './defaultCSS';
+import {getStyles} from './defaultCSS';
+import {useFontContext} from '../../Contexts/FontContext';
 
-const Index = ({ navigation }) => {
+const Index = ({navigation}) => {
+  const {selectedFontFamily, setSelectedFontFamily} = useFontContext();
+  const styles = getStyles(selectedFontFamily);
   return (
     <BackgroundWrapper>
       <View style={styles.container}>

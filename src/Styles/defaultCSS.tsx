@@ -1,6 +1,8 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
+import {FontFamilyType} from '../Contexts/FontContext';
 
-const colorRange = {
+export const getStyles = (fontFamily: FontFamilyType) => {
+  const colorRange = {
     VerySoftBlue: '#A9C0E8',
     DesaturatedDarkBlue: '#7386A9',
     DarkModerateBlue: '#4C6F9F',
@@ -11,50 +13,52 @@ const colorRange = {
     LightGrayishCyan: '#D2F9F9',
     VeryLightGray: '#f5f5f5',
     LightGrayishOrange: '#F9E2D2',
-};
+  };
 
-const background = {
-    colorList: Object.values(colorRange).slice(-4)
-}
+  const background = {
+    colorList: Object.values(colorRange).slice(-4),
+  };
 
-const stylesheet = StyleSheet.create({
+  const stylesheet = StyleSheet.create({
     container: {
-        height: '100%',
-        width: '100%',
-        rowGap: 10,
-        padding: 30,
+      height: '100%',
+      width: '100%',
+      rowGap: 10,
+      padding: 30,
     },
     ...colorRange,
     ...background,
     defaultColor: colorRange.VeryDarkDesaturatedBlue,
     defaultText: {
-        fontFamily: 'sans-serif-condensed',
-        color: colorRange.VeryDarkDesaturatedBlue,
+      fontFamily: fontFamily.regular,
+      color: colorRange.VeryDarkDesaturatedBlue,
     },
     textNormal: {
-        fontFamily: 'sans-serif',
-        color: colorRange.VeryDarkDesaturatedBlue,
-        fontSize: 20,
-        fontStyle: 'normal',
-
+      fontFamily: fontFamily.regular,
+      color: colorRange.VeryDarkDesaturatedBlue,
+      fontSize: 14,
+      fontStyle: 'normal',
+    },
+    textBold: {
+      fontFamily: fontFamily.bold,
+      color: colorRange.VeryDarkDesaturatedBlue,
+      fontSize: 14,
     },
     headerText: {
-        fontSize: 33,
-        fontWeight: 'bold',
-        fontFamily: 'sans-serif',
-        color: colorRange.VeryDarkDesaturatedBlue,
+      fontSize: 20,
+      fontFamily: fontFamily.bold,
+      color: colorRange.VeryDarkDesaturatedBlue,
     },
     subheaderText: {
-        fontSize: 22,
-        fontWeight: 'bold',
-        color: colorRange.VeryDarkDesaturatedBlue,
-        fontFamily: 'sans-serif',
+      fontSize: 15,
+      color: colorRange.VeryDarkDesaturatedBlue,
+      fontFamily: fontFamily.bold,
     },
     content: {
-        fontSize: 18,
-        fontFamily: 'sans-serif',
-        color: colorRange.VeryDarkDesaturatedBlue
-    }
-});
-
-export default stylesheet;
+      fontSize: 13,
+      fontFamily: fontFamily.regular,
+      color: colorRange.VeryDarkDesaturatedBlue,
+    },
+  });
+  return stylesheet;
+};
