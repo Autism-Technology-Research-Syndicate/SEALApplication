@@ -10,7 +10,7 @@ import Hello from '../../Assets/svg/hello.svg';
 import useBreakTimer from '../../Hooks/BreakTimer';
 
 const Index = ({ navigation }) => {
-  useBreakTimer(10 * 1000); // Set the timer interval in milliseconds
+  useBreakTimer(1000 * 1000); // Set the timer interval in milliseconds
 
   return (
     <BackgroundWrapper>
@@ -25,7 +25,7 @@ const Index = ({ navigation }) => {
         </View>
         <View style={styles.bottom_section}>
           <Button title='Learner login' onPress={() => navigation.navigate('Login')} />
-          <Button light title='Teacher login' />
+          <Button light title='Teacher login' onPress={() => navigation.navigate('Videos')}/>
         </View>
       </View>
     </BackgroundWrapper>

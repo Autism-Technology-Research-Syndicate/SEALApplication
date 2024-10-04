@@ -9,7 +9,9 @@ import AccountSignUp from '../AccountSignUp';
 import HowSealWorks from '../HowSEALWorks';
 import WebCamFeed from '../../Components/WebCamFeed';
 import Break from '../Break';
+import UploadVideo from '../UploadVideo';
 import BottomNav from '../../Features/BottomNavigation';
+import Videos from '../Videos';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,7 +31,8 @@ const Index = () => {
         <Stack.Screen name="Break" component={Break} />
         {/* Commented for testing, to enable camera feed uncomment this */}
         {/* <Stack.Screen name="WebCamFeed" component={WebCamFeed}  /> */}
-
+        <Stack.Screen name='Videos' component={Videos}/>
+        <Stack.Screen name='UploadVideo' component={UploadVideo}/>
       </Stack.Navigator>
   );
 };
