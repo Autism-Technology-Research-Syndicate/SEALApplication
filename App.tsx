@@ -17,6 +17,7 @@ import {
 import {NavigationContainer} from '@react-navigation/native';
 import Home from './src/Screens/Home/.';
 import DeveloperMode from './src/Screens/DeveloperMode';
+
 import {
   DeveloperModeProvider,
   useDeveloperMode,
@@ -58,6 +59,13 @@ const AppContent: React.FC = () => {
       <RootStack.Navigator screenOptions={{headerShown: false}}>
         <RootStack.Screen name="Stack" component={Home} />
       </RootStack.Navigator>
+
+      {/* Testing Curriculum Input Page */}
+      {/* <RootStack.Navigator screenOptions={{ headerShown: false }}>
+      {/* Temporarily set CurriculumInput as the initial screen */}
+          {/* <RootStack.Screen name="CurriculumInput" component={CurriculumInput} />
+          <RootStack.Screen name="Home" component={Home} />
+      </RootStack.Navigator> */}
 
       {/* Developer mode activation area (top-right corner) */}
       <TouchableWithoutFeedback onPress={openDeveloperMode}>

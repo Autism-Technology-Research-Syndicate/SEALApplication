@@ -269,6 +269,26 @@ const insertCurriculumData = (input_output, sequence, content) => {
 });
 };
 
+// Retrieve all rows from the curriculum table for testing
+const getAllCurriculumData = () => {
+  return new Promise((resolve, reject) => {
+      db.transaction(tx => {
+          tx.executeSql(
+              'SELECT * FROM curriculum',
+              [],
+              (_, result) => {
+                  resolve(result.rows.raw()); 
+              },
+              (tx, error) => {
+                  console.error('Error fetching all curriculum data:', error);
+                  reject(error);
+              }
+          );
+      });
+  });
+};
+
+
 const printCurriculumFirstRow = () => {
   return new Promise((resolve, reject) => {
   db.transaction(tx => {
@@ -745,6 +765,7 @@ export {
   updateUser,
   deleteUser,
   printCurriculumFirstRow,
+  getAllCurriculumData,
   insertCurriculumData,
   insertAchievement,
   updateAchievement,
