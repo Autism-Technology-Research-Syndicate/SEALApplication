@@ -23,7 +23,7 @@
     "npm": "^10.8.2",
     "pod-install": "^0.2.2",
     "react": "18.2.0",
-    "react-native": "^0.74.3",
+    "react-native": "^0.74.5",
     "react-native-camera": "^4.2.1",
     "react-native-dropdown-picker": "^5.4.6",
     "react-native-elements": "^3.4.3",
