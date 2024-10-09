@@ -1,20 +1,20 @@
-import { ImageBackground, Text, View } from 'react-native';
-import Button from '../../Components/Button/.';
+import { View, ScrollView } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import styles from './defaultCSS';
 
-const image = require('../../Assets/images/backgroundImage.png');
-
-const index = ({ children }) => {
+const Index = ({ children }) => {
     return (
-        <View style={styles.container}>
-            <ImageBackground source={image} resizeMode="repeat" style={styles.image}>
-                <View>
-                {children}
-                </View >
-            </ImageBackground>
-        </View>
-
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+            <View style={styles.container}>
+                <LinearGradient style={styles.background} useAngle={true} angle={45} angleCenter={{ x: 0.5, y: 0.35 }} end={{ x: 1, y: 0 }} colors={styles.background.colorList}>
+                    <View>
+                        {children}
+                    </View>
+                </LinearGradient>
+            </View>
+        </ScrollView>
     );
 };
 
-export default index;
+
+export default Index;

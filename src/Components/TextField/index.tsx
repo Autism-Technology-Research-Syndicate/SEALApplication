@@ -1,23 +1,32 @@
 import React from 'react';
-import { TextInput,View } from 'react-native';
-import { Icon } from 'react-native-elements'
+import { TextInput } from 'react-native-paper';
 import styles from './defaultCSS';
 
 type props = {
   password: boolean;
 };
 
-function index(props) {
+function Index(props) {
   const [text, onChangeText] = React.useState('');
+  const {label = 'Heeelo', placeholder='', icon = "" } = props;
+  const isPassword = props.validationType === "password"
+
   return (
     <TextInput
-      style={styles.input}
-      onChangeText={onChangeText}
-      placeholder={props.placeholder}
-      value={text}
-    />
+    mode="outlined"
+    outlineStyle={styles.input}
+    contentStyle={styles.placeholder}
+    style={styles.placeholder}
+    outlineColor={styles.placeholder.color}
+    label={label}
+    value={text}
+    placeholder={placeholder}
+    onChangeText={onChangeText}
+    secureTextEntry= {isPassword}
+    right={isPassword ? <TextInput.Icon icon="eye" /> : ''}
+  />
 
   );
 };
 
-export default index;
+export default Index;

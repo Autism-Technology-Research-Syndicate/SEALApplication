@@ -10,6 +10,11 @@ const stylesheet = StyleSheet.create({
         padding: 10,
         gap: 15
       , ...styles.border},
+      placeholder: {
+        color: '#305070',
+        fontSize: styles.textNormal.fontSize,
+      },
+      backgroundColor: {backgroundColor: 'black'}
 });
 
 export default stylesheet;

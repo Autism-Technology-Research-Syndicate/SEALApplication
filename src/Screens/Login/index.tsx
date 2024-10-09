@@ -6,35 +6,38 @@ import TextField from '../../Components/TextField/.';
 import Text from '../../Components/Text/.';
 import styles from './defaultCSS';
 
-const index = ({ navigation }) => {
+const Index = ({ navigation }) => {
   return (
     <BackgroundWrapper>
       <View style={styles.container}>
 
-        <View style={styles.section}>
-          <TextField placeholder="username" />
-          <TextField placeholder="password" />
-        </View>
-        <LinkButton title='Forget password?' style={{textAlign: 'right'}} onPress={() => navigation.navigate('Welcome')}  />
+        <View style={styles.body}>
+          <View style={styles.upper_body}>
+            <TextField placeholder="Please enter username" label="username" />
+            <TextField placeholder="Please enter password" label="password" validationType="password"  />
+            <LinkButton title='Forgot password?' style={{flexDirection: 'row-reverse' }} onPress={() => navigation.navigate('Welcome')} />
+          </View>
+          <View style={styles.bottom_body}>
+            {/* renders the Bottomnav which in turn renders pages once logged in. defaults to the personal page */}
+          <Button title='Submit' onPress={() => navigation.navigate('Main')} />
 
-        <View style={styles.section}>
-          <Button title='Submit' onPress={() => navigation.navigate('Personal')} />
+          <View style={styles.middle_body}>
           <Button title='Test: Settings' onPress={() => navigation.navigate('Settings')} />
-          <Button title='Learner login' onPress={() => navigation.navigate('Login')} />
-
-
-          <Text  style={{textAlign: 'center'}}>
+          <Text style={{ textAlign: 'center' }}>
             Dont' have an account?
           </Text>
-          <LinkButton title='Sign up' style={{textAlign: 'center'}} onPress={() => navigation.navigate('Welcome')} />
+          <LinkButton title='Sign up' style={{ textAlign: 'center' }} onPress={() => navigation.navigate('AccountSignUp')} />
+          </View>
+          </View>
+        </View>
+        <View>
 
-          <Button light title='How SEAL works...' />
+          <Button light title='How SEAL works...'  onPress={() => navigation.navigate('HowSealWorks')} />
+
         </View>
       </View>
     </BackgroundWrapper>
   );
 };
 
-export default index;
-
-
+export default Index;

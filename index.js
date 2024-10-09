@@ -7,54 +7,36 @@ import App from './App';
 import {name as appName} from './app.json';
 import {
   initializeDatabase,
-  insertImageData,
-  getImageData,
-  updateImageData,
-  deleteImageData,
-  printFirstRow,
-  insertCurriculumData,
-  printCurriculumFirstRow
+  testDb,
 } from './Database/dbInitialization';
 
 import { exportDatabase, shareDatabase } from './Database/dbExport';
+import { getSlopeDataFromDB } from './Database/dbUtilities';
+// import { getUsers } from './dbTesting.cjs';
 
 AppRegistry.registerComponent(appName, () => App);
+console.log("in index.js");
 
 const setupDatabase = async () => {
   try {
-    initializeDatabase();
-
-    await insertImageData('test_base64_string', 1, 2);
-
-    await printFirstRow();
-
-    await insertCurriculumData(0, 5, "Testing curriculum");
-
-    await printCurriculumFirstRow();
-
-    const allData = await getImageData();
-    console.log('All data:', allData);
-
-    if (allData.length > 0) {
-      await updateImageData('updated_base64_string', allData[0].id);
-    }
-
+    await initializeDatabase();
     console.log('Database setup completed');
+    // uncomment to test the database
+    // await testDb();
   } catch (error) {
     console.error('Error setting up database:', error);
   }
 };
 
 setupDatabase();
-// if want to export the database
-//  .then(() => {
-//    console.log('### Database setup completed');
-//    return exportDatabase();
-//  })
-//  .then((exportPath) => {
-//    console.log('### Database export completed');
-//    return shareDatabase(exportPath);
-//  })
-//  .catch((error) => {
-//    console.error('### Error:', error);
-//  });
+
+// uncomment to export the database
+//.then(() => {
+//  console.log('### Database setup completed');
+//  return exportDatabase();
+//}).then((exportPath) => {
+//  console.log('### Database export completed');
+//  return shareDatabase(exportPath); // //"/data/data/com.sealapplication7/databases/mydatabase.db"
+//}).catch((error) => {
+//  console.error('### Error:', error);
+//});

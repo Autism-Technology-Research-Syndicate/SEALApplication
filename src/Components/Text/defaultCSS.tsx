@@ -8,7 +8,7 @@ const stylesheet = StyleSheet.create({
         fontSize: styles.textNormal.fontSize,
         fontStyle: styles.textNormal.fontStyle,
         fontWeight: 'normal',
-        color: styles.textNormal.color
+        color: styles.defaultColor
     },
 });
 
