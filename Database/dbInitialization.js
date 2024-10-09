@@ -40,7 +40,7 @@ const initializeDatabase = () => {
 
   db.transaction(tx => {
     tx.executeSql(
-      `CREATE TABLE IF NOT EXISTS users (
+      `CREATE TABLE IF NOT EXISTS Users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
         picture TEXT,
@@ -54,39 +54,98 @@ const initializeDatabase = () => {
       )`,
       [],
       () => {
-        console.log('users Table created successfully - in dbInitialization.');
+        console.log('users Table created successfuly - in dbInitialization.');
       },
       (_, error) => {
         console.error('Error creating table', error);
       },
     );
-  });
 
-  db.transaction(tx => {
     tx.executeSql(
-      `CREATE TABLE IF NOT EXISTS users (
+      `CREATE TABLE IF NOT EXISTS UserSettingsv3 (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
-        picture TEXT,
-        estimatedAttentionSpan INTEGER,
-        levelOfSpectrum INTEGER,
-        settingsChoices TEXT,
-        progressInCurriculum INTEGER,
-        averageAccuracy INTEGER,
-        description TEXT,
-        necessaryBreakTime INTEGER
+        userId INTEGER,
+        featureA INTEGER DEFAULT 1 CHECK(featureA BETWEEN 0 AND 1),
+        featureB INTEGER DEFAULT 1 CHECK(featureB BETWEEN 0 AND 1),
+        featureC INTEGER DEFAULT 1 CHECK(featureC BETWEEN 0 AND 1),
+        featureD INTEGER DEFAULT 1 CHECK(featureD BETWEEN 0 AND 1),
+        featureE INTEGER DEFAULT 1 CHECK(featureE BETWEEN 0 AND 1),
+        featureF INTEGER DEFAULT 1 CHECK(featureF BETWEEN 0 AND 1),
+        featureG INTEGER DEFAULT 1 CHECK(featureG BETWEEN 0 AND 1),
+        featureH INTEGER DEFAULT 1 CHECK(featureH BETWEEN 0 AND 1),
+        FOREIGN KEY (userId) REFERENCES Users(id)
+       
+        
       )`,
       [],
       () => {
-        console.log('users Table created successfully - in dbInitialization.');
+        console.log('usersettingsv3 Table created successfully - in dbInitialization.');
       },
+      
       (_, error) => {
-        console.error('Error creating table', error);
+        console.error('Error creating UserSettingsv3 table or exists or or or or or', error);
       },
     );
-  });
+    
+    tx.executeSql(`
+    CREATE TRIGGER IF NOT EXISTS create_default_settings
+    AFTER INSERT ON Users
+    BEGIN
+        INSERT INTO UserSettingsv3 (userId)
+        VALUES (NEW.id);
+
+    END;
+`,
+      [],
+      () => {
+        console.log('users trigger created successfuly - in dbInitialization.');
+      },
+      (_, error) => {
+        console.error('Error creating trigger', error);
+      },
+);
+});
+
+  // db.transaction(tx => {
+  //   tx.executeSql(
+  //     `CREATE TABLE IF NOT EXISTS Users (
+  //       id INTEGER PRIMARY KEY AUTOINCREMENT,
+  //       name TEXT,
+  //       picture TEXT,
+  //       estimatedAttentionSpan INTEGER,
+  //       levelOfSpectrum INTEGER,
+  //       settingsChoices TEXT,
+  //       progressInCurriculum INTEGER,
+  //       averageAccuracy INTEGER,
+  //       description TEXT,
+  //       necessaryBreakTime INTEGER
+  //     )`,
+  //     [],
+  //     () => {
+  //       console.log('users Table created successfully - in dbInitialization.');
+  //     },
+  //     (_, error) => {
+  //       console.error('Error creating table', error);
+  //     },
+  //   );
+  // });
 };
 
+
+function dropTrigger(triggerName) {
+  db.transaction(tx => {
+      tx.executeSql(
+          `DROP TRIGGER IF EXISTS ${triggerName};`,
+          [],
+          () => {
+              console.log(`Trigger '${triggerName}' dropped successfully.`);
+          },
+          error => {
+              console.error(`Error dropping trigger '${triggerName}':`, error);
+          }
+      );
+  });
+}
 // Insert a new row into the imgdp table
 const insertImageData = (b64str, input, output) => {
   db.transaction(tx => {
@@ -94,7 +153,7 @@ const insertImageData = (b64str, input, output) => {
       'INSERT INTO imgdp (b64str, input, output) VALUES (?, ?, ?)',
       [b64str, input, output],
       (_, result) => { console.log(`A row has been inserted with rowid ${result.insertId}`); },
-      (tx, error) => { console.error('Error inserting data', error); }
+      (tx, error) => { console.error('Error inseting data', error); }
     );
   });
 };
@@ -198,7 +257,7 @@ const insertUser = (
   db.transaction(
     tx => {
       tx.executeSql(
-        'INSERT INTO users (name, picture, estimatedAttentionSpan, levelOfSpectrum, settingsChoices, progressInCurriculum, averageAccuracy, description, necessaryBreakTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        'INSERT INTO Users (name, picture, estimatedAttentionSpan, levelOfSpectrum, settingsChoices, progressInCurriculum, averageAccuracy, description, necessaryBreakTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [
           name,
           picture,
@@ -219,6 +278,11 @@ const insertUser = (
           console.error('Error inserting user data', error.message);
         },
       );
+    //   tx.executeSql(`
+    //   INSERT INTO UserSettings (insertId)
+    //   VALUES (?);
+    // `, [userId]);
+
     },
     error => {
       console.error('Transaction error:', error.message); //
@@ -230,11 +294,12 @@ const insertUser = (
 };
 
 // Retrieve all rows from the users table
+
 const getUsers = () => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
-        'SELECT * FROM users',
+        `SELECT * FROM Users`,
         [],
         (_, result) => { resolve(result.rows.raw()); },
         (_, error) => { reject(error); }
@@ -242,6 +307,179 @@ const getUsers = () => {
     });
   });
 };
+
+//Create Settings Tablee in db
+// const createSettingsTable = () => {
+//   db.transaction(tx => {
+//     tx.executeSql(
+//       `CREATE TABLE IF NOT EXISTS UserSettings (
+//         id INTEGER PRIMARY KEY AUTOINCREMENT,
+//         featureA NUMBER DEFAULT 1,
+//         featureB NUMBER DEFUALT 1,
+//         featureC NUMBER DEFUALT 1,
+//         featureD NUMBER DEFAULT 1,
+//         featureE NUMBER DEFAULT 1, 
+//         featureF NUMBER DEFAULT 1,
+//         featureG NUMBER DEFAULT 1,
+//         featureH NUMBER DEFAULT 1,
+      
+//       )`,
+//       [],
+//       () => {
+//         console.log('Settings Table created successfully - in dbInitialization.');
+//       },
+      
+//       (_, error) => {
+//         console.error('Error creating table or exists', error);
+//       },
+//     );
+//   });
+// };
+
+// Function to update user settings
+
+const dropTable = (tableName) => {
+  db.transaction(tx => {
+    tx.executeSql(
+      `DROP TABLE IF EXISTS ${tableName}`,
+      [],
+      (tx, results) => {
+        console.log(`Table ${tableName} dropped successfully.`);
+      },
+      (tx, error) => {
+        console.error(`Error dropping table ${tableName}:`, error);
+      }
+    );
+  });
+};
+
+// Call the function with the table name you want to drop
+// dropTable('UserSettings');
+
+
+// is this chaning the true and false into 1 and zero 
+
+const updateUserSettings = (userId, settings) => {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        `UPDATE UserSettingsv3 SET
+        featureA = ?,
+        featureB = ?,
+        featureC = ?,
+        featureD = ?,
+        featureE = ?,
+        featureF = ?,
+        featureG = ?,
+        featureH = ?
+        WHERE userId = ?`,
+        [
+          settings.featureA ? 1 : 0,
+          settings.featureB ? 1 : 0,
+          settings.featureC ? 1 : 0,
+          settings.featureD ? 1 : 0,
+          settings.featureE ? 1 : 0,
+          settings.featureF ? 1 : 0,
+          settings.featureG ? 1 : 0,
+          settings.featureH ? 1 : 0,
+          userId
+        ],
+        (_, result) => {
+          resolve(result);
+        },
+        (_, error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+};
+
+
+const updateUserSettings2 = (userId, settings) => {
+
+  const booleanToInteger = value => (value === true ? 1 : 0);
+
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(`
+        INSERT INTO UserSettingsv3 (userId, featureA, featureB, featureC, featureD, featureE, featureF, featureG, featureH)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT(userId) DO UPDATE SET
+          featureA=excluded.featureA,
+          featureB=excluded.featureB,
+          featureC=excluded.featureC,
+          featureD=excluded.featureD,
+          featureE=excluded.featureE,
+          featureF=excluded.featureF,
+          featureG=excluded.featureG,
+          featureH=excluded.featureH
+      `, [
+        userId,
+        booleanToInteger(settings.featureA),
+        booleanToInteger(settings.featureB),
+        booleanToInteger(settings.featureC),
+        booleanToInteger(settings.featureD),
+        booleanToInteger(settings.featureE),
+        booleanToInteger(settings.featureF),
+        booleanToInteger(settings.featureG),
+        booleanToInteger(settings.featureH)
+      ], (tx, results) => {
+        resolve(results);
+      }, (tx, error) => {
+        reject(error);
+      });
+    });
+  });
+};
+
+
+// Function to retrieve user settings
+const getUserSettings=(userId)=> {
+  return new Promise((resolve, reject) => {
+      db.transaction(tx => {
+          tx.executeSql(
+              `SELECT * FROM UserSettingsv3 WHERE userId = ?;`,
+              [userId],
+              (tx, results) => {
+                  const rows = results.rows;
+                  let userSettings = [];
+                  for (let i = 0; i < rows.length; i++) {
+                      userSettings.push(rows.item(i));
+                  }
+                  resolve(userSettings); // Resolve the promise with the user settings
+              },
+              error => {
+                  reject(error); // Reject the promise with an error
+              }
+          );
+      });
+  });
+}
+
+const getAllUserSettings = () => {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        `SELECT * FROM UserSettingsv3`,
+        [],
+        (_, result) => { resolve(result.rows.raw()); },
+        (_, error) => { reject(error); }
+      );
+    });
+  });
+};
+
+
+
+
+  
+
+
+
+
+
+
 
 // Create the table in the db for the input, output, score called Combos
 const createCombosTable = () => {
@@ -326,6 +564,12 @@ const getBestComboData= () => {
 
 // Export functions
 export {
+  // createSettingsTable,
+  dropTable,
+  updateUserSettings,
+  getUserSettings,
+  getAllUserSettings,
+
   createCombosTable,
   insertComboData,
   updateComboData,
@@ -342,4 +586,5 @@ export {
   getUsers,
   printCurriculumFirstRow,
   insertCurriculumData,
+  dropTrigger
 };

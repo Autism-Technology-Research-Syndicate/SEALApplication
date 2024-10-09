@@ -19,6 +19,9 @@ const index = ({ navigation }) => {
 
         <View style={styles.section}>
           <Button title='Submit' onPress={() => navigation.navigate('Personal')} />
+          <Button title='Test: Settings' onPress={() => navigation.navigate('Settings')} />
+          <Button title='Learner login' onPress={() => navigation.navigate('Login')} />
+
 
           <Text  style={{textAlign: 'center'}}>
             Dont' have an account?
