@@ -36,43 +36,30 @@ import { dropTable } from '/Users/josereyes/Desktop/seals/project1/SEALApplicati
 import { getUserSettings } from '/Users/josereyes/Desktop/seals/project1/SEALApplication/Database/dbInitialization.js';
 import{ dropTrigger } from '/Users/josereyes/Desktop/seals/project1/SEALApplication/Database/dbInitialization.js';
 import{getAllUserSettings} from '/Users/josereyes/Desktop/seals/project1/SEALApplication/Database/dbInitialization.js';
-import { useNotification } from './useNotification';
+import { useNotification } from '../../Features/useNotification';
 
 
 
-
-// const resetToDefaultSettings = () => {
-//   // Reset settings to default values
-//   setSettings(defaultSettings);
-  
-//   // Save the default settings to the backend
-//   updateUserSettings(userId, defaultSettings)
-//     .then(results => {
-//       Alert.alert('Settings reverted to default successfully!');
-//     })
-//     .catch(error => {
-//       console.error('Error reverting settings to default:', error);
-//       Alert.alert('Failed to revert settings to default.');
-//     });
-// };
 const index = ({ navigation }) => {
 
-  // this is so cool the way its typed to be used
-  const  {
+  const {
     displayNotification,
     displayTriggerNotification,
     getTriggerNotificationIds,
     cancelTriggerNotifications,
     cancelAllNotifications,
+    openNotificationSettings
   } = useNotification();
 
   const handleDisplayNotification = () => { 
     displayNotification('Hello', 'This is a notification');
   }
-  const handleDisplayTriggerNotification = () => {
-    const timestamp = Date.now() + 5000;
-    displayTriggerNotification('Hello', 'This is a scheduled notification', timestamp);
+
+  const handleCancelAllTriggerNotifications = () => {
+    cancelAllNotifications();
   }
+
+    //The settings features can be changed to the acually features
   type Settings = {
     featureA: boolean;
     featureB: boolean;
@@ -92,45 +79,36 @@ const index = ({ navigation }) => {
     featureE: false,
     featureF: false,
     featureG: false,
-    featureH: true,
+    featureH: false,
   };
+
   const [settings, setSettings] = useState<Settings>(defaultSettings);
   
- 
-  // Call the function with the table name you want to drop
- // first need to create a use - it creates the join with each user being created with a trigger and default values
-  const getSettings = () => {
-    // dropTable('Users');
-    // dropTable('UserSettingsv3');
 
-    // dropTrigger('create_default_settings');
-    insertUser('yes', 'yes', 1, 1, 'yes', 1, 1, 'yes', 1)
+  //can run this to insert a user into the database 
+  // const getSettings = () => {
+  //   //this is to check the update settings did work 
+  //   // dropTable('Users');
+  //   // dropTable('UserSettingsv3');
+
+  //   // dropTrigger('create_default_settings');
+  //   insertUser('yes', 'yes', 1, 1, 'yes', 1, 1, 'yes', 1)
 
     
-    getAllUserSettings()
-    .then(results => {
-      console.log('Users:', results);
-    })
-    .catch(error => {
-      console.error('Error with getting user :', error);
+  //   getAllUserSettings()
+  //   .then(results => {
+  //     console.log('Users:', results);
+  //   })
+  //   .catch(error => {
+  //     console.error('Error with getting user :', error);
       
-    });
+  //   });
 
-    // updateUserSettings('1', settings)
-    // .then(results => {
-    //   Alert.alert('Settings saved successfully!');
-    // })
-    // .catch(error => {
-    //   console.error('Error saving settings:', error);
-    //   console.error('Error saving settings:', settings);
-    //   Alert.alert('Failed to save settings.');
-    // });
-};
+
+  // };
 
   const saveSettings = () => {
-
-// in the consolge log ---- theres a state issue thats making the results delayed by one state version
-
+    //Update the settings in the database based on of userid and settings object
     updateUserSettings(1, settings)
     .then(results => {
       Alert.alert('Settings saved successfully!');
@@ -140,7 +118,7 @@ const index = ({ navigation }) => {
       console.error('Error saving settings:', settings);
       Alert.alert('Failed to save settings.');
     });
-
+    //get user settigns based on userid - this is to check user settings did update
     getUserSettings(1)
     .then(results => {
       console.log('Users:', results);
@@ -150,144 +128,54 @@ const index = ({ navigation }) => {
       
     });
 
-};
+  };
+//this is state for making the features false or true that will be sent to the database 
+  const [enable,setEnable] = useState(false);
 
-const handleToggleSwitch = (feature: keyof Settings): boolean => {
-  setSettings(prevSettings => ({
-    ...prevSettings,
-    [feature]: !prevSettings[feature],
-  }));
-  console.log(`settings[${feature}]`, settings[feature]);
-  console.log(`settings`, settings);
-  return !settings[feature];
-};
-// const handleToggleSwitch = (feature: keyof Settings) => {
-//   setSettings(prevSettings => ({
-//     ...prevSettings,
-//     [feature]: prevSettings[feature] ? 0 : 1,
-//   }));
-
-//   console.log(`settings[${feature}]`, settings[feature]);
-//   console.log(`settings`, settings);
-// };
-
-  
-  
-  // return (
-  //   <BackgroundWrapper>
-  //     <View style={styles.container}>
-
-  //       <View style={styles.section}>
-  //         <Text>Settings</Text>
-  //         <Text>Enable Feature A:</Text>
-  //           <Switch 
-  //           onValueChange={() => handleToggleSwitch('featureA')}
-  //           value={settings.featureA}
-  //           />
-            
-
-  //       </View>
-      
-
-  //       <View style={styles.section}>
-  //         {/* <Button title='Submit Settings' onPress={saveSettings} />
-  //         <Button title='Reset Settings' onPress={resetToDefaultSettings} /> */}
-  //         <Button title='Reset Settings'  />
+  const handleToggleSwitch = (feature: keyof Settings): boolean => {
+    setSettings(prevSettings => ({
+      ...prevSettings,
+      [feature]: !prevSettings[feature],
+    }));
+    console.log(`settings[${feature}]`, settings[feature]);
+    console.log(`settings`, settings);
+    return !settings[feature];
+  };
 
 
-  //         <Text  style={{textAlign: 'center'}}>
-  //           Dont' have an account?
-  //         </Text>
-  //         {/* <LinkButton title='Sign up' style={{textAlign: 'center'}} onPress={() => navigation.navigate('Welcome')} /> */}
-
-  //         <Button light title='How SEAL works...' />
-  //       </View>
-  //     </View>
-  //   </BackgroundWrapper>
-  // );
-  const [isDarkMode,setIsDarkMode] = useState(false);
 
   return (
-
-
-    
-      <ScrollView
-        scrollEnabled={true}
-        contentInsetAdjustmentBehavior='automatic'
-      >
-
-<View style={styles.container}>
-
-<View style={styles.section}>
-
-
-    
-
-<TouchableOpacity onPress={() => navigation.navigate('Login')}
-        style={{
-          zIndex: 1,
-          width: 34,
-          height: 34,
-
-        }}
-         >
-
-          <Image
+    <ScrollView
+      scrollEnabled={true}
+      contentInsetAdjustmentBehavior='automatic'
+    >
+      <View style={styles.container}>
+        <View style={styles.section}>
+          <TouchableOpacity onPress={() => navigation.navigate('Main')}
             style={{
-              width: 24,
-              height: 24,
-              position: 'relative',
-              overflow: 'hidden',
-              zIndex: 6,
-              marginTop: 48,
-              marginRight: 0,
-              marginBottom: 0,
-              marginLeft: 18,
-              
+              zIndex: 1,
+              width: 34,
+              height: 34,
             }}
-            source={require('./assets/images/0193bb55-aa6d-4cd6-88f5-58443b74afd2.png')}
-            resizeMode='cover'
-          />
-          
-
-       
-         {/* <View
-          style={{
-            width: 360,
-            height: 640,
-            backgroundColor: '#f4f5f5',
-            position: 'relative',
-            overflow: 'hidden',
-            marginTop: 0,
-            marginRight: 'auto',
-            marginBottom: 0,
-            marginLeft: 'auto',
-          }}
-        >
-       
-            </View> */}
-        
-
-
-
-          <Image
-            style={{
-              width: 24,
-              height: 24,
-              position: 'relative',
-              overflow: 'hidden',
-              zIndex: 6,
-              marginTop: 48,
-              marginRight: 0,
-              marginBottom: 0,
-              marginLeft: 18,
-
-            }}
-            source={require('./assets/images/0193bb55-aa6d-4cd6-88f5-58443b74afd2.png')}
-            resizeMode='cover'
-          />
-            </TouchableOpacity>
-          
+          >
+            <Image
+              style={{
+                width: 24,
+                height: 24,
+                position: 'relative',
+                overflow: 'hidden',
+                zIndex: 6,
+                marginTop: 48,
+                marginRight: 0,
+                marginBottom: 0,
+                marginLeft: 18,
+                
+              }}
+              source={require('./assets/images/0193bb55-aa6d-4cd6-88f5-58443b74afd2.png')}
+              resizeMode='cover'
+            />
+          </TouchableOpacity>
+          {/* this is the start of the settings toggle view box */}
           <ImageBackground
             style={{
               width: 133,
@@ -338,7 +226,6 @@ const handleToggleSwitch = (feature: keyof Settings): boolean => {
             }}
             numberOfLines={1}
           >
-            Profile
           </Text>
           <ImageBackground
             style={{
@@ -362,7 +249,6 @@ const handleToggleSwitch = (feature: keyof Settings): boolean => {
             }}
             source={require('./assets/images/c7c6d0dd-1aeb-4479-bfc8-d6cea24633b4.png')}
           />
-       
           <Text
             style={{
               display: 'flex',
@@ -383,7 +269,6 @@ const handleToggleSwitch = (feature: keyof Settings): boolean => {
               zIndex: 1,
             }}
           >
-           
            
             Settings
           </Text>
@@ -437,15 +322,13 @@ const handleToggleSwitch = (feature: keyof Settings): boolean => {
               zIndex: 29,
             }}
           >
-              
-              <Switch
 
-                value={settings.featureA}
-                onValueChange={()=>handleToggleSwitch('featureA')}
-                thumbColor={settings.featureA ? '#305070' : '#ffffff'} // corrected color
-              />
+            <Switch
+              value={settings.featureA}
+              onValueChange={()=>handleToggleSwitch('featureA')}
+              thumbColor={settings.featureA ? '#305070' : '#ffffff'} // corrected color
+            />
 
-               
             <View
               style={{
                 width: 16,
@@ -454,29 +337,10 @@ const handleToggleSwitch = (feature: keyof Settings): boolean => {
                 position: 'relative',
                 zIndex: 30,
               }}
-            >
+            />
             
-              {/* <View
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  backgroundColor: '#9eacae',
-                  borderTopLeftRadius: 999,
-                  borderTopRightRadius: 999,
-                  borderBottomRightRadius: 999,
-                  borderBottomLeftRadius: 999,
-                  borderWidth: 1,
-                  borderColor: '#9eacae',
-                  borderStyle: 'solid',
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  overflow: 'hidden',
-                  zIndex: 31,
-                }}
-              /> */}
-            </View>
           </View>
+
           <ImageBackground
             style={{
               width: 297,
@@ -511,12 +375,12 @@ const handleToggleSwitch = (feature: keyof Settings): boolean => {
               zIndex: 32,
             }}
           >
-                 
-                 <Switch
-                  value={settings.featureB}
-                  onValueChange={()=>handleToggleSwitch('featureB')}
-                  thumbColor={settings.featureB ? '#305070' : '#ffffff'} // corrected color
-                />
+              
+              <Switch
+              value={settings.featureB}
+              onValueChange={()=>handleToggleSwitch('featureB')}
+              thumbColor={settings.featureB ? '#305070' : '#ffffff'} // corrected color
+            />
 
                
             <View
@@ -527,28 +391,12 @@ const handleToggleSwitch = (feature: keyof Settings): boolean => {
                 position: 'relative',
                 zIndex: 33,
               }}
-            >
-              {/* <View
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  backgroundColor: '#9eacae',
-                  borderTopLeftRadius: 999,
-                  borderTopRightRadius: 999,
-                  borderBottomRightRadius: 999,
-                  borderBottomLeftRadius: 999,
-                  borderWidth: 1,
-                  borderColor: '#9eacae',
-                  borderStyle: 'solid',
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  overflow: 'hidden',
-                  zIndex: 34,
-                }}
-              /> */}
-            </View>
+            />
+             
+
+
           </View>
+
           <ImageBackground
             style={{
               width: 297,
@@ -584,11 +432,11 @@ const handleToggleSwitch = (feature: keyof Settings): boolean => {
               zIndex: 35,
             }}
           >
-                <Switch
-                  value={settings.featureC}
-                  onValueChange={()=>handleToggleSwitch('featureC')}
-                  thumbColor={settings.featureC ? '#305070' : '#ffffff'} // corrected color
-                />
+            <Switch
+              value={settings.featureC}
+              onValueChange={()=>handleToggleSwitch('featureC')}
+              thumbColor={settings.featureC ? '#305070' : '#ffffff'} // corrected color
+            />
 
             <View
               style={{
@@ -598,10 +446,11 @@ const handleToggleSwitch = (feature: keyof Settings): boolean => {
                 position: 'relative',
                 zIndex: 36,
               }}
-            >
+            />
               
-            </View>
+
           </View>
+
           <ImageBackground
             style={{
               width: 297,
@@ -637,11 +486,11 @@ const handleToggleSwitch = (feature: keyof Settings): boolean => {
               zIndex: 26,
             }}
           >
-              <Switch
-                  value={settings.featureD}
-                  onValueChange={()=>handleToggleSwitch('featureD')}
-                  thumbColor={settings.featureD ? '#305070' : '#ffffff'} // corrected color
-                />
+            <Switch
+                value={settings.featureD}
+                onValueChange={()=>handleToggleSwitch('featureD')}
+                thumbColor={settings.featureD ? '#305070' : '#ffffff'} // corrected color
+              />
 
             <View
               style={{
@@ -651,10 +500,11 @@ const handleToggleSwitch = (feature: keyof Settings): boolean => {
                 position: 'relative',
                 zIndex: 27,
               }}
-            >
+            />
               
-            </View>
+
           </View>
+
           <ImageBackground
             style={{
               width: 297,
@@ -705,11 +555,12 @@ const handleToggleSwitch = (feature: keyof Settings): boolean => {
                 position: 'relative',
                 zIndex: 24,
               }}
-            >
+            />
               
               
-            </View>
+
           </View>
+
           <ImageBackground
             style={{
               width: 297,
@@ -746,11 +597,11 @@ const handleToggleSwitch = (feature: keyof Settings): boolean => {
               zIndex: 20,
             }}
           >
-              <Switch
-                  value={settings.featureF}
-                  onValueChange={()=>handleToggleSwitch('featureF')}
-                  thumbColor={settings.featureF ? '#305070' : '#ffffff'} // corrected color
-                />
+            <Switch
+                value={settings.featureF}
+                onValueChange={()=>handleToggleSwitch('featureF')}
+                thumbColor={settings.featureF ? '#305070' : '#ffffff'} // corrected color
+              />
 
             <View
               style={{
@@ -760,10 +611,11 @@ const handleToggleSwitch = (feature: keyof Settings): boolean => {
                 position: 'relative',
                 zIndex: 21,
               }}
-            >
+            />
               
-            </View>
+
           </View>
+
           <ImageBackground
             style={{
               width: 297,
@@ -837,11 +689,11 @@ const handleToggleSwitch = (feature: keyof Settings): boolean => {
               zIndex: 17,
             }}
           >
-              <Switch
-                  value={settings.featureG}
-                  onValueChange={()=>handleToggleSwitch('featureG')}
-                  thumbColor={settings.featureG ? '#305070' : '#ffffff'} // corrected color
-                />
+            <Switch
+                value={settings.featureG}
+                onValueChange={()=>handleToggleSwitch('featureG')}
+                thumbColor={settings.featureG ? '#305070' : '#ffffff'} // corrected color
+            />
 
             <View
               style={{
@@ -851,14 +703,17 @@ const handleToggleSwitch = (feature: keyof Settings): boolean => {
                 position: 'relative',
                 zIndex: 18,
               }}
-            >
+            />
               
-            </View>
-            
-               </View>
+          </View>
+
+          {/* test for notifications */}
            <Button title='Save Settings' onPress={saveSettings} /> 
-           <Button title='display notification ' onPress={handleDisplayNotification} /> 
-           <Button title='trigger notification ' onPress={handleDisplayTriggerNotification} /> 
+
+           {/* testing the notifications */}
+           {/* <Button title='display notification ' onPress={handleDisplayNotification} /> 
+           <Button title='cancel all notifications ' onPress={handleCancelAllTriggerNotifications} /> 
+           <Button title='go to device settings ' onPress = {openNotificationSettings} /> */}
 
 
            
@@ -876,13 +731,10 @@ const handleToggleSwitch = (feature: keyof Settings): boolean => {
             source={require('./assets/images/a9628dcf-1c7c-4d22-9248-8f80e9d21a53.png')}
             resizeMode='cover'
           />
-        {/* </View> */}
-     {/* </SafeAreaView>  */}
+      
+      </View>
      </View>
-     </View>
-     </ScrollView>
-
-
+    </ScrollView>
 
   );
 }

@@ -1,12 +1,12 @@
 import notifee, { TimestampTrigger, TriggerType, RepeatFrequency } from '@notifee/react-native';
 import { useEffect } from 'react';
 import { Platform, PermissionsAndroid } from 'react-native';
+import { View, Button, Linking, Alert } from 'react-native';
+
 
 
 export const useNotification = () => {
-
-
-
+ 
 
   async function checkNotificationPermission() {
     const settings = await notifee.getNotificationSettings();
@@ -15,12 +15,39 @@ export const useNotification = () => {
       console.log('Notification permissions has been authorized');
     } else if (settings.authorizationStatus == AuthorizationStatus.DENIED) {
       console.log('Notification permissions has been denied');
+      Alert.alert(
+        'Permission required',
+        'Please allow access to notifications in order to receive reminders',
+        [
+          {
+            text: 'Open settings',
+            onPress: openNotificationSettings,
+          },
+        ]
+      );
     }
   }
-useEffect(() => {
-  checkNotificationPermission();
-}, []);
 
+ 
+
+  useEffect(() => {
+    checkNotificationPermission();
+  }, []);
+
+  const openNotificationSettings = () => {
+    const url = 'app-settings:';
+    Linking.canOpenURL(url)
+      .then((supported) => {
+        if (supported) {
+          return Linking.openURL(url);
+        } else {
+          Alert.alert('Unable to open settings');
+        }
+      })
+      .catch((err) => {
+        Alert.alert('An error occurred', err.message);
+      });
+  };
 
   async function displayNotification(title: string, body: string) {
     // Create a channel required for Android Notifications
@@ -89,7 +116,8 @@ useEffect(() => {
       trigger, // use displayNotification to update triggerNotifications which trigger already fired
     );
     return triggerNotificationId;
-  }
+
+    }
 
   // get all trigger notifications
   async function getTriggerNotificationIds() {
@@ -121,6 +149,7 @@ useEffect(() => {
     getTriggerNotificationIds,
     cancelTriggerNotifications,
     cancelAllNotifications,
-    cancelNotification
+    cancelNotification,
+    openNotificationSettings
   }
 }

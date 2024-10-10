@@ -22,7 +22,6 @@ const Index = ({ navigation }) => {
           <Button title='Submit' onPress={() => navigation.navigate('Main')} />
 
           <View style={styles.middle_body}>
-          <Button title='Test: Settings' onPress={() => navigation.navigate('Settings')} />
           <Text style={{ textAlign: 'center' }}>
             Dont' have an account?
           </Text>

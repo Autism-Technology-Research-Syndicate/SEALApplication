@@ -268,14 +268,7 @@ function dropTrigger(triggerName) {
   });
 }
 // Insert a new row into the imgdp table
-const insertImageData = (b64str, input, output) => {
-  db.transaction(tx => {
-    tx.executeSql(
-      'INSERT INTO imgdp (b64str, input, output) VALUES (?, ?, ?)',
-      [b64str, input, output],
-      (_, result) => { console.log(`A row has been inserted with rowid ${result.insertId}`); },
-      (tx, error) => { console.error('Error inseting data', error); }
-    );
+
 const insertImageData = async (b64str, input, output) => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
@@ -427,35 +420,9 @@ const printCurriculumFirstRow = () => {
 };
 
   // Insert a new row into the users table
-const insertUser = (
-  name,
-  picture,
-  estimatedAttentionSpan,
-  levelOfSpectrum,
-  settingsChoices,
-  progressInCurriculum,
-  averageAccuracy,
-  description,
-  necessaryBreakTime,
-) => {
-  db.transaction(
-    tx => {
-      tx.executeSql(
-        'INSERT INTO Users (name, picture, estimatedAttentionSpan, levelOfSpectrum, settingsChoices, progressInCurriculum, averageAccuracy, description, necessaryBreakTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-        [
-          name,
-          picture,
-          estimatedAttentionSpan,
-          levelOfSpectrum,
-          settingsChoices,
-          progressInCurriculum,
-          averageAccuracy,
-          description,
-          necessaryBreakTime,
-        ],
-        (_, result) => {
-          console.log(
-            `A row has been inserted in the user table with rowid ${result.insertId}`,)
+
+
+            
   const insertUser = (
     name,
     picture,
@@ -512,9 +479,7 @@ const insertUser = (
     },
   );
 };
-    });
-  };
-
+   
 
 // Retrieve all rows from the users table
 
@@ -691,6 +656,13 @@ const getAllUserSettings = () => {
         `SELECT * FROM UserSettingsv3`,
         [],
         (_, result) => { resolve(result.rows.raw()); },
+
+        (_, error) => { reject(error); }
+      );
+    });
+  });
+};
+
 const getOneUser = (id) => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
