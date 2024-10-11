@@ -46,6 +46,8 @@ const Index = ({navigation}) => {
             icon="trophy"
             onPress={() => navigation.navigate('Achievements')}
           />
+          <Button title='Settings' onPress={() => navigation.navigate('Settings')} />
+          
           {/*Test button: Comment it to remove it. Will need to change Settings to 'NONE' before to remove filter*/}
           <Button
             title="Colorblind Settings"
