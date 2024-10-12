@@ -23,6 +23,7 @@ function Index(props) {
     onChangeText={props.onChangeText}
     secureTextEntry= {isPassword}
     right={isPassword ? <TextInput.Icon icon="eye" /> : ''}
+    {...props}
   />
 
   );

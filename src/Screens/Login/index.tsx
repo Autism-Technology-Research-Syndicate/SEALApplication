@@ -1,21 +1,37 @@
-import {View } from 'react-native';
-import React, { useState} from 'react';
+import { View } from 'react-native';
+import React, { useState } from 'react';
+import { useForm, Controller } from "react-hook-form"
 import BackgroundWrapper from '../../Components/BackgroundWrapper/.';
 import Button from '../../Components/Button/.';
 import LinkButton from '../../Components/LinkButton/.';
 import TextField from '../../Components/TextField/.';
 import Text from '../../Components/Text/.';
 import styles from './defaultCSS';
-import Dropdown from '../../Components/Validation/Dropdown';
+import { FieldValidatorDropDownWrapper } from '../../Components/Validation/FieldValidatorDropDownWrapper';
 
 const Index = ({ navigation }) => {
 
-  const [login, setLogin] = useState({username: '', password: ''});
+  const [login, setLogin] = useState({ username: '', password: '' });
 
-  function setLoginValues(value){
-    setLogin({...login, ...value});
-    console.log("login ", value, login);
-  }
+  const setLoginValues = (value) => {
+    setLogin({ ...login, ...value });
+    console.log("setLoginValues ", value, login);
+  };
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isValid }
+  } = useForm({
+    mode: 'all',
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+  })
+
+  const onSubmit = data => console.log(data)
+
 
   return (
     <BackgroundWrapper>
@@ -23,26 +39,45 @@ const Index = ({ navigation }) => {
 
         <View style={styles.body}>
           <View style={styles.upper_body}>
-            <TextField placeholder="Please enter username" value={login.username} onChangeText={value => setLoginValues({username: value})} label="username" />
-            <Dropdown contextType="username" value={login.username} />
-            <TextField placeholder="Please enter password" label="password" onChangeText={value => setLoginValues({password: value})} validationType="password"  />
-            <Dropdown contextType="password" value={login.password} />
-            <LinkButton title='Forgot password?' style={{flexDirection: 'row-reverse' }} onPress={() => navigation.navigate('Welcome')} />
+            <FieldValidatorDropDownWrapper control={control} name="username" value={login["username"]} rules={{ required: true, minLength: 8, maxLength: 32 }} errors={errors}>
+              {({ field: { onChange, onBlur, value } }) => (
+                <TextField
+                  placeholder="Please enter username"
+                  label="username"
+                  onBlur={onBlur}
+                  onChangeText={(value) => { onChange(value); setLoginValues({ username: value }) }}
+                  value={value}
+                />)}
+            </FieldValidatorDropDownWrapper>
+
+            <FieldValidatorDropDownWrapper control={control} name="password" value={login["password"]} rules={{ required: true, minLength: 8, maxLength: 32 }} errors={errors}>
+              {({ field: { onChange, onBlur, value } }) => (
+                <TextField
+                  placeholder="Please enter password"
+                  label="password"
+                  onBlur={onBlur}
+                  onChangeText={value => { onChange(value); setLoginValues({ password: value }) }}
+                  value={value}
+                  validationType="password" />
+              )}
+            </FieldValidatorDropDownWrapper>
+
+            <LinkButton title='Forgot password?' style={{ flexDirection: 'row-reverse' }} onPress={() => navigation.navigate('Welcome')} />
           </View>
           <View style={styles.bottom_body}>
-          <Button title='Submit' onPress={() => navigation.navigate('Personal')} />
+            <Button disabled={!isValid} title='Submit' onPress={handleSubmit(onSubmit)} />
 
-          <View style={styles.middle_body}>
-          <Text style={{ textAlign: 'center' }}>
-            Dont' have an account?
-          </Text>
-          <LinkButton title='Sign up' style={{ textAlign: 'center' }} onPress={() => navigation.navigate('AccountSignUp')} />
-          </View>
+            <View style={styles.middle_body}>
+              <Text style={{ textAlign: 'center' }}>
+                Dont' have an account?
+              </Text>
+              <LinkButton title='Sign up' style={{ textAlign: 'center' }} onPress={() => navigation.navigate('AccountSignUp')} />
+            </View>
           </View>
         </View>
         <View>
 
-          <Button light title='How SEAL works...'  onPress={() => navigation.navigate('HowSealWorks')} />
+          <Button light title='How SEAL works...' onPress={() => navigation.navigate('HowSealWorks')} />
 
         </View>
       </View>
