@@ -8,8 +8,8 @@ type props = {
 };
 
 function Index(props) {
-  const {selectedFontFamily, setSelectedFontFamily} = useFontContext();
-  const styles = getStyles(selectedFontFamily);
+  const {selectedFontConfig, setSelectedFontConfig} = useFontContext();
+  const styles = getStyles(selectedFontConfig);
 
   const {onPress, title = 'Heeelo', isActive = true, light} = props;
   const combinestyles = [

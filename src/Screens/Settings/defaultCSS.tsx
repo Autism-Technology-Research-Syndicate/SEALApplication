@@ -1,9 +1,9 @@
 import {StyleSheet} from 'react-native';
 import {getStyles as getDefaultStyles} from '../../Styles/defaultCSS';
-import {FontFamilyType} from '../../Contexts/FontContext';
+import {FontConfigType} from '../../Contexts/FontContext';
 
-export const getStyles = (fontFamily: FontFamilyType) => {
-  const styles = getDefaultStyles(fontFamily);
+export const getStyles = (fontConfig: FontConfigType) => {
+  const styles = getDefaultStyles(fontConfig);
 
   const stylesheet = StyleSheet.create({
     container: {
@@ -32,16 +32,20 @@ export const getStyles = (fontFamily: FontFamilyType) => {
       alignItems: 'center',
     },
     optionText: {
+      ...styles.content,
       justifyContent: 'center',
       color: '#222222',
-      fontFamily: fontFamily.regular,
+      fontFamily: fontConfig.regular,
     },
     fontButtons: {
       flexDirection: 'row',
-      marginEnd: 10,
+      alignItems: 'center',
     },
     fontButton: {
-      padding: 10,
+      padding: 5,
+      fontFamily: fontConfig.regular,
+      backgroundColor: 'transparent',
+      fontSize: 18 * fontConfig.fontScale,
     },
   });
   return stylesheet;

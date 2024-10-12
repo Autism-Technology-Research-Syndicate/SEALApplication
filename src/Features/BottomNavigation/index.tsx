@@ -9,8 +9,8 @@ import Settings from '../../Screens/Settings';
 import {useFontContext} from '../../Contexts/FontContext';
 
 export default function Index() {
-  const {selectedFontFamily, setSelectedFontFamily} = useFontContext();
-  const styles = getStyles(selectedFontFamily);
+  const {selectedFontConfig, setSelectedFontConfig} = useFontContext();
+  const styles = getStyles(selectedFontConfig);
 
   const Tab = createBottomTabNavigator();
 

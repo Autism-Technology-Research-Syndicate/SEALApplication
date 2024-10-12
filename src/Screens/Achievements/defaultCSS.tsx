@@ -1,9 +1,9 @@
 import {StyleSheet} from 'react-native';
 import {getStyles as getDefaultStyles} from '../../Styles/defaultCSS';
-import {FontFamilyType} from '../../Contexts/FontContext';
+import {FontConfigType} from '../../Contexts/FontContext';
 
-export const getStyles = (fontFamily: FontFamilyType) => {
-  const styles = getDefaultStyles(fontFamily);
+export const getStyles = (fontConfig: FontConfigType) => {
+  const styles = getDefaultStyles(fontConfig);
 
   // console.log('scaleWidth:', scaleWidth);
   // console.log('scaleHeight:', scaleHeight);
@@ -22,15 +22,15 @@ export const getStyles = (fontFamily: FontFamilyType) => {
     header: {
       ...styles.headerText,
       textAlign: 'center',
-      fontSize: 27,
-      fontFamily: fontFamily.bold,
+      fontSize: 27 * fontConfig.fontScale,
+      fontFamily: fontConfig.bold,
       lineHeight: 31.05,
       letterSpacing: 0.54,
     },
     subheader: {
       ...styles.subheaderText,
-      fontSize: 18,
-      fontFamily: fontFamily.bold,
+      fontSize: 18 * fontConfig.fontScale,
+      fontFamily: fontConfig.bold,
       lineHeight: 21.98,
       letterSpacing: 0.36,
     },
@@ -42,8 +42,8 @@ export const getStyles = (fontFamily: FontFamilyType) => {
 
     itemText: {
       textAlign: 'center',
-      fontFamily: fontFamily.bold,
-      fontSize: 16,
+      fontFamily: fontConfig.bold,
+      fontSize: 16 * fontConfig.fontScale,
       padding: 5,
       // lineHeight: 18.72,
       letterSpacing: 0.36,

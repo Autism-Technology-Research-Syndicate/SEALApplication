@@ -37,8 +37,8 @@ const AchievementsList = ({
 
 const Index: React.FC<{navigation: any}> = ({navigation}) => {
   const [achievements, setAchievements] = useState<Achievement[]>([]);
-  const {selectedFontFamily, setSelectedFontFamily} = useFontContext();
-  const styles = getStyles(selectedFontFamily);
+  const {selectedFontConfig, setSelectedFontConfig} = useFontContext();
+  const styles = getStyles(selectedFontConfig);
 
   useEffect(() => {
     const loadAchievements = async () => {

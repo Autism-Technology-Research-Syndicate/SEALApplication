@@ -9,11 +9,11 @@ import {Appbar} from 'react-native-paper';
 import {useFontContext} from '../../Contexts/FontContext';
 
 const Index = ({navigation}) => {
-  const {selectedFontFamily, setSelectedFontFamily} = useFontContext();
-  const styles = getStyles(selectedFontFamily);
+  const {selectedFontConfig, setSelectedFontConfig} = useFontContext();
+  const styles = getStyles(selectedFontConfig);
   return (
     <BackgroundWrapper>
-      <Appbar.BackAction onPress={() => navigation.navigate('Login')} />
+      <Appbar.BackAction onPress={() => navigation.navigate('Home')} />
 
       <View style={styles.container}>
         <View style={styles.section}>

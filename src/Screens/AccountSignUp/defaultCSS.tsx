@@ -1,16 +1,16 @@
 import {StyleSheet} from 'react-native';
 import {getStyles as getDefaultStyles} from '../../Styles/defaultCSS';
-import {FontFamilyType} from '../../Contexts/FontContext';
+import {FontConfigType} from '../../Contexts/FontContext';
 
-export const getStyles = (fontFamily: FontFamilyType) => {
-  const styles = getDefaultStyles(fontFamily);
+export const getStyles = (fontConfig: FontConfigType) => {
+  const styles = getDefaultStyles(fontConfig);
   const stylesheet = StyleSheet.create({
     container: {...styles.container},
     body: {
       flex: 2,
       rowGap: 30,
       overflow: 'scroll',
-      fontFamily: fontFamily.regular,
+      fontFamily: fontConfig.regular,
     },
     upper_body: {
       justifyContent: 'center',

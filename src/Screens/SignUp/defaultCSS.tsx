@@ -1,9 +1,9 @@
 import {StyleSheet} from 'react-native';
 import {getStyles as getDefaultStyles} from '../../Styles/defaultCSS';
-import {FontFamilyType} from '../../Contexts/FontContext';
+import {FontConfigType} from '../../Contexts/FontContext';
 
-export const getStyles = (fontFamily: FontFamilyType) => {
-  const styles = getDefaultStyles(fontFamily);
+export const getStyles = (fontConfig: FontConfigType) => {
+  const styles = getDefaultStyles(fontConfig);
   const stylesheet = StyleSheet.create({
     container: {
       flex: 1,
@@ -12,16 +12,16 @@ export const getStyles = (fontFamily: FontFamilyType) => {
       justifyContent: 'center',
     },
     title: {
-      fontSize: 24,
-      fontFamily: fontFamily.bold,
+      fontSize: 24 * fontConfig.fontScale,
+      fontFamily: fontConfig.bold,
       marginBottom: 20,
       color: '#305070',
     },
     label: {
-      fontSize: 16,
+      fontSize: 16 * fontConfig.fontScale,
       marginBottom: 5,
       color: '#305070',
-      fontFamily: fontFamily.bold,
+      fontFamily: fontConfig.bold,
     },
     button: {
       backgroundColor: '#305070',
@@ -33,8 +33,8 @@ export const getStyles = (fontFamily: FontFamilyType) => {
     },
     buttonText: {
       color: 'white',
-      fontSize: 18,
-      fontFamily: fontFamily.bold,
+      fontSize: 18 * fontConfig.fontScale,
+      fontFamily: fontConfig.bold,
     },
     errorText: {
       color: 'white',
@@ -43,7 +43,7 @@ export const getStyles = (fontFamily: FontFamilyType) => {
       marginTop: -5,
       marginBottom: 12,
       borderRadius: 5,
-      fontSize: 14,
+      fontSize: 14 * fontConfig.fontScale,
     },
   });
 

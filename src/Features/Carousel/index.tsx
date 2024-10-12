@@ -6,8 +6,8 @@ import {getStyles} from './defaultCSS';
 import {useFontContext} from '../../Contexts/FontContext';
 
 const Index = props => {
-  const {selectedFontFamily, setSelectedFontFamily} = useFontContext();
-  const styles = getStyles(selectedFontFamily);
+  const {selectedFontConfig, setSelectedFontConfig} = useFontContext();
+  const styles = getStyles(selectedFontConfig);
 
   const [index, setIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;

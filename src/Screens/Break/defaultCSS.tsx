@@ -1,9 +1,9 @@
 import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
 import {getStyles as getDefaultStyles} from '../../Styles/defaultCSS';
-import {FontFamilyType} from '../../Contexts/FontContext';
+import {FontConfigType} from '../../Contexts/FontContext';
 
-export const getStyles = (fontFamily: FontFamilyType) => {
-  const styles = getDefaultStyles(fontFamily);
+export const getStyles = (fontConfig: FontConfigType) => {
+  const styles = getDefaultStyles(fontConfig);
   const stylesheet = StyleSheet.create({
     container: {
       ...styles.container,
@@ -16,8 +16,8 @@ export const getStyles = (fontFamily: FontFamilyType) => {
       flex: 2,
     },
     title: {
-      ...styles.header,
-      fontSize: 28,
+      ...styles.headerText,
+      fontSize: 28 * fontConfig.fontScale,
       marginBottom: 20,
       color: '#305070',
       textAlign: 'center',
@@ -33,8 +33,9 @@ export const getStyles = (fontFamily: FontFamilyType) => {
       alignSelf: 'center',
     },
     buttonText: {
+      fontFamily: fontConfig.regular,
       color: '#FFFFFF',
-      fontSize: 16,
+      fontSize: 16 * fontConfig.fontScale,
       textAlign: 'center',
     },
   });

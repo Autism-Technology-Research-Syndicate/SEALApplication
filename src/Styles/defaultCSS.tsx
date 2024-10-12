@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
-import {FontFamilyType} from '../Contexts/FontContext';
+import {FontConfigType} from '../Contexts/FontContext';
 
-export const getStyles = (fontFamily: FontFamilyType) => {
+export const getStyles = (fontConfig: FontConfigType) => {
   const colorRange = {
     VerySoftBlue: '#A9C0E8',
     DesaturatedDarkBlue: '#7386A9',
@@ -30,33 +30,33 @@ export const getStyles = (fontFamily: FontFamilyType) => {
     ...background,
     defaultColor: colorRange.VeryDarkDesaturatedBlue,
     defaultText: {
-      fontFamily: fontFamily.regular,
+      fontFamily: fontConfig.regular,
       color: colorRange.VeryDarkDesaturatedBlue,
     },
     textNormal: {
-      fontFamily: fontFamily.regular,
+      fontFamily: fontConfig.regular,
       color: colorRange.VeryDarkDesaturatedBlue,
-      fontSize: 14,
+      fontSize: 20 * fontConfig.fontScale,
       fontStyle: 'normal',
     },
     textBold: {
-      fontFamily: fontFamily.bold,
+      fontFamily: fontConfig.bold,
       color: colorRange.VeryDarkDesaturatedBlue,
-      fontSize: 14,
+      fontSize: 20 * fontConfig.fontScale,
     },
     headerText: {
-      fontSize: 20,
-      fontFamily: fontFamily.bold,
+      fontSize: 33 * fontConfig.fontScale,
+      fontFamily: fontConfig.bold,
       color: colorRange.VeryDarkDesaturatedBlue,
     },
     subheaderText: {
-      fontSize: 15,
+      fontSize: 21 * fontConfig.fontScale,
       color: colorRange.VeryDarkDesaturatedBlue,
-      fontFamily: fontFamily.bold,
+      fontFamily: fontConfig.bold,
     },
     content: {
-      fontSize: 13,
-      fontFamily: fontFamily.regular,
+      fontSize: 18 * fontConfig.fontScale,
+      fontFamily: fontConfig.regular,
       color: colorRange.VeryDarkDesaturatedBlue,
     },
   });

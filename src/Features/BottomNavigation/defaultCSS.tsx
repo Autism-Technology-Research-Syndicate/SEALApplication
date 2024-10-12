@@ -1,8 +1,9 @@
 import {StyleSheet} from 'react-native';
 import {getStyles as getDefaultStyles} from '../../Styles/defaultCSS';
+import {FontConfigType} from '../../Contexts/FontContext';
 
-export const getStyles = (fontFamily: string) => {
-  const styles = getDefaultStyles(fontFamily);
+export const getStyles = (fontConfig: FontConfigType) => {
+  const styles = getDefaultStyles(fontConfig);
 
   const stylesheet = StyleSheet.create({
     container: {
@@ -16,7 +17,7 @@ export const getStyles = (fontFamily: string) => {
       inActive: styles.White,
     },
     icon: {
-      fontSize: 15,
+      fontSize: 15 * fontConfig.fontScale,
       fontStyle: styles.textNormal.fontStyle,
       color: styles.White,
     },

@@ -9,16 +9,17 @@ import React, {
   useState,
 } from 'react';
 
-export interface FontFamilyType {
+export interface FontConfigType {
   regular: string;
   bold: string;
   italic: string;
   bolditalic: string;
+  fontScale: number;
 }
 
 interface FontContextType {
-  selectedFontFamily: FontFamilyType;
-  setSelectedFontFamily: (fontFamily: FontFamilyType) => void;
+  selectedFontConfig: FontConfigType;
+  setSelectedFontConfig: (fontConfig: FontConfigType) => void;
 }
 
 export const FontContext = createContext<FontContextType | undefined>(
@@ -32,14 +33,15 @@ interface FontContextProviderType {
 export const FontContextProvider: React.FC<FontContextProviderType> = ({
   children,
 }) => {
-  const sansSerifFontFamily = {
+  const sansSerifFontFamily: FontConfigType = {
     regular: 'Roboto-Regular',
     bold: 'Roboto-Bold',
     italic: 'Roboto-Italic',
     bolditalic: 'Roboto-BoldItalic',
+    fontScale: 1,
   };
 
-  const [selectedFontFamily, setSelectedFontFamily] =
+  const [selectedFontConfig, setSelectedFontConfig] =
     useState(sansSerifFontFamily);
 
   useEffect(() => {
@@ -47,7 +49,7 @@ export const FontContextProvider: React.FC<FontContextProviderType> = ({
       try {
         const savedFont = await AsyncStorage.getItem('selectedFont');
         if (savedFont) {
-          setSelectedFontFamily(JSON.parse(savedFont));
+          setSelectedFontConfig(JSON.parse(savedFont));
         }
       } catch (error) {
         console.error('Failed to save font selection!');
@@ -57,17 +59,17 @@ export const FontContextProvider: React.FC<FontContextProviderType> = ({
     loadFont();
   }, []);
 
-  const saveFontSelection = async (fontFamily: FontFamilyType) => {
+  const saveFontSelection = async (fontConfig: FontConfigType) => {
     try {
-      await AsyncStorage.setItem('selectedFont', JSON.stringify(fontFamily));
-      setSelectedFontFamily(fontFamily);
+      await AsyncStorage.setItem('selectedFont', JSON.stringify(fontConfig));
+      setSelectedFontConfig(fontConfig);
     } catch (error) {
       console.error('Failed to save font selection!');
     }
   };
   return (
     <FontContext.Provider
-      value={{selectedFontFamily, setSelectedFontFamily: saveFontSelection}}>
+      value={{selectedFontConfig, setSelectedFontConfig: saveFontSelection}}>
       {children}
     </FontContext.Provider>
   );

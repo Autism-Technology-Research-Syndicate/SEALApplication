@@ -5,8 +5,8 @@ import {Button} from 'react-native-paper';
 import {useFontContext} from '../../Contexts/FontContext';
 
 function Index(props) {
-  const {selectedFontFamily, setSelectedFontFamily} = useFontContext();
-  const styles = getStyles(selectedFontFamily);
+  const {selectedFontConfig, setSelectedFontConfig} = useFontContext();
+  const styles = getStyles(selectedFontConfig);
 
   const {onPress, title = 'Heeelo'} = props;
 

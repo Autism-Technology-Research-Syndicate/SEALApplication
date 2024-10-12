@@ -4,8 +4,8 @@ import {getStyles} from './defaultCSS';
 import {useFontContext} from '../../Contexts/FontContext';
 
 const Index = ({children}) => {
-  const {selectedFontFamily, setSelectedFontFamily} = useFontContext();
-  const styles = getStyles(selectedFontFamily);
+  const {selectedFontConfig, setSelectedFontConfig} = useFontContext();
+  const styles = getStyles(selectedFontConfig);
 
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}}>

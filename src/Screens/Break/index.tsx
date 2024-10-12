@@ -5,8 +5,8 @@ import {getStyles} from './defaultCSS';
 import {useFontContext} from '../../Contexts/FontContext';
 
 const Index = ({navigation}) => {
-  const {selectedFontFamily, setSelectedFontFamily} = useFontContext();
-  const styles = getStyles(selectedFontFamily);
+  const {selectedFontConfig, setSelectedFontConfig} = useFontContext();
+  const styles = getStyles(selectedFontConfig);
   return (
     <BackgroundWrapper>
       <View style={styles.container}>

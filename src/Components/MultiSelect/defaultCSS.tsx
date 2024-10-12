@@ -1,9 +1,9 @@
 import {StyleSheet} from 'react-native';
 import {getStyles as getDefaultStyles} from '../Styles/defaultCSS';
-import {FontFamilyType} from '../../Contexts/FontContext';
+import {FontConfigType} from '../../Contexts/FontContext';
 
-export const getStyles = (fontFamily: FontFamilyType) => {
-  const styles = getDefaultStyles(fontFamily);
+export const getStyles = (fontConfig: FontConfigType) => {
+  const styles = getDefaultStyles(fontConfig);
 
   const stylesheet = StyleSheet.create({
     button: {...styles.border},
@@ -19,7 +19,7 @@ export const getStyles = (fontFamily: FontFamilyType) => {
       color: 'rgba(245, 245, 245, 1)',
       textAlign: 'center',
       fontFamily: styles.textBold.fontFamily,
-      fontSize: 18,
+      fontSize: 18 * fontConfig.fontScale,
       textAlignVertical: 'center',
     },
   });

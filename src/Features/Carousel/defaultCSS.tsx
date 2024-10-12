@@ -1,9 +1,10 @@
 import {StyleSheet, Dimensions} from 'react-native';
 const {width, height} = Dimensions.get('screen');
 import {getStyles as getDefaultStyles} from '../../Styles/defaultCSS';
+import {FontConfigType} from '../../Contexts/FontContext';
 
-export const getStyles = (fontFamily: string) => {
-  const styles = getDefaultStyles(fontFamily);
+export const getStyles = (fontConfig: FontConfigType) => {
+  const styles = getDefaultStyles(fontConfig);
 
   const stylesheet = StyleSheet.create({
     pagination: {flex: 1},

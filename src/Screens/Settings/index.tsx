@@ -1,8 +1,8 @@
 import {View, Text, Switch} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {getStyles} from './defaultCSS';
-import {Icon, Button} from 'react-native-paper';
-import {useFontContext} from '../../Contexts/FontContext';
+import Icon from 'react-native-vector-icons/FontAwesome6';
+import {FontConfigType, useFontContext} from '../../Contexts/FontContext';
 
 enum scale {
   SCALEDOWN,
@@ -10,35 +10,42 @@ enum scale {
 }
 
 const Settings = () => {
-  const dyslexicFontFamily = {
+  const {selectedFontConfig, setSelectedFontConfig} = useFontContext();
+  const dyslexicFontFamily: FontConfigType = {
     regular: 'OpenDyslexic Regular',
     bold: 'OpenDyslexic Bold',
     italic: 'OpenDyslexic Italic',
     bolditalic: 'OpenDyslexic BoldItalic',
+    fontScale: selectedFontConfig.fontScale,
   };
 
-  const sansSerifFontFamily = {
+  const sansSerifFontFamily: FontConfigType = {
     regular: 'Roboto-Regular',
     bold: 'Roboto-Bold',
     italic: 'Roboto-Italic',
     bolditalic: 'Roboto-BoldItalic',
+    fontScale: selectedFontConfig.fontScale,
   };
-  const {selectedFontFamily, setSelectedFontFamily} = useFontContext();
   const [isEnabled, setIsEnabled] = useState(
-    selectedFontFamily.regular === dyslexicFontFamily.regular,
+    selectedFontConfig.regular === dyslexicFontFamily.regular,
   );
-  const styles = getStyles(selectedFontFamily);
+  const styles = getStyles(selectedFontConfig);
   const toggleSwitch = () => {
     setIsEnabled(!isEnabled);
   };
 
   const handleScale = (scaling: scale) => {
-    console.log(scaling);
+    let currentScale = selectedFontConfig.fontScale;
+    currentScale += scaling === scale.SCALEUP ? 0.2 : -0.1;
+    const newFontConfig: FontConfigType = {
+      ...selectedFontConfig,
+      fontScale: currentScale,
+    };
+    setSelectedFontConfig(newFontConfig);
   };
 
   useEffect(() => {
-    console.log(isEnabled);
-    setSelectedFontFamily(isEnabled ? dyslexicFontFamily : sansSerifFontFamily);
+    setSelectedFontConfig(isEnabled ? dyslexicFontFamily : sansSerifFontFamily);
   }, [isEnabled]);
 
   return (
@@ -62,15 +69,24 @@ const Settings = () => {
           <View style={styles.option}>
             <Text style={styles.optionText}>Font size</Text>
             <View style={styles.fontButtons}>
-              <Button
-                onTouchEnd={() => handleScale(scale.SCALEDOWN)}
-                id="scaleDown">
-                <Icon source="minus-thick" color={'#afafaf'} size={24} />
-              </Button>
-              <Text style={styles.fontButton}>1x</Text>
-              <Button onTouchEnd={() => handleScale(scale.SCALEUP)}>
-                <Icon source="plus-thick" color={'#afafaf'} size={24} />
-              </Button>
+              <Icon.Button
+                backgroundColor={'transparent'}
+                iconStyle={{marginRight: 0}}
+                onPress={() => handleScale(scale.SCALEDOWN)}
+                name="minus"
+                color={'#afafaf'}
+                size={24}></Icon.Button>
+              <Text style={styles.fontButton}>
+                {selectedFontConfig.fontScale.toFixed(1)}x
+              </Text>
+              <Icon.Button
+                backgroundColor={'transparent'}
+                iconStyle={{marginRight: 0}}
+                onPress={() => handleScale(scale.SCALEUP)}
+                name="plus"
+                color={'#afafaf'}
+                size={24}
+                style={styles.fontButton}></Icon.Button>
             </View>
           </View>
         </View>

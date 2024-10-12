@@ -38,8 +38,8 @@ export const SignUp = () => {
   const [validName, setValidName] = useState(true);
   const [validAge, setValidAge] = useState(true);
 
-  const {selectedFontFamily, setSelectedFontFamily} = useFontContext();
-  const styles = getStyles(selectedFontFamily);
+  const {selectedFontConfig, setSelectedFontConfig} = useFontContext();
+  const styles = getStyles(selectedFontConfig);
 
   /**
    * Handles the form submission and validates inputs.

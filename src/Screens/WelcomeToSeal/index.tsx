@@ -12,8 +12,8 @@ import {useFontContext} from '../../Contexts/FontContext';
 
 const Index = ({navigation}) => {
   useBreakTimer(60 * 10 * 1000); // Set the timer interval in milliseconds
-  const {selectedFontFamily, setSelectedFontFamily} = useFontContext();
-  const styles = getStyles(selectedFontFamily);
+  const {selectedFontConfig, setSelectedFontConfig} = useFontContext();
+  const styles = getStyles(selectedFontConfig);
   return (
     <BackgroundWrapper>
       <View style={styles.container}>

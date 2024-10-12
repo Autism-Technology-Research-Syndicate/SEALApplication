@@ -1,9 +1,9 @@
 import {StyleSheet} from 'react-native';
 import {getStyles as getDefaultStyles} from '../../Styles/defaultCSS';
-import {FontFamilyType} from '../../Contexts/FontContext';
+import {FontConfigType} from '../../Contexts/FontContext';
 
-export const getStyles = (fontFamily: FontFamilyType) => {
-  const styles = getDefaultStyles(fontFamily);
+export const getStyles = (fontConfig: FontConfigType) => {
+  const styles = getDefaultStyles(fontConfig);
   const stylesheet = StyleSheet.create({
     container: {
       height: '100%',
@@ -11,11 +11,10 @@ export const getStyles = (fontFamily: FontFamilyType) => {
     },
     textNormal: {...styles.textNormal},
     header: {
-      ...styles.defaultText,
+      ...styles.textBold,
       textAlign: 'center',
       padding: 10,
-      fontSize: 33,
-      fontWeight: 'bold',
+      fontSize: 33 * fontConfig.fontScale,
     },
     subheader: {
       ...styles.subheaderText,
@@ -29,17 +28,17 @@ export const getStyles = (fontFamily: FontFamilyType) => {
     },
     itemTitle: {
       // fontWeight: 'bold',
-      fontSize: 20,
+      ...styles.textBold,
+      fontSize: 20 * fontConfig.fontScale,
       padding: 5,
       paddingHorizontal: 30,
       textAlign: 'center',
-      ...styles.textBold,
     },
     itemText: {
-      fontSize: 16,
+      ...styles.content,
+      fontSize: 16 * fontConfig.fontScale,
       padding: 5,
       textAlign: 'center',
-      ...styles.content,
     },
     rowItem: {
       borderColor: styles.defaultColor,

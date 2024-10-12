@@ -1,6 +1,6 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 
-const { width } = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   optionsContainer: {
-    width:width *0.7,
+    width: width * 0.7,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
