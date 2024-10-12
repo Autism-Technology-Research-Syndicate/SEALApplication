@@ -47,7 +47,7 @@ const DropdownBasic = ({ contextType, value }) => {
 
     return (
       <View style={styles.item} key={condition?.label}>
-        {!condition?.valid && !condition?.valid ? (
+        {!condition?.valid ? (
           <><Icon
             source="alpha-x-circle-outline"
             color="red"
@@ -71,16 +71,15 @@ const DropdownBasic = ({ contextType, value }) => {
     // Validate the password and get an array of conditions with their validity
     // const conditions = validatePassword();
 
-
-    console.log(value);
-
     if (!value) return;
+
+    console.log('renderValidationDropdown ', value);
 
     const conditions = context[contextType](value);
 
     // If all conditions are satisfied, do not render the dropdown
-    if (conditions.every((condition) => condition.valid))
-      return;
+    //if (conditions.every((condition) => condition.valid))
+     // return;
 
     // Render the dropdown with each condition item
     return (

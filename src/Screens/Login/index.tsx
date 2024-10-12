@@ -7,7 +7,7 @@ import LinkButton from '../../Components/LinkButton/.';
 import TextField from '../../Components/TextField/.';
 import Text from '../../Components/Text/.';
 import styles from './defaultCSS';
-import { FieldValidatorDropDownWrapper } from '../../Components/Validation/FieldValidatorDropDownWrapper';
+import { FieldValidatorDropDownWrapper } from '../../Components/Validation/FieldValidatorDropDownBasicWrapper';
 
 const Index = ({ navigation }) => {
 
@@ -15,7 +15,6 @@ const Index = ({ navigation }) => {
 
   const setLoginValues = (value) => {
     setLogin({ ...login, ...value });
-    console.log("setLoginValues ", value, login);
   };
 
   const {
@@ -31,7 +30,6 @@ const Index = ({ navigation }) => {
   })
 
   const onSubmit = data => console.log(data)
-
 
   return (
     <BackgroundWrapper>
