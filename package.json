@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@notifee/react-native": "^9.0.2",
     "@react-navigation/bottom-tabs": "^6.6.1",
     "@react-navigation/native": "^6.1.18",
     "@react-navigation/native-stack": "^6.11.0",
@@ -36,8 +37,7 @@
     "react-native-sqlite-storage": "^6.0.1",
     "react-native-svg": "^15.4.0",
     "react-native-vector-icons": "^10.1.0",
-    "sqlite3": "^5.1.7",
-    "@notifee/react-native": "^9.0.2"
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
