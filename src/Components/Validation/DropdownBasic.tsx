@@ -4,7 +4,7 @@ import { Icon } from 'react-native-paper';
 import Text from '../Text';
 import styles from './defaultCSS';
 
-const DropdownBasic = ({ contextType, value }) => {
+const DropdownBasic = ({ contextType, value, rules }) => {
   // Define regular expressions for each condition
   const uppercaseRegex = /[A-Z]/;
   const lowercaseRegex = /[a-z]/;
@@ -72,8 +72,6 @@ const DropdownBasic = ({ contextType, value }) => {
     // const conditions = validatePassword();
 
     if (!value) return;
-
-    console.log('renderValidationDropdown ', value);
 
     const conditions = context[contextType](value);
 

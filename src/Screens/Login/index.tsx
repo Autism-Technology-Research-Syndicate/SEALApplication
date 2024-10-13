@@ -7,7 +7,7 @@ import LinkButton from '../../Components/LinkButton/.';
 import TextField from '../../Components/TextField/.';
 import Text from '../../Components/Text/.';
 import styles from './defaultCSS';
-import { FieldValidatorDropDownWrapper } from '../../Components/Validation/FieldValidatorDropDownBasicWrapper';
+import { FieldValidatorDropDownWrapper } from '../../Components/Validation/FieldValidatorDropDownWrapper';
 
 const Index = ({ navigation }) => {
 
@@ -37,7 +37,7 @@ const Index = ({ navigation }) => {
 
         <View style={styles.body}>
           <View style={styles.upper_body}>
-            <FieldValidatorDropDownWrapper control={control} name="username" value={login["username"]} rules={{ required: true, minLength: 8, maxLength: 32 }} errors={errors}>
+            <FieldValidatorDropDownWrapper control={control} name="username" value={login["username"]} contextType="username" rules={{ required: true, minLength: 8, maxLength: 32 }} errors={errors}>
               {({ field: { onChange, onBlur, value } }) => (
                 <TextField
                   placeholder="Please enter username"
@@ -48,7 +48,7 @@ const Index = ({ navigation }) => {
                 />)}
             </FieldValidatorDropDownWrapper>
 
-            <FieldValidatorDropDownWrapper control={control} name="password" value={login["password"]} rules={{ required: true, minLength: 8, maxLength: 32 }} errors={errors}>
+            <FieldValidatorDropDownWrapper control={control} name="password" value={login["password"]} contextType="password" rules={{ required: true, minLength: 8, maxLength: 32 }} errors={errors}>
               {({ field: { onChange, onBlur, value } }) => (
                 <TextField
                   placeholder="Please enter password"
