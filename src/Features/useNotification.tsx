@@ -1,4 +1,4 @@
-import notifee, { TimestampTrigger, TriggerType, RepeatFrequency } from '@notifee/react-native';
+import notifee, { TimestampTrigger, TriggerType, RepeatFrequency, AuthorizationStatus } from '@notifee/react-native';
 import { useEffect } from 'react';
 import { Platform, PermissionsAndroid } from 'react-native';
 import { View, Button, Linking, Alert } from 'react-native';
@@ -6,11 +6,11 @@ import { View, Button, Linking, Alert } from 'react-native';
 
 
 export const useNotification = () => {
- 
+
 
   async function checkNotificationPermission() {
     const settings = await notifee.getNotificationSettings();
-  
+
     if (settings.authorizationStatus == AuthorizationStatus.AUTHORIZED) {
       console.log('Notification permissions has been authorized');
     } else if (settings.authorizationStatus == AuthorizationStatus.DENIED) {
@@ -28,7 +28,7 @@ export const useNotification = () => {
     }
   }
 
- 
+
 
   useEffect(() => {
     checkNotificationPermission();
@@ -153,3 +153,5 @@ export const useNotification = () => {
     openNotificationSettings
   }
 }
+
+// export default useNotification;
