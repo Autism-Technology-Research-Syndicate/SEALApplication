@@ -1,6 +1,7 @@
 import { View, Button } from 'react-native';
 import notifee, { AuthorizationStatus } from '@notifee/react-native';
 import React from 'react';
+import { useRef, useEffect, useState } from 'react';
 import BackgroundWrapper from '../../Components/BackgroundWrapper';
 import Text from '../../Components/Text';
 import styles from './defaultCSS';
@@ -20,6 +21,8 @@ interface Achievement {
 }
 
 const AchievementsList = ({ achievements }: { achievements: Achievement[] }) => (
+  // console.log(achievements),  // Check if achievements are being passed;
+
   <View>
     {achievements.map((item) => (
       <View key={item.id} >
@@ -30,39 +33,36 @@ const AchievementsList = ({ achievements }: { achievements: Achievement[] }) => 
   </View>
 );
 
-// async function onDisplayNotification() {
-//   // Request permissions (required for iOS)
-//   await notifee.requestPermission()
-
-//   // Create a channel (required for Android)
-//   const channelId = await notifee.createChannel({
-//     id: 'default',
-//     name: 'Default Channel',
-//   });
-
-//   // Display a notification
-//   await notifee.displayNotification({
-//     title: 'Notification Title',
-//     body: 'Main body content of the notification',
-//     android: {
-//       channelId,
-//       // smallIcon: 'name-of-a-small-icon', // optional, defaults to 'ic_launcher'.
-//       // pressAction is needed if you want the notification to open the app when pressed
-//       pressAction: {
-//         id: 'default',
-//       },
-//     },
-//   });
-// }
-
 const Index: React.FC<{ navigation: any }> = ({ navigation }) => {
   const user_id = 1; //replace with the actual user id of the logged in user
   const { achievements, loading, error } = useAchievements(user_id);
   const { displayNotification } = useNotification();
+  const displayedNotifications = useRef<Set<number>>(new Set());
 
-  const handleNotification = () => {
-    displayNotification('Test Title', 'This is a test notification');
-  };
+  useEffect(() => {
+    const displayNotifications = async () => {
+      if (achievements) {
+        for (const achievement of achievements) {
+          if (achievement.points > 1 && !displayedNotifications.current.has(achievement.id)) { // Replace 1 with your condition
+            console.log(`Displaying notification for: ${achievement.description} with ${achievement.points} points`);
+            await displayNotification('Achievement Unlocked', `${achievement.points} ${achievement.description}`);
+            displayedNotifications.current.add(achievement.id);
+            await new Promise(resolve => setTimeout(resolve, 1000)); // Add a 1-second delay
+          }
+        }
+
+      }
+    };
+    displayNotifications();
+  }, [achievements, displayNotification]);
+
+
+  if (loading) {
+    return <Text>Loading...</Text>;
+  }
+  // const handleNotification = (title, body) => {
+  //   displayNotification(title, body);
+  // };
 
   if (loading) {
     return <Text>Loading...</Text>;
@@ -88,8 +88,8 @@ const Index: React.FC<{ navigation: any }> = ({ navigation }) => {
               <Award/>
               <View style={{ flex: 1 }}>
                 <AchievementsList achievements={achievements} />
-      <Button title="Display Notification" onPress={handleNotification} />
-
+                {/* Button to test calling of notifications */}
+      {/* <Button title="Display Notification" onPress={handleNotification} /> */}
               </View>
             </View>
         </View>
