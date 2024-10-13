@@ -61,19 +61,19 @@ const initializeDatabase = async () => {
         featureG INTEGER DEFAULT 1 CHECK(featureG BETWEEN 0 AND 1),
         featureH INTEGER DEFAULT 1 CHECK(featureH BETWEEN 0 AND 1),
         FOREIGN KEY (userId) REFERENCES Users(id)
-       
-        
+
+
       )`,
       [],
       () => {
         console.log('usersettingsv3 Table created successfully - in dbInitialization.');
       },
-      
+
       (_, error) => {
         console.error('Error creating UserSettingsv3 table or exists or or or or or', error);
       },
     );
-    
+
     tx.executeSql(`
     CREATE TRIGGER IF NOT EXISTS create_default_settings
     AFTER INSERT ON Users
@@ -384,7 +384,7 @@ const getAllCurriculumData = () => {
               'SELECT * FROM curriculum',
               [],
               (_, result) => {
-                  resolve(result.rows.raw()); 
+                  resolve(result.rows.raw());
               },
               (tx, error) => {
                   console.error('Error fetching all curriculum data:', error);
@@ -422,7 +422,7 @@ const printCurriculumFirstRow = () => {
   // Insert a new row into the users table
 
 
-            
+
   const insertUser = (
     name,
     picture,
@@ -479,7 +479,7 @@ const printCurriculumFirstRow = () => {
     },
   );
 };
-   
+
 
 // Retrieve all rows from the users table
 
@@ -500,33 +500,33 @@ const getUsers = () => {
   });
 };
 
-//Create Settings Tablee in db
-// const createSettingsTable = () => {
-//   db.transaction(tx => {
-//     tx.executeSql(
-//       `CREATE TABLE IF NOT EXISTS UserSettings (
-//         id INTEGER PRIMARY KEY AUTOINCREMENT,
-//         featureA NUMBER DEFAULT 1,
-//         featureB NUMBER DEFUALT 1,
-//         featureC NUMBER DEFUALT 1,
-//         featureD NUMBER DEFAULT 1,
-//         featureE NUMBER DEFAULT 1, 
-//         featureF NUMBER DEFAULT 1,
-//         featureG NUMBER DEFAULT 1,
-//         featureH NUMBER DEFAULT 1,
-      
-//       )`,
-//       [],
-//       () => {
-//         console.log('Settings Table created successfully - in dbInitialization.');
-//       },
-      
-//       (_, error) => {
-//         console.error('Error creating table or exists', error);
-//       },
-//     );
-//   });
-// };
+// Create Settings Tablee in db
+const createSettingsTable = () => {
+  db.transaction(tx => {
+    tx.executeSql(
+      `CREATE TABLE IF NOT EXISTS UserSettings (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        featureA NUMBER DEFAULT 1,
+        featureB NUMBER DEFUALT 1,
+        featureC NUMBER DEFUALT 1,
+        featureD NUMBER DEFAULT 1,
+        featureE NUMBER DEFAULT 1,
+        featureF NUMBER DEFAULT 1,
+        featureG NUMBER DEFAULT 1,
+        featureH NUMBER DEFAULT 1,
+
+      )`,
+      [],
+      () => {
+        console.log('Settings Table created successfully - in dbInitialization.');
+      },
+
+      (_, error) => {
+        console.error('Error creating table or exists', error);
+      },
+    );
+  });
+};
 
 // Function to update user settings
 
@@ -549,7 +549,7 @@ const dropTable = (tableName) => {
 // dropTable('UserSettings');
 
 
-// is this chaning the true and false into 1 and zero 
+// is this chaning the true and false into 1 and zero
 
 const updateUserSettings = (userId, settings) => {
   return new Promise((resolve, reject) => {
@@ -683,7 +683,7 @@ const getOneUser = (id) => {
 
 
 
-  
+
 
 
 
@@ -786,7 +786,7 @@ const updateUser = (id, updates) => {
       });
     });
   };
-  
+
   const createScoreIndex = () => {
     return new Promise((resolve, reject) => {
       db.transaction(tx => {
@@ -805,7 +805,7 @@ const updateUser = (id, updates) => {
       });
     });
   };
-  
+
   const insertComboData = (score, input, output) => {
     return new Promise((resolve, reject) => {
       db.transaction(tx => {
@@ -824,7 +824,7 @@ const updateUser = (id, updates) => {
       });
     });
   };
-  
+
   const updateComboData = (score, id) => {
     return new Promise((resolve, reject) => {
       db.transaction(tx => {
@@ -843,7 +843,7 @@ const updateUser = (id, updates) => {
       });
     });
   };
-  
+
   const deleteComboData = (id) => {
     return new Promise((resolve, reject) => {
       db.transaction(tx => {
@@ -862,8 +862,8 @@ const updateUser = (id, updates) => {
       });
     });
   };
-  
-// A prediciton algorithm has been written in the prediction/sessionPrediction.js file 
+
+// A prediciton algorithm has been written in the prediction/sessionPrediction.js file
 // that uses the data from the Combos table to predict the next best action.
 // Access the table Combos and return combo that has score closest to 1
 // const getBestComboData= () => {
@@ -1043,7 +1043,7 @@ testDb();
 
 // Export functions
 export {
-  // createSettingsTable,
+  createSettingsTable,
   dropTable,
   updateUserSettings,
   getUserSettings,
