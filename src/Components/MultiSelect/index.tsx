@@ -12,7 +12,7 @@ function Index(props) {
       data={props.options}
       search={props.search}
       save="key"
-      label={props.placeholder}
+      label={props.displayName}
       fontFamily={styles.fontStyle}
       boxStyles={styles.container}
       dropdownStyles={styles.container}

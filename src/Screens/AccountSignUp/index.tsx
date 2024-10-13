@@ -68,7 +68,7 @@ const Index = ({ navigation }) => {
                     search={false}
                     onChangeText={(value) => {onChange(selectedItems); setValues({ [item.id]: selectedItems})}}
                     setSelected={setSelectedItems}
-                    value={selectedItems} />
+                    value={value} />
 
                 )}
               </FieldValidatorDropDownWrapper>

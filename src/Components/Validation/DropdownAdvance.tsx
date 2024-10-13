@@ -62,7 +62,7 @@ const DropdownAdvance = ({ contextType, value, rules, errors }) => {
 
       const age = parseInt(text);
       // Check each condition
-      const isAgeRange = age >= minLength && age <= maxLength;
+      const isAgeRange = age >= 3 && age <= 100;
 
       // Return an array of conditions and their validity
       return [

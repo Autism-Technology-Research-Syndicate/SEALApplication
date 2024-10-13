@@ -7,7 +7,8 @@ const stylesheet = StyleSheet.create({
     container: {
         backgroundColor: '#FFFFFF',
         fontSize: styles.textNormal.fontSize,
-        fontWeight: 500
+        fontWeight: 500,
+        color: '#050505',
     },
 });
 
