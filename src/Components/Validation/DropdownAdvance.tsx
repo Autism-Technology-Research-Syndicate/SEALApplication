@@ -66,7 +66,7 @@ const DropdownAdvance = ({ contextType, value, rules, errors }) => {
 
       // Return an array of conditions and their validity
       return [
-        { label: `Age must be between ${minLength} and ${maxLength}`, valid: isAgeRange }
+        { label: "Age must be between 3 and 100", valid: isAgeRange }
       ];
     },
     "morethanOne": (text) => {

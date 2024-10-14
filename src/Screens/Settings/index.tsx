@@ -19,28 +19,28 @@ import {
 } from 'react-native';
 
 
-import BackgroundWrapper from '../../Components/BackgroundWrapper/.';
+import BackgroundWrapper from '../../Components/BackgroundWrapper/index.js';
 // import Button from '../../Components/Button/.';
-import LinkButton from '../../Components/LinkButton/.';
-import TextField from '../../Components/TextField/.';
+import LinkButton from '../../Components/LinkButton/index.js';
+import TextField from '../../Components/TextField/index.js';
 // import Text from '../../Components/Text/.';
 
 import styles from './defaultCSS';
 
 
 import {updateUserSettings} from '../../../Database/dbInitialization.js';
-import {createSettingsTable} from '../../..//Database/dbInitialization.js';
-import {getUsers} from '../../..//Database/dbInitialization.js';
-import {insertUser} from '../../..//Database/dbInitialization.js';
-import { dropTable } from '../../..//Database/dbInitialization.js';
-import { getUserSettings } from '../../..//Database/dbInitialization.js';
-import{ dropTrigger } from '../../..//Database/dbInitialization.js';
-import{getAllUserSettings} from '../../..//Database/dbInitialization.js';
+import {createSettingsTable} from '../../../Database/dbInitialization.js';
+import {getUsers} from '../../../Database/dbInitialization.js';
+import {insertUser} from '../../../Database/dbInitialization.js';
+import { dropTable } from '../../../Database/dbInitialization.js';
+import { getUserSettings } from '../../../Database/dbInitialization.js';
+import { dropTrigger } from '../../../Database/dbInitialization.js';
+import {getAllUserSettings} from '../../../Database/dbInitialization.js';
 import { useNotification } from '../../Features/useNotification';
 
 
 
-const index = ({ navigation }) => {
+const Index = ({ navigation }) => {
 
   const {
     displayNotification,
@@ -738,4 +738,4 @@ const index = ({ navigation }) => {
 
   );
 }
-export default index;
+export default Index;
