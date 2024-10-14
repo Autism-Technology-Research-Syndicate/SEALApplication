@@ -6,6 +6,7 @@ import styles from './defaultCSS';
 import PracticeSession from '../../Assets/svg/practice_session.svg';
 import AssignTasks from '../../Assets/svg/assign_tasks.svg';
 import {Appbar} from 'react-native-paper';
+import CurriculumInput from '../CurriculumInput';
 
 const Index = ({navigation}) => {
   console.log('Navigation prop:', navigation);
@@ -52,6 +53,13 @@ const Index = ({navigation}) => {
           <Button
             title="Colorblind Settings"
             onPress={() => navigation.navigate('ColorblindSettings')}
+          />
+
+          {/* Curriculum Component */}
+          <Button
+            title="Curriculum To Do"
+            icon="clipboard-list"
+            onPress={() => navigation.navigate('Curriculum Todo')}
           />
         </View>
       </View>
