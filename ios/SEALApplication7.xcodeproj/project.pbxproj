@@ -38,6 +38,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = SEALApplication7/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SEALApplication7/main.m; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = SEALApplication7/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		14B2BDA8632FCDD62475E1A6 /* Pods-SEALApplication7.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SEALApplication7.release.xcconfig"; path = "Target Support Files/Pods-SEALApplication7/Pods-SEALApplication7.release.xcconfig"; sourceTree = "<group>"; };
 		21908DECBCF23AB2242BD97F /* Pods-SEALApplication7.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SEALApplication7.debug.xcconfig"; path = "Target Support Files/Pods-SEALApplication7/Pods-SEALApplication7.debug.xcconfig"; sourceTree = "<group>"; };
 		79BCC0E813683103B7C98659 /* libPods-SEALApplication7.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SEALApplication7.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,6 +46,9 @@
 		86CD2722C9BCD655EAE25636 /* Pods-SEALApplication7-SEALApplication7Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SEALApplication7-SEALApplication7Tests.debug.xcconfig"; path = "Target Support Files/Pods-SEALApplication7-SEALApplication7Tests/Pods-SEALApplication7-SEALApplication7Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A2F79AC4191CBE30A46F70B2 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = SEALApplication7/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		CF767BE6D3F9A7C3D7C08EF8 /* libPods-SEALApplication7-SEALApplication7Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SEALApplication7-SEALApplication7Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+=======
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = SEALApplication7/LaunchScreen.storyboard; sourceTree = "<group>"; };
+>>>>>>> bb-pre-alpha
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F83199AAC8B94FDD395688AF /* Pods-SEALApplication7-SEALApplication7Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SEALApplication7-SEALApplication7Tests.release.xcconfig"; path = "Target Support Files/Pods-SEALApplication7-SEALApplication7Tests/Pods-SEALApplication7-SEALApplication7Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -54,7 +58,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
 				7912340E960023E194A39AE7 /* libPods-SEALApplication7-SEALApplication7Tests.a in Frameworks */,
+=======
+>>>>>>> bb-pre-alpha
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,7 +69,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
 				AF271CB025A631FA0E6F58EA /* libPods-SEALApplication7.a in Frameworks */,
+=======
+>>>>>>> bb-pre-alpha
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,8 +115,11 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
+<<<<<<< HEAD
 				79BCC0E813683103B7C98659 /* libPods-SEALApplication7.a */,
 				CF767BE6D3F9A7C3D7C08EF8 /* libPods-SEALApplication7-SEALApplication7Tests.a */,
+=======
+>>>>>>> bb-pre-alpha
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -145,10 +158,13 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				21908DECBCF23AB2242BD97F /* Pods-SEALApplication7.debug.xcconfig */,
 				14B2BDA8632FCDD62475E1A6 /* Pods-SEALApplication7.release.xcconfig */,
 				86CD2722C9BCD655EAE25636 /* Pods-SEALApplication7-SEALApplication7Tests.debug.xcconfig */,
 				F83199AAC8B94FDD395688AF /* Pods-SEALApplication7-SEALApplication7Tests.release.xcconfig */,
+=======
+>>>>>>> bb-pre-alpha
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -160,12 +176,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "SEALApplication7Tests" */;
 			buildPhases = (
+<<<<<<< HEAD
 				3D7D1B5D0637A7274A6ADD66 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
 				F40722454C24F241A4618F2F /* [CP] Embed Pods Frameworks */,
 				43485A2A8F35F801CFD9B2A4 /* [CP] Copy Pods Resources */,
+=======
+				00E356EA1AD99517003FC87E /* Sources */,
+				00E356EB1AD99517003FC87E /* Frameworks */,
+				00E356EC1AD99517003FC87E /* Resources */,
+>>>>>>> bb-pre-alpha
 			);
 			buildRules = (
 			);
@@ -181,13 +203,19 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "SEALApplication7" */;
 			buildPhases = (
+<<<<<<< HEAD
 				1E1FE92F1076DD089C994B72 /* [CP] Check Pods Manifest.lock */,
+=======
+>>>>>>> bb-pre-alpha
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+<<<<<<< HEAD
 				A63EEFA1A9D967372261A3EA /* [CP] Embed Pods Frameworks */,
 				7D4E8DE0D3D5D80CDDA541EE /* [CP] Copy Pods Resources */,
+=======
+>>>>>>> bb-pre-alpha
 			);
 			buildRules = (
 			);
@@ -271,6 +299,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
+<<<<<<< HEAD
 		1E1FE92F1076DD089C994B72 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -383,6 +412,8 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SEALApplication7-SEALApplication7Tests/Pods-SEALApplication7-SEALApplication7Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+=======
+>>>>>>> bb-pre-alpha
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -416,7 +447,10 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
+<<<<<<< HEAD
 			baseConfigurationReference = 86CD2722C9BCD655EAE25636 /* Pods-SEALApplication7-SEALApplication7Tests.debug.xcconfig */;
+=======
+>>>>>>> bb-pre-alpha
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -443,7 +477,10 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
+<<<<<<< HEAD
 			baseConfigurationReference = F83199AAC8B94FDD395688AF /* Pods-SEALApplication7-SEALApplication7Tests.release.xcconfig */;
+=======
+>>>>>>> bb-pre-alpha
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -467,7 +504,10 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+<<<<<<< HEAD
 			baseConfigurationReference = 21908DECBCF23AB2242BD97F /* Pods-SEALApplication7.debug.xcconfig */;
+=======
+>>>>>>> bb-pre-alpha
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -494,7 +534,10 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+<<<<<<< HEAD
 			baseConfigurationReference = 14B2BDA8632FCDD62475E1A6 /* Pods-SEALApplication7.release.xcconfig */;
+=======
+>>>>>>> bb-pre-alpha
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

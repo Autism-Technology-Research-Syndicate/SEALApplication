@@ -9,11 +9,11 @@ type props = {
 
 
 function Index(props) {
-  const { onPress, title = 'Heeelo', isActive = true, light, icon = "", loading = false, dark= !light } = props;
+  const { onPress, title = 'Heeelo', isActive = true, light, icon = "", loading = false, dark= !light, disabled=false } = props;
   const combinestyles = [styles.button, (light ? styles.light : styles.dark)];
 
   return (
-   <Button labelStyle={[styles.icon, styles.text, styles.opacityNormal]} icon={icon} compact={true} dark mode="contained-tonal"  onPress={onPress} contentStyle={[styles.dimensions, ...combinestyles]}>
+   <Button  {...props} labelStyle={[styles.icon, styles.text, (disabled ? styles.disabled : styles.opacityNormal)]} icon={icon} compact={true} dark mode="contained-tonal"  onPress={onPress} contentStyle={[styles.dimensions, ...combinestyles]}>
       {title}
    </Button>
   );

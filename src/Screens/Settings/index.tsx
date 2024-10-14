@@ -28,14 +28,14 @@ import TextField from '../../Components/TextField/.';
 import styles from './defaultCSS';
 
 
-import {updateUserSettings} from '/Users/josereyes/Desktop/seals/project1/SEALApplication/Database/dbInitialization.js';
-import {createSettingsTable} from '/Users/josereyes/Desktop/seals/project1/SEALApplication/Database/dbInitialization.js';
-import {getUsers} from '/Users/josereyes/Desktop/seals/project1/SEALApplication/Database/dbInitialization.js';
-import {insertUser} from '/Users/josereyes/Desktop/seals/project1/SEALApplication/Database/dbInitialization.js';
-import { dropTable } from '/Users/josereyes/Desktop/seals/project1/SEALApplication/Database/dbInitialization.js';
-import { getUserSettings } from '/Users/josereyes/Desktop/seals/project1/SEALApplication/Database/dbInitialization.js';
-import{ dropTrigger } from '/Users/josereyes/Desktop/seals/project1/SEALApplication/Database/dbInitialization.js';
-import{getAllUserSettings} from '/Users/josereyes/Desktop/seals/project1/SEALApplication/Database/dbInitialization.js';
+import {updateUserSettings} from '../../../Database/dbInitialization.js';
+import {createSettingsTable} from '../../..//Database/dbInitialization.js';
+import {getUsers} from '../../..//Database/dbInitialization.js';
+import {insertUser} from '../../..//Database/dbInitialization.js';
+import { dropTable } from '../../..//Database/dbInitialization.js';
+import { getUserSettings } from '../../..//Database/dbInitialization.js';
+import{ dropTrigger } from '../../..//Database/dbInitialization.js';
+import{getAllUserSettings} from '../../..//Database/dbInitialization.js';
 import { useNotification } from '../../Features/useNotification';
 
 

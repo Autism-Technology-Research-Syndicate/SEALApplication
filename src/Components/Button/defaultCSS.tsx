@@ -11,6 +11,7 @@ const stylesheet = StyleSheet.create({
     dark: {...styles.dark},
     opacityLight:{...styles.opacityLight},
     opacityNormal:{ ...styles.opacityNormal},
+    disabled: {...styles.disabled},
     icon:{
         color: 'rgba(245, 245, 245, 1)'
     },

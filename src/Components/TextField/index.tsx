@@ -7,8 +7,6 @@ type props = {
 };
 
 function Index(props) {
-  const [text, onChangeText] = React.useState('');
-  const {label = 'Heeelo', placeholder='', icon = "" } = props;
   const isPassword = props.validationType === "password"
 
   return (
@@ -18,12 +16,10 @@ function Index(props) {
     contentStyle={styles.placeholder}
     style={styles.placeholder}
     outlineColor={styles.placeholder.color}
-    label={label}
-    value={text}
-    placeholder={placeholder}
-    onChangeText={onChangeText}
     secureTextEntry= {isPassword}
     right={isPassword ? <TextInput.Icon icon="eye" /> : ''}
+    keyboardType={props.type}
+    {...props}
   />
 
   );

@@ -13,6 +13,7 @@ const stylesheet = StyleSheet.create({
     light: { backgroundColor: 'rgba(132, 182, 207, 1)' },
     opacityLight: { opacity: 0.85 },
     opacityNormal: { opacity: 1 },
+    disabled: {opacity: 0.50 },
     textNormal: styles.textNormal,
     defaultColor: styles.defaultColor
 
