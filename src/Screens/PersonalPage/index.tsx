@@ -46,10 +46,14 @@ const Index = ({navigation}) => {
             icon="trophy"
             onPress={() => navigation.navigate('Achievements')}
           />
-          {/*Test button: Comment it to remove it. Will need to change Settings to 'NONE' before to remove filter*/}
+          {/*Test buttons: Comment it to remove it. Will need to change Settings to 'NONE' before to remove filter*/}
           <Button
             title="Colorblind Settings"
             onPress={() => navigation.navigate('ColorblindSettings')}
+          />
+          <Button
+            title="Typing input test page"
+            onPress={() => navigation.navigate('TypingInput')}
           />
         </View>
       </View>
