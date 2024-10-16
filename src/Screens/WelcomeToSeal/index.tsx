@@ -11,7 +11,7 @@ import SessionOptimizerComponent from '../../prediction/sessionPrediction';
 import useBreakTimer from '../../Hooks/BreakTimer';
 
 const Index = ({navigation}) => {
-  useBreakTimer(15 * 60 * 60); // Set the timer interval in milliseconds
+  useBreakTimer(15 * 60 * 1000); // Set the timer interval in milliseconds
 
   return (
     <BackgroundWrapper>
