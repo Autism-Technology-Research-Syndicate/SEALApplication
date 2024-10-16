@@ -12,12 +12,6 @@ import { FieldValidatorDropDownWrapper } from '../../Components/Validation/Field
 
 
 const Index = ({ navigation }) => {
-  const [form, setForm] = useState({});
-
-  const setValues = (value) => {
-    setForm({ ...form, ...value });
-  };
-
   const [selectedItems, setSelectedItems] = useState([]);
 
   const {
