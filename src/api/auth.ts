@@ -1,4 +1,4 @@
-import { User } from '@/types/user';
+import { User } from '../types/user';
 
 const testUser: User = {
   id: 1,
