@@ -4,7 +4,7 @@ import { Icon } from 'react-native-paper';
 import Text from '../Text';
 import styles from './defaultCSS';
 
-const DropdownAdvance = ({ contextType, value, rules, errors }) => {
+const DropdownAdvance = ({ contextType, value, rules }) => {
   // Define regular expressions for each condition
   const uppercaseRegex = /[A-Z]/;
   const lowercaseRegex = /[a-z]/;
@@ -22,11 +22,11 @@ const DropdownAdvance = ({ contextType, value, rules, errors }) => {
       const hasLowercase = lowercaseRegex.test(text);
       const hasNumber = numberRegex.test(text);
       const hasSpecialChar = specialCharRegex.test(text);
-      const isLengthValid = text.length >= minLength;
+      const isLengthValid = text.length >= minLength && text.length <= maxLength;
 
       // Return an array of conditions and their validity
       return [
-        { label: `Must be 10-32 characters long`, valid: isLengthValid },
+        { label: `Must be ${minLength}-${maxLength} characters long`, valid: isLengthValid },
         { label: "Must contain numerical characters", valid: hasNumber },
         { label: "Must contain lowercase characters", valid: hasLowercase },
         { label: "Must contain uppercase characters", valid: hasUppercase },
@@ -43,7 +43,7 @@ const DropdownAdvance = ({ contextType, value, rules, errors }) => {
 
       // Return an array of conditions and their validity
       return [
-        { label: "Must be 8-32 characters long", valid: isLengthValid },
+        { label: `Must be ${minLength}-${maxLength} characters long`, valid: isLengthValid },
         { label: "Must not contain a number", valid: !hasNumber },
         { label: "Must not contain special characters (&, %, etc.)", valid: !hasSpecialChar },
       ];

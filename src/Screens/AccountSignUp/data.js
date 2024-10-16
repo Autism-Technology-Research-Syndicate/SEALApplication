@@ -25,7 +25,7 @@ export const accountSignUp = [
         type: 'text',
         required: true,
         validationType: 'password',
-        rules: { required: true, minLength: 8, maxLength: 32 }
+        rules: { required: true, minLength: 8, maxLength: 32, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/ }
     },
     {
         id: "learnerAge",
