@@ -11,15 +11,10 @@ import { FieldValidatorDropDownWrapper } from '../../Components/Validation/Field
 
 const Index = ({ navigation }) => {
 
-  const [login, setLogin] = useState({ username: '', password: '' });
-
-  const setLoginValues = (value) => {
-    setLogin({ ...login, ...value });
-  };
-
   const {
     control,
     handleSubmit,
+    getValues,
     formState: { errors, isValid }
   } = useForm({
     mode: 'all',
@@ -40,24 +35,24 @@ const Index = ({ navigation }) => {
 
         <View style={styles.body}>
           <View style={styles.upper_body}>
-            <FieldValidatorDropDownWrapper control={control} name="username" value={login["username"]} contextType="username" rules={{ required: true, minLength: 8, maxLength: 32 }} errors={errors}>
+            <FieldValidatorDropDownWrapper control={control} name="username" value={getValues("username")} contextType="username" rules={{ required: true, minLength: 8, maxLength: 32 }} errors={errors}>
               {({ field: { onChange, onBlur, value } }) => (
                 <TextField
                   placeholder="Please enter username"
                   label="username"
                   onBlur={onBlur}
-                  onChangeText={(value) => { onChange(value); setLoginValues({ username: value }) }}
+                  onChangeText={(value) => { onChange(value) }}
                   value={value}
                 />)}
             </FieldValidatorDropDownWrapper>
 
-            <FieldValidatorDropDownWrapper control={control} name="password" value={login["password"]} contextType="password" rules={{ required: true, minLength: 8, maxLength: 32 }} errors={errors}>
+            <FieldValidatorDropDownWrapper control={control} name="password" value={getValues("password")} contextType="password" rules={ { required: true, minLength: 8, maxLength: 32, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/ }} errors={errors}>
               {({ field: { onChange, onBlur, value } }) => (
                 <TextField
                   placeholder="Please enter password"
                   label="password"
                   onBlur={onBlur}
-                  onChangeText={value => { onChange(value); setLoginValues({ password: value }) }}
+                  onChangeText={value => { onChange(value) }}
                   value={value}
                   validationType="password" />
               )}
