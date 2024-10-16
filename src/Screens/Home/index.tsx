@@ -40,7 +40,7 @@ const Index = () => {
         <Stack.Screen name="Main" component={BottomNav} />
         <Stack.Screen name="HowSealWorks" component={HowSealWorks} />
         {/* Commented for testing, uncomment to enable break screen*/}
-        {/*<Stack.Screen name="Break" component={Break} /> */}
+        <Stack.Screen name="Break" component={Break} />
         {/* Commented for testing, to enable camera feed uncomment this */}
         {/* <Stack.Screen name="WebCamFeed" component={WebCamFeed}  /> */}
       </Stack.Navigator>
