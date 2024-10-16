@@ -10,7 +10,7 @@ const DropdownAdvance = ({ contextType, value, rules, errors }) => {
   const lowercaseRegex = /[a-z]/;
   const numberRegex = /[0-9]/;
   const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
-  const emailValid = /[a-zA-Z0-9.*%±]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}/;
+  const emailValid = rules?.pattern;
   const minLength = rules?.minLength;
   const maxLength = rules?.maxLength;
 

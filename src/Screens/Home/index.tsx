@@ -7,12 +7,13 @@ import ColorblindFilter from '../../Components/ColorblindFilter';
 import WelcomeToSeal from '../WelcomeToSeal';
 import Login from '../Login';
 
-import Settings from '../Settings/Index';
+import Settings from '../Settings';
 
 import PersonalPage from '../PersonalPage';
 import AccountSignUp from '../AccountSignUp';
 import HowSealWorks from '../HowSEALWorks';
 import WebCamFeed from '../../Components/WebCamFeed';
+import Break from '../Break';
 import BottomNav from '../../Features/BottomNavigation';
 import ColorblindSettings from '../ColorblindSettings';
 

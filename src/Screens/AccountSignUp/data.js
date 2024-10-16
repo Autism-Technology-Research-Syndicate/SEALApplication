@@ -7,7 +7,7 @@ export const accountSignUp = [
         type: 'text',
         required: true,
         validationType: 'email',
-        rules: { required: true, minLength: 8, maxLength: 32 }
+        rules: { required: true, minLength: 8, maxLength: 32, pattern: /^[a-zA-Z0-9.*%±]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/  }
     },
     {
         id: "learnerUserName",

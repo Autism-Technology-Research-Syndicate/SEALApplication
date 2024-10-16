@@ -29,7 +29,10 @@ const Index = ({ navigation }) => {
     },
   })
 
-  const onSubmit = data => console.log(data)
+  const onSubmit = data =>{
+    console.log(data);
+    navigation.navigate('Personal');
+  }
 
   return (
     <BackgroundWrapper>
