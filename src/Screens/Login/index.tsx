@@ -6,10 +6,12 @@ import Button from '../../Components/Button/.';
 import LinkButton from '../../Components/LinkButton/.';
 import TextField from '../../Components/TextField/.';
 import Text from '../../Components/Text/.';
+import { useAuth } from '../../Components/Authentication/AuthProvider';
 import styles from './defaultCSS';
 import { FieldValidatorDropDownWrapper } from '../../Components/Validation/FieldValidatorDropDownWrapper';
 
 const Index = ({ navigation }) => {
+  const { authToken, handleLogin, handleLogout } = useAuth();
 
   const {
     control,
@@ -27,6 +29,7 @@ const Index = ({ navigation }) => {
   const onSubmit = data =>{
     console.log(data);
     navigation.navigate('Personal');
+    handleLogin();
   }
 
   return (

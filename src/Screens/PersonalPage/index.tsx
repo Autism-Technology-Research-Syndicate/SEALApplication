@@ -2,19 +2,22 @@ import {Image, View} from 'react-native';
 import BackgroundWrapper from '../../Components/BackgroundWrapper';
 import Button from '../../Components/Button';
 import Text from '../../Components/Text';
+import { useAuth } from '../../Components/Authentication/AuthProvider';
 import styles from './defaultCSS';
 import PracticeSession from '../../Assets/svg/practice_session.svg';
 import AssignTasks from '../../Assets/svg/assign_tasks.svg';
 import {Appbar} from 'react-native-paper';
 
 const Index = ({navigation}) => {
+  const { currentUser } = useAuth();
+
   console.log('Navigation prop:', navigation);
   return (
     <BackgroundWrapper>
       <Appbar.BackAction onPress={() => navigation.goBack()} />
       <View style={styles.container}>
         <View style={styles.section}>
-          <Text style={styles.header}>Welcome, James</Text>
+          <Text style={styles.header}>Welcome, {currentUser.name}</Text>
           <Text style={styles.subheader}>Activities</Text>
           <View style={styles.row}>
             <View style={styles.rowItem}>

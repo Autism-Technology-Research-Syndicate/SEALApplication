@@ -1,5 +1,5 @@
-import { getUser, login } from '@/api/auth';
-import { User } from '@/types/user';
+import { getUser, login } from '../../api/auth';
+import { User } from '../../types/user';
 import {
   createContext,
   PropsWithChildren,

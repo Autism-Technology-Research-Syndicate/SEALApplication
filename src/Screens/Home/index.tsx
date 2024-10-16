@@ -4,6 +4,9 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {ColorblindProvider} from '../../Contexts/ColorblindContext';
 import ColorblindFilter from '../../Components/ColorblindFilter';
+
+import AuthProvider from '../../Components/Authentication/AuthProvider';
+
 import WelcomeToSeal from '../WelcomeToSeal';
 import Login from '../Login';
 
@@ -22,6 +25,7 @@ const Stack = createNativeStackNavigator();
 const Index = () => {
   return (
     <>
+     <AuthProvider>
       <Stack.Navigator
         initialRouteName="WebCamFeed"
         screenOptions={{
@@ -45,6 +49,7 @@ const Index = () => {
         {/* <Stack.Screen name="WebCamFeed" component={WebCamFeed}  /> */}
       </Stack.Navigator>
       <ColorblindFilter />
+      </AuthProvider>
     </>
   );
 };
