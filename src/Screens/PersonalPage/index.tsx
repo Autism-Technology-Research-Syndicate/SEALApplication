@@ -11,7 +11,6 @@ import {Appbar} from 'react-native-paper';
 const Index = ({navigation}) => {
   const { currentUser } = useAuth();
 
-  console.log('Navigation prop:', navigation);
   return (
     <BackgroundWrapper>
       <Appbar.BackAction onPress={() => navigation.goBack()} />
