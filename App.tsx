@@ -15,6 +15,15 @@ import {
   Text,
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
+import React, {useCallback, useEffect, useRef} from 'react';
+import {
+  View,
+  TouchableWithoutFeedback,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
 import Home from './src/Screens/Home/.';
 import DeveloperMode from './src/Screens/DeveloperMode';
 
@@ -26,6 +35,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {ColorblindProvider} from './src/Contexts/ColorblindContext.tsx';
 import ColorblindFilter from './src/Components/ColorblindFilter/index.tsx';
 import styles from './appCSS.tsx';
+import {FontContextProvider} from './src/Contexts/FontContext.tsx';
 
 // Create a stack navigator for the root of the app
 
@@ -40,6 +50,7 @@ const RootStack = createNativeStackNavigator();
  * @param {Function} onPress - Function to call when the button is pressed
  */
 const CloseButton: React.FC<{onPress: () => void}> = ({onPress}) => (
+const CloseButton: React.FC<{onPress: () => void}> = ({onPress}) => (
   <View style={styles.closeButtonContainer}>
     <TouchableOpacity onPress={onPress} style={styles.closeButton}>
       <Text style={styles.closeButtonText}>Close</Text>
@@ -50,6 +61,8 @@ const CloseButton: React.FC<{onPress: () => void}> = ({onPress}) => (
 const AppContent: React.FC = () => {
   // Access developer mode functions and state from context
 
+  const {isDeveloperModeActive, openDeveloperMode, closeDeveloperMode} =
+    useDeveloperMode();
   const {isDeveloperModeActive, openDeveloperMode, closeDeveloperMode} =
     useDeveloperMode();
 

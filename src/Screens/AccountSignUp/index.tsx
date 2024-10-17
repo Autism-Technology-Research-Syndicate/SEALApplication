@@ -4,8 +4,7 @@ import { useForm } from "react-hook-form"
 import BackgroundWrapper from '../../Components/BackgroundWrapper/.';
 import Button from '../../Components/Button/.';
 import TextField from '../../Components/TextField/.';
-import styles from './defaultCSS';
-import { accountSignUp } from './data';
+import {accountSignUp} from './data';
 import Text from '../../Components/Text/.';
 import MultiSelect from '../../Components/MultiSelect/.';
 import { FieldValidatorDropDownWrapper } from '../../Components/Validation/FieldValidatorDropDownWrapper';
@@ -29,9 +28,7 @@ const Index = ({ navigation }) => {
   return (
     <BackgroundWrapper>
       <View style={styles.container}>
-        <Text style={styles.header}>
-          Account Sign up
-        </Text>
+        <Text style={styles.header}>Account Sign up</Text>
 
         <View style={styles.body}>
           {accountSignUp.map((item, idx) => {
@@ -74,13 +71,9 @@ const Index = ({ navigation }) => {
           <Button disabled={!isValid} dark title='Sign up' onPress={() => navigation.navigate('Login')} />
           <Button light title='Cancel' onPress={() => navigation.navigate('Welcome')} />
         </View>
-
       </View>
-
     </BackgroundWrapper>
   );
 };
 
 export default Index;
-
-

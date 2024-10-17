@@ -34,7 +34,6 @@ const Index = ({ navigation }) => {
   return (
     <BackgroundWrapper>
       <View style={styles.container}>
-
         <View style={styles.body}>
           <View style={styles.upper_body}>
             <FieldValidatorDropDownWrapper control={control} name="username" value={getValues("username")} contextType="username" rules={{ required: true, minLength: 8, maxLength: 32 }} errors={errors}>
