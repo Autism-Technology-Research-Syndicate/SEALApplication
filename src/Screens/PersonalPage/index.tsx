@@ -3,6 +3,7 @@ import BackgroundWrapper from '../../Components/BackgroundWrapper';
 import Button from '../../Components/Button';
 import Text from '../../Components/Text';
 import { useAuth } from '../../Components/Authentication/AuthProvider';
+import ProtectedRoute from '../../Components/Authorization/ProtectedRoute';
 import styles from './defaultCSS';
 import PracticeSession from '../../Assets/svg/practice_session.svg';
 import AssignTasks from '../../Assets/svg/assign_tasks.svg';
@@ -14,6 +15,7 @@ const Index = ({navigation}) => {
   return (
     <BackgroundWrapper>
       <Appbar.BackAction onPress={() => navigation.goBack()} />
+      <ProtectedRoute allowedRoles={['admin', 'viewer']}>
       <View style={styles.container}>
         <View style={styles.section}>
           <Text style={styles.header}>Welcome, {currentUser.name}</Text>
@@ -57,6 +59,7 @@ const Index = ({navigation}) => {
           />
         </View>
       </View>
+      </ProtectedRoute>
     </BackgroundWrapper>
   );
 };

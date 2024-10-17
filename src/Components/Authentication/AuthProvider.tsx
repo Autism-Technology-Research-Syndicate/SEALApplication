@@ -1,3 +1,5 @@
+import {View} from 'react-native';
+import Text from '../../Components/Text';
 import { getUser, login } from '../../api/auth';
 import { User } from '../../types/user';
 import {
