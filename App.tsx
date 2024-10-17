@@ -15,13 +15,25 @@ import {
   Text,
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
+import React, {useCallback, useEffect, useRef} from 'react';
+import {
+  View,
+  TouchableWithoutFeedback,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
 import Home from './src/Screens/Home/.';
 import DeveloperMode from './src/Screens/DeveloperMode';
+
 import {
   DeveloperModeProvider,
   useDeveloperMode,
 } from './src/Contexts/DeveloperModeContext';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {ColorblindProvider} from './src/Contexts/ColorblindContext.tsx';
+import ColorblindFilter from './src/Components/ColorblindFilter/index.tsx';
 import styles from './appCSS.tsx';
 import {FontContextProvider} from './src/Contexts/FontContext.tsx';
 
@@ -38,6 +50,7 @@ const RootStack = createNativeStackNavigator();
  * @param {Function} onPress - Function to call when the button is pressed
  */
 const CloseButton: React.FC<{onPress: () => void}> = ({onPress}) => (
+const CloseButton: React.FC<{onPress: () => void}> = ({onPress}) => (
   <View style={styles.closeButtonContainer}>
     <TouchableOpacity onPress={onPress} style={styles.closeButton}>
       <Text style={styles.closeButtonText}>Close</Text>
@@ -50,24 +63,33 @@ const AppContent: React.FC = () => {
 
   const {isDeveloperModeActive, openDeveloperMode, closeDeveloperMode} =
     useDeveloperMode();
+  const {isDeveloperModeActive, openDeveloperMode, closeDeveloperMode} =
+    useDeveloperMode();
 
   return (
-    <FontContextProvider>
-      <View style={styles.container}>
-        {/* Main navigation stack */}
-        <RootStack.Navigator screenOptions={{headerShown: false}}>
-          <RootStack.Screen name="Stack" component={Home} />
-        </RootStack.Navigator>
-        {/* Developer mode activation area (top-right corner) */}
-        <TouchableWithoutFeedback onPress={openDeveloperMode}>
-          <View style={styles.activationArea} />
-        </TouchableWithoutFeedback>
-        {/* Render DeveloperMode component when active */}
-        {isDeveloperModeActive && <DeveloperMode />}
-        {/* Render close button for developer mode when active */}
-        {isDeveloperModeActive && <CloseButton onPress={closeDeveloperMode} />}
-      </View>
-    </FontContextProvider>
+    <View style={styles.container}>
+      {/* Main navigation stack */}
+      <RootStack.Navigator screenOptions={{headerShown: false}}>
+        <RootStack.Screen name="Stack" component={Home} />
+      </RootStack.Navigator>
+
+      {/* Testing Curriculum Input Page */}
+      {/* <RootStack.Navigator screenOptions={{ headerShown: false }}>
+      {/* Temporarily set CurriculumInput as the initial screen */}
+          {/* <RootStack.Screen name="CurriculumInput" component={CurriculumInput} />
+          <RootStack.Screen name="Home" component={Home} />
+      </RootStack.Navigator> */}
+
+      {/* Developer mode activation area (top-right corner) */}
+      <TouchableWithoutFeedback onPress={openDeveloperMode}>
+        <View style={styles.activationArea} />
+      </TouchableWithoutFeedback>
+
+      {/* Render DeveloperMode component when active */}
+      {isDeveloperModeActive && <DeveloperMode />}
+      {/* Render close button for developer mode when active */}
+      {isDeveloperModeActive && <CloseButton onPress={closeDeveloperMode} />}
+    </View>
   );
 };
 
@@ -97,9 +119,11 @@ const App: React.FC = () => {
 
   return (
     <DeveloperModeProvider>
-      <NavigationContainer>
-        <AppContent />
-      </NavigationContainer>
+      <ColorblindProvider>
+        <NavigationContainer>
+          <AppContent />
+        </NavigationContainer>
+      </ColorblindProvider>
     </DeveloperModeProvider>
   );
 };

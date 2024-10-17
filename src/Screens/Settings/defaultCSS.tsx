@@ -1,52 +1,36 @@
-import {StyleSheet} from 'react-native';
-import {getStyles as getDefaultStyles} from '../../Styles/defaultCSS';
-import {FontConfigType} from '../../Contexts/FontContext';
+import { StyleSheet } from 'react-native';
 
-export const getStyles = (fontConfig: FontConfigType) => {
-  const styles = getDefaultStyles(fontConfig);
-
-  const stylesheet = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
-      height: '100%',
-      width: '100%',
+        height: '100%',
+        width: '100%',
+        rowGap: 10,
+        padding: 10,
+
     },
-    section: {
-      backgroundColor: '#ff000',
-      textAlign: 'center',
-      alignSelf: 'stretch',
-      paddingStart: 15,
-      paddingEnd: 15,
+    subheader: {
+        fontFamily: 'Helvetica Neue',
+        fontSize: 18,
+        fontStyle: 'normal',
+        fontWeight: '400',
+        alignSelf: 'center',
+        color: '#305070'
+
     },
     header: {
-      ...styles.headerText,
-      width: '100%',
-      color: 'black',
-      borderBottomColor: 'black',
-      borderBottomWidth: StyleSheet.hairlineWidth,
+        fontFamily: 'Comic Neue',
+        fontSize: 27,
+        fontStyle: 'normal',
+        fontWeight: 'bold',
+        alignSelf: 'center',
+        color: '#305070'
+
     },
-    option: {
-      paddingTop: 10,
-      paddingBottom: 10,
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-    },
-    optionText: {
-      ...styles.content,
-      justifyContent: 'center',
-      color: '#222222',
-      fontFamily: fontConfig.regular,
-    },
-    fontButtons: {
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
-    fontButton: {
-      padding: 5,
-      fontFamily: fontConfig.regular,
-      backgroundColor: 'transparent',
-      fontSize: 18 * fontConfig.fontScale,
-    },
-  });
-  return stylesheet;
-};
+    section:
+    {
+        flex: 1,
+        justifyContent: 'flex-end',
+        rowGap: 10
+    }
+});
+export default styles;

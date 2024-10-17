@@ -1,7 +1,7 @@
 import { insertCurriculumData } from './dbInitialization.js';
 import SQLite from 'react-native-sqlite-storage';
 
-async function parseStrToCurriculumData(inputStr) {
+export async function parseStrToCurriculumData(inputStr) {
     try {
         const inputType = parseInt(inputStr.slice(0, 2), 10);
         const sequence = parseInt(inputStr.slice(2, 4), 10);

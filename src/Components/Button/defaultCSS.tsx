@@ -11,10 +11,11 @@ export const getStyles = (fontConfig: FontConfigType) => {
     icon: {color: 'white'},
     light: {...styles.light},
     dark: {...styles.dark},
-    opacityLight: {...styles.opacityLight},
-    opacityNormal: {...styles.opacityNormal},
-    icon: {
-      color: 'rgba(245, 245, 245, 1)',
+    opacityLight:{...styles.opacityLight},
+    opacityNormal:{ ...styles.opacityNormal},
+    disabled: {...styles.disabled},
+    icon:{
+        color: 'rgba(245, 245, 245, 1)'
     },
     text: {
       color: 'rgba(245, 245, 245, 1)',
