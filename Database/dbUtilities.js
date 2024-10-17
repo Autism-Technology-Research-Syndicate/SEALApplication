@@ -87,3 +87,12 @@ export function getSlopeDataFromDB() {
         }
     );
 }
+
+// putting this function here temporarily because confused
+function navigateToContentPage(inputString) {
+    const inputOutputType = inputString.substring(0, 1);
+    const sequence = inputString.substring(1, 3);
+    const content = inputString.substring(3);
+
+    // add switch cases ab types of i/o
+}
