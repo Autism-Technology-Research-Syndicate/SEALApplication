@@ -1,11 +1,12 @@
 import React from 'react';
-import {getStyles} from './defaultCSS';
-import {Button} from 'react-native-paper';
-import {useFontContext} from '../../Contexts/FontContext';
+import styles from './defaultCSS';
+import { Button } from 'react-native-paper';
+
 
 type props = {
   light: boolean;
 };
+
 
 function Index(props) {
   const { onPress, title = 'Heeelo', isActive = true, light, icon = "", loading = false, dark= !light, disabled=false } = props;
@@ -14,8 +15,8 @@ function Index(props) {
   return (
    <Button  {...props} labelStyle={[styles.icon, styles.text, (disabled ? styles.disabled : styles.opacityNormal)]} icon={icon} compact={true} dark mode="contained-tonal"  onPress={onPress} contentStyle={[styles.dimensions, ...combinestyles]}>
       {title}
-    </Button>
+   </Button>
   );
-}
+};
 
 export default Index;
