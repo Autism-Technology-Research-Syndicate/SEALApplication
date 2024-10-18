@@ -2,7 +2,6 @@
 
 import React from 'react';
 import {View, Text} from 'react-native';
-import {View, Text} from 'react-native';
 import BackgroundWrapper from '../../Components/BackgroundWrapper';
 import Button from '../../Components/Button';
 import {getStyles} from './defaultCSS';
@@ -12,8 +11,14 @@ import SessionOptimizerComponent from '../../prediction/sessionPrediction';
 import useBreakTimer from '../../Hooks/BreakTimer';
 import {useFontContext} from '../../Contexts/FontContext';
 
+
+
+
 const Index = ({navigation}) => {
   useBreakTimer(15 * 60 * 1000); // Set the timer interval in milliseconds
+
+  const {selectedFontConfig} = useFontContext();
+  const styles = getStyles(selectedFontConfig);
 
   return (
     <BackgroundWrapper>
@@ -23,9 +28,9 @@ const Index = ({navigation}) => {
           <View style={styles.middle_section}>
             <Text style={styles.header}>Welcome to SEAL</Text>
           </View>
-          <Text style={styles.subheader}>
+          {/* <Text style={styles.subheader}>
             (Special Education Assistive Learning)
-          </Text>
+          </Text> */}
           <Text style={styles.subheader}>
             (Special Education Assistive Learning)
           </Text>
@@ -41,7 +46,7 @@ const Index = ({navigation}) => {
             title="Learner login"
             onPress={() => navigation.navigate('Login')}
           />
-          <Button light title="Teacher login" />
+          {/* <Button light title="Teacher login" /> */}
         </View>
 
         {/* For temporary testing purpose, Session combos output */}

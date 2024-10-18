@@ -1,5 +1,16 @@
 import { StyleSheet } from 'react-native';
-import styles from '../../Styles/defaultCSS';
+import { getStyles }from '../../Styles/defaultCSS';
+import { FontConfigType } from '../../Contexts/FontContext';
+
+const fontConfig: FontConfigType = {
+    regular: 'System',
+    bold: 'System-Bold',
+    italic: 'System-Italic',
+    bolditalic: 'System-BoldItalic',
+    fontScale: 1,
+  };
+
+  const styles = getStyles(fontConfig);
 
 const stylesheet = StyleSheet.create({
     container: {

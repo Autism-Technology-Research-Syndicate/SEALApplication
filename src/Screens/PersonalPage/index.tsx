@@ -1,5 +1,4 @@
 import {Image, View} from 'react-native';
-import {Image, View} from 'react-native';
 import BackgroundWrapper from '../../Components/BackgroundWrapper';
 import Button from '../../Components/Button';
 import Text from '../../Components/Text';
@@ -24,11 +23,9 @@ const Index = ({navigation}) => {
           <View style={styles.row}>
             <View style={styles.rowItem}>
               <PracticeSession />
-              <Text style={styles.itemTitle}>Practice sessions</Text>
+              {/* <Text style={styles.itemTitle}>Practice sessions</Text> */}
               <Text style={styles.itemTitle}>Practice sessions</Text>
               <Text style={styles.itemText}>
-                Focused practices, skill builders, step-by-step sessions and
-                'repeat & refine'
                 Focused practices, skill builders, step-by-step sessions and
                 'repeat & refine'
               </Text>
@@ -37,7 +34,7 @@ const Index = ({navigation}) => {
               <AssignTasks />
               <Text style={styles.itemTitle}>Assigned tasks</Text>
               <AssignTasks />
-              <Text style={styles.itemTitle}>Assigned tasks</Text>
+              {/* <Text style={styles.itemTitle}>Assigned tasks</Text> */}
               <Text style={styles.itemText}>
                 Complete the tasks assigned to you by your teacher
               </Text>
@@ -57,7 +54,7 @@ const Index = ({navigation}) => {
             onPress={() => navigation.navigate('Achievements')}
           />
           <Button title='Settings' onPress={() => navigation.navigate('Settings')} />
-          
+
           {/*Test button: Comment it to remove it. Will need to change Settings to 'NONE' before to remove filter*/}
           <Button
             title="Colorblind Settings"
