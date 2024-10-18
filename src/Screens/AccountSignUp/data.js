@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 export const accountSignUp = [
     {
         id: "guardianEmail",
@@ -6,7 +7,7 @@ export const accountSignUp = [
         type: 'text',
         required: true,
         validationType: 'email',
-        rules: { required: true, minLength: 8, maxLength: 32 }
+        rules: { required: true, minLength: 8, maxLength: 32, pattern: /^[a-zA-Z0-9.*%±]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/  }
     },
     {
         id: "learnerUserName",
@@ -24,7 +25,7 @@ export const accountSignUp = [
         type: 'text',
         required: true,
         validationType: 'password',
-        rules: { required: true, minLength: 8, maxLength: 32 }
+        rules: { required: true, minLength: 8, maxLength: 32, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/ }
     },
     {
         id: "learnerAge",
@@ -33,7 +34,7 @@ export const accountSignUp = [
         type: 'numeric',
         required: true,
         validationType: 'age',
-        rules: { required: true }
+        rules: { required: true, min: 3, max:99 }
     },
     {
         id: "learnerInterests",
