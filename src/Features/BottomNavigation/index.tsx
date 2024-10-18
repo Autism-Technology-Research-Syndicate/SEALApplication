@@ -4,6 +4,7 @@ import { Icon} from 'react-native-paper';
 import PersonalPage from '../../Screens/PersonalPage';
 import AccountSignUp from '../../Screens/AccountSignUp';
 import styles from './defaultCSS';
+import { HomeStackNavigator, ProfileStackNavigator } from '../StackNavigators';
 
 const Tab = createBottomTabNavigator();
 
@@ -33,7 +34,7 @@ export default function Index() {
     >
       <Tab.Screen
         name="Home"
-        component={PersonalPage}
+        component={HomeStackNavigator}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => {
@@ -53,7 +54,7 @@ export default function Index() {
       />
       <Tab.Screen
         name="Profile"
-        component={AccountSignUp}
+        component={ProfileStackNavigator}
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color, size }) => {

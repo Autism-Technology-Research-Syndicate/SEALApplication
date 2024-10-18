@@ -66,6 +66,30 @@ import {
       // Delete Combo data
       console.log('Deleting combo data...');
       await deleteComboData(2);
+
+
+
+      //User Settings Demo
+      // await createSettingsTable()
+      
+      const defaultSettings = {
+        featureA: 1,
+        featureB: 0,
+        featureC: 1,
+        featureD: 0,
+        featureE: 1,
+        featureF: 0,
+        featureG: 1,
+        featureH: 1
+      };
+  
+      // Save user settings
+      await updateUserSettings('user123', defaultSettings);
+      console.log('User settings saved or updated.');
+  
+      // Retrieve user settings
+      const settings = await getUserSettings('user123');
+      console.log('Retrieved user settings:', settings);
   
 
       // Close the database connection (optional in most cases)
@@ -74,6 +98,11 @@ import {
   
       // You may handle database closing in a different manner in a real production setting,
       // this is usually handled implicitly by react-native-sqlite-storage.
+
+
+
+
+      
     } catch (error) {
       console.error('Error:', error);
     }

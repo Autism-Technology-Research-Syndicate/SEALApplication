@@ -3,6 +3,8 @@
 ## Introduction
 **SEAL** is an innovative mobile application developed by **AUTRS** that aims to personalize special education curriculum for each student. By leveraging computer vision and machine learning, SEAL analyzes experimental responsiveness data to tailor educational content to individual needs.
 
+Want to get involved with seal? Visit: https://www.autrs.com/get-involved/
+
 ## Description
 The goal of SEAL is to provide a customized educational experience for students requiring special education. By using advanced technologies like computer vision and machine learning, SEAL will collect and analyze data to understand each student's responsiveness and adapt the curriculum accordingly. This personalized approach is designed to enhance learning outcomes and provide a more effective educational experience.
 
@@ -36,7 +38,8 @@ For major changes, please open an issue first to discuss what you would like to 
 
 ## Contact
 For any inquiries or questions regarding the SEAL project, please contact us at:  
-Email: [Inquiries@autrs.com](mailto:Inquiries@autrs.com)
+Email: [Inquiries@autrs.com](mailto:Inquiries@autrs.com) 
+Website: https://www.autrs.com/
 
 ## License
 The SEAL project is licensed under the GNU General Public License v3.0. For more information, please see the [LICENSE](LICENSE) file.
@@ -53,7 +56,7 @@ Autism Technology Research Syndicate
 
 # Getting Started
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+>**Note**: Make sure you have completed the [React Native - Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) instructions before proceeding. You might need to install the react-native cli if you have not already: `npm i @react-native-community/cli`
 
 ## Step 1: Start the Metro Server
 

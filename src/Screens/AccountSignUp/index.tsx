@@ -12,17 +12,12 @@ import { FieldValidatorDropDownWrapper } from '../../Components/Validation/Field
 
 
 const Index = ({ navigation }) => {
-  const [form, setForm] = useState({});
-
-  const setValues = (value) => {
-    setForm({ ...form, ...value });
-  };
-
   const [selectedItems, setSelectedItems] = useState([]);
 
   const {
     control,
     handleSubmit,
+    getValues,
     formState: { errors, isValid }
   } = useForm({
     mode: 'all',
@@ -42,7 +37,7 @@ const Index = ({ navigation }) => {
           {accountSignUp.map((item, idx) => {
             return (
 
-              <FieldValidatorDropDownWrapper  key={idx} control={control} contextType={item.validationType} name={item.id} value={form[item.id]} advance={true} rules={item.rules} errors={errors}>
+              <FieldValidatorDropDownWrapper  key={idx} control={control} contextType={item.validationType} name={item.id} value={getValues(item.id)} advance={true} rules={item.rules} errors={errors}>
                 {({ field: { onChange, onBlur, value } }) => (
 
 
@@ -54,7 +49,7 @@ const Index = ({ navigation }) => {
                       type={item.type}
                       maxLength={item.validationType === 'age' ? 2 : item.rules.maxLength}
                       onBlur={onBlur}
-                      onChangeText={(value) => { onChange(value); setValues({ [item.id]: value }) }}
+                      onChangeText={(value) => { onChange(value) }}
                       value={value} />
                     :
                     <MultiSelect 
@@ -66,7 +61,7 @@ const Index = ({ navigation }) => {
                     type={item.type}
                     onBlur={onBlur}
                     search={false}
-                    onChangeText={(value) => {onChange(selectedItems); setValues({ [item.id]: selectedItems})}}
+                    onChangeText={(value) => {onChange(selectedItems)}}
                     setSelected={setSelectedItems}
                     value={value} />
 
