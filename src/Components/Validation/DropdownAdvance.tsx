@@ -13,70 +13,59 @@ const DropdownAdvance = ({ contextType, value, rules }) => {
   const emailValid = rules?.pattern;
   const minLength = rules?.minLength;
   const maxLength = rules?.maxLength;
+  const min = rules?.min;
+  const max = rules?.max;
+
+  const hasUppercase = (text) => uppercaseRegex.test(text);
+  const hasLowercase = (text) =>  lowercaseRegex.test(text);
+  const hasNumber = (text) =>  numberRegex.test(text);
+  const hasSpecialChar = (text) =>  specialCharRegex.test(text);
+  const isLengthValid = (text) =>  text.length >= minLength && text.length <= maxLength;
+  const isEmail = (text) => emailValid.test(text);
+  const morethanOne = (text) =>  Array.isArray(text) && text.length > 0;
 
   const context = {
     "password": (text) => {
 
-      // Check each condition
-      const hasUppercase = uppercaseRegex.test(text);
-      const hasLowercase = lowercaseRegex.test(text);
-      const hasNumber = numberRegex.test(text);
-      const hasSpecialChar = specialCharRegex.test(text);
-      const isLengthValid = text.length >= minLength && text.length <= maxLength;
-
       // Return an array of conditions and their validity
       return [
-        { label: `Must be ${minLength}-${maxLength} characters long`, valid: isLengthValid },
-        { label: "Must contain numerical characters", valid: hasNumber },
-        { label: "Must contain lowercase characters", valid: hasLowercase },
-        { label: "Must contain uppercase characters", valid: hasUppercase },
-        { label: "Can contain special characters (&, %, etc.)", valid: hasSpecialChar },
+        { label: `Must be ${minLength}-${maxLength} characters long`, valid: isLengthValid(text) },
+        { label: "Must contain numerical characters", valid: hasNumber(text)  },
+        { label: "Must contain lowercase characters", valid: hasLowercase(text)  },
+        { label: "Must contain uppercase characters", valid: hasUppercase(text)  },
+        { label: "Can contain special characters (&, %, etc.)", valid: hasSpecialChar(text)  },
 
       ];
     },
     "username": (text) => {
-
-      // Check each condition
-      const hasNumber = numberRegex.test(text);
-      const hasSpecialChar = specialCharRegex.test(text);
-      const isLengthValid = text.length >= minLength;
-
       // Return an array of conditions and their validity
       return [
-        { label: `Must be ${minLength}-${maxLength} characters long`, valid: isLengthValid },
-        { label: "Must not contain a number", valid: !hasNumber },
-        { label: "Must not contain special characters (&, %, etc.)", valid: !hasSpecialChar },
+        { label: `Must be ${minLength}-${maxLength} characters long`, valid: isLengthValid(text) },
+        { label: "Must not contain a number", valid: !hasNumber(text) },
+        { label: "Must not contain special characters (&, %, etc.)", valid: !hasSpecialChar(text) },
       ];
     },
     "email": (text) => {
-
-      // Check each condition
-      const isEmail = emailValid.test(text);
-
       // Return an array of conditions and their validity
       return [
-        { label: "Valid email", valid: isEmail }
+        { label: "Valid email", valid: isEmail(text) }
       ];
     },
     "age": (text) => {
 
       const age = parseInt(text);
       // Check each condition
-      const isAgeRange = age >= 3 && age <= 100;
+      const isAgeRange = age > min && age < max;
 
       // Return an array of conditions and their validity
       return [
-        { label: "Age must be between 3 and 100", valid: isAgeRange }
+        { label: `Age must be ${min}-${max}`, valid: isAgeRange }
       ];
     },
     "morethanOne": (text) => {
 
-      const morethanOne = Array.isArray(text) && text.length > 0;
-      // Check each condition
-
-      // Return an array of conditions and their validity
       return [
-        { label: "Please select 1 or more item", valid: morethanOne }
+        { label: "Please select 1 or more item", valid: morethanOne(text) }
       ];
     }
   }

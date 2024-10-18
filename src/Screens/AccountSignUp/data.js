@@ -34,7 +34,7 @@ export const accountSignUp = [
         type: 'numeric',
         required: true,
         validationType: 'age',
-        rules: { required: true }
+        rules: { required: true, min: 3, max:99 }
     },
     {
         id: "learnerInterests",
