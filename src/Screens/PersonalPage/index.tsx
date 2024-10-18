@@ -1,5 +1,4 @@
 import {Image, View} from 'react-native';
-import {Image, View} from 'react-native';
 import BackgroundWrapper from '../../Components/BackgroundWrapper';
 import Button from '../../Components/Button';
 import Text from '../../Components/Text';

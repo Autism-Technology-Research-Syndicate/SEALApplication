@@ -5,16 +5,6 @@
  * It sets up the overall structure of the app, including navigation, developer mode,
  * and context providers.
  */
-
-import React, {useCallback, useEffect, useRef} from 'react';
-import {
-  View,
-  TouchableWithoutFeedback,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
 import React, {useCallback, useEffect, useRef} from 'react';
 import {
   View,
@@ -50,7 +40,6 @@ const RootStack = createNativeStackNavigator();
  * @param {Function} onPress - Function to call when the button is pressed
  */
 const CloseButton: React.FC<{onPress: () => void}> = ({onPress}) => (
-const CloseButton: React.FC<{onPress: () => void}> = ({onPress}) => (
   <View style={styles.closeButtonContainer}>
     <TouchableOpacity onPress={onPress} style={styles.closeButton}>
       <Text style={styles.closeButtonText}>Close</Text>
@@ -60,9 +49,6 @@ const CloseButton: React.FC<{onPress: () => void}> = ({onPress}) => (
 
 const AppContent: React.FC = () => {
   // Access developer mode functions and state from context
-
-  const {isDeveloperModeActive, openDeveloperMode, closeDeveloperMode} =
-    useDeveloperMode();
   const {isDeveloperModeActive, openDeveloperMode, closeDeveloperMode} =
     useDeveloperMode();
 
