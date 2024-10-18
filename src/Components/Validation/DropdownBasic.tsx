@@ -59,7 +59,7 @@ const DropdownBasic = ({ contextType, value, rules }) => {
     // Validate the password and get an array of conditions with their validity
     // const conditions = validatePassword();
 
-    if (!value) return;
+   // if (!value) return;
 
     const conditions = context[contextType](value);
 
