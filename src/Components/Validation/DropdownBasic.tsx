@@ -6,38 +6,26 @@ import styles from './defaultCSS';
 
 const DropdownBasic = ({ contextType, value, rules }) => {
   // Define regular expressions for each condition
-  const uppercaseRegex = /[A-Z]/;
-  const lowercaseRegex = /[a-z]/;
-  const numberRegex = /[0-9]/;
-  const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+  const minLength = rules?.minLength;
+  const maxLength = rules?.maxLength;
+
+  const isLengthValid = (text) =>  text.length >= minLength && text.length <= maxLength;
 
   const context = {
     "password": (text) => {
-      const minLength = 10;
-
       // Check each condition
-      const hasUppercase = uppercaseRegex.test(text);
-      const hasLowercase = lowercaseRegex.test(text);
-      const hasNumber = numberRegex.test(text);
-      const hasSpecialChar = specialCharRegex.test(text);
-      const isLengthValid = text.length >= minLength;
+      const isLengthValid = (text) =>  text.length >= minLength && text.length <= maxLength;
 
       // Return an array of conditions and their validity
       return [
-        { label: `Must be 10-32 characters long`, valid: isLengthValid }
+        { label: `Must be ${minLength}-${maxLength} characters long`, valid: isLengthValid(text) }
       ];
     },
     "username": (text) => {
-      const minLength = 8;
-
-      // Check each condition
-      const hasNumber = numberRegex.test(text);
-      const hasSpecialChar = specialCharRegex.test(text);
-      const isLengthValid = text.length >= minLength;
 
       // Return an array of conditions and their validity
       return [
-        { label: "Must be 8-32 characters long", valid: isLengthValid }
+        { label: `Must be ${minLength}-${maxLength} characters long`, valid: isLengthValid(text) }
       ];
     }
   }
