@@ -36,8 +36,7 @@ const Index = ({navigation}) => {
             <View style={styles.rowItem}>
               <AssignTasks />
               <Text style={styles.itemTitle}>Assigned tasks</Text>
-              <AssignTasks />
-              {/* <Text style={styles.itemTitle}>Assigned tasks</Text> */}
+
               <Text style={styles.itemText}>
                 Complete the tasks assigned to you by your teacher
               </Text>
