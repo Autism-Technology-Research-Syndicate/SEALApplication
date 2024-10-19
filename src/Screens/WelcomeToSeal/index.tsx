@@ -42,10 +42,6 @@ const Index = ({navigation}) => {
             onPress={() => navigation.navigate('Login')}
           />
           <Button light title="Teacher login" />
-          <Button
-            title="Learner login"
-            onPress={() => navigation.navigate('Login')}
-          />
           {/* <Button light title="Teacher login" /> */}
         </View>
 
