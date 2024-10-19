@@ -8,9 +8,14 @@ import {accountSignUp} from './data';
 import Text from '../../Components/Text/.';
 import MultiSelect from '../../Components/MultiSelect/.';
 import { FieldValidatorDropDownWrapper } from '../../Components/Validation/FieldValidatorDropDownWrapper';
+import { useFontContext } from '../../Contexts/FontContext';
+import { getStyles } from './defaultCSS';
+
 
 
 const Index = ({ navigation }) => {
+  const { selectedFontConfig } = useFontContext();
+  const styles = getStyles(selectedFontConfig);
   const [selectedItems, setSelectedItems] = useState([]);
 
   const {
@@ -49,7 +54,7 @@ const Index = ({ navigation }) => {
                       onChangeText={(value) => { onChange(value) }}
                       value={value} />
                     :
-                    <MultiSelect 
+                    <MultiSelect
                     name={item.id}
                     placeholder={item.placeHolder}
                     label={item.displayName}

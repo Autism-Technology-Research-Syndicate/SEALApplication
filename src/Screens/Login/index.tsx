@@ -7,10 +7,13 @@ import LinkButton from '../../Components/LinkButton/.';
 import TextField from '../../Components/TextField/.';
 import Text from '../../Components/Text/.';
 import { useAuth } from '../../Components/Authentication/AuthProvider';
-import styles from './defaultCSS';
+import { getStyles } from './defaultCSS';
+import { useFontContext } from '../../Contexts/FontContext';
 import { FieldValidatorDropDownWrapper } from '../../Components/Validation/FieldValidatorDropDownWrapper';
 
 const Index = ({ navigation }) => {
+  const { selectedFontConfig } = useFontContext();
+  const styles = getStyles(selectedFontConfig);
   const { authToken, handleLogin, handleLogout } = useAuth();
 
   const {
