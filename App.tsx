@@ -6,7 +6,7 @@
  * and context providers.
  */
 
-import React, {useCallback, useEffect, useRef} from 'react';
+import React from 'react';
 import {
   View,
   TouchableWithoutFeedback,
@@ -32,10 +32,10 @@ import {
   useDeveloperMode,
 } from './src/Contexts/DeveloperModeContext';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {ColorblindProvider} from './src/Contexts/ColorblindContext.tsx';
-import ColorblindFilter from './src/Components/ColorblindFilter/index.tsx';
-import styles from './appCSS.tsx';
-import {FontContextProvider} from './src/Contexts/FontContext.tsx';
+import {ColorblindProvider} from './src/Contexts/ColorblindContext';
+import ColorblindFilter from './src/Components/ColorblindFilter/index';
+import styles from './appCSS';
+import {FontContextProvider} from './src/Contexts/FontContext';
 
 // Create a stack navigator for the root of the app
 
@@ -120,9 +120,11 @@ const App: React.FC = () => {
   return (
     <DeveloperModeProvider>
       <ColorblindProvider>
+      <FontContextProvider >
         <NavigationContainer>
           <AppContent />
         </NavigationContainer>
+      </FontContextProvider>
       </ColorblindProvider>
     </DeveloperModeProvider>
   );
