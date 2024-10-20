@@ -7,10 +7,13 @@ import LinkButton from '../../Components/LinkButton/.';
 import TextField from '../../Components/TextField/.';
 import Text from '../../Components/Text/.';
 import { useAuth } from '../../Components/Authentication/AuthProvider';
-import styles from './defaultCSS';
+import { getStyles } from './defaultCSS';
+import { useFontContext } from '../../Contexts/FontContext';
 import { FieldValidatorDropDownWrapper } from '../../Components/Validation/FieldValidatorDropDownWrapper';
 
 const Index = ({ navigation }) => {
+  const { selectedFontConfig } = useFontContext();
+  const styles = getStyles(selectedFontConfig);
   const { authToken, handleLogin, handleLogout } = useAuth();
 
   const {
@@ -62,8 +65,8 @@ const Index = ({ navigation }) => {
             <LinkButton title='Forgot password?' style={{ flexDirection: 'row-reverse' }} onPress={() => navigation.navigate('Welcome')} />
           </View>
           <View style={styles.bottom_body}>
-            <Button disabled={!isValid} title='Submit' onPress={handleSubmit(onSubmit)} />
-
+            {/* <Button disabled={!isValid} title='Submit' onPress={handleSubmit(onSubmit)} /> */}
+            <Button title='Submit' onPress={ () => navigation.navigate('Personal') } />
             <View style={styles.middle_body}>
               <Text style={{ textAlign: 'center' }}>
                 Dont' have an account?

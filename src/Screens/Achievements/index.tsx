@@ -3,6 +3,7 @@ import React from 'react';
 import BackgroundWrapper from '../../Components/BackgroundWrapper';
 import Text from '../../Components/Text';
 import {getStyles} from './defaultCSS';
+import { useFontContext } from '../../Contexts/FontContext';
 import Trophy from '../../Assets/svg/Trophy.svg';
 import Award from '../../Assets/svg/Award.svg';
 import { Appbar } from 'react-native-paper';
@@ -35,6 +36,8 @@ const AchievementsList = ({
 );
 
 const Index: React.FC<{ navigation: any }> = ({ navigation }) => {
+  const { selectedFontConfig } = useFontContext();
+  const styles = getStyles(selectedFontConfig);
   const user_id = 1; //replace with the actual user id of the logged in user
   const { achievements, loading, error } = useAchievements(user_id);
 

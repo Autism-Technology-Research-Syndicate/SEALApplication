@@ -10,8 +10,14 @@ import Hello from '../../Assets/svg/hello.svg';
 import SessionOptimizerComponent from '../../prediction/sessionPrediction';
 import useBreakTimer from '../../Hooks/BreakTimer';
 
+
+
+
 const Index = ({navigation}) => {
   useBreakTimer(15 * 60 * 1000); // Set the timer interval in milliseconds
+
+  const {selectedFontConfig} = useFontContext();
+  const styles = getStyles(selectedFontConfig);
 
   return (
     <BackgroundWrapper>
@@ -21,9 +27,9 @@ const Index = ({navigation}) => {
           <View style={styles.middle_section}>
             <Text style={styles.header}>Welcome to SEAL</Text>
           </View>
-          <Text style={styles.subheader}>
+          {/* <Text style={styles.subheader}>
             (Special Education Assistive Learning)
-          </Text>
+          </Text> */}
           <Text style={styles.subheader}>
             (Special Education Assistive Learning)
           </Text>
@@ -35,11 +41,7 @@ const Index = ({navigation}) => {
             onPress={() => navigation.navigate('Login')}
           />
           <Button light title="Teacher login" />
-          <Button
-            title="Learner login"
-            onPress={() => navigation.navigate('Login')}
-          />
-          <Button light title="Teacher login" />
+          {/* <Button light title="Teacher login" /> */}
         </View>
 
         {/* For temporary testing purpose, Session combos output */}
