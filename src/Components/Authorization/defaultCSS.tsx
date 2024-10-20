@@ -12,7 +12,7 @@ const fontConfig: FontConfigType = {
 
   const styles = getStyles(fontConfig);
 
-const stylesheet = StyleSheet.create({
+  const stylesheet = StyleSheet.create({
     container: {
         height: '100%',
         width: '100%'

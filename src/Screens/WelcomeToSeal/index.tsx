@@ -4,12 +4,11 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import BackgroundWrapper from '../../Components/BackgroundWrapper';
 import Button from '../../Components/Button';
-import {getStyles} from './defaultCSS';
+import styles from './defaultCSS';
 import Seal from '../../Assets/svg/seal.svg';
 import Hello from '../../Assets/svg/hello.svg';
 import SessionOptimizerComponent from '../../prediction/sessionPrediction';
 import useBreakTimer from '../../Hooks/BreakTimer';
-import {useFontContext} from '../../Contexts/FontContext';
 
 
 
