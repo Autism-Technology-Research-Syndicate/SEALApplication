@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 import {getStyles as getDefaultStyles} from '../../Styles/defaultCSS';
 import {FontConfigType} from '../../Contexts/FontContext';
 
-export const getStyles = (fontConfig: FontConfigType) => {
+const getStyles = (fontConfig: FontConfigType) => {
   const styles = getDefaultStyles(fontConfig);
   const stylesheet = StyleSheet.create({
     container: {...styles.container},
@@ -36,3 +36,5 @@ export const getStyles = (fontConfig: FontConfigType) => {
 
   return stylesheet;
 };
+
+export default getStyles;

@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { MultipleSelectList } from 'react-native-dropdown-select-list'
 
-import styles from './defaultCSS';
+import { getStyles } from './defaultCSS';
+import { useFontContext } from '../../Contexts/FontContext';
 
 function Index(props) {
+  const { selectedFontConfig } = useFontContext();
+  const styles = getStyles(selectedFontConfig);
 
   return (
     <MultipleSelectList

@@ -8,6 +8,8 @@ type props = {
 };
 
 function Index(props) {
+  const { selectedFontConfig, setSelectedFontConfig } = useFontContext();
+  const styles = getStyles(selectedFontConfig);
   const isPassword = props.validationType === "password"
 
   return (
