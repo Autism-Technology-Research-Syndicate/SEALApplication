@@ -51,7 +51,7 @@ const Index = ({ navigation }) => {
     openNotificationSettings
   } = useNotification();
 
-  const handleDisplayNotification = () => { 
+  const handleDisplayNotification = () => {
     displayNotification('Hello', 'This is a notification');
   }
 
@@ -70,7 +70,7 @@ const Index = ({ navigation }) => {
     featureG: boolean;
     featureH: boolean;
   };
-  
+
   const defaultSettings: Settings = {
     featureA: false,
     featureB: false,
@@ -83,25 +83,25 @@ const Index = ({ navigation }) => {
   };
 
   const [settings, setSettings] = useState<Settings>(defaultSettings);
-  
 
-  //can run this to insert a user into the database 
+
+  //can run this to insert a user into the database
   // const getSettings = () => {
-  //   //this is to check the update settings did work 
+  //   //this is to check the update settings did work
   //   // dropTable('Users');
   //   // dropTable('UserSettingsv3');
 
   //   // dropTrigger('create_default_settings');
   //   insertUser('yes', 'yes', 1, 1, 'yes', 1, 1, 'yes', 1)
 
-    
+
   //   getAllUserSettings()
   //   .then(results => {
   //     console.log('Users:', results);
   //   })
   //   .catch(error => {
   //     console.error('Error with getting user :', error);
-      
+
   //   });
 
 
@@ -125,11 +125,11 @@ const Index = ({ navigation }) => {
     })
     .catch(error => {
       console.error('Error with getting user :', error);
-      
+
     });
 
   };
-//this is state for making the features false or true that will be sent to the database 
+//this is state for making the features false or true that will be sent to the database
   const [enable,setEnable] = useState(false);
 
   const handleToggleSwitch = (feature: keyof Settings): boolean => {
@@ -151,7 +151,7 @@ const Index = ({ navigation }) => {
     >
       <View style={styles.container}>
         <View style={styles.section}>
-          <TouchableOpacity onPress={() => navigation.navigate('Main')}
+          <TouchableOpacity onPress={() => navigation.goBack()}
             style={{
               zIndex: 1,
               width: 34,
@@ -169,7 +169,7 @@ const Index = ({ navigation }) => {
                 marginRight: 0,
                 marginBottom: 0,
                 marginLeft: 18,
-                
+
               }}
               source={require('./assets/images/0193bb55-aa6d-4cd6-88f5-58443b74afd2.png')}
               resizeMode='cover'
@@ -269,10 +269,10 @@ const Index = ({ navigation }) => {
               zIndex: 1,
             }}
           >
-           
+
             Settings
           </Text>
-          
+
           <Text
             style={{
               display: 'flex',
@@ -297,7 +297,7 @@ const Index = ({ navigation }) => {
             preferences{'\n'}Font sizes{'\n'}Dyslexic font options{'\n'}Audio
             sensitivities{'\n'}Light sensitivities{'\n'}Notification preferences
           </Text>
-       
+
           <View
             style={{
               display: 'flex',
@@ -311,7 +311,7 @@ const Index = ({ navigation }) => {
               alignItems: 'center',
               flexWrap: 'nowrap',
 
-             
+
 
               borderColor: '#617275',
               borderStyle: 'solid',
@@ -338,7 +338,7 @@ const Index = ({ navigation }) => {
                 zIndex: 30,
               }}
             />
-            
+
           </View>
 
           <ImageBackground
@@ -365,7 +365,7 @@ const Index = ({ navigation }) => {
               flexDirection: 'row',
               alignItems: 'center',
               flexWrap: 'nowrap',
-          
+
               borderColor: '#617275',
               borderStyle: 'solid',
               position: 'absolute',
@@ -375,14 +375,14 @@ const Index = ({ navigation }) => {
               zIndex: 32,
             }}
           >
-              
+
               <Switch
               value={settings.featureB}
               onValueChange={()=>handleToggleSwitch('featureB')}
               thumbColor={settings.featureB ? '#305070' : '#ffffff'} // corrected color
             />
 
-               
+
             <View
               style={{
                 width: 16,
@@ -392,7 +392,7 @@ const Index = ({ navigation }) => {
                 zIndex: 33,
               }}
             />
-             
+
 
 
           </View>
@@ -421,7 +421,7 @@ const Index = ({ navigation }) => {
               flexDirection: 'row',
               alignItems: 'center',
               flexWrap: 'nowrap',
-          
+
               borderColor: '#617275',
               borderStyle: 'solid',
               position: 'absolute',
@@ -447,7 +447,7 @@ const Index = ({ navigation }) => {
                 zIndex: 36,
               }}
             />
-              
+
 
           </View>
 
@@ -475,7 +475,7 @@ const Index = ({ navigation }) => {
               flexDirection: 'row',
               alignItems: 'center',
               flexWrap: 'nowrap',
-          
+
               borderColor: '#617275',
               borderStyle: 'solid',
               position: 'absolute',
@@ -501,7 +501,7 @@ const Index = ({ navigation }) => {
                 zIndex: 27,
               }}
             />
-              
+
 
           </View>
 
@@ -529,7 +529,7 @@ const Index = ({ navigation }) => {
               flexDirection: 'row',
               alignItems: 'center',
               flexWrap: 'nowrap',
-          
+
               borderColor: '#617275',
               borderStyle: 'solid',
               position: 'absolute',
@@ -556,8 +556,8 @@ const Index = ({ navigation }) => {
                 zIndex: 24,
               }}
             />
-              
-              
+
+
 
           </View>
 
@@ -585,7 +585,7 @@ const Index = ({ navigation }) => {
               flexDirection: 'row',
               alignItems: 'center',
               flexWrap: 'nowrap',
-          
+
               borderColor: '#617275',
               borderStyle: 'solid',
               position: 'absolute',
@@ -612,7 +612,7 @@ const Index = ({ navigation }) => {
                 zIndex: 21,
               }}
             />
-              
+
 
           </View>
 
@@ -677,7 +677,7 @@ const Index = ({ navigation }) => {
               flexDirection: 'row',
               alignItems: 'center',
               flexWrap: 'nowrap',
-          
+
               borderColor: '#617275',
               borderStyle: 'solid',
               position: 'absolute',
@@ -704,21 +704,21 @@ const Index = ({ navigation }) => {
                 zIndex: 18,
               }}
             />
-              
+
           </View>
 
           {/* test for notifications */}
-           <Button title='Save Settings' onPress={saveSettings} /> 
+           <Button title='Save Settings' onPress={saveSettings} />
 
            {/* testing the notifications */}
-           {/* <Button title='display notification ' onPress={handleDisplayNotification} /> 
-           <Button title='cancel all notifications ' onPress={handleCancelAllTriggerNotifications} /> 
+           {/* <Button title='display notification ' onPress={handleDisplayNotification} />
+           <Button title='cancel all notifications ' onPress={handleCancelAllTriggerNotifications} />
            <Button title='go to device settings ' onPress = {openNotificationSettings} /> */}
 
 
-           
-            
-       
+
+
+
           <ImageBackground
             style={{
               width: 297,
@@ -731,7 +731,7 @@ const Index = ({ navigation }) => {
             source={require('./assets/images/a9628dcf-1c7c-4d22-9248-8f80e9d21a53.png')}
             resizeMode='cover'
           />
-      
+
       </View>
      </View>
     </ScrollView>
