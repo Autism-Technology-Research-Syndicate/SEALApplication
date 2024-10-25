@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, TextInput} from 'react-native';
-import styles from './defaultCSS';
+import {getStyles} from './defaultCSS';
+import {useFontContext} from '../../Contexts/FontContext';
 
 /**
  * Creates a customizable text input box for React Native.
@@ -24,6 +25,8 @@ export const createTextBox = (
   secure: boolean = false,
   multiline: boolean = false,
 ) => {
+  const {selectedFontConfig, setSelectedFontConfig} = useFontContext();
+  const styles = getStyles(selectedFontConfig);
   return (
     <View>
       <TextInput

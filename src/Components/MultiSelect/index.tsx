@@ -1,21 +1,29 @@
-import React from 'react';
-import {Text, Pressable } from 'react-native';
-import styles from './defaultCSS';
+import React, { useState } from 'react';
+import { MultipleSelectList } from 'react-native-dropdown-select-list'
 
-
-type props = {
-  light: boolean;
-};
-
+import { getStyles } from './defaultCSS';
+import { useFontContext } from '../../Contexts/FontContext';
 
 function Index(props) {
-  const { onPress, title = 'Heeelo', isActive = true, light } = props;
-  const combinestyles = [styles.button, styles.opacityLight, (light ? styles.light : styles.dark)];
+  const { selectedFontConfig } = useFontContext();
+  const styles = getStyles(selectedFontConfig);
+
   return (
-    <Pressable style={combinestyles} onPress={onPress}>
-      <Text style={[styles.text, styles.opacityNormal]}>{title}</Text>
-    </Pressable>
+    <MultipleSelectList
+      setSelected={props.setSelected}
+      onSelect={props.onChangeText}
+      data={props.options}
+      search={props.search}
+      save="key"
+      label={props.displayName}
+      fontFamily={styles.fontStyle}
+      boxStyles={styles.container}
+      dropdownStyles={styles.container}
+      dropdownTextStyles={styles.container}
+      inputStyles={styles.container}
+    />
+
   );
-};
+}
 
 export default Index;

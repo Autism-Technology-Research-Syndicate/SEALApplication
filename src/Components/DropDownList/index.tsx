@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
-import styles from './defaultCSS';
+import {getStyles} from './defaultCSS';
+import {useFontContext} from '../../Contexts/FontContext';
 
 /**
  * Transforms an array of strings into an array of objects with label and value properties.
@@ -16,8 +17,13 @@ export const createDropDown = (
   value: string[],
   setValue: any,
 ) => {
+  const {selectedFontConfig, setSelectedFontConfig} = useFontContext();
+  const styles = getStyles(selectedFontConfig);
   // Transform the label strings into objects with label and value properties
-  const transformedLabels = labels.map(e => ({label: e, value: e.toLowerCase()}));
+  const transformedLabels = labels.map(e => ({
+    label: e,
+    value: e.toLowerCase(),
+  }));
 
   // State to manage the dropdown open/close status
   const [open, setOpen] = useState(false);
@@ -27,21 +33,21 @@ export const createDropDown = (
 
   return (
     <DropDownPicker
-      placeholder="Select All That Apply" 
-      open={open} 
-      value={value} 
-      items={items} 
+      placeholder="Select All That Apply"
+      open={open}
+      value={value}
+      items={items}
       setOpen={setOpen}
       setValue={setValue}
       setItems={setItems}
       multiple={true}
-      mode='BADGE'
-      listMode='MODAL'
+      mode="BADGE"
+      listMode="MODAL"
       min={0} // Minimum number of selections
       max={5} // Maximum number of selections
-      showTickIcon={true} 
-      dropDownDirection="AUTO" 
-      style={styles.dropDown} 
+      showTickIcon={true}
+      dropDownDirection="AUTO"
+      style={styles.dropDown}
       labelStyle={styles.labels}
     />
   );

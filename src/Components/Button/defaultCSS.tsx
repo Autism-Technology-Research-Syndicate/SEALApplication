@@ -1,26 +1,27 @@
-import { StyleSheet } from 'react-native';
-import styles from '../Styles/defaultCSS';
+import {StyleSheet} from 'react-native';
+import {getStyles as getDefaultStyles} from '../Styles/defaultCSS';
+import {FontConfigType} from '../../Contexts/FontContext';
 
+export const getStyles = (fontConfig: FontConfigType) => {
+  const styles = getDefaultStyles(fontConfig);
 
-const stylesheet = StyleSheet.create({
-
+  const stylesheet = StyleSheet.create({
     button: {...styles.border},
-    dimensions: {height:50},
+    dimensions: {height: 50},
     icon: {color: 'white'},
-    light:{...styles.light},
+    light: {...styles.light},
     dark: {...styles.dark},
     opacityLight:{...styles.opacityLight},
     opacityNormal:{ ...styles.opacityNormal},
+    disabled: {...styles.disabled},
     icon:{
         color: 'rgba(245, 245, 245, 1)'
     },
-     text: {
-        color: 'rgba(245, 245, 245, 1)',
-        fontFamily: styles.textNormal.fontFamily,
-        fontSize: styles.textNormal.fontSize,
-        fontStyle: styles.textNormal.fontStyle,
-        fontWeight: '700',
+    text: {
+      color: 'rgba(245, 245, 245, 1)',
+      fontFamily: styles.textNormal.fontFamily,
+      fontSize: styles.textNormal.fontSize,
     },
-});
-
-export default stylesheet;
+  });
+  return stylesheet;
+};
