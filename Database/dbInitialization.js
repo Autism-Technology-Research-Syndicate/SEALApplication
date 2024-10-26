@@ -85,6 +85,7 @@ const initializeDatabase = async () => {
       );
     });
 
+    // function to create tables
   const createTable = (query, tableName) => {
     return new Promise((resolve, reject) => {
       db.transaction(tx => {
@@ -147,6 +148,7 @@ const initializeDatabase = async () => {
     });
   };
 
+  // Create the tables if they don't exist
   const imgdpTableQuery = `
     CREATE TABLE IF NOT EXISTS imgdp (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -189,11 +191,28 @@ const initializeDatabase = async () => {
       FOREIGN KEY (user_id) REFERENCES users(id)
     )`;
 
+  const userSettingsTableQuery = `
+    CREATE TABLE IF NOT EXISTS UserSettingsv3 (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      userId INTEGER,
+      featureA INTEGER DEFAULT 1 CHECK(featureA BETWEEN 0 AND 1),
+      featureB INTEGER DEFAULT 1 CHECK(featureB BETWEEN 0 AND 1),
+      featureC INTEGER DEFAULT 1 CHECK(featureC BETWEEN 0 AND 1),
+      featureD INTEGER DEFAULT 1 CHECK(featureD BETWEEN 0 AND 1),
+      featureE INTEGER DEFAULT 1 CHECK(featureE BETWEEN 0 AND 1),
+      featureF INTEGER DEFAULT 1 CHECK(featureF BETWEEN 0 AND 1),
+      featureG INTEGER DEFAULT 1 CHECK(featureG BETWEEN 0 AND 1),
+      featureH INTEGER DEFAULT 1 CHECK(featureH BETWEEN 0 AND 1),
+      FOREIGN KEY (userId) REFERENCES users(id)
+    )`;
+
+  // Create the tables using the queries above and the createTable function
   return Promise.all([
     createTable(imgdpTableQuery, 'imgdp'),
     createTable(curriculumTableQuery, 'curriculum'),
     createTable(usersTableQuery, 'users'),
     createTable(achievementsTableQuery, 'achievements'),
+    createTable(userSettingsTableQuery, 'UserSettingsv3'),
   ])
   .then(() => {
     console.log('All tables created successfully.');
