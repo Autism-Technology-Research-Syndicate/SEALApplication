@@ -17,6 +17,7 @@ const Index = ({navigation}) => {
   const {selectedFontConfig} = useFontContext();
   const styles = getStyles(selectedFontConfig);
 
+
   return (
     <BackgroundWrapper>
       <View style={styles.container}>
