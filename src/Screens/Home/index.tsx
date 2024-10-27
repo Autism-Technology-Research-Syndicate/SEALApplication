@@ -18,6 +18,7 @@ import HowSealWorks from '../HowSEALWorks';
 import WebCamFeed from '../../Components/WebCamFeed';
 import Break from '../Break';
 import BottomNav from '../../Features/BottomNavigation';
+import Video from '../Video';
 import ColorblindSettings from '../ColorblindSettings';
 import CurriculumTodo from '../CurriculumTodo';
 
@@ -50,6 +51,7 @@ const Index = () => {
         <Stack.Screen name="HowSealWorks" component={HowSealWorks} />
         {/* Commented for testing, uncomment to enable break screen*/}
         <Stack.Screen name="Break" component={Break} />
+        <Stack.Screen name='Video' component={Video}/>
         {/* Commented for testing, to enable camera feed uncomment this */}
         {/* <Stack.Screen name="WebCamFeed" component={WebCamFeed}  /> */}
       </Stack.Navigator>
