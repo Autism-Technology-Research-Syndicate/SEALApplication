@@ -46,4 +46,4 @@ unzip -lv android/app/build/outputs/apk/debug/app-debug.apk | grep lib*.so
 grep camera   ~/.android/avd/*/*.ini
 
 
-sudo chown -R 501:20
+sudo chown -Rn 501:20
