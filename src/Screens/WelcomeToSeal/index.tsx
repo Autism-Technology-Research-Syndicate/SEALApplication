@@ -1,16 +1,22 @@
 // src/Screens/WelcomeToSeal/index.tsx
 
 import React from 'react';
-import { View, Text } from 'react-native';
+import {View, Text} from 'react-native';
 import BackgroundWrapper from '../../Components/BackgroundWrapper';
 import Button from '../../Components/Button';
-import styles from './defaultCSS';
+import getStyles from './defaultCSS';
+import {useFontContext} from '../../Contexts/FontContext';
 import Seal from '../../Assets/svg/seal.svg';
 import Hello from '../../Assets/svg/hello.svg';
+import SessionOptimizerComponent from '../../prediction/sessionPrediction';
 import useBreakTimer from '../../Hooks/BreakTimer';
 
-const Index = ({ navigation }) => {
-  useBreakTimer(1000 * 1000); // Set the timer interval in milliseconds
+const Index = ({navigation}) => {
+  useBreakTimer(15 * 60 * 1000); // Set the timer interval in milliseconds
+
+  const {selectedFontConfig} = useFontContext();
+  const styles = getStyles(selectedFontConfig);
+
 
   return (
     <BackgroundWrapper>
@@ -20,13 +26,26 @@ const Index = ({ navigation }) => {
           <View style={styles.middle_section}>
             <Text style={styles.header}>Welcome to SEAL</Text>
           </View>
-          <Text style={styles.subheader}>(Special Education Assistive Learning)</Text>
+          {/* <Text style={styles.subheader}>
+            (Special Education Assistive Learning)
+          </Text> */}
+          <Text style={styles.subheader}>
+            (Special Education Assistive Learning)
+          </Text>
           <Hello width={275} height={275} />
         </View>
         <View style={styles.bottom_section}>
-          <Button title='Learner login' onPress={() => navigation.navigate('Login')} />
-          <Button light title='Teacher login' onPress={() => navigation.navigate('Videos')}/>
+          <Button
+            title="Learner login"
+            onPress={() => navigation.navigate('Login')}
+          />
+          <Button light title="Teacher login" />
+          {/* <Button light title="Teacher login" /> */}
         </View>
+
+        {/* For temporary testing purpose, Session combos output */}
+        <SessionOptimizerComponent />
+        {/*  */}
       </View>
     </BackgroundWrapper>
   );

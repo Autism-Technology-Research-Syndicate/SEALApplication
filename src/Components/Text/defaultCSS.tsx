@@ -1,15 +1,18 @@
-import { StyleSheet } from 'react-native';
-import styles from '../Styles/defaultCSS';
+import {StyleSheet} from 'react-native';
+import {getStyles as getDefaultStyles} from '../Styles/defaultCSS';
+import {FontConfigType} from '../../Contexts/FontContext';
 
+export const getStyles = (fontConfig: FontConfigType) => {
+  const styles = getDefaultStyles(fontConfig);
 
-const stylesheet = StyleSheet.create({
-     text: {
-        fontFamily: styles.textNormal.fontFamily,
-        fontSize: styles.textNormal.fontSize,
-        fontStyle: styles.textNormal.fontStyle,
-        fontWeight: 'normal',
-        color: styles.defaultColor
+  const stylesheet = StyleSheet.create({
+    text: {
+      fontFamily: styles.textNormal.fontFamily,
+      fontSize: styles.textNormal.fontSize,
+      fontStyle: styles.textNormal.fontStyle,
+      fontWeight: 'normal',
+      color: styles.defaultColor,
     },
-});
-
-export default stylesheet;
+  });
+  return stylesheet;
+};

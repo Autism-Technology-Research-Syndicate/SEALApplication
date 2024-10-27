@@ -7,9 +7,10 @@ const styles = StyleSheet.create({
   "activationArea": {
       position: "absolute",
       top: 0,
-      left: 0,
+      left: '50%',
+      transform: [{ translateX: -60 }],
       width: 120,
-      height: 120,
+      height: 60,
       zIndex: 1,
       // backgroundColor: 'red' // Uncomment to see the activation area
     },
