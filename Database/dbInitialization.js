@@ -240,6 +240,7 @@ function dropTrigger(triggerName) {
       );
   });
 }
+// CRUD operations for the imgdp table
 // Insert a new row into the imgdp table
 
 const insertImageData = async (b64str, input, output) => {
@@ -330,7 +331,7 @@ const printFirstRow = () => {
 });
 };
 
-
+// CRUD operations for the curriculum table
 //Insert a new row into the curriculum table
 const insertCurriculumData = (input_output, sequence, content) => {
   return new Promise((resolve, reject) => {
@@ -392,10 +393,8 @@ const printCurriculumFirstRow = () => {
 });
 };
 
+// CRUD operations for the users table
   // Insert a new row into the users table
-
-
-
   const insertUser = (
     name,
     picture,
@@ -438,11 +437,6 @@ const printCurriculumFirstRow = () => {
           reject(error); // Reject the promise if the transaction fails
         }
       );
-    //   tx.executeSql(`
-    //   INSERT INTO UserSettings (insertId)
-    //   VALUES (?);
-    // `, [userId]);
-
     },
     error => {
       console.error('Transaction error:', error.message); //
@@ -455,7 +449,6 @@ const printCurriculumFirstRow = () => {
 
 
 // Retrieve all rows from the users table
-
 const getUsers = () => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
@@ -464,7 +457,6 @@ const getUsers = () => {
         [],
         (_, result) => {
           const users = result.rows.raw();
-          // console.log('Users:', users);
           resolve(users);
         },
         (_, error) => { reject(error); }
@@ -472,6 +464,97 @@ const getUsers = () => {
     });
   });
 };
+
+// Retrieve one row from the users table
+const getOneUser = (id) => {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'SELECT * FROM users WHERE id = ?',
+        [id],
+        (_, result) => {
+          const user = result.rows.raw();
+          console.log('User:', user);
+          resolve(user);
+        },
+        (_, error) => { reject(error); }
+      );
+    });
+  });
+};
+
+// Update a row in the users table
+const updateUser = (id, updates) => {
+  const fields = [];
+  const values = [];
+
+  if (updates.name !== undefined) {
+    fields.push('name = ?');
+    values.push(updates.name);
+  }
+  if (updates.picture !== undefined) {
+    fields.push('picture = ?');
+    values.push(updates.picture);
+  }
+  if (updates.estimatedAttentionSpan !== undefined) {
+    fields.push('estimatedAttentionSpan = ?');
+    values.push(updates.estimatedAttentionSpan);
+  }
+  if (updates.settingsChoices !== undefined) {
+    fields.push('settingsChoices = ?');
+    values.push(updates.settingsChoices);
+  }
+  if (updates.progressInCurriculum !== undefined) {
+    fields.push('progressInCurriculum = ?');
+    values.push(updates.progressInCurriculum);
+  }
+  if (updates.averageAccuracy !== undefined) {
+    fields.push('averageAccuracy = ?');
+    values.push(updates.averageAccuracy);
+  }
+  if (updates.description !== undefined) {
+    fields.push('description = ?');
+    values.push(updates.description);
+  }
+  if (updates.necessaryBreakTime !== undefined) {
+    fields.push('necessaryBreakTime = ?');
+    values.push(updates.necessaryBreakTime);
+  }
+
+  if (fields.length === 0) {
+    console.log('No fields to update');
+    return;
+  }
+
+  values.push(id);
+
+  const query = `UPDATE users SET ${fields.join(', ')} WHERE id = ?`;
+
+  db.transaction(tx => {
+    tx.executeSql(
+      query,
+      values,
+      (_, result) => { console.log(`Row(s) updated: ${result.rowsAffected}`); },
+      (_, error) => { console.error('Error updating data', error); }
+    );
+  });
+
+
+
+};
+
+  // delete a row from the users table
+  const deleteUser = (id) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'DELETE FROM users WHERE id = ?',
+        [id],
+        (_, result) => { console.log(`Row(s) deleted: ${result.rowsAffected}`); },
+        (_, error) => { console.error('Error deleting data', error); }
+      );
+    });
+  };
+
 
 //Create Settings Tablee in db
 // const createSettingsTable = () => {
@@ -502,7 +585,6 @@ const getUsers = () => {
 // };
 
 // Function to update user settings
-
 const dropTable = (tableName) => {
   db.transaction(tx => {
     tx.executeSql(
@@ -520,7 +602,6 @@ const dropTable = (tableName) => {
 
 // Call the function with the table name you want to drop
 // dropTable('UserSettings');
-
 
 // is this chaning the true and false into 1 and zero
 
@@ -636,104 +717,6 @@ const getAllUserSettings = () => {
   });
 };
 
-const getOneUser = (id) => {
-  return new Promise((resolve, reject) => {
-    db.transaction(tx => {
-      tx.executeSql(
-        'SELECT * FROM users WHERE id = ?',
-        [id],
-        (_, result) => {
-          const user = result.rows.raw();
-          console.log('User:', user);
-          resolve(user);
-        },
-        (_, error) => { reject(error); }
-      );
-    });
-  });
-};
-
-
-
-
-
-
-
-
-
-
-
-// Update a row in the users table
-const updateUser = (id, updates) => {
-  const fields = [];
-  const values = [];
-
-  if (updates.name !== undefined) {
-    fields.push('name = ?');
-    values.push(updates.name);
-  }
-  if (updates.picture !== undefined) {
-    fields.push('picture = ?');
-    values.push(updates.picture);
-  }
-  if (updates.estimatedAttentionSpan !== undefined) {
-    fields.push('estimatedAttentionSpan = ?');
-    values.push(updates.estimatedAttentionSpan);
-  }
-  if (updates.settingsChoices !== undefined) {
-    fields.push('settingsChoices = ?');
-    values.push(updates.settingsChoices);
-  }
-  if (updates.progressInCurriculum !== undefined) {
-    fields.push('progressInCurriculum = ?');
-    values.push(updates.progressInCurriculum);
-  }
-  if (updates.averageAccuracy !== undefined) {
-    fields.push('averageAccuracy = ?');
-    values.push(updates.averageAccuracy);
-  }
-  if (updates.description !== undefined) {
-    fields.push('description = ?');
-    values.push(updates.description);
-  }
-  if (updates.necessaryBreakTime !== undefined) {
-    fields.push('necessaryBreakTime = ?');
-    values.push(updates.necessaryBreakTime);
-  }
-
-  if (fields.length === 0) {
-    console.log('No fields to update');
-    return;
-  }
-
-  values.push(id);
-
-  const query = `UPDATE users SET ${fields.join(', ')} WHERE id = ?`;
-
-  db.transaction(tx => {
-    tx.executeSql(
-      query,
-      values,
-      (_, result) => { console.log(`Row(s) updated: ${result.rowsAffected}`); },
-      (_, error) => { console.error('Error updating data', error); }
-    );
-  });
-
-
-
-};
-
-  // delete a row from the users table
-  const deleteUser = (id) => {
-    db.transaction(tx => {
-      tx.executeSql(
-        'DELETE FROM users WHERE id = ?',
-        [id],
-        (_, result) => { console.log(`Row(s) deleted: ${result.rowsAffected}`); },
-        (_, error) => { console.error('Error deleting data', error); }
-      );
-    });
-  };
 
   //  Combos table operations
   const createCombosTable = () => {
@@ -779,6 +762,8 @@ const updateUser = (id, updates) => {
     });
   };
 
+  // CRUD operations for the Combos table
+  // Insert a new row into the Combos table
   const insertComboData = (score, input, output) => {
     return new Promise((resolve, reject) => {
       db.transaction(tx => {
@@ -798,6 +783,7 @@ const updateUser = (id, updates) => {
     });
   };
 
+  // update a row in the Combos table
   const updateComboData = (score, id) => {
     return new Promise((resolve, reject) => {
       db.transaction(tx => {
@@ -817,6 +803,7 @@ const updateUser = (id, updates) => {
     });
   };
 
+  // delete a row from the Combos table
   const deleteComboData = (id) => {
     return new Promise((resolve, reject) => {
       db.transaction(tx => {
@@ -852,6 +839,8 @@ const updateUser = (id, updates) => {
 //   });
 // };
 
+// CRUD operations for the achievements table
+// Insert a new row into the achievements table
 const insertAchievement = (name, description, points, user_id) => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
@@ -871,6 +860,7 @@ const insertAchievement = (name, description, points, user_id) => {
   });
 };
 
+// update a row in the achievements table
 const updateAchievement = (name, description, points, user_id) => {
   db.transaction(tx => {
     tx.executeSql(
@@ -882,6 +872,7 @@ const updateAchievement = (name, description, points, user_id) => {
   });
 };
 
+// Retrieve all rows from the achievements table
 const allUserAchievements = (id) => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
@@ -895,6 +886,7 @@ const allUserAchievements = (id) => {
   });
 };
 
+// delete a row from the achievements table
 const deleteAchievement = (id) => {
   return new Promise((resolve, reject) => {
   db.transaction(tx => {
@@ -1001,7 +993,7 @@ insertUser(
   // deleteUser(3);
   // console.log(getOneUser(3), "should be null");
 
-  // INERTING AN ACHIEVEMENT TO THE ACHIEVEMENTS TABLE TO DISPLAY
+  // INSERTING AN ACHIEVEMENT TO THE ACHIEVEMENTS TABLE TO DISPLAY
   // See logic in Achievements directory for displaying achievements.
 
   await insertAchievement('Streak', 'day streak', 4, 1);
