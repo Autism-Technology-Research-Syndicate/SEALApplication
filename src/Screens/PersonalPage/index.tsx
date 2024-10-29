@@ -43,7 +43,7 @@ const Index = ({ navigation }) => {
           </View>
         </View>
         <View style={styles.section}>
-          <Button title='Eye contact practice' icon="eye" onPress={() => navigation.navigate('Welcome')} />
+          <Button title='Eye contact practice' icon="eye" onPress={() => navigation.navigate('CurriculumText')} />
           <Button light title='Achievements' icon="trophy" onPress={() => navigation.navigate('Achievements')} />
         </View>
       </View>

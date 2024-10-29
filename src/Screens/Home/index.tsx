@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import WelcomeToSeal from '../WelcomeToSeal';
 import Login from '../Login';
 import PersonalPage from '../PersonalPage';
+import CurriculumText from '../CurriculumText';
 import AccountSignUp from '../AccountSignUp';
 import HowSealWorks from '../HowSEALWorks';
 import WebCamFeed from '../../Components/WebCamFeed';
@@ -22,6 +23,7 @@ const Index = () => {
         <Stack.Screen name="Login" component={Login}  />
         <Stack.Screen name="Personal" component={PersonalPage}  />
         <Stack.Screen name="AccountSignUp" component={AccountSignUp}  />
+        <Stack.Screen name="CurriculumText" component={CurriculumText}  />
         {/* the "Main "screen below renders the bottom Nav which wraps the relevant pages it is included on */}
         <Stack.Screen name="Main" component={BottomNav}  />
         <Stack.Screen name="HowSealWorks" component={HowSealWorks}  />
