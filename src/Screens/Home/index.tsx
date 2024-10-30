@@ -13,7 +13,7 @@ import WebCamFeed from '../../Components/WebCamFeed';
 import Break from '../Break';
 import BottomNav from '../../Features/BottomNavigation';
 import ColorblindSettings from '../ColorblindSettings';
-import TypingInput from '../TypingInput/TypingInput';
+import TypingInput from '../TypingInput/PracticeSession';
 
 const Stack = createNativeStackNavigator();
 

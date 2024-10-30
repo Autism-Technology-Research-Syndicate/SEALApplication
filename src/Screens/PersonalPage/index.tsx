@@ -1,4 +1,4 @@
-import {Image, View} from 'react-native';
+import {Image, TouchableOpacity, View} from 'react-native';
 import BackgroundWrapper from '../../Components/BackgroundWrapper';
 import Button from '../../Components/Button';
 import Text from '../../Components/Text';
@@ -17,14 +17,16 @@ const Index = ({navigation}) => {
           <Text style={styles.header}>Welcome, James</Text>
           <Text style={styles.subheader}>Activities</Text>
           <View style={styles.row}>
-            <View style={styles.rowItem}>
+            <TouchableOpacity
+              style={styles.rowItem}
+              onPress={() => navigation.navigate('TypingInput')}>
               <PracticeSession />
               <Text style={styles.itemTitle}>Practice sessions</Text>
               <Text style={styles.itemText}>
                 Focused practices, skill builders, step-by-step sessions and
                 'repeat & refine'
               </Text>
-            </View>
+            </TouchableOpacity>
             <View style={styles.rowItem}>
               <AssignTasks />
               <Text style={styles.itemTitle}>Assigned tasks</Text>
@@ -50,10 +52,6 @@ const Index = ({navigation}) => {
           <Button
             title="Colorblind Settings"
             onPress={() => navigation.navigate('ColorblindSettings')}
-          />
-          <Button
-            title="Typing input test page"
-            onPress={() => navigation.navigate('TypingInput')}
           />
         </View>
       </View>
