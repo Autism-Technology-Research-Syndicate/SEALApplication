@@ -76,7 +76,7 @@ const AppContent: React.FC = () => {
       {/* Testing Curriculum Input Page */}
       {/* <RootStack.Navigator screenOptions={{ headerShown: false }}>
       {/* Temporarily set CurriculumInput as the initial screen */}
-          {/* <RootStack.Screen name="CurriculumInput" component={CurriculumInput} />
+      {/* <RootStack.Screen name="CurriculumInput" component={CurriculumInput} />
           <RootStack.Screen name="Home" component={Home} />
       </RootStack.Navigator> */}
 
