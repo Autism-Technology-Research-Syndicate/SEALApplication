@@ -17,6 +17,7 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import styles from './defaultCSS';
 import {exportDatabase} from '../../../Database/dbExport';
+import { useDeveloperMode } from '../../Contexts/DeveloperModeContext';
 
 /**
  * DeveloperMode Component
@@ -25,13 +26,20 @@ import {exportDatabase} from '../../../Database/dbExport';
  * Each option, when pressed, triggers a specific action or navigation.
  */
 
-const DeveloperMode = () => {
+interface DeveloperModeProps {
+  setShowImageViewer: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const DeveloperMode: React.FC<DeveloperModeProps> = ({ setShowImageViewer }) => {
   // Hook to access navigation object
   const navigation = useNavigation();
 
   // State to store export status
 
   const [exportStatus, setExportStatus] = useState<string | null>(null);
+
+  // Get all the needed functions from useDeveloperMode at the component level
+  const { activateCamera } = useDeveloperMode();
 
   // Function to handle database export
 
@@ -57,7 +65,18 @@ const DeveloperMode = () => {
     {
       title: 'Camera',
       icon: '📷',
-      onPress: () => console.log('Camera component opens'),
+      onPress: () => {
+        activateCamera();
+        console.log('Camera component opens');
+      },
+    },
+    {
+      title: 'View Images',
+      icon: '🖼️',
+      onPress: () => {
+        setShowImageViewer(true); 
+        console.log('Displaying saved images');
+      },
     },
     {title: 'Logs', icon: '📝', onPress: () => console.log('Logs viewed')},
     {

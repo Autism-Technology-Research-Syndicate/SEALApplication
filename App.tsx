@@ -6,7 +6,7 @@
  * and context providers.
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   TouchableWithoutFeedback,
@@ -36,6 +36,8 @@ import {ColorblindProvider} from './src/Contexts/ColorblindContext';
 import ColorblindFilter from './src/Components/ColorblindFilter/index';
 import styles from './appCSS';
 import {FontContextProvider} from './src/Contexts/FontContext';
+import { CameraComponent } from './src/Library/Camera/Camera';
+import ImageViewer from './src/Library/ImageViewer/ImageViewer';
 
 // Create a stack navigator for the root of the app
 
@@ -61,35 +63,57 @@ const CloseButton: React.FC<{onPress: () => void}> = ({onPress}) => (
 const AppContent: React.FC = () => {
   // Access developer mode functions and state from context
 
-  const {isDeveloperModeActive, openDeveloperMode, closeDeveloperMode} =
-    useDeveloperMode();
+  const {isDeveloperModeActive, openDeveloperMode, closeDeveloperMode, isCameraActive, deactivateCamera} =
+  useDeveloperMode();
   // const {isDeveloperModeActive, openDeveloperMode, closeDeveloperMode} =
   //   useDeveloperMode();
+  const [showImageViewer, setShowImageViewer] = useState(false);
 
   return (
-    <View style={styles.container}>
-      {/* Main navigation stack */}
-      <RootStack.Navigator screenOptions={{headerShown: false}}>
-        <RootStack.Screen name="Stack" component={Home} />
-      </RootStack.Navigator>
+    <FontContextProvider>
+      <View style={styles.container}>
+        {/* Main navigation stack */}
+        <RootStack.Navigator screenOptions={{headerShown: false}}>
+          <RootStack.Screen name="Stack" component={Home} />
+        </RootStack.Navigator>
 
-      {/* Testing Curriculum Input Page */}
-      {/* <RootStack.Navigator screenOptions={{ headerShown: false }}>
-      {/* Temporarily set CurriculumInput as the initial screen */}
-          {/* <RootStack.Screen name="CurriculumInput" component={CurriculumInput} />
-          <RootStack.Screen name="Home" component={Home} />
-      </RootStack.Navigator> */}
+        {/* Testing Curriculum Input Page */}
+        {/* <RootStack.Navigator screenOptions={{ headerShown: false }}>
+        {/* Temporarily set CurriculumInput as the initial screen */}
+            {/* <RootStack.Screen name="CurriculumInput" component={CurriculumInput} />
+            <RootStack.Screen name="Home" component={Home} />
+        </RootStack.Navigator> */}
 
-      {/* Developer mode activation area (top-right corner) */}
-      <TouchableWithoutFeedback onPress={openDeveloperMode}>
-        <View style={styles.activationArea} />
-      </TouchableWithoutFeedback>
+        {/* Developer mode activation area (top-right corner) */}
+        <TouchableWithoutFeedback onPress={openDeveloperMode}>
+          <View style={styles.activationArea} />
+        </TouchableWithoutFeedback>
 
-      {/* Render DeveloperMode component when active */}
-      {isDeveloperModeActive && <DeveloperMode />}
-      {/* Render close button for developer mode when active */}
-      {isDeveloperModeActive && <CloseButton onPress={closeDeveloperMode} />}
-    </View>
+        {/* Render DeveloperMode component when active */}
+        {isDeveloperModeActive && (
+          <>
+            <DeveloperMode setShowImageViewer={setShowImageViewer} />
+            {isCameraActive && (
+              <View style={styles.mainContainer}>
+                <CameraComponent />
+                <TouchableOpacity 
+                  style={styles.cameraCloseButton}
+                  onPress={deactivateCamera}
+                >
+                  <Text style={styles.cameraCloseButtonText}>Close Camera</Text>
+                </TouchableOpacity>
+              </View>
+            )}
+            {showImageViewer && (
+              <ImageViewer onClose={() => setShowImageViewer(false)} />
+            )}
+            {!isCameraActive && !showImageViewer && (
+              <CloseButton onPress={closeDeveloperMode} />
+            )}
+          </>
+        )}
+      </View>
+    </FontContextProvider>
   );
 };
 
