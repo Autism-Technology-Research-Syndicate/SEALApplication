@@ -1,11 +1,11 @@
 import {View, ScrollView} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {getStyles} from './defaultCSS';
-import {useFontContext} from '../../Contexts/FontContext';
+import {useSettingsContext} from '../../Contexts/SettingsContext';
 
 const Index = ({children}) => {
-  const {selectedFontConfig, setSelectedFontConfig} = useFontContext();
-  const styles = getStyles(selectedFontConfig);
+  const {selectedConfig, setSelectedConfig} = useSettingsContext();
+  const styles = getStyles(selectedConfig.font);
 
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}}>

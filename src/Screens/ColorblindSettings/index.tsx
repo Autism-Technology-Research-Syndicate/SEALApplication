@@ -2,8 +2,13 @@ import React from 'react';
 import {View, Button, Text} from 'react-native';
 import {useColorblind} from '../../Contexts/ColorblindContext';
 import styles from './defaultCSS';
+import {NavigationProp} from '@react-navigation/native';
 
-const ColorblindSettings = ({navigation}) => {
+const ColorblindSettings = ({
+  navigation,
+}: {
+  navigation: NavigationProp<any>;
+}) => {
   const {setFilterType} = useColorblind();
 
   const applyFilter = type => {

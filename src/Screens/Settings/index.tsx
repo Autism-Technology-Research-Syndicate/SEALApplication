@@ -1,46 +1,55 @@
-import React, { useState } from 'react';
-
+import React, {useEffect, useState} from 'react';
 
 import {
   View,
   Text,
-  ImageBackground,
-  SafeAreaView,
   ScrollView,
   Switch,
-  Pressable,
-  Touchable,
   TouchableOpacity,
-  Image,
-  Button,
-  Alert,
-  Platform,
-  PermissionsAndroid
+  Dimensions,
 } from 'react-native';
 
+import {getStyles} from './defaultCSS';
+import {useNotification} from '../../Features/useNotification';
+import {
+  FontConfigType,
+  useSettingsContext,
+} from '../../Contexts/SettingsContext';
+import {NavigationProp} from '@react-navigation/native';
+import {Icon} from 'react-native-paper';
 
-import BackgroundWrapper from '../../Components/BackgroundWrapper/index.js';
-// import Button from '../../Components/Button/.';
-import LinkButton from '../../Components/LinkButton/index.js';
-import TextField from '../../Components/TextField/index.js';
-// import Text from '../../Components/Text/.';
+const enum SettingsToggle {
+  videoResolution,
+  brightnessUp,
+  brightnessDown,
+  colorblindMode,
+  fontSizeUp,
+  fontSizeDown,
+  dyslexicFont,
+  audioSensitivity,
+  lightSensitivity,
+  notification,
+}
 
-import styles from './defaultCSS';
+const Index = ({navigation}: {navigation: NavigationProp<any>}) => {
+  const {width, height} = Dimensions.get('window');
+  const {selectedConfig, setSelectedConfig} = useSettingsContext();
+  const styles = getStyles(selectedConfig.font);
 
-
-import {updateUserSettings} from '../../../Database/dbInitialization.js';
-import {createSettingsTable} from '../../../Database/dbInitialization.js';
-import {getUsers} from '../../../Database/dbInitialization.js';
-import {insertUser} from '../../../Database/dbInitialization.js';
-import { dropTable } from '../../../Database/dbInitialization.js';
-import { getUserSettings } from '../../../Database/dbInitialization.js';
-import { dropTrigger } from '../../../Database/dbInitialization.js';
-import {getAllUserSettings} from '../../../Database/dbInitialization.js';
-import { useNotification } from '../../Features/useNotification';
-
-
-
-const Index = ({ navigation }) => {
+  const sansSerifFontFamily: FontConfigType = {
+    regular: 'Roboto-Regular',
+    bold: 'Roboto-Bold',
+    italic: 'Roboto-Italic',
+    bolditalic: 'Roboto-BoldItalic',
+    fontScale: selectedConfig.font.fontScale,
+  };
+  const dyslexicFontFamily: FontConfigType = {
+    regular: 'OpenDyslexic Regular',
+    bold: 'OpenDyslexic Bold',
+    italic: 'OpenDyslexic Italic',
+    bolditalic: 'OpenDyslexic Bold-Italic',
+    fontScale: selectedConfig.font.fontScale,
+  };
 
   const {
     displayNotification,
@@ -48,694 +57,324 @@ const Index = ({ navigation }) => {
     getTriggerNotificationIds,
     cancelTriggerNotifications,
     cancelAllNotifications,
-    openNotificationSettings
+    openNotificationSettings,
   } = useNotification();
 
-  const handleDisplayNotification = () => { 
+  const handleDisplayNotification = () => {
     displayNotification('Hello', 'This is a notification');
-  }
-
-  const handleCancelAllTriggerNotifications = () => {
-    cancelAllNotifications();
-  }
-
-    //The settings features can be changed to the acually features
-  type Settings = {
-    featureA: boolean;
-    featureB: boolean;
-    featureC: boolean;
-    featureD: boolean;
-    featureE: boolean;
-    featureF: boolean;
-    featureG: boolean;
-    featureH: boolean;
-  };
-  
-  const defaultSettings: Settings = {
-    featureA: false,
-    featureB: false,
-    featureC: false,
-    featureD: false,
-    featureE: false,
-    featureF: false,
-    featureG: false,
-    featureH: false,
   };
 
-  const [settings, setSettings] = useState<Settings>(defaultSettings);
-  
+  const [enableDyslexicFont, setEnableDyslexicFont] = useState(
+    selectedConfig.font.regular === dyslexicFontFamily.regular,
+  );
+  const isTablet = width > 640;
+  const [fontScaleLimit, setFontScaleLimit] = useState(
+    enableDyslexicFont ? (!isTablet ? 1.2 : 1.5) : !isTablet ? 1.5 : 2.0,
+  );
 
-  //can run this to insert a user into the database 
-  // const getSettings = () => {
-  //   //this is to check the update settings did work 
-  //   // dropTable('Users');
-  //   // dropTable('UserSettingsv3');
+  const handleToggleSwitch = (option: SettingsToggle) => {
+    switch (option) {
+      case SettingsToggle.dyslexicFont:
+        setEnableDyslexicFont(!enableDyslexicFont);
+        break;
 
-  //   // dropTrigger('create_default_settings');
-  //   insertUser('yes', 'yes', 1, 1, 'yes', 1, 1, 'yes', 1)
+      case SettingsToggle.fontSizeDown:
+        if (selectedConfig.font.fontScale > 0.6)
+          setSelectedConfig({
+            ...selectedConfig,
+            font: {
+              ...selectedConfig.font,
+              fontScale: Math.max(0.6, selectedConfig.font.fontScale - 0.1),
+            },
+          });
+        break;
 
-    
-  //   getAllUserSettings()
-  //   .then(results => {
-  //     console.log('Users:', results);
-  //   })
-  //   .catch(error => {
-  //     console.error('Error with getting user :', error);
-      
-  //   });
+      case SettingsToggle.fontSizeUp:
+        if (selectedConfig.font.fontScale < fontScaleLimit)
+          setSelectedConfig({
+            ...selectedConfig,
+            font: {
+              ...selectedConfig.font,
+              fontScale: Math.min(
+                fontScaleLimit,
+                selectedConfig.font.fontScale + 0.1,
+              ),
+            },
+          });
+        break;
 
+      case SettingsToggle.brightnessDown:
+        if (selectedConfig.brightness > 0)
+          setSelectedConfig({
+            ...selectedConfig,
+            brightness: Math.max(0, selectedConfig.brightness - 0.1),
+          });
+        break;
 
-  // };
+      case SettingsToggle.brightnessUp:
+        if (selectedConfig.brightness < 1)
+          setSelectedConfig({
+            ...selectedConfig,
+            brightness: Math.min(1, selectedConfig.brightness + 0.1),
+          });
+        break;
 
-  const saveSettings = () => {
-    //Update the settings in the database based on of userid and settings object
-    updateUserSettings(1, settings)
-    .then(results => {
-      Alert.alert('Settings saved successfully!');
-    })
-    .catch(error => {
-      console.error('Error saving settings:', error);
-      console.error('Error saving settings:', settings);
-      Alert.alert('Failed to save settings.');
-    });
-    //get user settigns based on userid - this is to check user settings did update
-    getUserSettings(1)
-    .then(results => {
-      console.log('Users:', results);
-    })
-    .catch(error => {
-      console.error('Error with getting user :', error);
-      
-    });
+      case SettingsToggle.videoResolution:
+        setSelectedConfig({
+          ...selectedConfig,
+          videoResolution: !selectedConfig.videoResolution,
+        });
+        break;
 
+      case SettingsToggle.colorblindMode:
+        setSelectedConfig({
+          ...selectedConfig,
+          colorblindMode: !selectedConfig.colorblindMode,
+        });
+        break;
+
+      case SettingsToggle.audioSensitivity:
+        setSelectedConfig({
+          ...selectedConfig,
+          audioSensitivity: !selectedConfig.audioSensitivity,
+        });
+        break;
+
+      case SettingsToggle.lightSensitivity:
+        setSelectedConfig({
+          ...selectedConfig,
+          lightSensitivity: !selectedConfig.lightSensitivity,
+        });
+        break;
+
+      case SettingsToggle.notification:
+        if (selectedConfig.notification) {
+          cancelAllNotifications();
+        }
+        setSelectedConfig({
+          ...selectedConfig,
+          notification: !selectedConfig.notification,
+        });
+        break;
+
+      default:
+        break;
+    }
   };
-//this is state for making the features false or true that will be sent to the database 
-  const [enable,setEnable] = useState(false);
 
-  const handleToggleSwitch = (feature: keyof Settings): boolean => {
-    setSettings(prevSettings => ({
-      ...prevSettings,
-      [feature]: !prevSettings[feature],
-    }));
-    console.log(`settings[${feature}]`, settings[feature]);
-    console.log(`settings`, settings);
-    return !settings[feature];
-  };
+  useEffect(() => {
+    if (enableDyslexicFont) {
+      setFontScaleLimit(!isTablet ? 1.2 : 1.5);
+      setSelectedConfig({
+        ...selectedConfig,
+        font: {
+          ...dyslexicFontFamily,
+          fontScale: Math.min(
+            !isTablet ? 1.2 : 1.5,
+            selectedConfig.font.fontScale,
+          ),
+        },
+      });
+    } else {
+      setFontScaleLimit(!isTablet ? 1.5 : 2.0);
+      setSelectedConfig({
+        ...selectedConfig,
+        font: {
+          ...sansSerifFontFamily,
+          fontScale: Math.min(
+            !isTablet ? 1.5 : 2.0,
+            selectedConfig.font.fontScale,
+          ),
+        },
+      });
+    }
+  }, [enableDyslexicFont]);
 
-
+  useEffect(() => {}, [selectedConfig]);
 
   return (
-    <ScrollView
-      scrollEnabled={true}
-      contentInsetAdjustmentBehavior='automatic'
-    >
-      <View style={styles.container}>
+    <>
+      <ScrollView
+        style={styles.container}
+        scrollEnabled={true}
+        contentInsetAdjustmentBehavior="automatic">
         <View style={styles.section}>
-          <TouchableOpacity onPress={() => navigation.navigate('Main')}
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Home')}
             style={{
               zIndex: 1,
-              width: 34,
-              height: 34,
-            }}
-          >
-            <Image
-              style={{
-                width: 24,
-                height: 24,
-                position: 'relative',
-                overflow: 'hidden',
-                zIndex: 6,
-                marginTop: 48,
-                marginRight: 0,
-                marginBottom: 0,
-                marginLeft: 18,
-                
-              }}
-              source={require('./assets/images/0193bb55-aa6d-4cd6-88f5-58443b74afd2.png')}
-              resizeMode='cover'
-            />
+              padding: 10,
+            }}>
+            <Icon size={34} source="arrow-left" />
           </TouchableOpacity>
-          {/* this is the start of the settings toggle view box */}
-          <ImageBackground
-            style={{
-              width: 133,
-              height: 49,
-              position: 'relative',
-              zIndex: 4,
-              marginTop: 454,
-              marginRight: 0,
-              marginBottom: 0,
-              marginLeft: 0.5,
-            }}
-            source={require('./assets/images/c74b045e-32dd-492f-8547-0e2bbfe3df24.png')}
-            resizeMode='cover'
-          />
-          <ImageBackground
-            style={{
-              width: 25,
-              height: 25,
-              position: 'relative',
-              zIndex: 5,
-              marginTop: 3,
-              marginRight: 0,
-              marginBottom: 0,
-              marginLeft: 284,
-            }}
-            source={require('./assets/images/93d66223-c0f3-4e1e-8953-516a85a44641.png')}
-          />
-          <Text
-            style={{
-              display: 'flex',
-              width: 49,
-              height: 22,
-              justifyContent: 'center',
-              alignItems: 'flex-start',
-              fontFamily: 'Helvetica Neue',
-              fontSize: 13,
-              fontWeight: '500',
-              lineHeight: 15.873,
-              color: '#f4f5f5',
-              letterSpacing: 0.26,
-              position: 'relative',
-              textAlign: 'center',
-              zIndex: 3,
-              marginTop: 2,
-              marginRight: 0,
-              marginBottom: 0,
-              marginLeft: 272,
-            }}
-            numberOfLines={1}
-          >
-          </Text>
-          <ImageBackground
-            style={{
-              width: 641,
-              height: 878,
-              position: 'absolute',
-              top: -218,
-              left: -102,
-            }}
-            source={require('./assets/images/8e9996ab-d0b1-4df0-82b1-8703a4fd0f6d.png')}
-            resizeMode='cover'
-          />
-          <ImageBackground
-            style={{
-              width: '6.11%',
-              height: '3.44%',
-              position: 'absolute',
-              top: '21.41%',
-              left: '9.17%',
-              zIndex: 7,
-            }}
-            source={require('./assets/images/c7c6d0dd-1aeb-4479-bfc8-d6cea24633b4.png')}
-          />
-          <Text
-            style={{
-              display: 'flex',
-              width: 202,
-              height: 72,
-              justifyContent: 'flex-start',
-              alignItems: 'flex-start',
-              fontFamily: 'Helvetica Neue',
-              fontSize: 18,
-              fontWeight: '700',
-              lineHeight: 21.978,
-              color: '#305070',
-              letterSpacing: 0.36,
-              position: 'absolute',
-              top: 138,
-              left: 63,
-              textAlign: 'left',
-              zIndex: 1,
-            }}
-          >
-           
-            Settings
-          </Text>
-          
-          <Text
-            style={{
-              display: 'flex',
-              width: 297,
-              height: 331,
-              justifyContent: 'flex-start',
-              alignItems: 'flex-start',
-              fontFamily: 'Helvetica Neue',
-              fontSize: 16,
-              fontWeight: '400',
-              lineHeight: 40,
-              color: '#305070',
-              position: 'absolute',
-              top: 178,
-              left: 34,
-              textAlign: 'left',
-              overflow: 'hidden',
-              zIndex: 16,
-            }}
-          >
-            Video resolution{'\n'}Brightness/contrast{'\n'}Color blindness
-            preferences{'\n'}Font sizes{'\n'}Dyslexic font options{'\n'}Audio
-            sensitivities{'\n'}Light sensitivities{'\n'}Notification preferences
-          </Text>
-       
-          <View
-            style={{
-              display: 'flex',
-              width: 66,
-              height: 20,
-              paddingTop: 2,
-              paddingRight: 2,
-              paddingBottom: 2,
-              paddingLeft: 0,
-              flexDirection: 'row',
-              alignItems: 'center',
-              flexWrap: 'nowrap',
 
-             
+          <Text style={styles.header}>Settings</Text>
 
-              borderColor: '#617275',
-              borderStyle: 'solid',
-              position: 'absolute',
-              top: 189,
-              left: 291,
-              overflow: 'hidden',
-              zIndex: 29,
-            }}
-          >
-
-            <Switch
-              value={settings.featureA}
-              onValueChange={()=>handleToggleSwitch('featureA')}
-              thumbColor={settings.featureA ? '#305070' : '#ffffff'} // corrected color
-            />
-
-            <View
-              style={{
-                width: 16,
-                height: 16,
-                flexShrink: 0,
-                position: 'relative',
-                zIndex: 30,
-              }}
-            />
-            
-          </View>
-
-          <ImageBackground
-            style={{
-              width: 297,
-              height: 1,
-              position: 'absolute',
-              top: 218.088,
-              left: 34,
-              zIndex: 8,
-            }}
-            source={require('./assets/images/14b9ccb2-67fa-4580-bc68-25a9c1e3d8d0.png')}
-            resizeMode='cover'
-          />
-          <View
-            style={{
-              display: 'flex',
-              width: 66,
-              height: 20,
-              paddingTop: 2,
-              paddingRight: 2,
-              paddingBottom: 2,
-              paddingLeft: 0,
-              flexDirection: 'row',
-              alignItems: 'center',
-              flexWrap: 'nowrap',
-          
-              borderColor: '#617275',
-              borderStyle: 'solid',
-              position: 'absolute',
-              top: 229,
-              left: 291,
-              overflow: 'hidden',
-              zIndex: 32,
-            }}
-          >
-              
+          <View style={styles.content}>
+            <View style={styles.settingOption}>
+              <Text style={styles.text}>Video Resolution</Text>
               <Switch
-              value={settings.featureB}
-              onValueChange={()=>handleToggleSwitch('featureB')}
-              thumbColor={settings.featureB ? '#305070' : '#ffffff'} // corrected color
-            />
-
-               
-            <View
-              style={{
-                width: 16,
-                height: 16,
-                flexShrink: 0,
-                position: 'relative',
-                zIndex: 33,
-              }}
-            />
-             
-
-
-          </View>
-
-          <ImageBackground
-            style={{
-              width: 297,
-              height: 1,
-              position: 'absolute',
-              top: 259,
-              left: 34,
-              zIndex: 9,
-            }}
-            source={require('./assets/images/a750d20a-906c-472c-b4fe-05db453f04cc.png')}
-            resizeMode='cover'
-          />
-          <View
-            style={{
-              display: 'flex',
-              width: 66,
-              height: 20,
-              paddingTop: 2,
-              paddingRight: 2,
-              paddingBottom: 2,
-              paddingLeft: 0,
-              flexDirection: 'row',
-              alignItems: 'center',
-              flexWrap: 'nowrap',
-          
-              borderColor: '#617275',
-              borderStyle: 'solid',
-              position: 'absolute',
-
-              top: 270,
-              left: 291,
-              overflow: 'hidden',
-              zIndex: 35,
-            }}
-          >
-            <Switch
-              value={settings.featureC}
-              onValueChange={()=>handleToggleSwitch('featureC')}
-              thumbColor={settings.featureC ? '#305070' : '#ffffff'} // corrected color
-            />
-
-            <View
-              style={{
-                width: 16,
-                height: 16,
-                flexShrink: 0,
-                position: 'relative',
-                zIndex: 36,
-              }}
-            />
-              
-
-          </View>
-
-          <ImageBackground
-            style={{
-              width: 297,
-              height: 1,
-              position: 'absolute',
-              top: 299,
-              left: 34,
-              zIndex: 10,
-            }}
-            source={require('./assets/images/664ac660-4bea-4f9a-9bc8-21a8513c9da1.png')}
-            resizeMode='cover'
-          />
-          <View
-            style={{
-              display: 'flex',
-              width: 66,
-              height: 20,
-              paddingTop: 2,
-              paddingRight: 2,
-              paddingBottom: 2,
-              paddingLeft: 0,
-              flexDirection: 'row',
-              alignItems: 'center',
-              flexWrap: 'nowrap',
-          
-              borderColor: '#617275',
-              borderStyle: 'solid',
-              position: 'absolute',
-
-              top: 311,
-              left: 291,
-              overflow: 'hidden',
-              zIndex: 26,
-            }}
-          >
-            <Switch
-                value={settings.featureD}
-                onValueChange={()=>handleToggleSwitch('featureD')}
-                thumbColor={settings.featureD ? '#305070' : '#ffffff'} // corrected color
+                value={selectedConfig.videoResolution}
+                onValueChange={() =>
+                  handleToggleSwitch(SettingsToggle.videoResolution)
+                }
+                thumbColor={
+                  selectedConfig.videoResolution ? '#305070' : '#eeeeee'
+                } // corrected color
               />
+            </View>
 
-            <View
-              style={{
-                width: 16,
-                height: 16,
-                flexShrink: 0,
-                position: 'relative',
-                zIndex: 27,
-              }}
-            />
-              
+            <View style={styles.settingOption}>
+              <Text style={styles.text}>Brightness/ Contrast</Text>
+              <View style={styles.buttons}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() =>
+                    handleToggleSwitch(SettingsToggle.brightnessDown)
+                  }>
+                  <Text>
+                    <Icon
+                      size={20}
+                      source="minus-thick"
+                      color={
+                        selectedConfig.brightness > 0 ? '#305070' : '#aaaaaa'
+                      }
+                    />
+                  </Text>
+                </TouchableOpacity>
+                <Text style={styles.value}>
+                  {(selectedConfig.brightness * 100).toFixed(0)}%
+                </Text>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() =>
+                    handleToggleSwitch(SettingsToggle.brightnessUp)
+                  }>
+                  <Text>
+                    <Icon
+                      size={20}
+                      source="plus-thick"
+                      color={
+                        selectedConfig.brightness < 1 ? '#305070' : '#aaaaaa'
+                      }
+                    />
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
 
-          </View>
-
-          <ImageBackground
-            style={{
-              width: 297,
-              height: 1,
-              position: 'absolute',
-              top: 339,
-              left: 34,
-              zIndex: 11,
-            }}
-            source={require('./assets/images/19272486-e057-4558-af97-2584ac921370.png')}
-            resizeMode='cover'
-          />
-          <View
-            style={{
-              display: 'flex',
-              width: 66,
-              height: 20,
-              paddingTop: 2,
-              paddingRight: 2,
-              paddingBottom: 2,
-              paddingLeft: 0,
-              flexDirection: 'row',
-              alignItems: 'center',
-              flexWrap: 'nowrap',
-          
-              borderColor: '#617275',
-              borderStyle: 'solid',
-              position: 'absolute',
-
-
-              top: 351,
-              left: 291,
-              overflow: 'hidden',
-              zIndex: 23,
-            }}
-          >
-           <Switch
-                  value={settings.featureE}
-                  onValueChange={()=>handleToggleSwitch('featureE')}
-                  thumbColor={settings.featureE? '#305070' : '#ffffff'} // corrected color
-                />
-
-            <View
-              style={{
-                width: 16,
-                height: 16,
-                flexShrink: 0,
-                position: 'relative',
-                zIndex: 24,
-              }}
-            />
-              
-              
-
-          </View>
-
-          <ImageBackground
-            style={{
-              width: 297,
-              height: 1,
-              position: 'absolute',
-              top: 379,
-              left: 34,
-              zIndex: 12,
-            }}
-            source={require('./assets/images/a46e11bd-07d3-4295-a8f0-637ca0364bac.png')}
-            resizeMode='cover'
-          />
-          <View
-            style={{
-              display: 'flex',
-              width: 66,
-              height: 20,
-              paddingTop: 2,
-              paddingRight: 2,
-              paddingBottom: 2,
-              paddingLeft: 0,
-              flexDirection: 'row',
-              alignItems: 'center',
-              flexWrap: 'nowrap',
-          
-              borderColor: '#617275',
-              borderStyle: 'solid',
-              position: 'absolute',
-
-
-              top: 389,
-              left: 291,
-              overflow: 'hidden',
-              zIndex: 20,
-            }}
-          >
-            <Switch
-                value={settings.featureF}
-                onValueChange={()=>handleToggleSwitch('featureF')}
-                thumbColor={settings.featureF ? '#305070' : '#ffffff'} // corrected color
+            <View style={styles.settingOption}>
+              <Text style={styles.text}>Colorblind Mode</Text>
+              <Switch
+                value={selectedConfig.colorblindMode}
+                onValueChange={() =>
+                  handleToggleSwitch(SettingsToggle.colorblindMode)
+                }
+                thumbColor={
+                  selectedConfig.colorblindMode ? '#305070' : '#eeeeee'
+                }
               />
+            </View>
 
-            <View
-              style={{
-                width: 16,
-                height: 16,
-                flexShrink: 0,
-                position: 'relative',
-                zIndex: 21,
-              }}
-            />
-              
+            <View style={styles.settingOption}>
+              <Text
+                style={{
+                  ...styles.text,
+                  fontFamily: dyslexicFontFamily.regular,
+                  lineHeight: styles.text.fontSize * 1.6,
+                }}>
+                Dyslexic Font
+              </Text>
+              <Switch
+                value={enableDyslexicFont}
+                onValueChange={() =>
+                  handleToggleSwitch(SettingsToggle.dyslexicFont)
+                }
+                thumbColor={enableDyslexicFont ? '#305070' : '#eeeeee'} // corrected color
+              />
+            </View>
 
+            <View style={styles.settingOption}>
+              <Text style={styles.text}>Font Size</Text>
+              <View style={styles.buttons}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() =>
+                    handleToggleSwitch(SettingsToggle.fontSizeDown)
+                  }>
+                  <Text>
+                    <Icon
+                      size={20}
+                      source="minus-thick"
+                      color={
+                        selectedConfig.font.fontScale > 0.6
+                          ? '#305070'
+                          : '#aaaaaa'
+                      }
+                    />
+                  </Text>
+                </TouchableOpacity>
+                <Text style={styles.value}>
+                  {selectedConfig.font.fontScale.toFixed(1)}x
+                </Text>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => handleToggleSwitch(SettingsToggle.fontSizeUp)}>
+                  <Text>
+                    <Icon
+                      size={20}
+                      source="plus-thick"
+                      color={
+                        selectedConfig.font.fontScale < fontScaleLimit
+                          ? '#305070'
+                          : '#aaaaaa'
+                      }
+                    />
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            <View style={styles.settingOption}>
+              <Text style={styles.text}>Audio Sensitivities</Text>
+              <Switch
+                value={selectedConfig.audioSensitivity}
+                onValueChange={() =>
+                  handleToggleSwitch(SettingsToggle.audioSensitivity)
+                }
+                thumbColor={
+                  selectedConfig.audioSensitivity ? '#305070' : '#eeeeee'
+                } // corrected color
+              />
+            </View>
+
+            <View style={styles.settingOption}>
+              <Text style={styles.text}>Light Sensitivities</Text>
+              <Switch
+                value={selectedConfig.lightSensitivity}
+                onValueChange={() =>
+                  handleToggleSwitch(SettingsToggle.lightSensitivity)
+                }
+                thumbColor={
+                  selectedConfig.lightSensitivity ? '#305070' : '#eeeeee'
+                } // corrected color
+              />
+            </View>
+
+            <View style={styles.settingOption}>
+              <Text style={styles.text}>Notification Preferences</Text>
+              <Switch
+                value={selectedConfig.notification}
+                onValueChange={() =>
+                  handleToggleSwitch(SettingsToggle.notification)
+                }
+                thumbColor={selectedConfig.notification ? '#305070' : '#eeeeee'} // corrected color
+              />
+            </View>
           </View>
-
-          <ImageBackground
-            style={{
-              width: 297,
-              height: 1,
-              position: 'absolute',
-              top: 419,
-              left: 34,
-              zIndex: 13,
-            }}
-            source={require('./assets/images/0472aba0-7d58-4848-83c5-3502fcc8990f.png')}
-            resizeMode='cover'
-          />
-          <View
-            style={{
-              width: 24,
-              height: 23,
-              position: 'absolute',
-              top: 428,
-              left: 306,
-              overflow: 'hidden',
-              zIndex: 38,
-            }}
-          >
-            <ImageBackground
-              style={{
-                width: 12,
-                height: 7.106,
-                position: 'relative',
-                zIndex: 39,
-                marginTop: 7.868,
-                marginRight: 0,
-                marginBottom: 0,
-                marginLeft: 6,
-              }}
-              source={require('./assets/images/822bec52-25b2-4ecf-8017-74ab1592c139.png')}
-            />
-          </View>
-          <ImageBackground
-            style={{
-              width: 297,
-              height: 1,
-              position: 'absolute',
-              top: 459,
-              left: 34,
-              zIndex: 14,
-            }}
-            source={require('./assets/images/d2481ce5-66e3-441f-833f-d873425d0f5c.png')}
-            resizeMode='cover'
-          />
-          <View
-            style={{
-              display: 'flex',
-              width: 66,
-              height: 20,
-              paddingTop: 2,
-              paddingRight: 2,
-              paddingBottom: 2,
-              paddingLeft: 0,
-              flexDirection: 'row',
-              alignItems: 'center',
-              flexWrap: 'nowrap',
-          
-              borderColor: '#617275',
-              borderStyle: 'solid',
-              position: 'absolute',
-
-
-              top: 470,
-              left: 291,
-              overflow: 'hidden',
-              zIndex: 17,
-            }}
-          >
-            <Switch
-                value={settings.featureG}
-                onValueChange={()=>handleToggleSwitch('featureG')}
-                thumbColor={settings.featureG ? '#305070' : '#ffffff'} // corrected color
-            />
-
-            <View
-              style={{
-                width: 16,
-                height: 16,
-                flexShrink: 0,
-                position: 'relative',
-                zIndex: 18,
-              }}
-            />
-              
-          </View>
-
-          {/* test for notifications */}
-           <Button title='Save Settings' onPress={saveSettings} /> 
-
-           {/* testing the notifications */}
-           {/* <Button title='display notification ' onPress={handleDisplayNotification} /> 
-           <Button title='cancel all notifications ' onPress={handleCancelAllTriggerNotifications} /> 
-           <Button title='go to device settings ' onPress = {openNotificationSettings} /> */}
-
-
-           
-            
-       
-          <ImageBackground
-            style={{
-              width: 297,
-              height: 1,
-              position: 'absolute',
-              top: 499,
-              left: 34,
-              zIndex: 15,
-            }}
-            source={require('./assets/images/a9628dcf-1c7c-4d22-9248-8f80e9d21a53.png')}
-            resizeMode='cover'
-          />
-      
-      </View>
-     </View>
-    </ScrollView>
-
+        </View>
+      </ScrollView>
+    </>
   );
-}
+};
 export default Index;

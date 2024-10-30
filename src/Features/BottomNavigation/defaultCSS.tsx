@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {getStyles as getDefaultStyles} from '../../Styles/defaultCSS';
-import {FontConfigType} from '../../Contexts/FontContext';
+import {FontConfigType} from '../../Contexts/SettingsContext';
 
 export const getStyles = (fontConfig: FontConfigType) => {
   const styles = getDefaultStyles(fontConfig);
@@ -18,7 +18,7 @@ export const getStyles = (fontConfig: FontConfigType) => {
     },
     icon: {
       fontSize: 15 * fontConfig.fontScale,
-      fontStyle: styles.textNormal.fontStyle,
+      fontFamily: styles.textNormal.fontFamily,
       color: styles.White,
     },
     middle: {

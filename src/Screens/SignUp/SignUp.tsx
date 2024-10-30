@@ -11,7 +11,7 @@ import {
   validateAge,
   validateName,
 } from './validation';
-import {useFontContext} from '../../Contexts/FontContext';
+import {useSettingsContext} from '../../Contexts/SettingsContext';
 
 /**
  * SignUp component renders the registration form and handles user input and validation.
@@ -38,8 +38,8 @@ export const SignUp = () => {
   const [validName, setValidName] = useState(true);
   const [validAge, setValidAge] = useState(true);
 
-  const {selectedFontConfig, setSelectedFontConfig} = useFontContext();
-  const styles = getStyles(selectedFontConfig);
+  const {selectedConfig, setSelectedConfig} = useSettingsContext();
+  const styles = getStyles(selectedConfig.font);
 
   /**
    * Handles the form submission and validates inputs.

@@ -2,11 +2,11 @@ import React from 'react';
 import {Text} from 'react-native';
 import {getStyles} from './defaultCSS';
 import {Button} from 'react-native-paper';
-import {useFontContext} from '../../Contexts/FontContext';
+import {useSettingsContext} from '../../Contexts/SettingsContext';
 
 function Index(props) {
-  const {selectedFontConfig, setSelectedFontConfig} = useFontContext();
-  const styles = getStyles(selectedFontConfig);
+  const {selectedConfig, setSelectedConfig} = useSettingsContext();
+  const styles = getStyles(selectedConfig.font);
 
   const {onPress, title = 'Heeelo'} = props;
 

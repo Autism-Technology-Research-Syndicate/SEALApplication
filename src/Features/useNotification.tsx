@@ -1,16 +1,17 @@
-import notifee, { TimestampTrigger, TriggerType, RepeatFrequency } from '@notifee/react-native';
-import { useEffect } from 'react';
-import { Platform, PermissionsAndroid } from 'react-native';
-import { View, Button, Linking, Alert } from 'react-native';
-
-
+import notifee, {
+  TimestampTrigger,
+  TriggerType,
+  RepeatFrequency,
+  AuthorizationStatus,
+} from '@notifee/react-native';
+import {useEffect} from 'react';
+import {Platform, PermissionsAndroid} from 'react-native';
+import {View, Button, Linking, Alert} from 'react-native';
 
 export const useNotification = () => {
- 
-
   async function checkNotificationPermission() {
     const settings = await notifee.getNotificationSettings();
-  
+
     if (settings.authorizationStatus == AuthorizationStatus.AUTHORIZED) {
       console.log('Notification permissions has been authorized');
     } else if (settings.authorizationStatus == AuthorizationStatus.DENIED) {
@@ -23,12 +24,10 @@ export const useNotification = () => {
             text: 'Open settings',
             onPress: openNotificationSettings,
           },
-        ]
+        ],
       );
     }
   }
-
- 
 
   useEffect(() => {
     checkNotificationPermission();
@@ -37,14 +36,14 @@ export const useNotification = () => {
   const openNotificationSettings = () => {
     const url = 'app-settings:';
     Linking.canOpenURL(url)
-      .then((supported) => {
+      .then(supported => {
         if (supported) {
           return Linking.openURL(url);
         } else {
           Alert.alert('Unable to open settings');
         }
       })
-      .catch((err) => {
+      .catch(err => {
         Alert.alert('An error occurred', err.message);
       });
   };
@@ -77,7 +76,7 @@ export const useNotification = () => {
     title: string,
     body: string,
     timestamp: number,
-    repeatFrequency: RepeatFrequency | undefined = undefined
+    repeatFrequency: RepeatFrequency | undefined = undefined,
   ) {
     // Create a channel required for Android Notifications
     const channelId = await notifee.createChannel({
@@ -116,8 +115,7 @@ export const useNotification = () => {
       trigger, // use displayNotification to update triggerNotifications which trigger already fired
     );
     return triggerNotificationId;
-
-    }
+  }
 
   // get all trigger notifications
   async function getTriggerNotificationIds() {
@@ -126,7 +124,9 @@ export const useNotification = () => {
   }
 
   // cancel all or specific trigger notifications
-  async function cancelTriggerNotifications(notificationIds: string[] | undefined) {
+  async function cancelTriggerNotifications(
+    notificationIds: string[] | undefined,
+  ) {
     await notifee.cancelTriggerNotifications(notificationIds);
   }
 
@@ -136,7 +136,10 @@ export const useNotification = () => {
   }
 
   // cancel notification via notificationId or tag
-  async function cancelNotification(notificationId: string, tag: string | undefined = undefined) {
+  async function cancelNotification(
+    notificationId: string,
+    tag: string | undefined = undefined,
+  ) {
     await notifee.cancelNotification(notificationId, tag);
   }
 
@@ -150,6 +153,6 @@ export const useNotification = () => {
     cancelTriggerNotifications,
     cancelAllNotifications,
     cancelNotification,
-    openNotificationSettings
-  }
-}
+    openNotificationSettings,
+  };
+};

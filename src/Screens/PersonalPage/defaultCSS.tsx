@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {getStyles as getDefaultStyles} from '../../Styles/defaultCSS';
-import {FontConfigType} from '../../Contexts/FontContext';
+import {FontConfigType} from '../../Contexts/SettingsContext';
 
 export const getStyles = (fontConfig: FontConfigType) => {
   const styles = getDefaultStyles(fontConfig);
@@ -18,6 +18,11 @@ export const getStyles = (fontConfig: FontConfigType) => {
     },
     subheader: {
       ...styles.subheaderText,
+    },
+    col: {
+      flexDirection: 'col',
+      gap: 15,
+      flexGrow: 1,
     },
     row: {
       flexDirection: 'row',
@@ -55,6 +60,13 @@ export const getStyles = (fontConfig: FontConfigType) => {
     section: {
       rowGap: 15,
       padding: 30,
+    },
+    settingsButton: {
+      position: 'absolute',
+      zIndex: 1,
+      top: 10,
+      right: 10,
+      padding: 10,
     },
   });
   return stylesheet;

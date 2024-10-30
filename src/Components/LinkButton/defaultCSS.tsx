@@ -1,16 +1,20 @@
 import {StyleSheet} from 'react-native';
 import {getStyles as getDefaultStyles} from '../Styles/defaultCSS';
-import {FontConfigType} from '../../Contexts/FontContext';
+import {FontConfigType} from '../../Contexts/SettingsContext';
 
 export const getStyles = (fontConfig: FontConfigType) => {
   const styles = getDefaultStyles(fontConfig);
 
   const stylesheet = StyleSheet.create({
     text: {
+      ...styles.textBold,
+      alignItems: 'center',
       color: styles.defaultColor,
-      fontSize: styles.textBold.fontSize,
-      fontFamily: styles.textBold.fontFamily,
       textDecorationLine: 'underline',
+      // textAlign: 'center',
+    },
+    button: {
+      paddingVertical: 8,
     },
   });
   return stylesheet;

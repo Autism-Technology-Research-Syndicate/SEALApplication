@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {FontConfigType} from '../Contexts/FontContext';
+import {FontConfigType} from '../Contexts/SettingsContext';
 
 export const getStyles = (fontConfig: FontConfigType) => {
   const colorRange = {
@@ -37,27 +37,47 @@ export const getStyles = (fontConfig: FontConfigType) => {
       fontFamily: fontConfig.regular,
       color: colorRange.VeryDarkDesaturatedBlue,
       fontSize: 20 * fontConfig.fontScale,
-      fontStyle: 'normal',
+      lineHeight:
+        20 *
+        fontConfig.fontScale *
+        (fontConfig.regular === 'OpenDyslexic Regular' ? 1.6 : 1),
+      // fontStyle: 'normal',
     },
     textBold: {
       fontFamily: fontConfig.bold,
       color: colorRange.VeryDarkDesaturatedBlue,
       fontSize: 20 * fontConfig.fontScale,
+      lineHeight:
+        20 *
+        fontConfig.fontScale *
+        (fontConfig.regular === 'OpenDyslexic Regular' ? 1.6 : 1),
     },
     headerText: {
       fontSize: 33 * fontConfig.fontScale,
       fontFamily: fontConfig.bold,
       color: colorRange.VeryDarkDesaturatedBlue,
+      lineHeight:
+        33 *
+        fontConfig.fontScale *
+        (fontConfig.regular === 'OpenDyslexic Regular' ? 1.6 : 1),
     },
     subheaderText: {
       fontSize: 21 * fontConfig.fontScale,
       color: colorRange.VeryDarkDesaturatedBlue,
       fontFamily: fontConfig.bold,
+      lineHeight:
+        21 *
+        fontConfig.fontScale *
+        (fontConfig.regular === 'OpenDyslexic Regular' ? 1.6 : 1),
     },
     content: {
       fontSize: 18 * fontConfig.fontScale,
       fontFamily: fontConfig.regular,
       color: colorRange.VeryDarkDesaturatedBlue,
+      lineHeight:
+        18 *
+        fontConfig.fontScale *
+        (fontConfig.regular === 'OpenDyslexic Regular' ? 1.6 : 1),
     },
   });
   return stylesheet;
