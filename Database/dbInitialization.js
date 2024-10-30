@@ -29,20 +29,111 @@ const initializeDatabase = async () => {
     );
   });
 
-  // Drop the existing achievements table before updating it. might be better to have a migrations file
   db.transaction(tx => {
-    // Drop the existing achievements table
     tx.executeSql(
-      `DROP TABLE IF EXISTS achievements`,
+      `CREATE TABLE IF NOT EXISTS Users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        picture TEXT,
+        estimatedAttentionSpan INTEGER,
+        levelOfSpectrum INTEGER,
+        settingsChoices TEXT,
+        progressInCurriculum INTEGER,
+        averageAccuracy INTEGER,
+        description TEXT,
+        necessaryBreakTime INTEGER
+      )`,
       [],
       () => {
-        console.log('Old achievements table dropped successfully.');
+        console.log('users Table created successfuly - in dbInitialization.');
       },
       (_, error) => {
-        console.error('Error dropping table', error);
+        console.error('Error creating table', error);
+      },
+    );
+
+    tx.executeSql(
+      `CREATE TABLE IF NOT EXISTS UserSettingsv3 (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        userId INTEGER,
+        featureA INTEGER DEFAULT 1 CHECK(featureA BETWEEN 0 AND 1),
+        featureB INTEGER DEFAULT 1 CHECK(featureB BETWEEN 0 AND 1),
+        featureC INTEGER DEFAULT 1 CHECK(featureC BETWEEN 0 AND 1),
+        featureD INTEGER DEFAULT 1 CHECK(featureD BETWEEN 0 AND 1),
+        featureE INTEGER DEFAULT 1 CHECK(featureE BETWEEN 0 AND 1),
+        featureF INTEGER DEFAULT 1 CHECK(featureF BETWEEN 0 AND 1),
+        featureG INTEGER DEFAULT 1 CHECK(featureG BETWEEN 0 AND 1),
+        featureH INTEGER DEFAULT 1 CHECK(featureH BETWEEN 0 AND 1),
+        FOREIGN KEY (userId) REFERENCES Users(id)
+       
+        
+      )`,
+      [],
+      () => {
+        console.log('usersettingsv3 Table created successfully - in dbInitialization.');
+      },
+      
+      (_, error) => {
+        console.error('Error creating UserSettingsv3 table or exists or or or or or', error);
+      },
+    );
+    
+    tx.executeSql(`
+    CREATE TRIGGER IF NOT EXISTS create_default_settings
+    AFTER INSERT ON Users
+    BEGIN
+        INSERT INTO UserSettingsv3 (userId)
+        VALUES (NEW.id);
+
+    END;
+`,
+      [],
+      () => {
+        console.log('users trigger created successfuly - in dbInitialization.');
+      },
+      (_, error) => {
+        console.error('Error creating trigger', error);
+      },
+);
+});
+
+  db.transaction(tx => {
+    tx.executeSql(
+      `CREATE TABLE IF NOT EXISTS Users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        picture TEXT,
+        estimatedAttentionSpan INTEGER,
+        levelOfSpectrum INTEGER,
+        settingsChoices TEXT,
+        progressInCurriculum INTEGER,
+        averageAccuracy INTEGER,
+        description TEXT,
+        necessaryBreakTime INTEGER
+      )`,
+      [],
+      () => {
+        console.log('users Table created successfully - in dbInitialization.');
+      },
+      (_, error) => {
+        console.error('Error creating table', error);
       },
     );
   });
+    // Drop the existing achievements table before updating it. might be better to have a migrations file
+    db.transaction(tx => {
+      // Drop the existing achievements table
+      tx.executeSql(
+        `DROP TABLE IF EXISTS achievements`,
+        [],
+        () => {
+          console.log('Old achievements table dropped successfully.');
+        },
+        (_, error) => {
+          console.error('Error dropping table', error);
+        }
+      );
+    });
 
   const createTable = (query, tableName) => {
     return new Promise((resolve, reject) => {
@@ -196,7 +287,23 @@ const initializeDatabase = async () => {
     });
 };
 
+
+function dropTrigger(triggerName) {
+  db.transaction(tx => {
+      tx.executeSql(
+          `DROP TRIGGER IF EXISTS ${triggerName};`,
+          [],
+          () => {
+              console.log(`Trigger '${triggerName}' dropped successfully.`);
+          },
+          error => {
+              console.error(`Error dropping trigger '${triggerName}':`, error);
+          }
+      );
+  });
+}
 // Insert a new row into the imgdp table
+
 const insertImageData = async (b64str, input, output) => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
@@ -354,80 +461,92 @@ const getAllCurriculumData = () => {
 
 const printCurriculumFirstRow = () => {
   return new Promise((resolve, reject) => {
-    db.transaction(tx => {
-      tx.executeSql(
-        'SELECT * FROM curriculum LIMIT 1',
-        [],
-        (_, {rows}) => {
-          if (rows.length > 0) {
-            console.log('First row data:', rows.item(0));
-            resolve(rows.item(0));
-          } else {
-            console.log('No data found.');
-            resolve(null);
-          }
-        },
-        (tx, error) => {
-          console.error('Error querying data', error);
-          reject(error);
-        },
-      );
-    });
-  });
-};
 
-// Insert a new row into the users table
-const insertUser = (
-  name,
-  picture,
-  estimatedAttentionSpan,
-  settingsChoices,
-  progressInCurriculum,
-  averageAccuracy,
-  description,
-  necessaryBreakTime,
-) => {
-  return new Promise((resolve, reject) => {
-    db.transaction(
-      tx => {
-        tx.executeSql(
-          'INSERT INTO users (name, picture, estimatedAttentionSpan, settingsChoices, progressInCurriculum, averageAccuracy, description, necessaryBreakTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-          [
-            name,
-            picture,
-            estimatedAttentionSpan,
-            settingsChoices,
-            progressInCurriculum,
-            averageAccuracy,
-            description,
-            necessaryBreakTime,
-          ],
-          (_, result) => {
-            console.log(
-              `A row has been inserted in the user table with rowid ${result.insertId} and name ${name}`,
-            );
-            resolve(result);
-          },
-          (_, error) => {
-            console.error('Error inserting user data', error.message);
-            reject(error);
-          },
-        );
+  db.transaction(tx => {
+    tx.executeSql(
+      'SELECT * FROM curriculum LIMIT 1',
+      [],
+      (_, { rows }) => {
+        if (rows.length > 0) {
+          console.log('First row data:', rows.item(0));
+          resolve(rows.item(0));
+        } else {
+          console.log('No data found.');
+          resolve(null);
+        }
       },
-      error => {
-        console.error('Transaction error:', error.message);
-        reject(error); // Reject the promise if the transaction fails
-      },
+      (tx, error) => { console.error('Error querying data', error);
+        reject(error);
+      }
     );
   });
+});
 };
 
+  // Insert a new row into the users table
+
+
+            
+  const insertUser = (
+    name,
+    picture,
+    estimatedAttentionSpan,
+    settingsChoices,
+    progressInCurriculum,
+    averageAccuracy,
+    description,
+    necessaryBreakTime,
+  ) => {
+    return new Promise((resolve, reject) => {
+      db.transaction(
+        tx => {
+          tx.executeSql(
+            'INSERT INTO users (name, picture, estimatedAttentionSpan, settingsChoices, progressInCurriculum, averageAccuracy, description, necessaryBreakTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+            [
+              name,
+              picture,
+              estimatedAttentionSpan,
+              settingsChoices,
+              progressInCurriculum,
+              averageAccuracy,
+              description,
+              necessaryBreakTime,
+            ],
+            (_, result) => {
+              console.log(
+                `A row has been inserted in the user table with rowid ${result.insertId} and name ${name}`,
+              );
+              resolve(result);
+            },
+            (_, error) => {
+              console.error('Error inserting user data', error.message);
+              reject(error);
+            },
+          );
+        },
+      );
+    //   tx.executeSql(`
+    //   INSERT INTO UserSettings (insertId)
+    //   VALUES (?);
+    // `, [userId]);
+
+    },
+    error => {
+      console.error('Transaction error:', error.message); //
+    },
+    () => {
+      console.log('Transaction completed successfully');
+    },
+  );
+};
+   
 // Retrieve all rows from the users table
+
 const getUsers = () => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
-        'SELECT * FROM users',
+        `SELECT * FROM Users`,
         [],
         (_, result) => {
           const users = result.rows.raw();
@@ -442,7 +561,170 @@ const getUsers = () => {
   });
 };
 
-const getOneUser = id => {
+//Create Settings Tablee in db
+// const createSettingsTable = () => {
+//   db.transaction(tx => {
+//     tx.executeSql(
+//       `CREATE TABLE IF NOT EXISTS UserSettings (
+//         id INTEGER PRIMARY KEY AUTOINCREMENT,
+//         featureA NUMBER DEFAULT 1,
+//         featureB NUMBER DEFUALT 1,
+//         featureC NUMBER DEFUALT 1,
+//         featureD NUMBER DEFAULT 1,
+//         featureE NUMBER DEFAULT 1, 
+//         featureF NUMBER DEFAULT 1,
+//         featureG NUMBER DEFAULT 1,
+//         featureH NUMBER DEFAULT 1,
+      
+//       )`,
+//       [],
+//       () => {
+//         console.log('Settings Table created successfully - in dbInitialization.');
+//       },
+      
+//       (_, error) => {
+//         console.error('Error creating table or exists', error);
+//       },
+//     );
+//   });
+// };
+
+// Function to update user settings
+
+const dropTable = (tableName) => {
+  db.transaction(tx => {
+    tx.executeSql(
+      `DROP TABLE IF EXISTS ${tableName}`,
+      [],
+      (tx, results) => {
+        console.log(`Table ${tableName} dropped successfully.`);
+      },
+      (tx, error) => {
+        console.error(`Error dropping table ${tableName}:`, error);
+      }
+    );
+  });
+};
+
+// Call the function with the table name you want to drop
+// dropTable('UserSettings');
+
+
+// is this chaning the true and false into 1 and zero 
+
+const updateUserSettings = (userId, settings) => {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        `UPDATE UserSettingsv3 SET
+        featureA = ?,
+        featureB = ?,
+        featureC = ?,
+        featureD = ?,
+        featureE = ?,
+        featureF = ?,
+        featureG = ?,
+        featureH = ?
+        WHERE userId = ?`,
+        [
+          settings.featureA ? 1 : 0,
+          settings.featureB ? 1 : 0,
+          settings.featureC ? 1 : 0,
+          settings.featureD ? 1 : 0,
+          settings.featureE ? 1 : 0,
+          settings.featureF ? 1 : 0,
+          settings.featureG ? 1 : 0,
+          settings.featureH ? 1 : 0,
+          userId
+        ],
+        (_, result) => {
+          resolve(result);
+        },
+        (_, error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+};
+
+
+const updateUserSettings2 = (userId, settings) => {
+
+  const booleanToInteger = value => (value === true ? 1 : 0);
+
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(`
+        INSERT INTO UserSettingsv3 (userId, featureA, featureB, featureC, featureD, featureE, featureF, featureG, featureH)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT(userId) DO UPDATE SET
+          featureA=excluded.featureA,
+          featureB=excluded.featureB,
+          featureC=excluded.featureC,
+          featureD=excluded.featureD,
+          featureE=excluded.featureE,
+          featureF=excluded.featureF,
+          featureG=excluded.featureG,
+          featureH=excluded.featureH
+      `, [
+        userId,
+        booleanToInteger(settings.featureA),
+        booleanToInteger(settings.featureB),
+        booleanToInteger(settings.featureC),
+        booleanToInteger(settings.featureD),
+        booleanToInteger(settings.featureE),
+        booleanToInteger(settings.featureF),
+        booleanToInteger(settings.featureG),
+        booleanToInteger(settings.featureH)
+      ], (tx, results) => {
+        resolve(results);
+      }, (tx, error) => {
+        reject(error);
+      });
+    });
+  });
+};
+
+
+// Function to retrieve user settings
+const getUserSettings=(userId)=> {
+  return new Promise((resolve, reject) => {
+      db.transaction(tx => {
+          tx.executeSql(
+              `SELECT * FROM UserSettingsv3 WHERE userId = ?;`,
+              [userId],
+              (tx, results) => {
+                  const rows = results.rows;
+                  let userSettings = [];
+                  for (let i = 0; i < rows.length; i++) {
+                      userSettings.push(rows.item(i));
+                  }
+                  resolve(userSettings); // Resolve the promise with the user settings
+              },
+              error => {
+                  reject(error); // Reject the promise with an error
+              }
+          );
+      });
+  });
+}
+
+const getAllUserSettings = () => {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        `SELECT * FROM UserSettingsv3`,
+        [],
+        (_, result) => { resolve(result.rows.raw()); },
+
+        (_, error) => { reject(error); }
+      );
+    });
+  });
+};
+
+const getOneUser = (id) => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
@@ -460,6 +742,16 @@ const getOneUser = id => {
     });
   });
 };
+
+
+
+
+  
+
+
+
+
+
 
 // Update a row in the users table
 const updateUser = (id, updates) => {
@@ -829,6 +1121,12 @@ testDb();
 
 // Export functions
 export {
+  // createSettingsTable,
+  dropTable,
+  updateUserSettings,
+  getUserSettings,
+  getAllUserSettings,
+
   createCombosTable,
   createScoreIndex,
   insertComboData,
@@ -850,6 +1148,7 @@ export {
   printCurriculumFirstRow,
   getAllCurriculumData,
   insertCurriculumData,
+  dropTrigger,
   insertAchievement,
   updateAchievement,
   allUserAchievements,

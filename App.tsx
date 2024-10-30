@@ -6,7 +6,7 @@
  * and context providers.
  */
 
-import React, {useCallback, useEffect, useRef} from 'react';
+import React from 'react';
 import {
   View,
   TouchableWithoutFeedback,
@@ -15,6 +15,15 @@ import {
   Text,
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
+// import React, {useCallback, useEffect, useRef} from 'react';
+// import {
+//   View,
+//   TouchableWithoutFeedback,
+//   StyleSheet,
+//   TouchableOpacity,
+//   Text,
+// } from 'react-native';
+// import {NavigationContainer} from '@react-navigation/native';
 import Home from './src/Screens/Home/.';
 import DeveloperMode from './src/Screens/DeveloperMode';
 
@@ -23,9 +32,10 @@ import {
   useDeveloperMode,
 } from './src/Contexts/DeveloperModeContext';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {ColorblindProvider} from './src/Contexts/ColorblindContext.tsx';
-import ColorblindFilter from './src/Components/ColorblindFilter/index.tsx';
-import styles from './appCSS.tsx';
+import {ColorblindProvider} from './src/Contexts/ColorblindContext';
+import ColorblindFilter from './src/Components/ColorblindFilter/index';
+import styles from './appCSS';
+import {FontContextProvider} from './src/Contexts/FontContext';
 
 // Create a stack navigator for the root of the app
 
@@ -39,6 +49,7 @@ const RootStack = createNativeStackNavigator();
  *
  * @param {Function} onPress - Function to call when the button is pressed
  */
+// const CloseButton: React.FC<{onPress: () => void}> = ({onPress}) => (
 const CloseButton: React.FC<{onPress: () => void}> = ({onPress}) => (
   <View style={styles.closeButtonContainer}>
     <TouchableOpacity onPress={onPress} style={styles.closeButton}>
@@ -52,6 +63,8 @@ const AppContent: React.FC = () => {
 
   const {isDeveloperModeActive, openDeveloperMode, closeDeveloperMode} =
     useDeveloperMode();
+  // const {isDeveloperModeActive, openDeveloperMode, closeDeveloperMode} =
+  //   useDeveloperMode();
 
   return (
     <View style={styles.container}>
@@ -107,9 +120,11 @@ const App: React.FC = () => {
   return (
     <DeveloperModeProvider>
       <ColorblindProvider>
+      <FontContextProvider >
         <NavigationContainer>
           <AppContent />
         </NavigationContainer>
+      </FontContextProvider>
       </ColorblindProvider>
     </DeveloperModeProvider>
   );

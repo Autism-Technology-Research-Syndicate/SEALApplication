@@ -1,0 +1,49 @@
+1. 
+sdkmanager "platform-tools" "emulator" "platforms;android-34" "system-images;android-UpsideDownCakePrivacySandbox;google_apis_playstore;arm64-v8a"
+sdkmanager --list
+sdkmanager --list_installed
+sdkmanager --uninstall  "system-images;android-UpsideDownCakePrivacySandbox;google_apis_playstore;arm64-v8a"
+
+sdkmanager "platform-tools" "emulator" "platforms;android-34" "system-images;android-34;google_apis;arm64-v8a"
+
+2. 
+avdmanager -v create avd -n pixel_6_pro_arm64-v8a -k "system-images;android-UpsideDownCakePrivacySandbox;google_apis_playstore;arm64-v8a" --device "pixel_6_pro"
+avdmanager list device
+avdmanager delete avd -n Pixel_6_pro_x86_64
+avdmanager list device -c
+avdmanager list avd
+
+3. emulator -avd pixel_6_pro_arm64-v8a
+
+4. adb logcat
+
+5. react-native run-android  --mode=release
+./gradlew assembleDebug
+
+sudo watchman watch-del-all && sudo rm -rf $TMPDIR/react-*  && sudo rm -fr $TMPDIR/metro-cache* && sudo rm -fr $TMPDIR/haste-map-metro*  &&  sudo rm -rf ios/build && sudo xcrun simctl erase all && sudo rm -rf node_modules/ && sudo npm cache verify
+ && npm install
+ && react-native run-ios -- --reset-cache
+
+npx react-native-clean-project
+./gradlew clean
+rm -rf .gradle
+
+npx react-native init testy --version 0.74.3
+
+for i in $( gem list --local --no-version | grep cocoapods );
+do 
+    sudo gem uninstall $i; 
+done
+
+lsof -i :8081
+lsof | grep x86
+~/.android/avd
+
+unzip -lv test.apk | grep "\.so"
+
+unzip -lv android/app/build/outputs/apk/debug/app-debug.apk | grep lib*.so
+
+grep camera   ~/.android/avd/*/*.ini
+
+
+sudo chown -Rn 501:20

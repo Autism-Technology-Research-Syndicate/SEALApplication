@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { View, Text, Button } from 'react-native';
-import { createCombosTable, insertComboData } from '../../Database/dbInitialization';
+// sessionUtils.ts
+
 import SQLite from 'react-native-sqlite-storage';
+import { createCombosTable, insertComboData } from '../../Database/dbInitialization';
 
 const db = SQLite.openDatabase(
   { name: 'mydatabase.db', location: 'default' },
@@ -16,8 +16,7 @@ const outputs = ['Video lessons', 'Reading', 'Teacher instruction', 'Pictures/di
  * Loads data from the Combos table in the database
  * @returns {Promise<Object>} A promise that resolves to an object containing the processed data
  */
-
-const loadData = () => {
+const loadData = (): Promise<Record<string, Record<string, { totalScore: number; count: number }>>> => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
@@ -51,35 +50,30 @@ const loadData = () => {
  * @param {number} explorationFactor - A factor to balance exploration vs. exploitation (default: 1)
  * @returns {number} The calculated UCB score
  */
-
-const calculateUCB = (totalScore, count, totalTrials, explorationFactor = 1) => {
+const calculateUCB = (totalScore: number, count: number, totalTrials: number, explorationFactor = 1): number => {
   const averageScore = count > 0 ? totalScore / count : 0;
   return averageScore + explorationFactor * Math.sqrt(Math.log(totalTrials) / (count || 1));
 };
-
 
 /**
  * Predicts the next best input-output combination based on UCB scores
  * @param {Object} data - The processed data from the database
  * @returns {Object|null} The best input-output pair and its UCB score, or null if no data is available
  */
-
-const predictNext = (data) => {
+const predictNext = (data: Record<string, Record<string, { totalScore: number; count: number }>>): Prediction | null => {
   if (Object.keys(data).length === 0) {
     console.log('No data available for prediction');
     return null;
   }
 
-    // Calculate total trials across all combinations
-
-
+  // Calculate total trials across all combinations
   const totalTrials = Object.values(data).reduce(
     (sum, outputs) => sum + Object.values(outputs).reduce((s, { count }) => s + count, 0),
     0
   );
 
   let bestScore = -Infinity;
-  let bestPair = null;
+  let bestPair: Prediction | null = null;
 
   for (const [input, outputs] of Object.entries(data)) {
     for (const [output, { totalScore, count }] of Object.entries(outputs)) {
@@ -95,23 +89,20 @@ const predictNext = (data) => {
   return bestPair;
 };
 
-//  Below function is for testing purposes
-
 /**
  * Generates and inserts sample data into the database
  * @param {number} numRows - The number of sample rows to generate (default: 100)
  * @returns {Promise<void>}
  */
-
-const generateAndInsertSampleData = async (numRows = 100) => {
-  const errors = [];
+const generateAndInsertSampleData = async (numRows = 100): Promise<void> => {
+  const errors: string[] = [];
   for (let i = 0; i < numRows; i++) {
     try {
       const input = inputs[Math.floor(Math.random() * inputs.length)];
       const output = outputs[Math.floor(Math.random() * outputs.length)];
       const score = Math.random().toFixed(2); // Random score between 0 and 1
       await insertComboData(score, input, output);
-    } catch (error) {
+    } catch (error: any) {
       errors.push(`Error inserting row ${i + 1}: ${error.message}`);
     }
   }
@@ -122,7 +113,11 @@ const generateAndInsertSampleData = async (numRows = 100) => {
   console.log(`${numRows} sample rows inserted successfully`);
 };
 
-const runTest = async () => {
+/**
+ * Runs a test by creating the Combos table, inserting sample data, loading data, and making a prediction
+ * @returns {Promise<{ prediction?: Prediction; error?: string }>}
+ */
+const runTest = async (): Promise<{ prediction?: Prediction; error?: string }> => {
   try {
     console.log('Starting runTest...');
 
@@ -148,58 +143,21 @@ const runTest = async () => {
     }
 
     console.log('Test completed.');
-    return { prediction };
-  } catch (error) {
+    return { prediction: prediction || undefined };
+  } catch (error: any) {
     console.error('Error in runTest:', error.message);
     console.error('Error stack:', error.stack);
     return { error: error.message };
   }
 };
 
-const SessionOptimizerComponent = () => {
-  const [result, setResult] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+/**
+ * Prediction Interface
+ */
+interface Prediction {
+  input: string;
+  output: string;
+  ucbScore: number;
+}
 
-  const handleRunTest = async () => {
-    setIsLoading(true);
-    setResult(null);
-
-    try {
-      console.log('Starting runTest...');
-      const testResult = await runTest();
-      console.log('Test completed. Result:', testResult);
-      setResult(testResult);
-    } catch (error) {
-      console.error('Test failed:', error.message);
-      setResult({ error: error.message });
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  return (
-    <View style={{ padding: 20 }}>
-      <Button 
-        title={isLoading ? "Running..." : "Run Session Optimizer Test"} 
-        onPress={handleRunTest}
-        disabled={isLoading}
-      />
-      {result && (
-        <View style={{ marginTop: 20 }}>
-          {result.prediction ? (
-            <>
-              <Text>Best Input: {result.prediction.input}</Text>
-              <Text>Best Output: {result.prediction.output}</Text>
-              <Text>UCB Score: {result.prediction.ucbScore.toFixed(4)}</Text>
-            </>
-          ) : (
-            <Text>No prediction available</Text>
-          )}
-          {result.error && <Text>Error: {result.error}</Text>}
-        </View>
-      )}
-    </View>
-  );
-};
-
-export default SessionOptimizerComponent;
+export { loadData, predictNext, runTest };

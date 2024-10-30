@@ -26,9 +26,9 @@ export const HomeStackNavigator = () => {
 export const ProfileStackNavigator = () => {
   return (
     <ProfileStack.Navigator initialRouteName="AccountSignUp" screenOptions={{ headerShown: false }}>
-      <HomeStack.Screen name="PersonalPage" component={PersonalPage} />
-      <HomeStack.Screen name="AccountSignUp" component={AccountSignUp} />
-      <HomeStack.Screen name="Achievements" component={Achievements} />
+      <ProfileStack.Screen name="PersonalPage" component={PersonalPage} />
+      <ProfileStack.Screen name="AccountSignUp" component={AccountSignUp} />
+      <ProfileStack.Screen name="Achievements" component={Achievements} />
     </ProfileStack.Navigator>
   );
 };
