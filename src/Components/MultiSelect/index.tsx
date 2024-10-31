@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { MultipleSelectList } from 'react-native-dropdown-select-list'
+import React, {useState} from 'react';
+import {MultipleSelectList} from 'react-native-dropdown-select-list';
 
-import { getStyles } from './defaultCSS';
-import { useFontContext } from '../../Contexts/FontContext';
+import {getStyles} from './defaultCSS';
+import {useSettingsContext} from '../../Contexts/SettingsContext';
 
 function Index(props) {
-  const { selectedFontConfig } = useFontContext();
-  const styles = getStyles(selectedFontConfig);
+  const {selectedConfig} = useSettingsContext();
+  const styles = getStyles(selectedConfig.font);
 
   return (
     <MultipleSelectList
@@ -22,7 +22,6 @@ function Index(props) {
       dropdownTextStyles={styles.container}
       inputStyles={styles.container}
     />
-
   );
 }
 

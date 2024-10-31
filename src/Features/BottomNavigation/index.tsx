@@ -6,11 +6,11 @@ import AccountSignUp from '../../Screens/AccountSignUp';
 import {getStyles} from './defaultCSS';
 import {HomeStackNavigator, ProfileStackNavigator} from '../StackNavigators';
 import Settings from '../../Screens/Settings';
-import {useFontContext} from '../../Contexts/FontContext';
+import {useSettingsContext} from '../../Contexts/SettingsContext';
 
 export default function Index() {
-  const {selectedFontConfig, setSelectedFontConfig} = useFontContext();
-  const styles = getStyles(selectedFontConfig);
+  const {selectedConfig, setSelectedConfig} = useSettingsContext();
+  const styles = getStyles(selectedConfig.font);
 
   const Tab = createBottomTabNavigator();
 
@@ -28,8 +28,7 @@ export default function Index() {
     },
     tabBarItemStyle: {
       backgroundColor: styles.nav.backgroundColor,
-      paddingTop: 10,
-      paddingBottom: 10,
+      paddingVertical: 5,
     },
   };
   return (
@@ -64,7 +63,7 @@ export default function Index() {
           },
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Settings"
         component={Settings}
         options={{
@@ -73,7 +72,7 @@ export default function Index() {
             return <Icon source="cog" size={size} color={color} />;
           },
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 }

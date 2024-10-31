@@ -1,17 +1,13 @@
 import React from 'react';
 import {Text} from 'react-native-paper';
 import {getStyles} from './defaultCSS';
-import {useFontContext} from '../../Contexts/FontContext';
+import {useSettingsContext} from '../../Contexts/SettingsContext';
 
 function Index(props) {
-  const {selectedFontConfig, setSelectedFontConfig} = useFontContext();
-  const styles = getStyles(selectedFontConfig);
+  const {selectedConfig, setSelectedConfig} = useSettingsContext();
+  const styles = getStyles(selectedConfig.font);
 
-  return (
-    <Text variant="bodyLarge" style={{...styles.text, ...props.style}}>
-      {props.children}
-    </Text>
-  );
+  return <Text style={{...styles.text, ...props.style}}>{props.children}</Text>;
 }
 
 export default Index;

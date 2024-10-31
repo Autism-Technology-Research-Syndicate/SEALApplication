@@ -5,17 +5,18 @@ import {View, Text} from 'react-native';
 import BackgroundWrapper from '../../Components/BackgroundWrapper';
 import Button from '../../Components/Button';
 import getStyles from './defaultCSS';
-import {useFontContext} from '../../Contexts/FontContext';
+import {useSettingsContext} from '../../Contexts/SettingsContext';
 import Seal from '../../Assets/svg/seal.svg';
 import Hello from '../../Assets/svg/hello.svg';
 import SessionOptimizerComponent from '../../prediction/sessionPrediction';
 import useBreakTimer from '../../Hooks/BreakTimer';
+import {NavigationProp} from '@react-navigation/native';
 
-const Index = ({navigation}) => {
+const Index = ({navigation}: {navigation: NavigationProp<any>}) => {
   useBreakTimer(15 * 60 * 1000); // Set the timer interval in milliseconds
 
-  const {selectedFontConfig} = useFontContext();
-  const styles = getStyles(selectedFontConfig);
+  const {selectedConfig} = useSettingsContext();
+  const styles = getStyles(selectedConfig.font);
 
 
   return (

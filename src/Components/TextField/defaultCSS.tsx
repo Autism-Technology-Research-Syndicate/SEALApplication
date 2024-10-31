@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {getStyles as getDefaultStyles} from '../Styles/defaultCSS';
-import {FontConfigType} from '../../Contexts/FontContext';
+import {FontConfigType} from '../../Contexts/SettingsContext';
 
 export const getStyles = (fontConfig: FontConfigType) => {
   const styles = getDefaultStyles(fontConfig);
@@ -16,7 +16,9 @@ export const getStyles = (fontConfig: FontConfigType) => {
     },
     placeholder: {
       color: '#305070',
-      fontSize: styles.textNormal.fontSize,
+      fontSize:
+        styles.textNormal.fontSize *
+        (fontConfig.regular === 'OpenDyslexic Regular' ? 0.8 : 1),
       fontFamily: styles.textNormal.fontFamily,
     },
     backgroundColor: {backgroundColor: 'black'},

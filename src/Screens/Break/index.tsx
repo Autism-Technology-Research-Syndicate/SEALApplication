@@ -2,11 +2,12 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import BackgroundWrapper from '../../Components/BackgroundWrapper';
 import {getStyles} from './defaultCSS';
-import {useFontContext} from '../../Contexts/FontContext';
+import {useSettingsContext} from '../../Contexts/SettingsContext';
+import {NavigationProp} from '@react-navigation/native';
 
-const Index = ({navigation}) => {
-  const {selectedFontConfig, setSelectedFontConfig} = useFontContext();
-  const styles = getStyles(selectedFontConfig);
+const Index = ({navigation}: {navigation: NavigationProp<any>}) => {
+  const {selectedConfig, setSelectedConfig} = useSettingsContext();
+  const styles = getStyles(selectedConfig.font);
   return (
     <BackgroundWrapper>
       <View style={styles.container}>

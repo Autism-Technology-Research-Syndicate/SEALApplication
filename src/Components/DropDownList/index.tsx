@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {getStyles} from './defaultCSS';
-import {useFontContext} from '../../Contexts/FontContext';
+import {useSettingsContext} from '../../Contexts/SettingsContext';
 
 /**
  * Transforms an array of strings into an array of objects with label and value properties.
@@ -17,8 +17,8 @@ export const createDropDown = (
   value: string[],
   setValue: any,
 ) => {
-  const {selectedFontConfig, setSelectedFontConfig} = useFontContext();
-  const styles = getStyles(selectedFontConfig);
+  const {selectedConfig, setSelectedConfig} = useSettingsContext();
+  const styles = getStyles(selectedConfig.font);
   // Transform the label strings into objects with label and value properties
   const transformedLabels = labels.map(e => ({
     label: e,

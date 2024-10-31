@@ -35,7 +35,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {ColorblindProvider} from './src/Contexts/ColorblindContext';
 import ColorblindFilter from './src/Components/ColorblindFilter/index';
 import styles from './appCSS';
-import {FontContextProvider} from './src/Contexts/FontContext';
+import {SettingsContextProvider} from './src/Contexts/SettingsContext';
 
 // Create a stack navigator for the root of the app
 
@@ -76,7 +76,7 @@ const AppContent: React.FC = () => {
       {/* Testing Curriculum Input Page */}
       {/* <RootStack.Navigator screenOptions={{ headerShown: false }}>
       {/* Temporarily set CurriculumInput as the initial screen */}
-          {/* <RootStack.Screen name="CurriculumInput" component={CurriculumInput} />
+      {/* <RootStack.Screen name="CurriculumInput" component={CurriculumInput} />
           <RootStack.Screen name="Home" component={Home} />
       </RootStack.Navigator> */}
 
@@ -120,11 +120,11 @@ const App: React.FC = () => {
   return (
     <DeveloperModeProvider>
       <ColorblindProvider>
-      <FontContextProvider >
-        <NavigationContainer>
-          <AppContent />
-        </NavigationContainer>
-      </FontContextProvider>
+        <SettingsContextProvider>
+          <NavigationContainer>
+            <AppContent />
+          </NavigationContainer>
+        </SettingsContextProvider>
       </ColorblindProvider>
     </DeveloperModeProvider>
   );

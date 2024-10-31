@@ -1,13 +1,14 @@
-import { View } from 'react-native';
+import {View} from 'react-native';
 import React from 'react';
 import BackgroundWrapper from '../../Components/BackgroundWrapper';
 import Text from '../../Components/Text';
 import {getStyles} from './defaultCSS';
-import { useFontContext } from '../../Contexts/FontContext';
+import {useSettingsContext} from '../../Contexts/SettingsContext';
 import Trophy from '../../Assets/svg/Trophy.svg';
 import Award from '../../Assets/svg/Award.svg';
-import { Appbar } from 'react-native-paper';
+import {Appbar} from 'react-native-paper';
 import useAchievements from './data';
+import {NavigationProp} from '@react-navigation/native';
 
 interface Achievement {
   id: number;
@@ -35,11 +36,11 @@ const AchievementsList = ({
   </View>
 );
 
-const Index: React.FC<{ navigation: any }> = ({ navigation }) => {
-  const { selectedFontConfig } = useFontContext();
-  const styles = getStyles(selectedFontConfig);
+const Index: React.FC<{navigation: NavigationProp<any>}> = ({navigation}) => {
+  const {selectedConfig} = useSettingsContext();
+  const styles = getStyles(selectedConfig.font);
   const user_id = 1; //replace with the actual user id of the logged in user
-  const { achievements, loading, error } = useAchievements(user_id);
+  const {achievements, loading, error} = useAchievements(user_id);
 
   if (loading) {
     return <Text>Loading...</Text>;

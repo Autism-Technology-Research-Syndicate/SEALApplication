@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {getStyles as getDefaultStyles} from '../../Styles/defaultCSS';
-import {FontConfigType} from '../../Contexts/FontContext';
+import {FontConfigType} from '../../Contexts/SettingsContext';
 
 export const getStyles = (fontConfig: FontConfigType) => {
   const styles = getDefaultStyles(fontConfig);
@@ -12,11 +12,11 @@ export const getStyles = (fontConfig: FontConfigType) => {
       borderTopLeftRadius: 12,
       borderTopRightRadius: 12,
     },
-    dark: { backgroundColor: 'rgba(48, 80, 112, 1)' },
-    light: { backgroundColor: 'rgba(132, 182, 207, 1)' },
-    opacityLight: { opacity: 0.85 },
-    opacityNormal: { opacity: 1 },
-    disabled: {opacity: 0.50 },
+    dark: {backgroundColor: 'rgba(48, 80, 112, 1)'},
+    light: {backgroundColor: 'rgba(132, 182, 207, 1)'},
+    opacityLight: {opacity: 0.85},
+    opacityNormal: {opacity: 1},
+    disabled: {opacity: 0.5},
     textNormal: styles.textNormal,
     textBold: styles.textBold,
     defaultColor: styles.defaultColor,

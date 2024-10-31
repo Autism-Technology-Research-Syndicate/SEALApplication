@@ -4,11 +4,12 @@ import Carousel from '../../Features/Carousel';
 import {Appbar} from 'react-native-paper';
 import {getStyles} from './defaultCSS';
 import data from './data';
-import {useFontContext} from '../../Contexts/FontContext';
+import {useSettingsContext} from '../../Contexts/SettingsContext';
+import {NavigationProp} from '@react-navigation/native';
 
-const Index = ({navigation}) => {
-  const {selectedFontConfig, setSelectedFontConfig} = useFontContext();
-  const styles = getStyles(selectedFontConfig);
+const Index = ({navigation}: {navigation: NavigationProp<any>}) => {
+  const {selectedConfig, setSelectedConfig} = useSettingsContext();
+  const styles = getStyles(selectedConfig.font);
   return (
     <BackgroundWrapper>
       <View style={styles.container}>
