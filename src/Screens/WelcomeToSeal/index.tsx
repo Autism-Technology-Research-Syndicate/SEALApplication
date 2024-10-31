@@ -18,6 +18,7 @@ const Index = ({navigation}: {navigation: NavigationProp<any>}) => {
   const {selectedConfig} = useSettingsContext();
   const styles = getStyles(selectedConfig.font);
 
+
   return (
     <BackgroundWrapper>
       <View style={styles.container}>

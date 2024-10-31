@@ -11,6 +11,7 @@ import PracticeSession from '../../Assets/svg/practice_session.svg';
 import AssignTasks from '../../Assets/svg/assign_tasks.svg';
 import {Appbar, Icon} from 'react-native-paper';
 import {NavigationProp} from '@react-navigation/native';
+import CurriculumInput from '../CurriculumInput';
 
 const Index = ({navigation}: {navigation: NavigationProp<any>}) => {
   const {selectedConfig} = useSettingsContext();
@@ -65,12 +66,18 @@ const Index = ({navigation}: {navigation: NavigationProp<any>}) => {
               onPress={() => navigation.navigate('Achievements')}
             />
 
-            {/*Test button: Comment it to remove it. Will need to change Settings to 'NONE' before to remove filter*/}
-            <Button
-              title="Colorblind Settings"
-              onPress={() => navigation.navigate('ColorblindSettings')}
-            />
-          </View>
+          {/*Test button: Comment it to remove it. Will need to change Settings to 'NONE' before to remove filter*/}
+          <Button
+            title="Colorblind Settings"
+            onPress={() => navigation.navigate('ColorblindSettings')}
+          />
+
+          {/* Curriculum Component */}
+          <Button
+            title="Curriculum To Do"
+            icon="clipboard-list"
+            onPress={() => navigation.navigate('Curriculum Todo')}
+          />
         </View>
       </ProtectedRoute>
     </BackgroundWrapper>
