@@ -167,6 +167,12 @@ const initializeDatabase = async () => {
       score INTEGER DEFAULT 0
     )`;
 
+  const curriculumImagesTableQuery = `
+      CREATE TABLE IF NOT EXISTS curriculumImages (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        base64 TEXT NOT NULL
+    )`;
+
   const usersTableQuery = `
     CREATE TABLE IF NOT EXISTS users (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -210,6 +216,7 @@ const initializeDatabase = async () => {
   return Promise.all([
     createTable(imgdpTableQuery, 'imgdp'),
     createTable(curriculumTableQuery, 'curriculum'),
+    createTable(curriculumImagesTableQuery, 'curriculumImages'),
     createTable(usersTableQuery, 'users'),
     createTable(achievementsTableQuery, 'achievements'),
     createTable(userSettingsTableQuery, 'UserSettingsv3'),
