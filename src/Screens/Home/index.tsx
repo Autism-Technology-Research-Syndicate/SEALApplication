@@ -20,6 +20,7 @@ import Break from '../Break';
 import BottomNav from '../../Features/BottomNavigation';
 import Video from '../Video';
 import ColorblindSettings from '../ColorblindSettings';
+import TypingInput from '../TypingInput/PracticeSession';
 import CurriculumTodo from '../CurriculumTodo';
 
 const Stack = createNativeStackNavigator();
@@ -34,6 +35,7 @@ const Index = () => {
           headerShown: false,
         }}>
         <Stack.Screen name="Welcome" component={WelcomeToSeal} />
+
         <Stack.Screen
           name="ColorblindSettings"
           component={ColorblindSettings}
@@ -48,7 +50,12 @@ const Index = () => {
         <Stack.Screen name="AccountSignUp" component={AccountSignUp} />
         {/* the "Main "screen below renders the bottom Nav which wraps the relevant pages it is included on */}
         <Stack.Screen name="Main" component={BottomNav} />
+        <Stack.Screen
+          name="ColorblindSettings"
+          component={ColorblindSettings}
+        />
         <Stack.Screen name="HowSealWorks" component={HowSealWorks} />
+        <Stack.Screen name="TypingInput" component={TypingInput} />
         {/* Commented for testing, uncomment to enable break screen*/}
         <Stack.Screen name="Break" component={Break} />
         <Stack.Screen name='Video' component={Video}/>
