@@ -14,8 +14,11 @@ import React, { createContext, useState, useContext, useCallback, ReactNode } fr
 
 interface DeveloperModeContextType {
   isDeveloperModeActive: boolean;
+  isCameraActive: boolean;
   openDeveloperMode: () => void;
   closeDeveloperMode: () => void;
+  activateCamera: () => void;
+  deactivateCamera: () => void; 
 }
 
 // Create the context with undefined as initial value
@@ -44,6 +47,9 @@ export const DeveloperModeProvider: React.FC<DeveloperModeProviderProps> = ({ ch
   const [isDeveloperModeActive, setIsDeveloperModeActive] = useState(false);
     // State to track the number of taps for activating developer mode
   const [tapCount, setTapCount] = useState(0);
+
+  const [isCameraActive, setIsCameraActive] = useState(false);
+
    /**
    * Function to handle opening the developer mode
    * It increments the tap count and activates developer mode after 15 taps
@@ -60,16 +66,28 @@ export const DeveloperModeProvider: React.FC<DeveloperModeProviderProps> = ({ ch
     });
   }, []);
 
-  const closeDeveloperMode = () =>{
+  const closeDeveloperMode = useCallback(() => {
     setIsDeveloperModeActive(false);
+    setIsCameraActive(false);
     setTapCount(0); // Reset tap count when closing
-  }
+  }, []);
+
+  const activateCamera = useCallback(() => {
+    setIsCameraActive(true);
+  }, []);
+
+  const deactivateCamera = useCallback(() => {
+    setIsCameraActive(false);
+  }, []);
 
   // Context value that will be provided to consumers
   const contextValue = {
     isDeveloperModeActive,
+    isCameraActive,
     openDeveloperMode,
-    closeDeveloperMode
+    closeDeveloperMode,
+    activateCamera,
+    deactivateCamera
   };
 
   return (
