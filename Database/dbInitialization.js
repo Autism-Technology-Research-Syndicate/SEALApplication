@@ -400,6 +400,36 @@ const printCurriculumFirstRow = () => {
 });
 };
 
+//  CRUD operations for the curriculumImages table
+// Create function to store base64 data in curriculumImages
+function createCurriculumImage(base64String) {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'INSERT INTO curriculumImages (base64) VALUES (?);',
+        [base64String],
+        (_, { insertId }) => resolve(insertId),  // Return the new image's ID
+        (_, error) => reject(error)
+      );
+    });
+  });
+}
+
+// Read function to retrieve base64 data by ID
+function getCurriculumImageById(id) {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'SELECT base64 FROM curriculumImages WHERE id = ?;',
+        [id],
+        (_, { rows }) => resolve(rows.length > 0 ? rows.item(0).base64 : null),
+        (_, error) => reject(error)
+      );
+    });
+  });
+}
+
+
 // CRUD operations for the users table
   // Insert a new row into the users table
   const insertUser = (
@@ -1007,8 +1037,29 @@ insertUser(
   await insertAchievement('Hours', 'hours of learning', 20, 1);
   await insertAchievement('Tasks', 'tasks completed', 12, 1);
   console.log('All achievements:', await allUserAchievements(1));
+
+  // curriculumImage tests
+// Create a new image
+  console.log("create curriculum Image");
+  await createCurriculumImage('base64_string_test');
+
+  // Retrieve a curriculumImage
+  console.log("getting curriculum image");
+  try {
+    const base64 = await getCurriculumImageById(1);
+    if (base64) {
+      console.log(`Image data: ${base64}`);
+    } else {
+      console.log('No image found with the given ID.');
+    }
+  } catch (error) {
+    console.error('Error retrieving image:', error);
+  }
 console.log("finished running testDb");
 };
+
+
+
 
 // uncomment to run tests
 testDb();
