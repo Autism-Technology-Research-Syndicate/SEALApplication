@@ -24,6 +24,20 @@ const initializeDatabase = async () => {
         },
       );
     });
+    // Drop the existing curriculum table before updating it. might be better to have a migrations file
+    db.transaction(tx => {
+      // Drop the existing curriculum table
+      tx.executeSql(
+        `DROP TABLE IF EXISTS curriculum`,
+        [],
+        () => {
+          console.log('Old curriculum table dropped successfully.');
+        },
+        (_, error) => {
+          console.error('Error dropping table', error);
+        },
+      );
+    });
 
 //     tx.executeSql(
 //       `CREATE TABLE IF NOT EXISTS UserSettingsv3 (
@@ -356,6 +370,31 @@ const insertCurriculumData = (input_output, sequence, content) => {
   });
 });
 };
+
+const insertCurriculumDataWithImage = async (input_output, sequence, content) => {
+  try {
+    let uriContent = content;
+
+    // Ensure content is an object and check for base64 image
+    if (typeof content === 'object' && content.image && content.image.startsWith('data:image/')) {
+      const base64Image = content.image;  // Extract the base64 image string
+      const imageId = await createCurriculumImage(base64Image);  // Store image and get its ID
+      uriContent = { ...content, image: `image://${imageId}` };  // Create URI and update content object
+      console.log("uriContent", uriContent);
+    }
+
+    // Serialize the content object to a JSON string
+    const serializedContent = JSON.stringify(uriContent);
+
+    const result = await insertCurriculumData(input_output, sequence, serializedContent);
+    console.log(`Inserted curriculum with row ID ${result.insertId}`);
+    return result;
+  } catch (error) {
+    console.error('Error inserting curriculum data with image', error);
+    throw error;
+  }
+};
+
 
 // Retrieve all rows from the curriculum table for testing
 const getAllCurriculumData = () => {
@@ -956,6 +995,8 @@ const testDb = async () => {
 
   await insertCurriculumData(0, 5, "Testing curriculum");
 
+  await insertCurriculumDataWithImage(0, 6, { text: 'Testing curriculum with image', image: 'data:image/png;base64,base64_string' });
+
   await printCurriculumFirstRow();
 
   // User tests
@@ -1055,6 +1096,26 @@ insertUser(
   } catch (error) {
     console.error('Error retrieving image:', error);
   }
+
+// Retrieve all curriculum data
+console.log("getting all curriculum data");
+const allCurriculum = await getAllCurriculumData();
+const lastCurriculum = allCurriculum[allCurriculum.length - 1];
+console.log('last curriculum:', lastCurriculum);
+
+console.log('last curriculum content:', lastCurriculum.content);
+
+
+// Parse the content JSON string back into an object
+if (lastCurriculum && lastCurriculum.content) {
+  lastCurriculum.content = JSON.parse(lastCurriculum.content);
+  console.log('Last curriculum data:', lastCurriculum);
+} else {
+  console.log('No curriculum data found.');
+}
+
+
+
 console.log("finished running testDb");
 };
 
