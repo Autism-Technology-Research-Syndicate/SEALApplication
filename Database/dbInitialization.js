@@ -455,17 +455,38 @@ function createCurriculumImage(base64String) {
 }
 
 // Read function to retrieve base64 data by ID
-function getCurriculumImageById(id) {
+const getCurriculumImageById = (id) =>{
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
         'SELECT base64 FROM curriculumImages WHERE id = ?;',
         [id],
-        (_, { rows }) => resolve(rows.length > 0 ? rows.item(0).base64 : null),
-        (_, error) => reject(error)
+        (_, { rows }) => {
+          if (rows.length > 0) {
+            const base64 = rows.item(0).base64;
+            console.log(`Base64 string for ID ${id}: ${base64}`);
+            resolve(base64);
+          } else {
+            console.log(`No image found for ID ${id}`);
+            resolve(null);
+          }
+        },
+        (_, error) => {
+          console.error(`Error retrieving image for ID ${id}`, error);
+          reject(error);
+        }
       );
     });
   });
+}
+
+// Function to retrieve a curriculum image by ID
+const retrieveCurriculumImageFromUri = (uri) => {
+  console.log('URI:', uri);
+
+  const imageId = uri.split('://')[1];
+  console.log('Image ID:', imageId);
+  return getCurriculumImageById(imageId);
 }
 
 
@@ -1097,6 +1118,23 @@ insertUser(
     console.error('Error retrieving image:', error);
   }
 
+  // Retrieve a curriculumImage from a URI
+  console.log("getting curriculum image from uri");
+  try {
+    const base64 = await retrieveCurriculumImageFromUri('image://1');
+    if (base64) {
+      console.log(`Image data: ${base64}`);
+    } else {
+      console.log('No image found with the given URI.');
+    }
+  } catch (error) {
+    console.error('Error retrieving image:', error);
+  }
+
+  // Insert curriculum data with image
+  console.log("inserting curriculum data with image");
+  await insertCurriculumDataWithImage(0, 7, { text: 'Testing curriculum with image', image: 'data:image/png;base64,base64_string' });
+
 // Retrieve all curriculum data
 console.log("getting all curriculum data");
 const allCurriculum = await getAllCurriculumData();
@@ -1158,5 +1196,9 @@ export {
   updateAchievement,
   allUserAchievements,
   deleteAchievement,
+  createCurriculumImage,
+  getCurriculumImageById,
+  retrieveCurriculumImageFromUri,
+  insertCurriculumDataWithImage,
   testDb,
 };
