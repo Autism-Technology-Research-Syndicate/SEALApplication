@@ -1,5 +1,18 @@
 import {StyleSheet} from 'react-native';
-import styles from '../../Styles/defaultCSS';
+import { getStyles } from '../../Styles/defaultCSS';
+import {FontConfigType, useFontContext} from '../../Contexts/FontContext';
+// import { fontConfig } from 'react-native-paper/lib/typescript/styles/fonts';
+
+const fontConfig: FontConfigType = {
+  regular: 'Roboto-Regular',
+  bold: 'Roboto-Bold',
+  italic: 'Roboto-Italic',
+  bolditalic: 'Roboto-BoldItalic',
+  fontScale: 1,
+};
+
+const styles = getStyles(fontConfig);
+
 
 const stylesheet = StyleSheet.create({
   container: {
