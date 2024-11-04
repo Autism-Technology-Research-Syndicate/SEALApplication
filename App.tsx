@@ -96,7 +96,7 @@ const AppContent: React.FC = () => {
             {isCameraActive && (
               <View style={styles.mainContainer}>
                 <CameraComponent />
-                <TouchableOpacity 
+                <TouchableOpacity
                   style={styles.cameraCloseButton}
                   onPress={deactivateCamera}
                 >
