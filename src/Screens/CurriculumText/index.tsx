@@ -1,6 +1,6 @@
 // import { Image, View, } from 'react-native';
 import { TouchableOpacity, Image, ScrollView, View, StyleSheet } from 'react-native';
-import BackgroundWrapper from '../../Components/BackgroundWrapper';
+import MulticolorBackground from '../../Components/MulticolorBackground';
 import Button from '../../Components/Button';
 import Text from '../../Components/Text';
 import styles from './defaultCSS';
@@ -23,61 +23,51 @@ const Index = ({ navigation }) => {
     This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text.
     This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text.
     This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text.
-   
-    This is a sample text. This is a sample text.
-    This is a sample text. This is a sample text.
-    This is a sample text. This is a sample text.
-    This is a sample text. This is a sample text.
-    This is a sample text. This is a sample text.
   `;
 
   const increaseFontSize = () => setFontSize(fontSize + 2);
   const decreaseFontSize = () => setFontSize(fontSize > 10 ? fontSize - 2 : fontSize);
-  const toggleEyeProtectMode = () => setEyeProtectMode(!eyeProtectMode); // Toggle eye protect mode
+  const changeMode = () => setEyeProtectMode(!eyeProtectMode); // Toggle eye protect mode
+
 
 
 //<Text style={[styles.text, { fontSize }]}></Text>
   return (
-    <BackgroundWrapper colors={{ backgroundColor: eyeProtectMode ? '#333' : '#FFF' }}>
+    <MulticolorBackground dark = {eyeProtectMode}>
       <Appbar.BackAction onPress={() => navigation.navigate('Login')} />
-      <Text style={styles.header}>
+      <Text style={{...styles.header, }}>
+      {/* <Text style={{...styles.header, ...{color:eyeProtectMode?'#FFFFFF':'#305070'}}}> */}
         Reading for Today
       </Text>
 
 
       <View style={styles.buttonContainer}>
-        {/* <Button onPress={increaseFontSize} style={styles.button} title="Increase Font Size" /> */}
-        <TouchableOpacity onPress={increaseFontSize} style={styles.button}>
-        <Text style={{...styles.buttonText, ...{ fontSize: 25, fontWeight: 'bold'}}}>A</Text>
-        </TouchableOpacity>
+      <View style={styles.buttonGroup}>
+          <TouchableOpacity onPress={increaseFontSize} style={styles.button}>
+            <Text style={{ ...styles.buttonText, fontSize: 25, fontWeight: 'bold' }}>A</Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity onPress={decreaseFontSize} style={styles.button}>
+            <Text style={styles.buttonText}>A</Text>
+          </TouchableOpacity>
+        </View>
 
-        {/* <Button onPress={decreaseFontSize} title="Decrease Font Size" /> */}
-        <TouchableOpacity onPress={decreaseFontSize} style={styles.button}>
-          <Text style={styles.buttonText}>A</Text>
-        </TouchableOpacity>
-        {/* <TouchableOpacity onPress={toggleEyeProtectMode} style={styles.button}>
-          <Text style={styles.buttonText}>Light</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={toggleEyeProtectMode} style={styles.button}>
-          <Text style={styles.buttonText}>Dark</Text>
-        </TouchableOpacity> */}
-        <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.button}>
-          <Text style={styles.buttonText}>Back</Text>
-        </TouchableOpacity>
-        {/* <Button title='A' icon="night" onPress={() => navigation.navigate('CurriculumText')} /> */}
+        <Button title='🌛' onPress={changeMode} />
+
       </View>
 
 
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
+      {/* <ScrollView contentContainerStyle={styles.scrollContainer}> */}
         <View style={styles.centerContent}>
           
-          <Text style={{...styles.text, ...{fontSize}}}>
+          <Text style={{...styles.text, ...{fontSize},...{padding: 20}}}>
             {longText}
           </Text>
         </View>
-      </ScrollView>
-            {/* Buttons to adjust the font size */}
-    </BackgroundWrapper>
+        <Button title='Done' onPress={() => navigation.navigate('Main')} />
+      {/* </ScrollView> */}
+
+    </MulticolorBackground>
   );
 };
 

@@ -17,6 +17,16 @@ const background = {
     colorList: Object.values(colorRange).slice(-4)
 }
 
+const darkground = {
+    // darkColor: Object.values(colorRange).slice(6,9)
+    darkColor: [
+        colorRange.VerySoftBlue,
+        colorRange.LightGrayishBlue,
+        colorRange.DarkModerateBlue
+        // colorRange. DarkModerateCyan
+    ]
+}
+
 const stylesheet = StyleSheet.create({
     container: {
         height: '100%',
@@ -26,6 +36,7 @@ const stylesheet = StyleSheet.create({
     },
     ...colorRange,
     ...background,
+    ...darkground,
     defaultColor: colorRange.VeryDarkDesaturatedBlue,
     defaultText: {
         fontFamily: 'sans-serif-condensed',

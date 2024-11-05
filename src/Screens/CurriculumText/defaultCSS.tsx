@@ -6,7 +6,17 @@ const stylesheet = StyleSheet.create({
         height: '100%',
         width: '100%'
     },
+    buttonGroup: {
+        flex: 0.15,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginHorizontal: 0, // Adjust to reduce or increase space
+        marginBottom: 0,
+      },
     buttonContainer: {
+        paddingBottom: 0,
+        paddingTop: 0,
         flexDirection: 'row',
         justifyContent: 'space-around',
         padding: 0,
@@ -34,8 +44,9 @@ const stylesheet = StyleSheet.create({
         flex: 3,
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 10,
-        // marginBottom:20,
+        paddingHorizontal: 20,
+        paddingVertical: 0,
+        marginTop:0,
     },
     text: {
         textAlign: 'justify',

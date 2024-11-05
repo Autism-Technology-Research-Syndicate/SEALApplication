@@ -102,6 +102,8 @@ const initializeDatabase = async () => {
     });
   };
 
+  //session: for user data flow
+
   const imgdpTableQuery = `
     CREATE TABLE IF NOT EXISTS imgdp (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -144,11 +146,23 @@ const initializeDatabase = async () => {
       FOREIGN KEY (user_id) REFERENCES users(id)
     )`;
 
+    // curriculumResponseTable stores curriculum input
+    // and responsiveness 
+    // calculated from our own mathematical function
+    // accounts for how each of the emotions are a factor in overall performance
+    const curriculumResponseTableQuery = `
+    CREATE TABLE IF NOT EXISTS achievements (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      type INTEGER,
+      responsiveness INTEGER
+    )`;
+
   return Promise.all([
     createTable(imgdpTableQuery, 'imgdp'),
     createTable(curriculumTableQuery, 'curriculum'),
     createTable(usersTableQuery, 'users'),
     createTable(achievementsTableQuery, 'achievements'),
+    createTable(curriculumResponseTableQuery, 'curriculumResponse')
   ])
   .then(() => {
     console.log('All tables created successfully.');
@@ -160,6 +174,36 @@ const initializeDatabase = async () => {
     throw error;
   });
 };
+
+
+//Input: image, either be a URI, or a base64 string
+//runs it through the computer vision models
+//get the responsiveness from and stores it in the db. 
+
+//todo: connect to cv model, and curriculumn optimize algorithms
+//todo: create index
+// preprocessed
+
+const insertCurriculumResponseData = async (imageInput,responsiveness) => {
+
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'INSERT INTO  (imageInput, responsiveness) VALUES (?, ?)',
+        [imageInput, responsiveness],
+        (_, result) => {
+          console.log(`A row has been inserted with rowid ${result.insertId}`);
+          resolve(result);
+        },
+        (tx, error) => {
+          console.error('Error inserting data', error);
+          reject(error);
+        },
+      );
+    });
+  });
+};
+
 
 // Insert a new row into the imgdp table
 const insertImageData = async (b64str, input, output) => {
@@ -690,6 +734,7 @@ testDb();
 
 // Export functions
 export {
+  insertCurriculumResponseData,
   createCombosTable,
   insertComboData,
   updateComboData,
