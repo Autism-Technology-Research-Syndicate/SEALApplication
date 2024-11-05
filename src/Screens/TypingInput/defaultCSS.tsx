@@ -1,6 +1,10 @@
 import {StyleSheet} from 'react-native';
-import styles from '../../Styles/defaultCSS';
+import {getStyles as getDefaultStyles} from '../../Styles/defaultCSS';
+import {FontConfigType} from '../../Contexts/FontContext';
 
+
+export const getStyles = (fontConfig: FontConfigType) => {
+  const styles = getDefaultStyles(fontConfig);
 const stylesheet = StyleSheet.create({
   container: {
     ...styles.container,
@@ -23,5 +27,5 @@ const stylesheet = StyleSheet.create({
     fontSize: 20,
   },
 });
-
-export default stylesheet;
+return stylesheet;
+};
