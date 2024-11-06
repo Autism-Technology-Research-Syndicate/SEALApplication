@@ -36,7 +36,7 @@ import {ColorblindProvider} from './src/Contexts/ColorblindContext';
 import ColorblindFilter from './src/Components/ColorblindFilter/index';
 import styles from './appCSS';
 import {FontContextProvider} from './src/Contexts/FontContext';
-import { CameraComponent } from './src/Library/Camera/Camera';
+// import { CameraComponent } from './src/Library/Camera/Camera';
 import ImageViewer from './src/Library/ImageViewer/ImageViewer';
 
 // Create a stack navigator for the root of the app
@@ -96,7 +96,7 @@ const AppContent: React.FC = () => {
             {isCameraActive && (
               <View style={styles.mainContainer}>
                 <CameraComponent />
-                <TouchableOpacity 
+                <TouchableOpacity
                   style={styles.cameraCloseButton}
                   onPress={deactivateCamera}
                 >

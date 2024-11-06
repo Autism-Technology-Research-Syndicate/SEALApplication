@@ -50,6 +50,11 @@ const Index = () => {
         <Stack.Screen name="AccountSignUp" component={AccountSignUp} />
         {/* the "Main "screen below renders the bottom Nav which wraps the relevant pages it is included on */}
         <Stack.Screen name="Main" component={BottomNav} />
+        {/* commented duplicate screen */}
+        {/* <Stack.Screen
+          name="ColorblindSettings"
+          component={ColorblindSettings}
+        /> */}
         <Stack.Screen name="HowSealWorks" component={HowSealWorks} />
         <Stack.Screen name="TypingInput" component={TypingInput} />
         {/* Commented for testing, uncomment to enable break screen*/}
