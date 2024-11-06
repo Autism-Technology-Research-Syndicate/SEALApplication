@@ -5,10 +5,13 @@ import {
   Easing,
 } from 'react-native';
 import React from 'react';
-import styles from './defaultCSS'
+import { getStyles } from './defaultCSS';
+import { useFontContext } from '../../Contexts/FontContext';
 
 const SlideItem = ({item}) => {
   const translateYImage = new Animated.Value(40);
+  const { selectedFontConfig } = useFontContext();
+  const styles = getStyles(selectedFontConfig);
 
   Animated.timing(translateYImage, {
     toValue: 0,
