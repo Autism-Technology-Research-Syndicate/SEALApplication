@@ -8,7 +8,7 @@ const Index = ({children}) => {
   const styles = getStyles(selectedFontConfig);
 
   return (
-    <ScrollView contentContainerStyle={{flexGrow: 1}}>
+    <ScrollView contentContainerStyle={{  flexGrow: 1}}>
       <View style={styles.container}>
         <LinearGradient
           style={styles.background}
