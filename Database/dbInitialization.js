@@ -253,6 +253,7 @@ const initializeDatabase = async () => {
     createTable(curriculumImagesTableQuery, 'curriculumImages'),
     createTable(usersTableQuery, 'users'),
     createTable(achievementsTableQuery, 'achievements'),
+    createTable(userSettingsTableQuery, 'UserSettingsv3'),
   ])
     .then(() => {
       console.log('All tables created successfully.');
@@ -446,7 +447,6 @@ const insertCurriculumDataWithImage = async (input_output, sequence, content) =>
   }
 };
 
-
 // Retrieve all rows from the curriculum table for testing
 const getAllCurriculumData = () => {
   return new Promise((resolve, reject) => {
@@ -539,7 +539,6 @@ const retrieveCurriculumImageFromUri = (uri) => {
   console.log('Image ID:', imageId);
   return getCurriculumImageById(imageId);
 }
-
 
 // CRUD operations for the users table
   // Insert a new row into the users table
@@ -694,11 +693,8 @@ const updateUserSettings = (userId, settings) => {
   });
 };
 
-
 const updateUserSettings2 = (userId, settings) => {
-
   const booleanToInteger = value => (value === true ? 1 : 0);
-
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(`
@@ -787,16 +783,6 @@ const getOneUser = (id) => {
   });
 };
 
-
-
-
-
-
-
-
-
-
-
 // Update a row in the users table
 const updateUser = (id, updates) => {
   const fields = [];
@@ -852,9 +838,6 @@ const updateUser = (id, updates) => {
       (_, error) => { console.error('Error updating data', error); }
     );
   });
-
-
-
 };
 
   // delete a row from the users table
@@ -1061,7 +1044,6 @@ const deleteAchievement = (id) => {
   });
 };
 // test the functions above
-
 const testDb = async () => {
   console.log('running testDb');
   const allUsers = await getUsers();
@@ -1069,13 +1051,9 @@ const testDb = async () => {
   console.log('second user', allUsers[1]);
 
   await insertImageData('test_base64_string', 1, 2);
-
   await printFirstRow();
-
   await insertCurriculumData(0, 5, 'Testing curriculum');
-
   await insertCurriculumDataWithImage(0, 6, { text: 'Testing curriculum with image', image: 'data:image/png;base64,base64_string' });
-
   await printCurriculumFirstRow();
 
   // User tests
@@ -1209,14 +1187,8 @@ if (lastCurriculum && lastCurriculum.content) {
 } else {
   console.log('No curriculum data found.');
 }
-
-
-
 console.log('finished running testDb');
 };
-
-
-
 
 // uncomment to run tests
 testDb();
@@ -1228,7 +1200,6 @@ export {
   updateUserSettings,
   getUserSettings,
   getAllUserSettings,
-
   createCombosTable,
   createScoreIndex,
   insertComboData,
