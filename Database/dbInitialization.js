@@ -1138,38 +1138,43 @@ const testDb = async () => {
 
   // curriculumImage tests
 // Create a new image
-  console.log("create curriculum Image");
-  await createCurriculumImage('base64_string_test');
+console.log("create curriculum Image");
+const newImageId = await createCurriculumImage(
+  'iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAADUlEQVR4nGNgGAWkAwABNgABVtF/yAAAAABJRU5ErkJggg=='
+);
+console.log(`Created new image with ID: ${newImageId}`);
 
-  // Retrieve a curriculumImage
-  console.log("getting curriculum image");
-  try {
-    const base64 = await getCurriculumImageById(1);
-    if (base64) {
-      console.log(`Image data: ${base64}`);
-    } else {
-      console.log('No image found with the given ID.');
-    }
-  } catch (error) {
-    console.error('Error retrieving image:', error);
+ // Retrieve a curriculumImage by ID
+console.log("getting curriculum image by ID");
+try {
+  const base64ById = await getCurriculumImageById(newImageId);
+  if (base64ById) {
+    console.log(`Image data by ID: ${base64ById}`);
+  } else {
+    console.log('No image found with the given ID.');
   }
-
-  // Retrieve a curriculumImage from a URI
-  console.log("getting curriculum image from uri");
-  try {
-    const base64 = await retrieveCurriculumImageFromUri('image://1');
-    if (base64) {
-      console.log(`Image data: ${base64}`);
-    } else {
-      console.log('No image found with the given URI.');
-    }
-  } catch (error) {
-    console.error('Error retrieving image:', error);
+} catch (error) {
+  console.error('Error retrieving image by ID:', error);
+}
+// Retrieve a curriculumImage from a URI
+console.log("getting curriculum image from URI");
+try {
+  const base64ByUri = await retrieveCurriculumImageFromUri(`image://${newImageId}`);
+  if (base64ByUri) {
+    console.log(`Image data by URI: ${base64ByUri}`);
+  } else {
+    console.log('No image found with the given URI.');
   }
+} catch (error) {
+  console.error('Error retrieving image by URI:', error);
+}
 
   // Insert curriculum data with image
-  console.log("inserting curriculum data with image");
-  await insertCurriculumDataWithImage(0, 7, { text: 'Testing curriculum with image', image: 'data:image/png;base64,base64_string' });
+console.log("inserting curriculum data with image");
+await insertCurriculumDataWithImage(0, 7, {
+  text: 'Testing curriculum with image',
+  image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAADUlEQVR4nGNgGAWkAwABNgABVtF/yAAAAABJRU5ErkJggg=='
+});
 
 // Retrieve all curriculum data
 console.log("getting all curriculum data");
@@ -1183,7 +1188,19 @@ console.log('last curriculum content:', lastCurriculum.content);
 // Parse the content JSON string back into an object
 if (lastCurriculum && lastCurriculum.content) {
   lastCurriculum.content = JSON.parse(lastCurriculum.content);
-  console.log('Last curriculum data:', lastCurriculum);
+  console.log('Last curriculum data parsed:', lastCurriculum);
+
+  // Display the image URI and text content
+  console.log('Text content:', lastCurriculum.content.text);
+  console.log('Image URI:', lastCurriculum.content.image);
+
+  // Retrieve the actual image using the URI from the content field
+  try {
+    const imageBase64 = await retrieveCurriculumImageFromUri(lastCurriculum.content.image);
+    console.log('Retrieved image base64 data:', imageBase64);
+  } catch (error) {
+    console.error('Error retrieving image from parsed URI:', error);
+  }
 } else {
   console.log('No curriculum data found.');
 }
