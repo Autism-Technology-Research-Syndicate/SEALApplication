@@ -1180,19 +1180,11 @@ await insertCurriculumDataWithImage(0, 7, {
 console.log("getting all curriculum data");
 const allCurriculum = await getAllCurriculumData();
 const lastCurriculum = allCurriculum[allCurriculum.length - 1];
-console.log('last curriculum:', lastCurriculum);
-
-console.log('last curriculum content:', lastCurriculum.content);
-
 
 // Parse the content JSON string back into an object
 if (lastCurriculum && lastCurriculum.content) {
   lastCurriculum.content = JSON.parse(lastCurriculum.content);
   console.log('Last curriculum data parsed:', lastCurriculum);
-
-  // Display the image URI and text content
-  console.log('Text content:', lastCurriculum.content.text);
-  console.log('Image URI:', lastCurriculum.content.image);
 
   // Retrieve the actual image using the URI from the content field
   try {
