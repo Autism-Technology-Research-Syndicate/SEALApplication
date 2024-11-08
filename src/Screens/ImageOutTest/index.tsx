@@ -1,51 +1,17 @@
 import { View, Image } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import BackgroundWrapper from '../../Components/BackgroundWrapper';
 import Text from '../../Components/Text';
 import { getStyles } from './defaultCSS';
 import { useFontContext } from '../../Contexts/FontContext';
 import { Appbar } from 'react-native-paper';
-import { retrieveCurriculumImageFromUri, getAllCurriculumData } from '../../../Database/dbInitialization';
+import useCurriculumData from './data';
 
-const Index: React.FC<{ navigation: any }> = ({ navigation }) => {
+const Index = ({ navigation }) => {
   const { selectedFontConfig } = useFontContext();
   const styles = getStyles(selectedFontConfig);
 
-  const [imageSrc, setImageSrc] = useState<string | undefined>(undefined);
-  const [contentText, setContentText] = useState<string | undefined>(undefined);
-
-  useEffect(() => {
-    const fetchDataAndImage = async () => {
-      try {
-        console.log("Fetching curriculum data on imageOutTest page...");
-        const allCurriculumData = await getAllCurriculumData();
-        const lastCurriculum = allCurriculumData[allCurriculumData.length - 1];
-
-        if (lastCurriculum && lastCurriculum.content) {
-          const content = JSON.parse(lastCurriculum.content);
-          const uri = content.image;
-
-          setContentText(content.text || "No content available");
-
-          if (uri) {
-            const base64Image = await retrieveCurriculumImageFromUri(uri);
-            if (base64Image) {
-              setImageSrc(base64Image);
-            } else {
-              console.log("No image available.");
-            }
-          }
-        } else {
-          setContentText("No content available");
-        }
-      } catch (error) {
-        console.error("Error fetching curriculum image:", error);
-        setContentText("Error loading content.");
-      }
-    };
-
-    fetchDataAndImage();
-  }, []);
+  const { imageSrc, contentText } = useCurriculumData();
 
   return (
     <BackgroundWrapper>
