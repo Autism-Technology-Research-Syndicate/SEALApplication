@@ -117,12 +117,13 @@ const CurriculumTodo = ({ navigation }) => {
         <Appbar.Content title="Curriculum To Do" />
       </Appbar.Header>
       <ScrollView style={styles.container}>
-      <Button
+        {/* uncomment this to add a button to navigate to ImageOutTest */}
+      {/* <Button
         mode="contained"
         onPress={() => navigation.navigate('ImageOutTest')}
       >
         Image Out Test
-      </Button>
+      </Button> */}
         <Card style={styles.card}>
           <Card.Content>
             <Title>Current Task</Title>
