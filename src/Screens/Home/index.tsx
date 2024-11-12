@@ -22,6 +22,7 @@ import Video from '../Video';
 import ColorblindSettings from '../ColorblindSettings';
 import TypingInput from '../TypingInput/PracticeSession';
 import CurriculumTodo from '../CurriculumTodo';
+import ImageOutTest from '../ImageOutTest';
 
 const Stack = createNativeStackNavigator();
 
@@ -62,6 +63,7 @@ const Index = () => {
         <Stack.Screen name='Video' component={Video}/>
         {/* Commented for testing, to enable camera feed uncomment this */}
         {/* <Stack.Screen name="WebCamFeed" component={WebCamFeed}  /> */}
+        <Stack.Screen name="ImageOutTest" component={ImageOutTest} />
       </Stack.Navigator>
       <ColorblindFilter />
       </AuthProvider>

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { View, ScrollView } from 'react-native';
-import { Appbar, Card, Title, Paragraph, List, ActivityIndicator, Checkbox } from 'react-native-paper'; // Import Checkbox
+import { Appbar, Card, Title, Paragraph, List, ActivityIndicator, Checkbox, Button } from 'react-native-paper'; // Import Checkbox
 import BackgroundWrapper from '../../Components/BackgroundWrapper';
 import Text from '../../Components/Text';
 import styles from './styles';
@@ -117,6 +117,13 @@ const CurriculumTodo = ({ navigation }) => {
         <Appbar.Content title="Curriculum To Do" />
       </Appbar.Header>
       <ScrollView style={styles.container}>
+        {/* uncomment this to add a button to navigate to ImageOutTest */}
+      {/* <Button
+        mode="contained"
+        onPress={() => navigation.navigate('ImageOutTest')}
+      >
+        Image Out Test
+      </Button> */}
         <Card style={styles.card}>
           <Card.Content>
             <Title>Current Task</Title>

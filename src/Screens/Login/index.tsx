@@ -66,7 +66,8 @@ const Index = ({ navigation }) => {
             <LinkButton title='Forgot password?' style={{ flexDirection: 'row-reverse' }} onPress={() => navigation.navigate('Welcome')} />
           </View>
           <View style={styles.bottom_body}>
-            <Button disabled={!isValid} title='Submit' onPress={ () => navigation.navigate('Main', {screen: 'Home', params: {screen: 'Personal'}}) } />
+          <Button title='Submit' onPress={ () => navigation.navigate('Main', {screen: 'Home', params: {screen: 'Personal'}}) } />
+            {/* <Button disabled={!isValid} title='Submit' onPress={ () => navigation.navigate('Main', {screen: 'Home', params: {screen: 'Personal'}}) } /> */}
             <View style={styles.middle_body}>
               <Text style={{ textAlign: 'center' }}>
                 Dont' have an account?

@@ -28,98 +28,66 @@ const initializeDatabase = async () => {
       },
     );
   });
+    // Drop the existing curriculum table before updating it. might be better to have a migrations file
+    db.transaction(tx => {
+      // Drop the existing curriculum table
+      tx.executeSql(
+        `DROP TABLE IF EXISTS curriculum`,
+        [],
+        () => {
+          console.log('Old curriculum table dropped successfully.');
+        },
+        (_, error) => {
+          console.error('Error dropping table', error);
+        },
+      );
+    });
 
-  db.transaction(tx => {
-    tx.executeSql(
-      `CREATE TABLE IF NOT EXISTS Users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
-        picture TEXT,
-        estimatedAttentionSpan INTEGER,
-        levelOfSpectrum INTEGER,
-        settingsChoices TEXT,
-        progressInCurriculum INTEGER,
-        averageAccuracy INTEGER,
-        description TEXT,
-        necessaryBreakTime INTEGER
-      )`,
-      [],
-      () => {
-        console.log('users Table created successfuly - in dbInitialization.');
-      },
-      (_, error) => {
-        console.error('Error creating table', error);
-      },
-    );
+//     tx.executeSql(
+//       `CREATE TABLE IF NOT EXISTS UserSettingsv3 (
+//         id INTEGER PRIMARY KEY AUTOINCREMENT,
+//         userId INTEGER,
+//         featureA INTEGER DEFAULT 1 CHECK(featureA BETWEEN 0 AND 1),
+//         featureB INTEGER DEFAULT 1 CHECK(featureB BETWEEN 0 AND 1),
+//         featureC INTEGER DEFAULT 1 CHECK(featureC BETWEEN 0 AND 1),
+//         featureD INTEGER DEFAULT 1 CHECK(featureD BETWEEN 0 AND 1),
+//         featureE INTEGER DEFAULT 1 CHECK(featureE BETWEEN 0 AND 1),
+//         featureF INTEGER DEFAULT 1 CHECK(featureF BETWEEN 0 AND 1),
+//         featureG INTEGER DEFAULT 1 CHECK(featureG BETWEEN 0 AND 1),
+//         featureH INTEGER DEFAULT 1 CHECK(featureH BETWEEN 0 AND 1),
+//         FOREIGN KEY (userId) REFERENCES Users(id)
 
-    tx.executeSql(
-      `CREATE TABLE IF NOT EXISTS UserSettingsv3 (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        userId INTEGER,
-        featureA INTEGER DEFAULT 1 CHECK(featureA BETWEEN 0 AND 1),
-        featureB INTEGER DEFAULT 1 CHECK(featureB BETWEEN 0 AND 1),
-        featureC INTEGER DEFAULT 1 CHECK(featureC BETWEEN 0 AND 1),
-        featureD INTEGER DEFAULT 1 CHECK(featureD BETWEEN 0 AND 1),
-        featureE INTEGER DEFAULT 1 CHECK(featureE BETWEEN 0 AND 1),
-        featureF INTEGER DEFAULT 1 CHECK(featureF BETWEEN 0 AND 1),
-        featureG INTEGER DEFAULT 1 CHECK(featureG BETWEEN 0 AND 1),
-        featureH INTEGER DEFAULT 1 CHECK(featureH BETWEEN 0 AND 1),
-        FOREIGN KEY (userId) REFERENCES Users(id)
-       
-        
-      )`,
-      [],
-      () => {
-        console.log('usersettingsv3 Table created successfully - in dbInitialization.');
-      },
-      
-      (_, error) => {
-        console.error('Error creating UserSettingsv3 table or exists or or or or or', error);
-      },
-    );
-    
-    tx.executeSql(`
-    CREATE TRIGGER IF NOT EXISTS create_default_settings
-    AFTER INSERT ON Users
-    BEGIN
-        INSERT INTO UserSettingsv3 (userId)
-        VALUES (NEW.id);
 
-    END;
-`,
-      [],
-      () => {
-        console.log('users trigger created successfuly - in dbInitialization.');
-      },
-      (_, error) => {
-        console.error('Error creating trigger', error);
-      },
-);
-});
+//       )`,
+//       [],
+//       () => {
+//         console.log('usersettingsv3 Table created successfully - in dbInitialization.');
+//       },
 
-  db.transaction(tx => {
-    tx.executeSql(
-      `CREATE TABLE IF NOT EXISTS Users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
-        picture TEXT,
-        estimatedAttentionSpan INTEGER,
-        levelOfSpectrum INTEGER,
-        settingsChoices TEXT,
-        progressInCurriculum INTEGER,
-        averageAccuracy INTEGER,
-        description TEXT,
-        necessaryBreakTime INTEGER
-      )`,
-      [],
-      () => {
-        console.log('users Table created successfully - in dbInitialization.');
-      },
-      (_, error) => {
-        console.error('Error creating table', error);
-      },
-    );
-  });
+//       (_, error) => {
+//         console.error('Error creating UserSettingsv3 table or exists or or or or or', error);
+//       },
+//     );
+
+//     tx.executeSql(`
+//     CREATE TRIGGER IF NOT EXISTS create_default_settings
+//     AFTER INSERT ON Users
+//     BEGIN
+//         INSERT INTO UserSettingsv3 (userId)
+//         VALUES (NEW.id);
+
+//     END;
+// `,
+//       [],
+//       () => {
+//         console.log('users trigger created successfuly - in dbInitialization.');
+//       },
+//       (_, error) => {
+//         console.error('Error creating trigger', error);
+//       },
+// );
+// });
+
     // Drop the existing achievements table before updating it. might be better to have a migrations file
     db.transaction(tx => {
       // Drop the existing achievements table
@@ -135,6 +103,7 @@ const initializeDatabase = async () => {
       );
     });
 
+    // function to create tables
   const createTable = (query, tableName) => {
     return new Promise((resolve, reject) => {
       db.transaction(tx => {
@@ -213,6 +182,7 @@ const initializeDatabase = async () => {
     });
   };
 
+  // Create the tables if they don't exist
   const imgdpTableQuery = `
     CREATE TABLE IF NOT EXISTS imgdp (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -229,6 +199,12 @@ const initializeDatabase = async () => {
       content TEXT,
       completed INTEGER DEFAULT 0,
       score INTEGER DEFAULT 0
+    )`;
+
+  const curriculumImagesTableQuery = `
+      CREATE TABLE IF NOT EXISTS curriculumImages (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        base64 TEXT NOT NULL
     )`;
 
   const usersTableQuery = `
@@ -255,22 +231,29 @@ const initializeDatabase = async () => {
       FOREIGN KEY (user_id) REFERENCES users(id)
     )`;
 
-  const answersTableQuery = `
-  CREATE TABLE IF NOT EXISTS answers (
-      id INTEGER PRIMARY KEY AUTOINCREMENT, 
-      user_id INTEGER, 
-      prompt TEXT, 
-      writing_response TEXT,
-      graded INTEGER DEFAULT 0, 
-      FOREIGN KEY (user_id) REFERENCES users(id)
-      )`;
+  const userSettingsTableQuery = `
+    CREATE TABLE IF NOT EXISTS UserSettingsv3 (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      userId INTEGER,
+      featureA INTEGER DEFAULT 1 CHECK(featureA BETWEEN 0 AND 1),
+      featureB INTEGER DEFAULT 1 CHECK(featureB BETWEEN 0 AND 1),
+      featureC INTEGER DEFAULT 1 CHECK(featureC BETWEEN 0 AND 1),
+      featureD INTEGER DEFAULT 1 CHECK(featureD BETWEEN 0 AND 1),
+      featureE INTEGER DEFAULT 1 CHECK(featureE BETWEEN 0 AND 1),
+      featureF INTEGER DEFAULT 1 CHECK(featureF BETWEEN 0 AND 1),
+      featureG INTEGER DEFAULT 1 CHECK(featureG BETWEEN 0 AND 1),
+      featureH INTEGER DEFAULT 1 CHECK(featureH BETWEEN 0 AND 1),
+      FOREIGN KEY (userId) REFERENCES users(id)
+    )`;
 
+  // Create the tables using the queries above and the createTable function
   return Promise.all([
     createTable(imgdpTableQuery, 'imgdp'),
     createTable(curriculumTableQuery, 'curriculum'),
+    createTable(curriculumImagesTableQuery, 'curriculumImages'),
     createTable(usersTableQuery, 'users'),
     createTable(achievementsTableQuery, 'achievements'),
-    createTable(answersTableQuery, 'users'),
+    createTable(userSettingsTableQuery, 'UserSettingsv3'),
   ])
     .then(() => {
       console.log('All tables created successfully.');
@@ -287,7 +270,6 @@ const initializeDatabase = async () => {
     });
 };
 
-
 function dropTrigger(triggerName) {
   db.transaction(tx => {
       tx.executeSql(
@@ -302,8 +284,8 @@ function dropTrigger(triggerName) {
       );
   });
 }
+// CRUD operations for the imgdp table
 // Insert a new row into the imgdp table
-
 const insertImageData = async (b64str, input, output) => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
@@ -401,6 +383,7 @@ const printFirstRow = () => {
   });
 };
 
+
 //Insert a new row into the curriculum table
 const insertCurriculumData = (input_output, sequence, content) => {
   return new Promise((resolve, reject) => {
@@ -438,6 +421,30 @@ const insertAnswerData = (user_id, prompt, writing_response) => {
       );
     });
   });
+};
+
+const insertCurriculumDataWithImage = async (input_output, sequence, content) => {
+  try {
+    let uriContent = content;
+
+    // Ensure content is an object and check for base64 image
+    if (typeof content === 'object' && content.image && content.image.startsWith('data:image/')) {
+      const base64Image = content.image;  // Extract the base64 image string
+      const imageId = await createCurriculumImage(base64Image);  // Store image and get its ID
+      uriContent = { ...content, image: `image://${imageId}` };  // Create URI and update content object
+      console.log("uriContent", uriContent);
+    }
+
+    // Serialize the content object to a JSON string
+    const serializedContent = JSON.stringify(uriContent);
+
+    const result = await insertCurriculumData(input_output, sequence, serializedContent);
+    console.log(`Inserted curriculum with row ID ${result.insertId}`);
+    return result;
+  } catch (error) {
+    console.error('Error inserting curriculum data with image', error);
+    throw error;
+  }
 };
 
 // Retrieve all rows from the curriculum table for testing
@@ -483,10 +490,58 @@ const printCurriculumFirstRow = () => {
 });
 };
 
+//  CRUD operations for the curriculumImages table
+// Create function to store base64 data in curriculumImages
+function createCurriculumImage(base64String) {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'INSERT INTO curriculumImages (base64) VALUES (?);',
+        [base64String],
+        (_, { insertId }) => resolve(insertId),  // Return the new image's ID
+        (_, error) => reject(error)
+      );
+    });
+  });
+}
+
+// Read function to retrieve base64 data by ID
+const getCurriculumImageById = (id) =>{
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'SELECT base64 FROM curriculumImages WHERE id = ?;',
+        [id],
+        (_, { rows }) => {
+          if (rows.length > 0) {
+            const base64 = rows.item(0).base64;
+            console.log(`Base64 string for ID ${id}: ${base64}`);
+            resolve(base64);
+          } else {
+            console.log(`No image found for ID ${id}`);
+            resolve(null);
+          }
+        },
+        (_, error) => {
+          console.error(`Error retrieving image for ID ${id}`, error);
+          reject(error);
+        }
+      );
+    });
+  });
+}
+
+// Function to retrieve a curriculum image by ID
+const retrieveCurriculumImageFromUri = (uri) => {
+  console.log('URI:', uri);
+
+  const imageId = uri.split('://')[1];
+  console.log('Image ID:', imageId);
+  return getCurriculumImageById(imageId);
+}
+
+// CRUD operations for the users table
   // Insert a new row into the users table
-
-
-            
   const insertUser = (
     name,
     picture,
@@ -525,11 +580,6 @@ const printCurriculumFirstRow = () => {
           );
         },
       );
-    //   tx.executeSql(`
-    //   INSERT INTO UserSettings (insertId)
-    //   VALUES (?);
-    // `, [userId]);
-
     },
     error => {
       console.error('Transaction error:', error.message); //
@@ -539,9 +589,9 @@ const printCurriculumFirstRow = () => {
     },
   );
 };
-   
-// Retrieve all rows from the users table
 
+
+// Retrieve all rows from the users table
 const getUsers = () => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
@@ -550,12 +600,9 @@ const getUsers = () => {
         [],
         (_, result) => {
           const users = result.rows.raw();
-          // console.log('Users:', users);
           resolve(users);
         },
-        (_, error) => {
-          reject(error);
-        },
+        (_, error) => { reject(error); }
       );
     });
   });
@@ -571,17 +618,17 @@ const getUsers = () => {
 //         featureB NUMBER DEFUALT 1,
 //         featureC NUMBER DEFUALT 1,
 //         featureD NUMBER DEFAULT 1,
-//         featureE NUMBER DEFAULT 1, 
+//         featureE NUMBER DEFAULT 1,
 //         featureF NUMBER DEFAULT 1,
 //         featureG NUMBER DEFAULT 1,
 //         featureH NUMBER DEFAULT 1,
-      
+
 //       )`,
 //       [],
 //       () => {
 //         console.log('Settings Table created successfully - in dbInitialization.');
 //       },
-      
+
 //       (_, error) => {
 //         console.error('Error creating table or exists', error);
 //       },
@@ -590,7 +637,6 @@ const getUsers = () => {
 // };
 
 // Function to update user settings
-
 const dropTable = (tableName) => {
   db.transaction(tx => {
     tx.executeSql(
@@ -609,8 +655,7 @@ const dropTable = (tableName) => {
 // Call the function with the table name you want to drop
 // dropTable('UserSettings');
 
-
-// is this chaning the true and false into 1 and zero 
+// is this chaning the true and false into 1 and zero
 
 const updateUserSettings = (userId, settings) => {
   return new Promise((resolve, reject) => {
@@ -648,11 +693,8 @@ const updateUserSettings = (userId, settings) => {
   });
 };
 
-
 const updateUserSettings2 = (userId, settings) => {
-
   const booleanToInteger = value => (value === true ? 1 : 0);
-
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(`
@@ -735,23 +777,11 @@ const getOneUser = (id) => {
           console.log('User:', user);
           resolve(user);
         },
-        (_, error) => {
-          reject(error);
-        },
+        (_, error) => { reject(error); }
       );
     });
   });
 };
-
-
-
-
-  
-
-
-
-
-
 
 // Update a row in the users table
 const updateUser = (id, updates) => {
@@ -804,134 +834,124 @@ const updateUser = (id, updates) => {
     tx.executeSql(
       query,
       values,
-      (_, result) => {
-        console.log(`Row(s) updated: ${result.rowsAffected}`);
-      },
-      (_, error) => {
-        console.error('Error updating data', error);
-      },
+      (_, result) => { console.log(`Row(s) updated: ${result.rowsAffected}`); },
+      (_, error) => { console.error('Error updating data', error); }
     );
   });
 };
 
-// delete a row from the users table
-const deleteUser = id => {
-  db.transaction(tx => {
-    tx.executeSql(
-      'DELETE FROM users WHERE id = ?',
-      [id],
-      (_, result) => {
-        console.log(`Row(s) deleted: ${result.rowsAffected}`);
-      },
-      (_, error) => {
-        console.error('Error deleting data', error);
-      },
-    );
-  });
-};
-
-//  Combos table operations
-const createCombosTable = () => {
-  return new Promise((resolve, reject) => {
+  // delete a row from the users table
+  const deleteUser = (id) => {
     db.transaction(tx => {
       tx.executeSql(
-        `CREATE TABLE IF NOT EXISTS Combos (
+        'DELETE FROM users WHERE id = ?',
+        [id],
+        (_, result) => { console.log(`Row(s) deleted: ${result.rowsAffected}`); },
+        (_, error) => { console.error('Error deleting data', error); }
+      );
+    });
+  };
+
+  //  Combos table operations
+  const createCombosTable = () => {
+    return new Promise((resolve, reject) => {
+      db.transaction(tx => {
+        tx.executeSql(
+          `CREATE TABLE IF NOT EXISTS Combos (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             score DECIMAL(12, 10),
             input TEXT,
             output TEXT
           )`,
-        [],
-        () => {
-          console.log(
-            'Combos Table created successfully - in dbInitialization.',
-          );
-          resolve();
-        },
-        (_, error) => {
-          console.error('Error creating table:', error);
-          reject(error);
-        },
-      );
+          [],
+          () => {
+            console.log('Combos Table created successfully - in dbInitialization.');
+            resolve();
+          },
+          (_, error) => {
+            console.error('Error creating table:', error);
+            reject(error);
+          }
+        );
+      });
     });
-  });
-};
+  };
 
-const createScoreIndex = () => {
-  return new Promise((resolve, reject) => {
-    db.transaction(tx => {
-      tx.executeSql(
-        `CREATE INDEX IF NOT EXISTS idx_score ON Combos(score)`,
-        [],
-        () => {
-          console.log('Index created successfully.');
-          resolve();
-        },
-        (_, error) => {
-          console.error('Error creating index:', error);
-          reject(error);
-        },
-      );
+  const createScoreIndex = () => {
+    return new Promise((resolve, reject) => {
+      db.transaction(tx => {
+        tx.executeSql(
+          `CREATE INDEX IF NOT EXISTS idx_score ON Combos(score)`,
+          [],
+          () => {
+            console.log('Index created successfully.');
+            resolve();
+          },
+          (_, error) => {
+            console.error('Error creating index:', error);
+            reject(error);
+          }
+        );
+      });
     });
-  });
-};
+  };
 
-const insertComboData = (score, input, output) => {
-  return new Promise((resolve, reject) => {
-    db.transaction(tx => {
-      tx.executeSql(
-        'INSERT INTO Combos (score, input, output) VALUES (?, ?, ?)',
-        [score, input, output],
-        (_, result) => {
-          console.log(`A row has been inserted with rowid ${result.insertId}`);
-          resolve(result.insertId);
-        },
-        (_, error) => {
-          console.error('Error inserting data:', error);
-          reject(error);
-        },
-      );
+  const insertComboData = (score, input, output) => {
+    return new Promise((resolve, reject) => {
+      db.transaction(tx => {
+        tx.executeSql(
+          'INSERT INTO Combos (score, input, output) VALUES (?, ?, ?)',
+          [score, input, output],
+          (_, result) => {
+            console.log(`A row has been inserted with rowid ${result.insertId}`);
+            resolve(result.insertId);
+          },
+          (_, error) => {
+            console.error('Error inserting data:', error);
+            reject(error);
+          }
+        );
+      });
     });
-  });
-};
+  };
 
-const updateComboData = (score, id) => {
-  return new Promise((resolve, reject) => {
-    db.transaction(tx => {
-      tx.executeSql(
-        'UPDATE Combos SET score = ? WHERE id = ?',
-        [score, id],
-        (_, result) => {
-          console.log(`Row(s) updated: ${result.rowsAffected}`);
-          resolve(result.rowsAffected);
-        },
-        (_, error) => {
-          console.error('Error updating data:', error);
-          reject(error);
-        },
-      );
+  const updateComboData = (score, id) => {
+    return new Promise((resolve, reject) => {
+      db.transaction(tx => {
+        tx.executeSql(
+          'UPDATE Combos SET score = ? WHERE id = ?',
+          [score, id],
+          (_, result) => {
+            console.log(`Row(s) updated: ${result.rowsAffected}`);
+            resolve(result.rowsAffected);
+          },
+          (_, error) => {
+            console.error('Error updating data:', error);
+            reject(error);
+          }
+        );
+      });
     });
-  });
-};
+  };
 
-const deleteComboData = id => {
-  return new Promise((resolve, reject) => {
-    db.transaction(tx => {
-      tx.executeSql(
-        'DELETE FROM Combos WHERE id = ?',
-        [id],
-        (_, result) => {
-          console.log(`Row(s) deleted: ${result.rowsAffected}`);
-          resolve(result.rowsAffected);
-        },
-        (_, error) => {
-          console.error('Error deleting data:', error);
-          reject(error);
-        },
-      );
+  const deleteComboData = (id) => {
+    return new Promise((resolve, reject) => {
+      db.transaction(tx => {
+        tx.executeSql(
+          'DELETE FROM Combos WHERE id = ?',
+          [id],
+          (_, result) => {
+            console.log(`Row(s) deleted: ${result.rowsAffected}`);
+            resolve(result.rowsAffected);
+          },
+          (_, error) => {
+            console.error('Error deleting data:', error);
+            reject(error);
+          }
+        );
+      });
     });
-  });
-};
+  };
 
 // A prediciton algorithm has been written in the prediction/sessionPrediction.js file
 // that uses the data from the Combos table to predict the next best action.
@@ -949,6 +969,8 @@ const deleteComboData = id => {
 //   });
 // };
 
+// CRUD operations for the achievements table
+// Insert a new row into the achievements table
 const insertAchievement = (name, description, points, user_id) => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
@@ -968,6 +990,7 @@ const insertAchievement = (name, description, points, user_id) => {
   });
 };
 
+// update a row in the achievements table
 const updateAchievement = (name, description, points, user_id) => {
   db.transaction(tx => {
     tx.executeSql(
@@ -983,7 +1006,8 @@ const updateAchievement = (name, description, points, user_id) => {
   });
 };
 
-const allUserAchievements = id => {
+// Retrieve all rows from the achievements table
+const allUserAchievements = (id) => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
@@ -1000,7 +1024,8 @@ const allUserAchievements = id => {
   });
 };
 
-const deleteAchievement = id => {
+// delete a row from the achievements table
+const deleteAchievement = (id) => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
@@ -1019,7 +1044,6 @@ const deleteAchievement = id => {
   });
 };
 // test the functions above
-
 const testDb = async () => {
   console.log('running testDb');
   const allUsers = await getUsers();
@@ -1027,11 +1051,9 @@ const testDb = async () => {
   console.log('second user', allUsers[1]);
 
   await insertImageData('test_base64_string', 1, 2);
-
   await printFirstRow();
-
   await insertCurriculumData(0, 5, 'Testing curriculum');
-
+  await insertCurriculumDataWithImage(0, 6, { text: 'Testing curriculum with image', image: 'data:image/png;base64,base64_string' });
   await printCurriculumFirstRow();
 
   // User tests
@@ -1106,14 +1128,75 @@ const testDb = async () => {
   // deleteUser(3);
   // console.log(getOneUser(3), "should be null");
 
-  // INERTING AN ACHIEVEMENT TO THE ACHIEVEMENTS TABLE TO DISPLAY
+  // INSERTING AN ACHIEVEMENT TO THE ACHIEVEMENTS TABLE TO DISPLAY
   // See logic in Achievements directory for displaying achievements.
 
   await insertAchievement('Streak', 'day streak', 4, 1);
   await insertAchievement('Hours', 'hours of learning', 20, 1);
   await insertAchievement('Tasks', 'tasks completed', 12, 1);
   console.log('All achievements:', await allUserAchievements(1));
-  console.log('finished running testDb');
+
+  // curriculumImage tests
+// Create a new image
+console.log("create curriculum Image");
+const newImageId = await createCurriculumImage(
+  'iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAADUlEQVR4nGNgGAWkAwABNgABVtF/yAAAAABJRU5ErkJggg=='
+);
+console.log(`Created new image with ID: ${newImageId}`);
+
+ // Retrieve a curriculumImage by ID
+console.log("getting curriculum image by ID");
+try {
+  const base64ById = await getCurriculumImageById(newImageId);
+  if (base64ById) {
+    console.log(`Image data by ID: ${base64ById}`);
+  } else {
+    console.log('No image found with the given ID.');
+  }
+} catch (error) {
+  console.error('Error retrieving image by ID:', error);
+}
+// Retrieve a curriculumImage from a URI
+console.log("getting curriculum image from URI");
+try {
+  const base64ByUri = await retrieveCurriculumImageFromUri(`image://${newImageId}`);
+  if (base64ByUri) {
+    console.log(`Image data by URI: ${base64ByUri}`);
+  } else {
+    console.log('No image found with the given URI.');
+  }
+} catch (error) {
+  console.error('Error retrieving image by URI:', error);
+}
+
+  // Insert curriculum data with image
+console.log("inserting curriculum data with image");
+await insertCurriculumDataWithImage(0, 7, {
+  text: 'Testing curriculum with image',
+  image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAADUlEQVR4nGNgGAWkAwABNgABVtF/yAAAAABJRU5ErkJggg=='
+});
+
+// Retrieve all curriculum data
+console.log("getting all curriculum data");
+const allCurriculum = await getAllCurriculumData();
+const lastCurriculum = allCurriculum[allCurriculum.length - 1];
+
+// Parse the content JSON string back into an object
+if (lastCurriculum && lastCurriculum.content) {
+  lastCurriculum.content = JSON.parse(lastCurriculum.content);
+  console.log('Last curriculum data parsed:', lastCurriculum);
+
+  // Retrieve the actual image using the URI from the content field
+  try {
+    const imageBase64 = await retrieveCurriculumImageFromUri(lastCurriculum.content.image);
+    console.log('Retrieved image base64 data:', imageBase64);
+  } catch (error) {
+    console.error('Error retrieving image from parsed URI:', error);
+  }
+} else {
+  console.log('No curriculum data found.');
+}
+console.log('finished running testDb');
 };
 
 // uncomment to run tests
@@ -1126,7 +1209,6 @@ export {
   updateUserSettings,
   getUserSettings,
   getAllUserSettings,
-
   createCombosTable,
   createScoreIndex,
   insertComboData,
@@ -1153,5 +1235,9 @@ export {
   updateAchievement,
   allUserAchievements,
   deleteAchievement,
+  createCurriculumImage,
+  getCurriculumImageById,
+  retrieveCurriculumImageFromUri,
+  insertCurriculumDataWithImage,
   testDb,
 };
