@@ -88,11 +88,41 @@ export function getSlopeDataFromDB() {
     );
 }
 
-// putting this function here temporarily because confused
-function navigateToContentPage(inputString) {
-    const inputOutputType = inputString.substring(0, 1);
-    const sequence = inputString.substring(1, 3);
-    const content = inputString.substring(3);
+const pageMapping = {
+    11: "talkingPage",
+    12: "eyeContactPage",
+    13: "emotionPage",
+    14: "typingPage",
+    15: "multipleChoicePage",
+    16: "sliderPage",
+    17: "validateActivityPage",
+    21: "videoLessonsPage",
+    22: "readingPage",
+    23: "teacherInstructionPage",
+    24: "picturesDiagramsPage",
+    25: "animationsTasksPage",
+    26: "conversationalAIPage",
+    27: "virtualAvatarPage",
+    // more?
+};
 
-    // add switch cases ab types of i/o
+export function openPageWithContent(curriculumNum, content) {
+    const pageId = pageMapping[curriculumNum];
+    
+    if (!pageId) {
+        console.log("Invalid curriculum number.");
+        return;
+    }
+
+    if (pageId === "placeholder") {
+        console.log("This page is under development. Stay tuned!");
+        return;
+    }
+
+    console.log(`Redirecting to ${pageId}...`);
+    console.log(`Displaying content: ${content}`);
+
+    navigation.navigate(pageId, { content });
+
+    console.log(`Simulated navigation to ${pageId} with content: ${content}`);
 }
