@@ -8,7 +8,7 @@ import TextField from '../../Components/TextField/.';
 import Text from '../../Components/Text/.';
 import {useAuth} from '../../Components/Authentication/AuthProvider';
 import {getStyles} from './defaultCSS';
-import {useSettingsContext} from '../../Contexts/SettingsContext';
+import {useSettingsContext} from '../../Contexts/FontContext';
 import {FieldValidatorDropDownWrapper} from '../../Components/Validation/FieldValidatorDropDownWrapper';
 import {NavigationProp} from '@react-navigation/native';
 
@@ -95,7 +95,15 @@ const Index = ({navigation}: {navigation: NavigationProp<any>}) => {
             />
           </View>
           <View style={styles.bottom_body}>
-            <Button disabled={!isValid} title='Submit' onPress={ () => navigation.navigate('Main', {screen: 'Home', params: {screen: 'Personal'}}) } />
+            <Button
+              title="Submit"
+              onPress={() =>
+                navigation.navigate('Main', {
+                  screen: 'Home',
+                  params: {screen: 'Personal'},
+                })
+              }
+            />
             <View style={styles.middle_body}>
               <Text style={styles.text}>Don't have an account?</Text>
               <LinkButton

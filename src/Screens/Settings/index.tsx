@@ -11,10 +11,7 @@ import {
 
 import {getStyles} from './defaultCSS';
 import {useNotification} from '../../Features/useNotification';
-import {
-  FontConfigType,
-  useSettingsContext,
-} from '../../Contexts/SettingsContext';
+import {FontConfigType, useSettingsContext} from '../../Contexts/FontContext';
 import {NavigationProp} from '@react-navigation/native';
 import {Icon} from 'react-native-paper';
 

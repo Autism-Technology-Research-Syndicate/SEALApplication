@@ -6,7 +6,7 @@ import AccountSignUp from '../../Screens/AccountSignUp';
 import {getStyles} from './defaultCSS';
 import {HomeStackNavigator, ProfileStackNavigator} from '../StackNavigators';
 import Settings from '../../Screens/Settings';
-import {useSettingsContext} from '../../Contexts/SettingsContext';
+import {useSettingsContext} from '../../Contexts/FontContext';
 
 export default function Index() {
   const {selectedConfig, setSelectedConfig} = useSettingsContext();
