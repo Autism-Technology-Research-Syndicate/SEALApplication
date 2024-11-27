@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import BackgroundWrapper from '../../Components/BackgroundWrapper';
 import {getStyles} from './defaultCSS';
-import {useSettingsContext} from '../../Contexts/SettingsContext';
+import {useSettingsContext} from '../../Contexts/FontContext';
 import {NavigationProp} from '@react-navigation/native';
 
 const Index = ({navigation}: {navigation: NavigationProp<any>}) => {

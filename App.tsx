@@ -35,7 +35,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {ColorblindProvider} from './src/Contexts/ColorblindContext';
 import ColorblindFilter from './src/Components/ColorblindFilter/index';
 import styles from './appCSS';
-import {SettingsContextProvider} from './src/Contexts/SettingsContext';
+import {SettingsContextProvider} from './src/Contexts/FontContext';
 
 // Create a stack navigator for the root of the app
 

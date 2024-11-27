@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {getStyles} from './defaultCSS';
-import {useSettingsContext} from '../../Contexts/SettingsContext';
+import {useSettingsContext} from '../../Contexts/FontContext';
 
 /**
  * Transforms an array of strings into an array of objects with label and value properties.

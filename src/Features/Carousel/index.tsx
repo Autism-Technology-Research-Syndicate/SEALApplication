@@ -3,7 +3,7 @@ import React, {useRef, useState} from 'react';
 import SlideItem from './SlideItem';
 import Pagination from './Pagination';
 import {getStyles} from './defaultCSS';
-import {useSettingsContext} from '../../Contexts/SettingsContext';
+import {useSettingsContext} from '../../Contexts/FontContext';
 
 const Index = props => {
   const {selectedConfig, setSelectedConfig} = useSettingsContext();

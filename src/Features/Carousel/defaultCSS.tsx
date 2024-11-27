@@ -1,7 +1,7 @@
 import {StyleSheet, Dimensions} from 'react-native';
 const {width, height} = Dimensions.get('screen');
 import {getStyles as getDefaultStyles} from '../../Styles/defaultCSS';
-import {FontConfigType} from '../../Contexts/SettingsContext';
+import {FontConfigType} from '../../Contexts/FontContext';
 
 export const getStyles = (fontConfig: FontConfigType) => {
   const styles = getDefaultStyles(fontConfig);

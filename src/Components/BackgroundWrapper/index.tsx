@@ -1,7 +1,7 @@
 import {View, ScrollView} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {getStyles} from './defaultCSS';
-import {useSettingsContext} from '../../Contexts/SettingsContext';
+import {useSettingsContext} from '../../Contexts/FontContext';
 
 const Index = ({children}) => {
   const {selectedConfig, setSelectedConfig} = useSettingsContext();

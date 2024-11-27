@@ -11,7 +11,7 @@ import {
   validateAge,
   validateName,
 } from './validation';
-import {useSettingsContext} from '../../Contexts/SettingsContext';
+import {useSettingsContext} from '../../Contexts/FontContext';
 
 /**
  * SignUp component renders the registration form and handles user input and validation.

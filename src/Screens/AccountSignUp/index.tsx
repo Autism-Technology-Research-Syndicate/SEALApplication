@@ -8,7 +8,7 @@ import {accountSignUp} from './data';
 import Text from '../../Components/Text/.';
 import MultiSelect from '../../Components/MultiSelect/.';
 import {FieldValidatorDropDownWrapper} from '../../Components/Validation/FieldValidatorDropDownWrapper';
-import {useSettingsContext} from '../../Contexts/SettingsContext';
+import {useSettingsContext} from '../../Contexts/FontContext';
 import {getStyles} from './defaultCSS';
 import {NavigationProp} from '@react-navigation/native';
 
