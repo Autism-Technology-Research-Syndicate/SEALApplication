@@ -3,7 +3,7 @@ import React from 'react';
 import BackgroundWrapper from '../../Components/BackgroundWrapper';
 import Text from '../../Components/Text';
 import {getStyles} from './defaultCSS';
-import {useSettingsContext} from '../../Contexts/FontContext';
+import {useSettingsContext} from '../../Contexts/SettingsContext';
 import Trophy from '../../Assets/svg/Trophy.svg';
 import Award from '../../Assets/svg/Award.svg';
 import {Appbar} from 'react-native-paper';

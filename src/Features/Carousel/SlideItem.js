@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import {getStyles} from './defaultCSS'
-import { useSettingsContext } from '../../Contexts/FontContext';
+import { useSettingsContext } from '../../Contexts/SettingsContext';
 
 const SlideItem = ({item}) => {
   const {selectedConfig, setSelectedConfig} = useSettingsContext();

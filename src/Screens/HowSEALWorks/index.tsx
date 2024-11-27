@@ -4,7 +4,7 @@ import Carousel from '../../Features/Carousel';
 import {Appbar} from 'react-native-paper';
 import {getStyles} from './defaultCSS';
 import data from './data';
-import {useSettingsContext} from '../../Contexts/FontContext';
+import {useSettingsContext} from '../../Contexts/SettingsContext';
 import {NavigationProp} from '@react-navigation/native';
 
 const Index = ({navigation}: {navigation: NavigationProp<any>}) => {

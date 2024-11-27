@@ -1,7 +1,7 @@
 import React from 'react';
 import {TextInput} from 'react-native-paper';
 import {getStyles} from './defaultCSS';
-import {useSettingsContext} from '../../Contexts/FontContext';
+import {useSettingsContext} from '../../Contexts/SettingsContext';
 
 type props = {
   password: boolean;
