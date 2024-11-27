@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {MultipleSelectList} from 'react-native-dropdown-select-list';
 
 import {getStyles} from './defaultCSS';
-import {useSettingsContext} from '../../Contexts/FontContext';
+import {useSettingsContext} from '../../Contexts/SettingsContext';
 
 function Index(props) {
   const {selectedConfig} = useSettingsContext();

@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {getStyles} from '../../Styles/defaultCSS';
-import {FontConfigType} from '../../Contexts/FontContext';
+import {FontConfigType} from '../../Contexts/SettingsContext';
 
 const fontConfig: FontConfigType = {
   regular: 'System',
