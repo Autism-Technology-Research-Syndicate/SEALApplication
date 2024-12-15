@@ -246,6 +246,18 @@ const initializeDatabase = async () => {
       FOREIGN KEY (userId) REFERENCES users(id)
     )`;
 
+    // note: the emotionalStateDuringResponse is a string representation of an object with the emotional state of the user during the response as the key and the confidence level (response accuracy) as the value.
+    const responseTableQuery = `
+    CREATE TABLE IF NOT EXISTS response (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER,
+      curriculum_id INTEGER,
+      responseTime DATETIME,
+      emotionalStateDuringResponse TEXT,
+      FOREIGN KEY (user_id) REFERENCES users(id),
+      FOREIGN KEY (curriculum_id) REFERENCES curriculum(id),
+    )`;
+
   // Create the tables using the queries above and the createTable function
   return Promise.all([
     createTable(imgdpTableQuery, 'imgdp'),
@@ -254,6 +266,7 @@ const initializeDatabase = async () => {
     createTable(usersTableQuery, 'users'),
     createTable(achievementsTableQuery, 'achievements'),
     createTable(userSettingsTableQuery, 'UserSettingsv3'),
+    createTable(responseTableQuery, 'response'),
   ])
     .then(() => {
       console.log('All tables created successfully.');
