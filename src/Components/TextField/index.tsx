@@ -1,14 +1,15 @@
 import React from 'react';
-import { TextInput } from 'react-native-paper';
-import styles from './defaultCSS';
+import {TextInput} from 'react-native-paper';
+import {getStyles} from './defaultCSS';
+import {useFontContext} from '../../Contexts/FontContext';
 
 type props = {
   password: boolean;
 };
 
 function Index(props) {
-  const [text, onChangeText] = React.useState('');
-  const {label = 'Heeelo', placeholder='', icon = "" } = props;
+  const { selectedFontConfig, setSelectedFontConfig } = useFontContext();
+  const styles = getStyles(selectedFontConfig);
   const isPassword = props.validationType === "password"
 
   return (
@@ -18,15 +19,13 @@ function Index(props) {
     contentStyle={styles.placeholder}
     style={styles.placeholder}
     outlineColor={styles.placeholder.color}
-    label={label}
-    value={text}
-    placeholder={placeholder}
-    onChangeText={onChangeText}
     secureTextEntry= {isPassword}
     right={isPassword ? <TextInput.Icon icon="eye" /> : ''}
+    keyboardType={props.type}
+    {...props}
   />
 
   );
-};
+}
 
 export default Index;

@@ -79,3 +79,6 @@ android/.bash_profile
 Database/mydatabase.db
 
 /ai
+
+# Expo
+.expo/

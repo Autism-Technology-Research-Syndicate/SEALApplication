@@ -10,7 +10,7 @@ const useBreakTimer = (interval: number) => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      navigation.navigate('Break'); // Ensure 'Break' screen is added to your navigator
+      // navigation.navigate('Break'); // Ensure 'Break' screen is added to your navigator
     }, interval);
 
     return () => clearInterval(timer);

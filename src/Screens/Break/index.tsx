@@ -1,18 +1,24 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import BackgroundWrapper from '../../Components/BackgroundWrapper';
-import styles from './defaultCSS';
+import {getStyles} from './defaultCSS';
+import {useFontContext} from '../../Contexts/FontContext';
 
-const Index = ({ navigation }) => {
+const Index = ({navigation}) => {
+  const {selectedFontConfig, setSelectedFontConfig} = useFontContext();
+  const styles = getStyles(selectedFontConfig);
   return (
     <BackgroundWrapper>
       <View style={styles.container}>
-        <Text style={styles.title}>Time for a Break!</Text>
-        <Button
-          title="Continue Working"
-          onPress={() => navigation.navigate('Welcome')} // Navigate to 'Welcome' screen
-          color="#4CAF50"
-        />
+        <View style={styles.body}>
+          <Text style={styles.title}>Time for a Break!</Text>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.goBack()} // Close the break screen
+          >
+            <Text style={styles.buttonText}>Continue Working</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </BackgroundWrapper>
   );

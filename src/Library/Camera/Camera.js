@@ -3,7 +3,7 @@ import { RNCamera } from 'react-native-camera';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import { TouchableOpacity, Alert, StyleSheet } from 'react-native';
 import RNFS from 'react-native-fs';
-import { insertImageData, getImageData } from '../Database/dbInitialization.js';
+import { insertImageData, getImageData } from '../../../Database/dbInitialization.js';
 import { getPredictions } from '../src/Library/Tensorflow.js';
 
 function saveImageToDb(toSend, input, output) {
@@ -14,7 +14,6 @@ function URIToB64Str(uri, input, output) {
   RNFS.readFile(uri, 'base64')
     .then((base64String) => {
       saveImageToDb(base64String, input, output);
-      getPredictions(base64String);
     })
     .catch((error) => {
       console.log('Error converting URI to base64 string:', error);
@@ -31,6 +30,11 @@ class Camera extends PureComponent {
     getImageData();
   }
 
+
+  componentDidMount(){
+
+  }
+
   takePicture = async () => {
     if (this.camera && !this.state.takingPic) {
       let options = {
@@ -41,14 +45,18 @@ class Camera extends PureComponent {
 
       this.setState({ takingPic: true });
       console.log("trying pic");
+
       try {
         const data = await this.camera.takePictureAsync(options);
         //Alert.alert('Success', JSON.stringify(data));
         this.setState({ takingPic: false });
         URIToB64Str(data.uri, -1, -1);
+       // console.log(data.uri);
+
+        
       } catch (err) {
         Alert.alert('Error', 'Failed to take picture: ' + (err.message || err));
-        console.log(data);
+       // console.log(data);
       } finally {
         this.setState({ takingPic: false });
       }
