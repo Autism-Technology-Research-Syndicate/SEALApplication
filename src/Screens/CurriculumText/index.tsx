@@ -8,22 +8,36 @@ import PracticeSession from '../../Assets/svg/practice_session.svg';
 import AssignTasks from '../../Assets/svg/assign_tasks.svg';
 import { Appbar } from 'react-native-paper';
 
-import React, { useState } from 'react';
-
-// import React from 'react';
-// import { ScrollView, View, StyleSheet } from 'react-native';
+import React, { useEffect,useState } from 'react';
+import { fetchLongText } from './data';
 
 
 const Index = ({ navigation }) => {
   const [fontSize, setFontSize] = useState(20); // Initial font size
   const [eyeProtectMode, setEyeProtectMode] = useState(false); // Eye protect mode state
-  const longText = `
+  const sampleText = `
     This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text.
     This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text.
     This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text.
     This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text.
     This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text. This is a sample text.
   `;
+  const [longText, setLongText] = useState(sampleText); // text content from curriculum table
+
+  useEffect(() => {
+    const loadLongText = async () => {
+      try {
+        const textId = 1; // Replace with the actual user ID of logged in user
+        const textContent = await fetchLongText(textId);
+        setLongText(textContent);
+      } catch (error) {
+        console.error('Failed to fetch achievements:', error);
+      }
+    };
+
+    loadLongText();
+  }, []);
+
 
   const increaseFontSize = () => setFontSize(fontSize + 2);
   const decreaseFontSize = () => setFontSize(fontSize > 10 ? fontSize - 2 : fontSize);
