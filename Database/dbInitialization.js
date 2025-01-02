@@ -302,7 +302,7 @@ const insertCurriculumData = (input_output, sequence, content) => {
     tx.executeSql(
       'INSERT INTO curriculum (input_output, sequence, content) VALUES (?, ?, ?)',
       [input_output, sequence, content],
-      (_, result) => { console.log(`A row has been inserted with rowid ${result.insertId}`);
+      (_, result) => { console.log(`A curriculumData row has been inserted with rowid ${result.insertId}`);
       resolve(result);
     },
       (tx, error) => { console.error('Error inserting data', error);
@@ -600,6 +600,23 @@ const updateAchievement = (name, description, points, user_id) => {
   });
 };
 
+const specificTextContent = (id) => {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'SELECT * FROM curriculum WHERE input_output = ?',
+        [id],
+        (_, result) => { resolve(result.rows.raw()); 
+          console.log('Successfully fetched text content from db.');
+        },
+        (_, error) => { reject(error); }
+      );
+    });
+  });
+};
+
+
+
 const allUserAchievements = (id) => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
@@ -644,6 +661,8 @@ const testDb = async () => {
   await printFirstRow();
 
   await insertCurriculumData(0, 5, "Testing curriculum");
+
+  await insertCurriculumData(1, 6, "This is a sample text fetched from db.");
 
   await printCurriculumFirstRow();
 
@@ -758,4 +777,5 @@ export {
   allUserAchievements,
   deleteAchievement,
   testDb,
+  specificTextContent,
 };

@@ -27,8 +27,9 @@ const Index = ({ navigation }) => {
   useEffect(() => {
     const loadLongText = async () => {
       try {
-        const textId = 1; // Replace with the actual user ID of logged in user
-        const textContent = await fetchLongText(textId);
+        const textId = 1; // Replace with the actual text ID
+        const text = await fetchLongText(textId);
+        const textContent = text[0].content; // The fetched row is wrapped in an array
         setLongText(textContent);
       } catch (error) {
         console.error('Failed to fetch achievements:', error);
