@@ -54,8 +54,7 @@ const Index = ({ navigation }) => {
       {/* <Text style={{...styles.header, ...{color:eyeProtectMode?'#FFFFFF':'#305070'}}}> */}
         Reading for Today
       </Text>
-
-
+      <ScrollView style={styles.container}>
       <View style={styles.buttonContainer}>
       <View style={styles.buttonGroup}>
           <TouchableOpacity onPress={increaseFontSize} style={styles.button}>
@@ -76,11 +75,13 @@ const Index = ({ navigation }) => {
         <View style={styles.centerContent}>
           
           <Text style={{...styles.text, ...{fontSize},...{padding: 20}}}>
-            {longText}
+            {sampleText}
           </Text>
         </View>
-        <Button title='Done' onPress={() => navigation.navigate('Main')} />
-      {/* </ScrollView> */}
+        <View style={{ width: 150, alignSelf: 'center' }}>
+          <Button title='Done' onPress={() => navigation.navigate('Main')} />
+        </View>
+      </ScrollView>
 
     </MulticolorBackground>
   );
