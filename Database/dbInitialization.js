@@ -1056,6 +1056,84 @@ const deleteAchievement = (id) => {
     });
   });
 };
+
+// CRUD operations for the response table
+// Insert a new row into the response table
+const insertResponse = (user_id, curriculum_id, responseTime, emotionalStateDuringResponse) => {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'INSERT INTO response (user_id, curriculum_id, responseTime, emotionalStateDuringResponse) VALUES (?, ?, ?, ?)',
+        [user_id, curriculum_id, responseTime, emotionalStateDuringResponse],
+        (_, result) => {
+          console.log(`A row has been inserted into the response table with rowid ${result.insertId}`);
+          resolve(result);
+        },
+        (_, error) => {
+          console.error('Error inserting data', error);
+          reject(error);
+        },
+      );
+    });
+  });
+};
+
+// Retrieve all rows from the response table
+const getResponses = () => {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'SELECT * FROM response',
+        [],
+        (_, result) => {
+          resolve(result.rows.raw());
+        },
+        (_, error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+};
+
+// Update a row in the response table
+const updateResponse = (user_id, curriculum_id, responseTime, emotionalStateDuringResponse) => {
+  db.transaction(tx => {
+    tx.executeSql(
+      'UPDATE response SET responseTime = ?, emotionalStateDuringResponse = ? WHERE user_id = ? AND curriculum_id = ?',
+      [responseTime, emotionalStateDuringResponse, user_id, curriculum_id],
+      (_, result) => {
+        console.log(`Row(s) updated: ${result.rowsAffected}`);
+      },
+      (_, error) => {
+        console.error('Error updating data', error);
+      },
+    );
+  });
+};
+
+// Delete a row from the response table
+const deleteResponse = (user_id, curriculum_id) => {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'DELETE FROM response WHERE user_id = ? AND curriculum_id = ?',
+        [user_id, curriculum_id],
+        (_, result) => {
+          console.log(`Row(s) deleted: ${result.rowsAffected}`);
+          resolve(result);
+        },
+        (_, error) => {
+          console.error('Error deleting data', error);
+          reject(error);
+        },
+      );
+    });
+  });
+};
+
+
+
 // test the functions above
 const testDb = async () => {
   console.log('running testDb');
