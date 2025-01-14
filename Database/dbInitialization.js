@@ -755,6 +755,7 @@ testDb();
 // Export functions
 export {
   insertCurriculumResponseData,
+  updateCurrResponse,
   createCombosTable,
   insertComboData,
   updateComboData,
