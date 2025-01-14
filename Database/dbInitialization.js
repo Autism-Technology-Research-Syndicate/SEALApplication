@@ -151,7 +151,7 @@ const initializeDatabase = async () => {
     // calculated from our own mathematical function
     // accounts for how each of the emotions are a factor in overall performance
     const curriculumResponseTableQuery = `
-    CREATE TABLE IF NOT EXISTS achievements (
+    CREATE TABLE IF NOT EXISTS curriculumResponse (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       type INTEGER,
       responsiveness INTEGER
@@ -184,15 +184,15 @@ const initializeDatabase = async () => {
 //todo: create index
 // preprocessed
 
-const insertCurriculumResponseData = async (imageInput,responsiveness) => {
+const insertCurriculumResponseData = async (type,responsiveness) => {
 
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
-        'INSERT INTO  (imageInput, responsiveness) VALUES (?, ?)',
-        [imageInput, responsiveness],
+        'INSERT INTO curriculumResponse (type, responsiveness) VALUES (?, ?)',
+        [type, responsiveness],
         (_, result) => {
-          console.log(`A row has been inserted with rowid ${result.insertId}`);
+          console.log(`A row has been inserted into curriculumResponseTable with rowid ${result.insertId}`);
           resolve(result);
         },
         (tx, error) => {
@@ -635,7 +635,7 @@ const deleteAchievement = (id) => {
 
 const testDb = async () => {
   console.log("running testDb");
- const allUsers = await getUsers();
+  const allUsers = await getUsers();
   console.log('top user', allUsers[0]);
   console.log('second user', allUsers[1]);
 
@@ -646,6 +646,15 @@ const testDb = async () => {
   await insertCurriculumData(0, 5, "Testing curriculum");
 
   await printCurriculumFirstRow();
+
+
+  // CurriculumResponse test
+  console.log('Getting the responsiveness for a curriculum');
+
+  // const testCurr = {type: 1, responsiveness:3};
+
+  // await insertCurriculumResponseData(testCurr.type, testCurr.responsiveness);
+  await insertCurriculumResponseData(1, 3);
 
   // User tests
   // Example call to insertUser with test data
