@@ -589,6 +589,18 @@ const insertAchievement = (name, description, points, user_id) => {
   });
 };
 
+
+const updateCurrResponse = (responsiveness, id) => {
+  db.transaction(tx => {
+    tx.executeSql(
+      'UPDATE CurriculumResponse SET responsiveness = ? WHERE id = ?',
+      [responsiveness, id],
+      (_, result) => { console.log(`Row(s) updated in CurriculumResponse Table: ${result.rowsAffected}`); },
+      (_, error) => { console.error('Error updating data', error); }
+    );
+  });
+};
+
 const updateAchievement = (name, description, points, user_id) => {
   db.transaction(tx => {
     tx.executeSql(
@@ -649,12 +661,11 @@ const testDb = async () => {
 
 
   // CurriculumResponse test
-  console.log('Getting the responsiveness for a curriculum');
-
-  // const testCurr = {type: 1, responsiveness:3};
-
-  // await insertCurriculumResponseData(testCurr.type, testCurr.responsiveness);
-  await insertCurriculumResponseData(1, 3);
+  console.log('Insert and Update the responsiveness for a curriculum');
+  const testCurr = {type: 1, responsiveness:3};
+  await insertCurriculumResponseData(testCurr.type, testCurr.responsiveness);
+  await updateCurrResponse(4,1);
+  
 
   // User tests
   // Example call to insertUser with test data
