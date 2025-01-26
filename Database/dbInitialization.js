@@ -1064,7 +1064,7 @@ const insertResponse = (user_id, curriculum_id, responseTime, emotionalStateDuri
     db.transaction(tx => {
       tx.executeSql(
         'INSERT INTO response (user_id, curriculum_id, responseTime, emotionalStateDuringResponse) VALUES (?, ?, ?, ?)',
-        [user_id, curriculum_id, responseTime, emotionalStateDuringResponse],
+        [user_id, curriculum_id, responseTime.toISOString(), JSON.stringify(emotionalStateDuringResponse)],
         (_, result) => {
           console.log(`A row has been inserted into the response table with rowid ${result.insertId}`);
           resolve(result);
@@ -1096,12 +1096,30 @@ const getResponses = () => {
   });
 };
 
+// Retrieve a single row from the response table
+const getOneResponse = (user_id, curriculum_id) => {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'SELECT * FROM response WHERE user_id = ? AND curriculum_id = ?',
+        [user_id, curriculum_id],
+        (_, result) => {
+          resolve(result.rows.raw());
+        },
+        (_, error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+};
+
 // Update a row in the response table
 const updateResponse = (user_id, curriculum_id, responseTime, emotionalStateDuringResponse) => {
   db.transaction(tx => {
     tx.executeSql(
       'UPDATE response SET responseTime = ?, emotionalStateDuringResponse = ? WHERE user_id = ? AND curriculum_id = ?',
-      [responseTime, emotionalStateDuringResponse, user_id, curriculum_id],
+      [responseTime.toISOString(), JSON.stringify(emotionalStateDuringResponse), user_id, curriculum_id],
       (_, result) => {
         console.log(`Row(s) updated: ${result.rowsAffected}`);
       },
@@ -1287,7 +1305,39 @@ if (lastCurriculum && lastCurriculum.content) {
 } else {
   console.log('No curriculum data found.');
 }
-console.log('finished running testDb');
+
+// response table tests
+// Insert a response
+console.log("inserting response");
+const currentUserId = 1;
+const currentCurriculumId = 1;
+const currentResponseTime = new Date();
+const outputFromModel = { anger:  0.8567321, disgust: 0.1456789, fear: 0.0020342, happy: 0.0000000, neutral: 0.0000000, sad: 0.0000000, surprise: 0.0000000 };
+const emotionalStateDuringResponse = JSON.stringify(outputFromModel);
+await insertResponse(currentUserId, currentCurriculumId, currentResponseTime, emotionalStateDuringResponse);
+
+// Retrieve all responses
+console.log("getting all responses");
+const allResponses = await getResponses();
+console.log('All responses:', allResponses);
+
+// Retrieve a single response
+console.log("getting one response");
+const oneResponse = await getOneResponse(currentUserId, currentCurriculumId);
+console.log('One response:', oneResponse);
+
+// Update a response
+console.log("updating response");
+const newResponseTime = new Date();
+const newOutputFromModel = { anger: 0.6566674, disgust: 0.0000000, fear: 0.0000000, happy: 0.0000000, neutral: 0.0000000, sad: 0.0000000, surprise: 1.0000000 };
+
+const newEmotionalStateDuringResponse = JSON.stringify(newOutputFromModel);
+updateResponse(currentUserId, currentCurriculumId, newResponseTime, newEmotionalStateDuringResponse);
+
+// Delete a response
+console.log("deleting response");
+deleteResponse(currentUserId, currentCurriculumId);
+
 };
 
 // uncomment to run tests
@@ -1330,5 +1380,10 @@ export {
   getCurriculumImageById,
   retrieveCurriculumImageFromUri,
   insertCurriculumDataWithImage,
+  insertResponse,
+  getResponses,
+  getOneResponse,
+  updateResponse,
+  deleteResponse,
   testDb,
 };
