@@ -255,7 +255,7 @@ const initializeDatabase = async () => {
       responseTime DATETIME,
       emotionalStateDuringResponse TEXT,
       FOREIGN KEY (user_id) REFERENCES users(id),
-      FOREIGN KEY (curriculum_id) REFERENCES curriculum(id),
+      FOREIGN KEY (curriculum_id) REFERENCES curriculum(id)
     )`;
 
   // Create the tables using the queries above and the createTable function
