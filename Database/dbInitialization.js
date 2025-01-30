@@ -246,6 +246,18 @@ const initializeDatabase = async () => {
       FOREIGN KEY (userId) REFERENCES users(id)
     )`;
 
+    // note: the emotionalStateDuringResponse is a string representation of an object with the emotional state of the user during the response as the key and the confidence level (response accuracy) as the value.
+    const responseTableQuery = `
+    CREATE TABLE IF NOT EXISTS response (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER,
+      curriculum_id INTEGER,
+      responseTime DATETIME,
+      emotionalStateDuringResponse TEXT,
+      FOREIGN KEY (user_id) REFERENCES users(id),
+      FOREIGN KEY (curriculum_id) REFERENCES curriculum(id)
+    )`;
+
   // Create the tables using the queries above and the createTable function
   return Promise.all([
     createTable(imgdpTableQuery, 'imgdp'),
@@ -254,6 +266,7 @@ const initializeDatabase = async () => {
     createTable(usersTableQuery, 'users'),
     createTable(achievementsTableQuery, 'achievements'),
     createTable(userSettingsTableQuery, 'UserSettingsv3'),
+    createTable(responseTableQuery, 'response'),
   ])
     .then(() => {
       console.log('All tables created successfully.');
@@ -1043,6 +1056,102 @@ const deleteAchievement = (id) => {
     });
   });
 };
+
+// CRUD operations for the response table
+// Insert a new row into the response table
+const insertResponse = (user_id, curriculum_id, responseTime, emotionalStateDuringResponse) => {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'INSERT INTO response (user_id, curriculum_id, responseTime, emotionalStateDuringResponse) VALUES (?, ?, ?, ?)',
+        [user_id, curriculum_id, responseTime.toISOString(), JSON.stringify(emotionalStateDuringResponse)],
+        (_, result) => {
+          console.log(`A row has been inserted into the response table with rowid ${result.insertId}`);
+          resolve(result);
+        },
+        (_, error) => {
+          console.error('Error inserting data', error);
+          reject(error);
+        },
+      );
+    });
+  });
+};
+
+// Retrieve all rows from the response table
+const getResponses = () => {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'SELECT * FROM response',
+        [],
+        (_, result) => {
+          resolve(result.rows.raw());
+        },
+        (_, error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+};
+
+// Retrieve a single row from the response table
+const getOneResponse = (user_id, curriculum_id) => {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'SELECT * FROM response WHERE user_id = ? AND curriculum_id = ?',
+        [user_id, curriculum_id],
+        (_, result) => {
+          resolve(result.rows.raw());
+        },
+        (_, error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+};
+
+// Update a row in the response table
+const updateResponse = (user_id, curriculum_id, responseTime, emotionalStateDuringResponse) => {
+  db.transaction(tx => {
+    tx.executeSql(
+      'UPDATE response SET responseTime = ?, emotionalStateDuringResponse = ? WHERE user_id = ? AND curriculum_id = ?',
+      [responseTime.toISOString(), JSON.stringify(emotionalStateDuringResponse), user_id, curriculum_id],
+      (_, result) => {
+        console.log(`Row(s) updated: ${result.rowsAffected}`);
+      },
+      (_, error) => {
+        console.error('Error updating data', error);
+      },
+    );
+  });
+};
+
+// Delete a row from the response table
+const deleteResponse = (user_id, curriculum_id) => {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'DELETE FROM response WHERE user_id = ? AND curriculum_id = ?',
+        [user_id, curriculum_id],
+        (_, result) => {
+          console.log(`Row(s) deleted: ${result.rowsAffected}`);
+          resolve(result);
+        },
+        (_, error) => {
+          console.error('Error deleting data', error);
+          reject(error);
+        },
+      );
+    });
+  });
+};
+
+
+
 // test the functions above
 const testDb = async () => {
   console.log('running testDb');
@@ -1196,7 +1305,39 @@ if (lastCurriculum && lastCurriculum.content) {
 } else {
   console.log('No curriculum data found.');
 }
-console.log('finished running testDb');
+
+// response table tests
+// Insert a response
+console.log("inserting response");
+const currentUserId = 1;
+const currentCurriculumId = 1;
+const currentResponseTime = new Date();
+const outputFromModel = { anger:  0.8567321, disgust: 0.1456789, fear: 0.0020342, happy: 0.0000000, neutral: 0.0000000, sad: 0.0000000, surprise: 0.0000000 };
+const emotionalStateDuringResponse = JSON.stringify(outputFromModel);
+await insertResponse(currentUserId, currentCurriculumId, currentResponseTime, emotionalStateDuringResponse);
+
+// Retrieve all responses
+console.log("getting all responses");
+const allResponses = await getResponses();
+console.log('All responses:', allResponses);
+
+// Retrieve a single response
+console.log("getting one response");
+const oneResponse = await getOneResponse(currentUserId, currentCurriculumId);
+console.log('One response:', oneResponse);
+
+// Update a response
+console.log("updating response");
+const newResponseTime = new Date();
+const newOutputFromModel = { anger: 0.6566674, disgust: 0.0000000, fear: 0.0000000, happy: 0.0000000, neutral: 0.0000000, sad: 0.0000000, surprise: 1.0000000 };
+
+const newEmotionalStateDuringResponse = JSON.stringify(newOutputFromModel);
+updateResponse(currentUserId, currentCurriculumId, newResponseTime, newEmotionalStateDuringResponse);
+
+// Delete a response
+console.log("deleting response");
+deleteResponse(currentUserId, currentCurriculumId);
+
 };
 
 // uncomment to run tests
@@ -1239,5 +1380,10 @@ export {
   getCurriculumImageById,
   retrieveCurriculumImageFromUri,
   insertCurriculumDataWithImage,
+  insertResponse,
+  getResponses,
+  getOneResponse,
+  updateResponse,
+  deleteResponse,
   testDb,
 };
