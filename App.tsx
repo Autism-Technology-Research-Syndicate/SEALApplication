@@ -8,13 +8,15 @@
 
 
 import React, { useCallback, useEffect, useRef } from 'react';
-import { View, TouchableWithoutFeedback, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { View, TouchableWithoutFeedback, StyleSheet, TouchableOpacity, Text, Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import Home from './src/Screens/Home/.';
 import DeveloperMode from './src/Screens/DeveloperMode';
 import { DeveloperModeProvider, useDeveloperMode } from './src/Contexts/DeveloperModeContext';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import styles from './appCSS.tsx';
+import * as tf from '@tensorflow/tfjs';
+import '@tensorflow/tfjs-react-native';
 
 // Create a stack navigator for the root of the app
 
@@ -94,6 +96,26 @@ const App: React.FC = () => {
 
   //   return () => clearInterval(interval);
   // }, []);
+
+  useEffect(() => {
+    /*  
+     * TensorFlow.js initialization for CV model
+     */
+
+    const initTensorFlow = async () => {
+      await tf.ready();
+      Alert.alert('TensorFlow.js is ready');
+      // To do: 
+      // (1) convert the model in .h5 file to model.json stored in asset
+      // (2) specify the path below
+      const model = await tf.loadLayersModel('/model.json');
+
+    };
+
+    initTensorFlow().catch(error => {
+      Alert.alert('Failed to initialize TensorFlow.js', error.message);
+    });
+  }, []);
 
   return (
     <DeveloperModeProvider>
