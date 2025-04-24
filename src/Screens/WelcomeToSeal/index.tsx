@@ -8,7 +8,7 @@ import getStyles from './defaultCSS';
 import {useFontContext} from '../../Contexts/FontContext';
 import Seal from '../../Assets/svg/seal.svg';
 import Hello from '../../Assets/svg/hello.svg';
-import SessionOptimizerComponent from '../../prediction/sessionPrediction';
+// import SessionOptimizerComponent from '../../prediction/sessionPrediction';
 import useBreakTimer from '../../Hooks/BreakTimer';
 
 const Index = ({navigation}) => {
@@ -44,7 +44,7 @@ const Index = ({navigation}) => {
         </View>
 
         {/* For temporary testing purpose, Session combos output */}
-        <SessionOptimizerComponent />
+        {/* <SessionOptimizerComponent /> */}
         {/*  */}
       </View>
     </BackgroundWrapper>
