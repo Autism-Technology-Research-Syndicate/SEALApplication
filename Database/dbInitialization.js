@@ -198,7 +198,10 @@ const initializeDatabase = async () => {
       sequence INTEGER,
       content TEXT,
       completed INTEGER DEFAULT 0,
-      score INTEGER DEFAULT 0
+      score INTEGER DEFAULT 0,
+      correct_answer TEXT,
+      difficulty TEXT DEFAULT 'medium',
+      choices TEXT
     )`;
 
   const curriculumImagesTableQuery = `
@@ -865,122 +868,65 @@ const updateUser = (id, updates) => {
     });
   };
 
-  //  Combos table operations
-  const createCombosTable = () => {
+  //  RL tables
+  export const setupRLTables = async (db) => {
     return new Promise((resolve, reject) => {
       db.transaction(tx => {
+        // DROP OLD UCB TABLE IF EXISTS
+        tx.executeSql(
+          `DROP TABLE IF EXISTS Combos`,
+          [],
+          () => console.log("Dropped old Combos table"),
+          (_, err) => {
+            console.error("Failed to drop Combos table:", err);
+            return true;
+          }
+        );
+  
+        // CREATE RL COMBOS TABLE
         tx.executeSql(
           `CREATE TABLE IF NOT EXISTS Combos (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            score DECIMAL(12, 10),
-            input TEXT,
-            output TEXT
+            student_id INTEGER NOT NULL,
+            state TEXT NOT NULL,
+            action TEXT NOT NULL,
+            q_value REAL DEFAULT 0,
+            last_updated DATETIME DEFAULT CURRENT_TIMESTAMP,
+            UNIQUE(student_id, state, action)
           )`,
           [],
-          () => {
-            console.log('Combos Table created successfully - in dbInitialization.');
-            resolve();
-          },
-          (_, error) => {
-            console.error('Error creating table:', error);
-            reject(error);
+          () => console.log("✅ RL Combos table created"),
+          (_, err) => {
+            console.error("Combos table create error:", err);
+            return true;
           }
         );
-      });
-    });
-  };
-
-  const createScoreIndex = () => {
-    return new Promise((resolve, reject) => {
-      db.transaction(tx => {
+  
+        // CREATE INTERACTION LOGS TABLE
         tx.executeSql(
-          `CREATE INDEX IF NOT EXISTS idx_score ON Combos(score)`,
+          `CREATE TABLE IF NOT EXISTS InteractionLogs (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            student_id INTEGER NOT NULL,
+            state TEXT NOT NULL,
+            action TEXT NOT NULL,
+            reward INTEGER NOT NULL,
+            is_correct BOOLEAN,
+            time_taken REAL,
+            emotion TEXT,
+            hints_used INTEGER,
+            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+          )`,
           [],
-          () => {
-            console.log('Index created successfully.');
-            resolve();
-          },
-          (_, error) => {
-            console.error('Error creating index:', error);
-            reject(error);
+          () => console.log("✅ InteractionLogs table created"),
+          (_, err) => {
+            console.error("Logs table create error:", err);
+            return true;
           }
         );
-      });
+      }, reject, resolve);
     });
   };
-
-  const insertComboData = (score, input, output) => {
-    return new Promise((resolve, reject) => {
-      db.transaction(tx => {
-        tx.executeSql(
-          'INSERT INTO Combos (score, input, output) VALUES (?, ?, ?)',
-          [score, input, output],
-          (_, result) => {
-            console.log(`A row has been inserted with rowid ${result.insertId}`);
-            resolve(result.insertId);
-          },
-          (_, error) => {
-            console.error('Error inserting data:', error);
-            reject(error);
-          }
-        );
-      });
-    });
-  };
-
-  const updateComboData = (score, id) => {
-    return new Promise((resolve, reject) => {
-      db.transaction(tx => {
-        tx.executeSql(
-          'UPDATE Combos SET score = ? WHERE id = ?',
-          [score, id],
-          (_, result) => {
-            console.log(`Row(s) updated: ${result.rowsAffected}`);
-            resolve(result.rowsAffected);
-          },
-          (_, error) => {
-            console.error('Error updating data:', error);
-            reject(error);
-          }
-        );
-      });
-    });
-  };
-
-  const deleteComboData = (id) => {
-    return new Promise((resolve, reject) => {
-      db.transaction(tx => {
-        tx.executeSql(
-          'DELETE FROM Combos WHERE id = ?',
-          [id],
-          (_, result) => {
-            console.log(`Row(s) deleted: ${result.rowsAffected}`);
-            resolve(result.rowsAffected);
-          },
-          (_, error) => {
-            console.error('Error deleting data:', error);
-            reject(error);
-          }
-        );
-      });
-    });
-  };
-
-// A prediciton algorithm has been written in the prediction/sessionPrediction.js file
-// that uses the data from the Combos table to predict the next best action.
-// Access the table Combos and return combo that has score closest to 1
-// const getBestComboData= () => {
-//   return new Promise((resolve, reject) => {
-//     db.transaction(tx => {
-//       tx.executeSql(
-//         'SELECT input, output, score FROM Combos ORDER BY ABS(score - 1) LIMIT 1',
-//         [],
-//         (_, result) => { resolve(result.rows.raw()); },
-//         (tx, error) => { reject(error); },
-//       );
-//     });
-//   });
-// };
+  
 
 // CRUD operations for the achievements table
 // Insert a new row into the achievements table
@@ -1350,12 +1296,7 @@ export {
   updateUserSettings,
   getUserSettings,
   getAllUserSettings,
-  createCombosTable,
-  createScoreIndex,
-  insertComboData,
-  updateComboData,
-  deleteComboData,
-  // getBestComboData,
+  // setupRLTables, // Removed duplicate export to avoid parsing error
   initializeDatabase,
   insertImageData,
   insertAnswerData,
